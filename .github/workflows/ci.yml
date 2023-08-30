@@ -18,52 +18,58 @@ env:
   PACKAGE_NAME: "ansys.workbench.core"
 
 jobs:
-  build:
-    name: Build package
+
+  style:
+    name: Code style
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: PyAnsys code style checks
+        uses: ansys/actions/code-style@v4
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-      - name: Install build requirements
-        run: |
-          pip install -U pip
-          pip install build
-      - name: Build
-        run: python -m build
-      - name: Install
-        run: pip install dist/*.whl
-      - name: Test import
-        run: |
-          mkdir tmp
-          cd tmp
-          python -c "import ${{ env.PACKAGE_NAME }}; print('Sucessfully imported ${{ env.PACKAGE_NAME }}')"
-          python -c "from ${{ env.PACKAGE_NAME }} import __version__; print(__version__)"
-      - name: Upload packages
-        uses: actions/upload-artifact@v3
+
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    needs: [style]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest ]
+        python-version: ['3.10', '3.11']
+        should-release:
+          - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
+    steps:
+      - name: Build wheelhouse
+        uses: ansys/actions/build-wheelhouse@v4
         with:
-          name: ansys-workbench-core-packages
+          library-name: ${{ env.PACKAGE_NAME }}
+          operating-system: ${{ matrix.os }}
+          python-version: ${{ matrix.python-version }}
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build library source and wheel artifacts
+        uses: ansys/actions/build-library@v4
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+      - name: Upload package
+        uses: ansys/actions/upload-artifact@v3
+        with:
+          name: ${{ env.PACKAGE_NAME }}-packages
           path: dist/
           retention-days: 7
 
-  Release:
+  release:
+    name: Release
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    needs: [build]
+    needs: [package]
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
-      - uses: actions/download-artifact@v3
-
-      - name: Display structure of downloaded files
-        run: ls -R
-
-      - name: Upload to Ansys Private PyPi
+      - name: Upload to Ansys private PyPI
         run: |
           pip install twine
           twine upload --skip-existing ./ansys-workbench-core-packages/*.whl
@@ -72,7 +78,6 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
           TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/upload
-
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

@@ -1,3 +1,47 @@
 [build-system]
-requires = ["setuptools >= 42.0.0", "wheel", "ansys_tools_protoc_helper"]
-build-backend = "setuptools.build_meta:__legacy__"
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+# Check https://flit.pypa.io/en/latest/pyproject_toml.html about this config file
+
+[project]
+name = "ansys-mechanical-core"
+version = "0.1.7"
+description = "A python wrapper for Ansys Workbench"
+readme = "README.md"
+requires-python = ">=3.7,<4.0"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Frank Li", email = "frank.li@ansys.com"},
+]
+maintainers = [
+    {name = "Marshall Hanmer", email = "marshall.hanmer@ansys.com"},
+]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    'Topic :: Scientific/Engineering',
+    "Programming Language :: Python",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "ansys_api_workbench==0.1.7",
+    "ansys-platform-instancemanagement>=1.0.1",
+    "ansys-pythonnet>=3.1.0rc1",
+    "ansys-tools-path>=0.3.1",
+    "grpcio>=1.17.0",
+    "protobuf>=3.19.6,<3.21.0",
+    "tqdm>=4.65.0",
+    "wMI>=1.4.9",
+]
+
+[project.urls]
+Documentation = "https://workbench.docs.pyansys.com"
+Source = "https://github.com/ansys-internal/pyworkbench"
+Homepage = "https://github.com/ansys-internal/pyworkbench"
+Tracker = "https://github.com/ansys-internal/pyworkbench/issues"
+
+[tool.flit.module]
+name = "ansys.mechanical.core"
