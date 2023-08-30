@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 # Check https://flit.pypa.io/en/latest/pyproject_toml.html about this config file
 
 [project]
-name = "ansys-mechanical-core"
+name = "ansys-workbench-core"
 version = "0.1.7"
 description = "A python wrapper for Ansys Workbench"
 readme = "README.md"
@@ -44,4 +44,4 @@ Homepage = "https://github.com/ansys-internal/pyworkbench"
 Tracker = "https://github.com/ansys-internal/pyworkbench/issues"
 
 [tool.flit.module]
-name = "ansys.mechanical.core"
+name = "ansys.workbench.core"
