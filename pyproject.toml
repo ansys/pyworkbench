@@ -27,7 +27,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "ansys_api_workbench==0.1.7",
+    "ansys_api_workbench==0.1.6",
     "ansys-platform-instancemanagement>=1.0.1",
     "ansys-pythonnet>=3.1.0rc1",
     "ansys-tools-path>=0.3.1",
