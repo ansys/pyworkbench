@@ -19,19 +19,9 @@ env:
 
 jobs:
 
-  style:
-    name: Code style
-    runs-on: ubuntu-latest
-    steps:
-      - name: PyAnsys code style checks
-        uses: ansys/actions/code-style@v4
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
   build:
     name: Build
     runs-on: ${{ matrix.os }}
-    needs: [style]
     strategy:
       fail-fast: false
       matrix:
@@ -57,7 +47,7 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
       - name: Upload package
-        uses: ansys/actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ env.PACKAGE_NAME }}-packages
           path: dist/
