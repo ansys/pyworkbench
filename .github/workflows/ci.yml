@@ -19,24 +19,6 @@ env:
 
 jobs:
 
-  build:
-    name: Build
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest ]
-        python-version: ['3.10', '3.11']
-        should-release:
-          - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
-    steps:
-      - name: Build wheelhouse
-        uses: ansys/actions/build-wheelhouse@v4
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          operating-system: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
-
   package:
     name: Package
     runs-on: ubuntu-latest
