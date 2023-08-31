@@ -43,8 +43,8 @@ jobs:
       - name: Upload to Ansys private PyPI
         run: |
           pip install twine
-          twine upload --skip-existing ./${{ env.PACKAGE_NAME }}-packages/*.whl
-          twine upload --skip-existing ./${{ env.PACKAGE_NAME }}-packages/*.tar.gz
+          twine upload --skip-existing ./**/*.whl
+          twine upload --skip-existing ./**/*.tar.gz
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
