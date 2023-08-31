@@ -37,15 +37,16 @@ jobs:
 
   release:
     name: Release
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    # if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    if: github.event_name == 'push'
     needs: [package]
     runs-on: ubuntu-latest
     steps:
       - name: Upload to Ansys private PyPI
         run: |
           pip install twine
-          twine upload --skip-existing ./ansys-workbench-core-packages/*.whl
-          twine upload --skip-existing ./ansys-workbench-core-packages/*.tar.gz
+          twine upload --skip-existing ./dist/*.whl
+          twine upload --skip-existing ./dist/*.tar.gz
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
