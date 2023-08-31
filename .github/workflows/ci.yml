@@ -31,7 +31,7 @@ jobs:
       - name: Upload package
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.PACKAGE_NAME }}-packages
+          name: ansys-workbench-core-packages
           path: dist/
           retention-days: 7
 
@@ -40,16 +40,27 @@ jobs:
     needs: [package]
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+      - name: Download package
+        uses: actions/download-artifact@v3
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
       - name: Upload to Ansys private PyPI
         run: |
           pip install twine
-          twine upload --skip-existing ./**/*.whl
-          twine upload --skip-existing ./**/*.tar.gz
+          twine upload --skip-existing ./ansys-workbench-core-packages/*.whl
+          twine upload --skip-existing ./ansys-workbench-core-packages/*.tar.gz
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
           TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/upload
-      - name: Release
+      - name: Release it
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
