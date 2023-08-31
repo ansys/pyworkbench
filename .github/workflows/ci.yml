@@ -48,6 +48,8 @@ jobs:
 
       - name: Download package
         uses: actions/download-artifact@v3
+        with:
+          name: ansys-workbench-core-packages
 
       - name: Display structure of downloaded files
         run: ls -R
@@ -61,9 +63,11 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
           TWINE_REPOSITORY_URL: https://pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/upload
-      - name: Release it
+
+      - name: Github release
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
           files: |
-            ./**/*.whl
+            ./ansys-workbench-core-packages/*.whl
+            ./ansys-workbench-core-packages/*.tar.gz
