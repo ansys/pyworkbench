@@ -89,10 +89,10 @@ are published to Ansys Private PyPI when tags are pushed.
 
 To release wheels to PyPI, ensure your branch is up-to-date and then
 push tags. For example, for the version ``v0.1.5``.  This version MUST MATCH
-the version in `src/ansys/workbench/core/VERSION`.
+the version in `pyproject.toml`.
 
-For example, if you intend to release version `0.1.5` to Private PyPI, the VERSION
-file should contain '0.1.5'.  You will then run:
+For example, if you intend to release version `0.1.5` to Private PyPI, the
+pyproject.toml file should contain '0.1.5'.  You will then run:
 
 ```bash
 git tag v0.1.5
@@ -100,4 +100,4 @@ git push --tags
 ```
 
 Note that there is a 'v' prepended to the GitHub tag, keeping with best practices.
-The 'v' is not required in the `VERSION` file.
+The 'v' is not required in the `pyproject.toml` file.
