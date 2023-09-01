@@ -44,7 +44,7 @@ html_theme_options = {
         "version_match": switcher_version,
     },
     "check_switcher": False,
-    "github_url": "https://github.com/ansys/pyworkbench",
+    "github_url": "https://github.com/ansys-internal/pyworkbench",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "collapse_navigation": True,
@@ -55,7 +55,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/ansys/pyworkbench/discussions",
+            "url": "https://github.com/ansys-internal/pyworkbench/discussions",
             "icon": "fa fa-comment fa-fw",
         },
     ],
@@ -78,14 +78,6 @@ extensions = [
 # Intersphinx mapping
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
-    "pint": ("https://pint.readthedocs.io/en/stable", None),
-    "numpy": ("https://numpy.org/devdocs", None),
-    "scipy": ("https://docs.scipy.org/doc/scipy/", None),
-    "pyvista": ("https://docs.pyvista.org/", None),
-    "grpc": ("https://grpc.github.io/grpc/python/", None),
-    # kept here as an example
-    # "matplotlib": ("https://matplotlib.org/stable", None),
-    "pypim": ("https://pypim.docs.pyansys.com/version/dev", None),
 }
 
 # numpydoc configuration

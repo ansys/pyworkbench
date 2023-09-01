@@ -1,9 +1,9 @@
-# ansys-workbench-core PyWorkbench Package
+## ansys-workbench-core PyWorkbench Package
 
 This Python package contains the public API to PyWorkbench.
 
 
-## Installation
+### Installation
 
 NOTE: Users must first apply the `PYANSYS_PRIVATE_PYPI_PAT` token as an environment variable.  This allows authentication with Private PyPI.
 The value can be found at the following [link](https://dev-docs.solutions.ansys.com/solution_journey/journey_prepare/connect_to_private_pypi.html).
@@ -60,7 +60,7 @@ pip install --index-url https://%PYANSYS_PRIVATE_PYPI_PAT%@pkgs.dev.azure.com/py
 ```
 
 
-## Build
+### Build
 
 To build the gRPC packages, run:
 
@@ -79,7 +79,7 @@ Python 3.7, so to improve your build time, use Python 3.7 when building the
 wheel.
 
 
-## Automatic Deployment
+### Automatic Deployment
 
 This repository contains GitHub CI/CD that enables the automatic building of
 source and wheel packages for these gRPC Python interface files. By default,
