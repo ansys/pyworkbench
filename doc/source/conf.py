@@ -65,7 +65,6 @@ html_theme_options = {
 extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
-    "nbsphinx",
     "sphinx_gallery.load_style",
     "myst_parser",
     "jupyter_sphinx",
