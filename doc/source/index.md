@@ -2,7 +2,7 @@ PyWorkbench documentation
 =========================
 
 
-```{include} ../../readme.md
+```{include} ../../README.md
 ```
 
 ```{toctree}
