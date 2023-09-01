@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-workbench-core"
-version = "0.1.11"
+version = "0.2.dev0"
 description = "A python wrapper for Ansys Workbench"
 readme = "README.md"
 requires-python = ">=3.7,<4.0"
@@ -36,6 +36,20 @@ dependencies = [
     "tqdm>=4.65.0",
     "wMI>=1.4.9",
 ]
+[project.optional-dependencies]
+doc = [
+    "ansys-sphinx-theme==0.10.4",
+    "jupyter_sphinx==0.4.0",
+    "jupytext==1.15.0",
+    "myst-parser==2.0.0",
+    "nbconvert==7.7.4",
+    "numpydoc==1.5.0",
+    "Sphinx==7.1.1",
+    "sphinx-autoapi==2.1.1",
+    "sphinx-autodoc-typehints==1.22.0",
+    "sphinx-copybutton==0.5.2",
+    "sphinx-gallery==0.7.0",
+]
 
 [project.urls]
 Documentation = "https://workbench.docs.pyansys.com"
@@ -45,3 +59,13 @@ Tracker = "https://github.com/ansys-internal/pyworkbench/issues"
 
 [tool.flit.module]
 name = "ansys.workbench.core"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+force_sort_within_sections = true
+line_length = 100
+default_section = "THIRDPARTY"
+src_paths = ["doc", "src", "tests"]

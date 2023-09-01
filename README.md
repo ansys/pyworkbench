@@ -84,7 +84,7 @@ wheel.
 This repository contains GitHub CI/CD that enables the automatic building of
 source and wheel packages for these gRPC Python interface files. By default,
 these are built on PRs, the main branch, and on tags when pushing. Artifacts
-are uploaded to GitHub for each PR and push to the main branch.  Artifacts 
+are uploaded to GitHub for each PR and push to the main branch.  Artifacts
 are published to Ansys Private PyPI when tags are pushed.
 
 To release wheels to PyPI, ensure your branch is up-to-date and then

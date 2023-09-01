@@ -96,7 +96,7 @@ wb.download_file('solve.out', show_progress=False)
 ## start other PyANSYS services based on PyWorkbench
 ### PyMechanical
 For any mechanical system in the Workbench project, PyMechanical service can be started and connected to from the same client machine.
-The following server side script starts PyMechanical service for an existing Workbench system and returns the port useed by the service.
+The following server side script starts PyMechanical service for an existing Workbench system and returns the port used by the service.
 ```
 import json
 model = system.GetContainer(ComponentName="Model")
