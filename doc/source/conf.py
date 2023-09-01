@@ -65,11 +65,9 @@ html_theme_options = {
 extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
-    "sphinx_gallery.load_style",
+    "sphinx_gallery.gen_gallery",
     "myst_parser",
     "jupyter_sphinx",
-    "sphinx_design",
-    "sphinx_jinja",
     "autoapi.extension",
     "numpydoc",
 ]
