@@ -47,7 +47,6 @@ doc = [
     "sphinx-autoapi==2.1.1",
     "sphinx-autodoc-typehints==1.22.0",
     "sphinx-copybutton==0.5.2",
-    "sphinx-gallery==0.7.0",
 ]
 
 [project.urls]
