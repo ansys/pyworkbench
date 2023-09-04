@@ -5,7 +5,7 @@ This Python package contains the public API to PyWorkbench.
 
 ### Installation
 
-NOTE: Users must first apply the `PYANSYS_PRIVATE_PYPI_PAT` token as an environment variable.  This allows authentication with Private PyPI.
+NOTE: Users must first apply the ``PYANSYS_PRIVATE_PYPI_PAT`` token as an environment variable.  This allows authentication with Private PyPI.
 The value can be found at the following [link](https://dev-docs.solutions.ansys.com/solution_journey/journey_prepare/connect_to_private_pypi.html).
 
 Provided that these wheels have been published to PyPI, they can be
@@ -84,7 +84,7 @@ wheel.
 This repository contains GitHub CI/CD that enables the automatic building of
 source and wheel packages for these gRPC Python interface files. By default,
 these are built on PRs, the main branch, and on tags when pushing. Artifacts
-are uploaded to GitHub for each PR and push to the main branch.  Artifacts
+are uploaded to GitHub for each PR and push to the main branch. Artifacts
 are published to Ansys Private PyPI when tags are pushed.
 
 To release wheels to PyPI, ensure your branch is up-to-date and then
