@@ -197,7 +197,7 @@ class LaunchWorkbench:
         return self.client.start_pyfluent(system_name)
 
 
-"""launch Workbench server on local or remote
+"""Launch Workbench server on local or remote
 Windows machine and create a Workbench client
 that connects to the server. """
 
