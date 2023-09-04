@@ -10,7 +10,7 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
 class LaunchWorkbench:
-    """launch Workbench server on local or remote Windows machine and create a Workbench client that connects to the server."""  # noqa: E501
+    """Launch Workbench server on local or remote Windows machine and create a Workbench client that connects to the server."""  # noqa: E501
 
     def __init__(
         self,
