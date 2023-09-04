@@ -66,13 +66,13 @@ class LaunchWorkbench:
                 )
             else:
                 logging.info("ANSYS installation found at: " + install_path)
-            exePath = os.path.join(install_path, "Framework", "bin", "Win64", "RunWB2.exe")
+            executable = os.path.join(install_path, "Framework", "bin", "Win64", "RunWB2.exe")
             prefix = uuid.uuid4().hex
             workdir_arg = ""
             if self._server_workdir is not None:
                 workdir_arg = ",WorkingDirectory='" + self._server_workdir + "'"
-            cmdLine = (
-                exePath
+            command = (
+                executable
                 + " -I -E \"StartServer(EnvironmentPrefix='"
                 + prefix
                 + "'"
@@ -82,11 +82,11 @@ class LaunchWorkbench:
 
             process_startup_info = self._wmi_connection.Win32_ProcessStartup.new(ShowWindow=1)
             process_id, result = self._wmi_connection.Win32_Process.Create(
-                CommandLine=cmdLine, ProcessStartupInformation=process_startup_info
+                CommandLine=command, ProcessStartupInformation=process_startup_info
             )
 
             if result == 0:
-                logging.info("Workbench launched on the host with process id " + str(process_id))
+                logging.info("Workbench launched on the host with process id: " + str(process_id))
                 self._process_id = process_id
             else:
                 logging.error("Workbench failed to launch on the host")
