@@ -15,7 +15,7 @@ concurrency:
 
 env:
   MAIN_PYTHON_VERSION: "3.10"
-  PACKAGE_NAME: "ansys.workbench.core"
+  PACKAGE_NAME: "ansys-workbench-core"
   PIP_EXTRA_INDEX_URL: 'https://${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/'
   DOCUMENTATION_CNAME: 'workbench.docs.pyansys.com'
 
@@ -83,6 +83,18 @@ jobs:
     needs: doc-build
     steps:
       - uses: ansys/actions/doc-deploy-dev@v4
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  doc-deploy-stable:
+    name: "Deploy stable docs"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - name: Deploy the stable documentation
+        uses: ansys/actions/doc-deploy-stable@v4
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}

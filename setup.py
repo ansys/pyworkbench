@@ -33,7 +33,7 @@ if __name__ == "__main__":
         long_description_content_type="text/markdown",
         url=f"https://github.com/ansys-internal/{package_name}",
         license="MIT",
-        python_requires=">=3.7",
+        python_requires=">=3.8",
         install_requires=["grpcio~=1.17", "protobuf~=3.19", "wMI>=1.4.9", "tqdm>=4.65.0"],
         package_dir={"": "src"},
         packages=setuptools.find_namespace_packages("src", include=("ansys.*",)),

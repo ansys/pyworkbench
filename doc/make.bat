@@ -12,6 +12,7 @@ set BUILDDIR=_build
 
 if "%1" == "" goto help
 if "%1" == "clean" goto clean
+if "%1" == "pdf" goto pdf
 
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
@@ -29,10 +30,11 @@ if errorlevel 9009 (
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
-:html
-%SPHINXBUILD% -M linkcheck %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
-%SPHINXBUILD% -M html %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
-goto build-examples-py
+:pdf
+%SPHINXBUILD% -M latex %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+cd "%BUILDDIR%\latex"
+for %%f in (*.tex) do (
+pdflatex "%%f" --interaction=nonstopmode)
 
 :clean
 rmdir /s /q %BUILDDIR% > /NUL 2>&1
