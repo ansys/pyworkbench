@@ -65,6 +65,7 @@ class WorkbenchClient:
     def reset_log_file(self):
         if self.__log_file_handler is None:
             return
+        self.__log_file_handler.close()
         self._logger.removeHandler(self.__log_file_handler)
         self.__log_file_handler = None
 
