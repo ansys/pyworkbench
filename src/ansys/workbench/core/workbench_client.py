@@ -1,12 +1,15 @@
-import os
-import logging
 import glob
-import grpc
 import json
-import tqdm
+import logging
+import os
+
 from ansys.api.workbench.v0 import workbench_pb2 as wb
 from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
+import grpc
+import tqdm
+
 from ansys.workbench.core.example_data import ExampleData
+
 
 class WorkbenchClient:
     """gRPC client used to connect to a Workbench server."""
@@ -25,7 +28,7 @@ class WorkbenchClient:
         self.disconnect()
 
     def connect(self):
-        hnp = self._server_host + ':' + str(self._server_port)
+        hnp = self._server_host + ":" + str(self._server_port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info("connected to the WB server at " + hnp)
@@ -45,7 +48,7 @@ class WorkbenchClient:
         self._logger.setLevel(logging.DEBUG)
         self._logger.propagate = False
         stream_handler = logging.StreamHandler()
-        stream_handler.setFormatter(logging.Formatter('%(levelname)s: %(message)s'))
+        stream_handler.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
         stream_handler.setLevel(logging.WARNING)
         self._logger.addHandler(stream_handler)
         self.__log_console_handler = stream_handler
@@ -57,7 +60,7 @@ class WorkbenchClient:
         self.reset_log_file()
 
         file_handler = logging.handlers.WatchedFileHandler(log_file)
-        file_handler.setFormatter(logging.Formatter('%(levelname)s: %(message)s'))
+        file_handler.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
         file_handler.setLevel(logging.DEBUG)
         self._logger.addHandler(file_handler)
         self.__log_file_handler = file_handler
@@ -72,11 +75,12 @@ class WorkbenchClient:
     __log_file_handler = None
     __log_console_handler = None
 
-
-    def run_script_string(self, script_string, log_level='error'):
+    def run_script_string(self, script_string, log_level="error"):
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
-        request = wb.RunScriptRequest(content=script_string, log_level=WorkbenchClient.__to_server_log_level(log_level))
+        request = wb.RunScriptRequest(
+            content=script_string, log_level=WorkbenchClient.__to_server_log_level(log_level)
+        )
         for response in self.stub.RunScript(request):
             if response.log and response.log.messages and len(response.log.messages) > 0:
                 for log_entry in response.log.messages:
@@ -89,11 +93,11 @@ class WorkbenchClient:
                     logging.info("the script run finished")
                     return json.loads(response.result.result)
 
-    def run_script_file(self, script_file_name, log_level='error'):
+    def run_script_file(self, script_file_name, log_level="error"):
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         script_path = os.path.join(self.workdir, script_file_name)
-        with open(script_path, encoding='UTF-8') as sf:
+        with open(script_path, encoding="UTF-8") as sf:
             script_string = sf.read()
         return self.run_script_string(script_string, log_level)
 
@@ -102,7 +106,7 @@ class WorkbenchClient:
             logging.error("Workbench client is not yet connected to a server")
         requested = []
         for file_pattern in file_list:
-            if '*' in file_pattern or '?' in file_pattern:
+            if "*" in file_pattern or "?" in file_pattern:
                 if not os.path.isabs(file_pattern):
                     file_pattern = os.path.join(self.workdir, file_pattern)
                 requested.extend(glob.glob(file_pattern))
@@ -118,7 +122,9 @@ class WorkbenchClient:
             else:
                 nonexisting_files.append(file_name)
         if len(nonexisting_files) > 0:
-            logging.warning("The following files do not exist and are skipped: " + '\n'.join(nonexisting_files))
+            logging.warning(
+                "The following files do not exist and are skipped: " + "\n".join(nonexisting_files)
+            )
         for file_path in existing_files:
             logging.info(f"uploading file {file_path}")
             response = self.stub.UploadFile(self.__upload_iterator(file_path, show_progress))
@@ -126,7 +132,7 @@ class WorkbenchClient:
                 logging.error("error during file upload: " + response.error)
             else:
                 logging.info("a file is uploaded to the server with name: " + response.file_name)
-            
+
     def __upload_iterator(self, file_path, show_progress):
         dir_path, file_name = os.path.split(file_path)
         yield wb.UploadFileRequest(file_name=file_name)
@@ -165,7 +171,7 @@ class WorkbenchClient:
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         request = wb.DownloadFileRequest(file_name=file_name)
-        file_name = file_name.replace('*', '_').replace('?', '_')
+        file_name = file_name.replace("*", "_").replace("?", "_")
         td = target_dir
         if td is None:
             td = self.workdir
@@ -175,7 +181,7 @@ class WorkbenchClient:
         for response in self.stub.DownloadFile(request):
             if response.error:
                 logging.error("error during file download: " + response.error)
-                return None;
+                return None
             if response.file_info:
                 if response.file_info.is_archive:
                     file_name += ".zip"
@@ -203,7 +209,7 @@ class WorkbenchClient:
         logging.info(f"downloaded the file {file_name}")
         if pbar is not None:
             pbar.close()
-        return file_name;
+        return file_name
 
     def __python_logging(self, log_level, msg):
         if log_level == wb.LOG_DEBUG:
@@ -234,28 +240,30 @@ class WorkbenchClient:
         return wb.LOG_NONE
 
     __log_levels = {
-        'none null' : (wb.LOG_NONE, logging.NOTSET),
-        'debug' : (wb.LOG_DEBUG, logging.DEBUG),
-        'information' : (wb.LOG_INFO, logging.INFO),
-        'warning' : (wb.LOG_WARNING, logging.WARNING),
-        'error' : (wb.LOG_ERROR, logging.ERROR),
-        'fatal critical' : (wb.LOG_FATAL, logging.CRITICAL),
+        "none null": (wb.LOG_NONE, logging.NOTSET),
+        "debug": (wb.LOG_DEBUG, logging.DEBUG),
+        "information": (wb.LOG_INFO, logging.INFO),
+        "warning": (wb.LOG_WARNING, logging.WARNING),
+        "error": (wb.LOG_ERROR, logging.ERROR),
+        "fatal critical": (wb.LOG_FATAL, logging.CRITICAL),
     }
 
     def start_pymechanical(self, system_name):
-        pymech_port = self.run_script_string(f"""import json
+        pymech_port = self.run_script_string(
+            f"""import json
 server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}")
 wb_script_result=json.dumps(server_port)
 """
-)
+        )
         return pymech_port
 
     def start_pyfluent(self, system_name):
-        server_info_file_name = self.run_script_string(f"""import json
+        server_info_file_name = self.run_script_string(
+            f"""import json
 server_info_file=LaunchFluentServerOnSystem(SystemName="{system_name}")
 wb_script_result=json.dumps(server_info_file)
 """
-)
+        )
         local_copy = os.path.join(self.workdir, server_info_file_name)
         if os.path.exists(local_copy):
             os.remove(local_copy)

@@ -1,7 +1,11 @@
-# workig with Workbench gRPC service
+# User guide
+This section provides an overview of the PyWorkbench library,
+explaining key method concepts and approaches.
+
+## Working with Workbench gRPC service
 
 
-## start Workbench client and connect to a running Workbench server
+### Start Workbench client and connect to a running Workbench server
 General users of Workbench gRPC service typically starts a Workbench client that connects to a running Workbench server on cloud, given the server's host name/IP and port.
 A client side working directory should be specified. This directory is the default location for client side files.
 ```
@@ -13,7 +17,7 @@ wb = WorkbenchClient(workdir, host, port)
 wb.connect()
 ```
 
-## start Workbench server and client
+### Start Workbench server and client
 For solution method developers, it is often useful for implementation or debugging purpose to start Workbench server on the developer's desktop or some computer within the company network. One can manually start a Workbench server by executing command `StartServer()` in any Workbench session and take a note of the returned server port.
 
 Alternatively, one can launch Workbench server and client in Python script. To launch it on the local computer:
@@ -35,7 +39,7 @@ from ansys.api.workbench.v0.launch_workbench import LaunchWorkbench
 wb = LaunchWorkbench(release='241', server_workdir='path_to_a_dir_on_server', client_workdir='path_to_a_dir_on_client')
 ```
 
-## run commands/queries on Workbench server
+### Run commands/queries on Workbench server
 Workbench scripts containing commands/queries can be executed on the server via
 * `run_script_file`, which execute a script file in the client working directory; or
 * `run_script_string`, which execute a script contained in the given string
@@ -51,7 +55,7 @@ These run_script APIs can also be called with different logging levels. The defa
 wb.run_script_file('a_script_file_name', log_level='info')
 ```
 
-## file handling
+### File handling
 Data files can be uploaded to the server or downloaded from the server, using `upload_file` or `download_file` API. The client-side working directory is used to hold these files. There is also a working directory on the server for the same purpose. The server's working directory can be obtained via Workbench query `GetServerWorkingDirectory()`.
 
 This uploads all part files with a given prefix and all agdb files in the working directory, plus another file outside of the working directory, from client to server:
@@ -93,10 +97,10 @@ All the file handling APIs come with progress bar that is shown by default. One 
 wb.download_file('solve.out', show_progress=False)
 ```
 
-## start other PyANSYS services based on PyWorkbench
-### PyMechanical
+### Start other PyANSYS services based on PyWorkbench
+#### PyMechanical
 For any mechanical system in the Workbench project, PyMechanical service can be started and connected to from the same client machine.
-The following server side script starts PyMechanical service for an existing Workbench system and returns the port useed by the service.
+The following server side script starts PyMechanical service for an existing Workbench system and returns the port used by the service.
 ```
 import json
 model = system.GetContainer(ComponentName="Model")
@@ -110,5 +114,5 @@ from ansys.mechanical.core import launch_mechanical
 mechanical = launch_mechanical(start_instance=False, ip=host, port=mech_port)
 print(mechanical.project_directory)
 ```
-### PyFluent
+#### PyFluent
 to be implemented
