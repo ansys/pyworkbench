@@ -70,7 +70,7 @@ class LaunchWorkbench:
             workdir_arg = ""
             if server_workdir is not None:
                 # use forward slash only to avoid escaping as command line argument
-                server_workdir = server_workdir.replace('\\', '/')
+                server_workdir = server_workdir.replace("\\", "/")
                 workdir_arg = ",WorkingDirectory='" + server_workdir + "'"
             command = (
                 executable
