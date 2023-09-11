@@ -196,3 +196,12 @@ class LaunchWorkbench:
 
     def start_fluent_server(self, system_name):
         return self.client.start_fluent_server(system_name)
+
+"""Launch Workbench server on local or remote
+Windows machine and create a Workbench client
+that connects to the server. """
+from ansys.workbench.core.launch_workbench import LaunchWorkbench
+def launch_workbench(
+    release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
+):
+    return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
