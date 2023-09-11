@@ -248,7 +248,7 @@ class WorkbenchClient:
         "fatal critical": (wb.LOG_FATAL, logging.CRITICAL),
     }
 
-    def start_pymechanical(self, system_name):
+    def start_mechanical_server(self, system_name):
         pymech_port = self.run_script_string(
             f"""import json
 server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}")
@@ -257,7 +257,7 @@ wb_script_result=json.dumps(server_port)
         )
         return pymech_port
 
-    def start_pyfluent(self, system_name):
+    def start_fluent_server(self, system_name):
         server_info_file_name = self.run_script_string(
             f"""import json
 server_info_file=LaunchFluentServerOnSystem(SystemName="{system_name}")
