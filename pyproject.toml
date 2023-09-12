@@ -33,8 +33,7 @@ dependencies = [
     "grpcio>=1.17.0",
     "protobuf>=3.19.6,<3.21.0",
     "tqdm>=4.65.0",
-    "wmi>=1.4.9",
-    "pywin32",
+    "WMI>=1.4.9",
 ]
 [project.optional-dependencies]
 doc = [
