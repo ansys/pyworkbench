@@ -34,7 +34,7 @@ dependencies = [
     "grpcio>=1.17.0",
     "protobuf>=3.19.6,<3.21.0",
     "tqdm>=4.65.0",
-    "wMI>=1.5",
+    "wMI>=1.4.9",
 ]
 [project.optional-dependencies]
 doc = [
