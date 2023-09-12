@@ -34,7 +34,7 @@ dependencies = [
     "grpcio>=1.17.0",
     "protobuf>=3.19.6,<3.21.0",
     "tqdm>=4.65.0",
-    "wMI>=1.4.9",
+    "wMI>=1.5.1",
 ]
 [project.optional-dependencies]
 doc = [
@@ -47,7 +47,6 @@ doc = [
     "sphinx-autoapi==2.1.1",
     "sphinx-autodoc-typehints==1.22.0",
     "sphinx-copybutton==0.5.2",
-    "wMI>=1.4.9",
 ]
 
 [project.urls]
