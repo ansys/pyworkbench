@@ -47,6 +47,21 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
+  build-wheelhouse:
+    name: "Build wheelhouse for latest Python versions"
+    runs-on: ${{ matrix.os }}
+    strategy:
+       matrix:
+           os: [ubuntu-latest, windows-latest]
+           python-version: ['3.8', '3.9', '3.10', '3.11']
+    steps:
+      - name: "Build a wheelhouse for ${{ matrix.python-version }}"
+        uses: ansys/actions/build-wheelhouse@v4.1
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          operating-system: ${{ matrix.os }}
+          python-version: ${{ matrix.python-version }}
+
   build-library:
     name: "Build library"
     runs-on: ubuntu-latest
