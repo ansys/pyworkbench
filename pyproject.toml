@@ -31,7 +31,7 @@ dependencies = [
     "ansys-pythonnet>=3.1.0rc1",
     "ansys-tools-path>=0.3.1",
     "grpcio>=1.17.0",
-    "protobuf>=3.19.6,<3.21.0",
+    "protobuf>=3.19.6,<4.25.0",
     "tqdm>=4.65.0",
     "WMI>=1.4.9",
 ]
