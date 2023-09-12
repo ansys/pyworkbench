@@ -9,21 +9,20 @@ name = "ansys-workbench-core"
 version = "0.3.dev0"
 description = "A python wrapper for Ansys Workbench"
 readme = "README.md"
-requires-python = ">=3.7,<4.0"
+requires-python = ">=3.8,<4.0"
 license = {file = "LICENSE"}
-authors = [
-    {name = "Frank Li", email = "frank.li@ansys.com"},
-]
-maintainers = [
-    {name = "Marshall Hanmer", email = "marshall.hanmer@ansys.com"},
-]
+authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
+maintainers = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
 
 classifiers = [
     "Development Status :: 4 - Beta",
     'Topic :: Scientific/Engineering',
-    "Programming Language :: Python",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
 ]
 
 dependencies = [
