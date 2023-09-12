@@ -1,10 +1,16 @@
 import logging
 import os
+import platform
 import tempfile
 import time
 import uuid
 
-import wmi
+try:
+    if platform.system() == "Windows":
+        import wmi
+except ImportError:
+    # Handle the case when 'wmi' cannot be imported
+    wmi = None
 
 from ansys.workbench.core.workbench_client import WorkbenchClient
 
@@ -22,7 +28,6 @@ class LaunchWorkbench:
         password=None,
     ):
         self._release = release
-        self._server_workdir = server_workdir
         self._host = host
         self._username = username
         self._password = password
@@ -35,7 +40,7 @@ class LaunchWorkbench:
         if client_workdir is None:
             client_workdir = tempfile.gettempdir()
         self.client_workdir = client_workdir
-        port = self._launch_server()
+        port = self._launch_server(server_workdir)
         if port is not None and port > 0:
             if host is None:
                 host = "localhost"
@@ -44,7 +49,7 @@ class LaunchWorkbench:
             )
             self.client.connect()
 
-    def _launch_server(self):
+    def _launch_server(self, server_workdir=None):
         try:
             if self._host is None:
                 self._wmi_connection = wmi.WMI()
@@ -69,8 +74,10 @@ class LaunchWorkbench:
             executable = os.path.join(install_path, "Framework", "bin", "Win64", "RunWB2.exe")
             prefix = uuid.uuid4().hex
             workdir_arg = ""
-            if self._server_workdir is not None:
-                workdir_arg = ",WorkingDirectory='" + self._server_workdir + "'"
+            if server_workdir is not None:
+                # use forward slash only to avoid escaping as command line argument
+                server_workdir = server_workdir.replace("\\", "/")
+                workdir_arg = ",WorkingDirectory='" + server_workdir + "'"
             command = (
                 executable
                 + " -I -E \"StartServer(EnvironmentPrefix='"
@@ -190,11 +197,11 @@ class LaunchWorkbench:
             file_name, show_progress=show_progress, target_dir=target_dir
         )
 
-    def start_pymechanical(self, system_name):
-        return self.client.start_pymechanical(system_name)
+    def start_mechanical_server(self, system_name):
+        return self.client.start_mechanical_server(system_name)
 
-    def start_pyfluent(self, system_name):
-        return self.client.start_pyfluent(system_name)
+    def start_fluent_server(self, system_name):
+        return self.client.start_fluent_server(system_name)
 
 
 """Launch Workbench server on local or remote
