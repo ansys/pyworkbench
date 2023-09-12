@@ -1,13 +1,12 @@
 import logging
 import os
+import platform
 import tempfile
 import time
 import uuid
 
-import platform
-
 try:
-    if platform.system() == 'Windows':
+    if platform.system() == "Windows":
         import wmi
 except ImportError:
     # Handle the case when 'wmi' cannot be imported
