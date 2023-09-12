@@ -4,7 +4,14 @@ import tempfile
 import time
 import uuid
 
-import wmi
+import platform
+
+try:
+    if platform.system() == 'Windows':
+        import wmi
+except ImportError:
+    # Handle the case when 'wmi' cannot be imported
+    wmi = None
 
 from ansys.workbench.core.workbench_client import WorkbenchClient
 
