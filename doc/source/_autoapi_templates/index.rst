@@ -4,12 +4,17 @@ API reference
 This section describes PyWorkbench API endpoints, their capabilities, and how
 to interact with them programmatically.
 
+Launching server
+----------------
+This section describes functions to launch Workbench server.
+
+Workbench
+---------
+This section describes PyWorkbench client API.
+
 .. toctree::
    :titlesonly:
    :maxdepth: 2
 
-   {% for page in pages %}
-   {% if (page.top_level_object or page.name.split('.') | length == 3) and page.display %}
-   {{ page.include_path }}
-   {% endif %}
-   {% endfor %}
+   launcher
+   workbench
