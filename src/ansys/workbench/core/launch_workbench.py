@@ -216,11 +216,11 @@ class LaunchWorkbench:
         --------
             Run a Workbench script, given in a string, that returns the name of 
             a newly created system
-            ```
+
             >>> wb.run_script_string(r"""import json
             wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
             """)
-            ```
+
         """
         return self.client.run_script_string(script_string, log_level)
 
@@ -309,11 +309,11 @@ class LaunchWorkbench:
         Examples
         --------
             Start PyMechanical session for the given system name
-            ```
+
             >>> from ansys.mechanical.core import launch_mechanical
             >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
             >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
-            ```
+
         """
         return self.client.start_mechanical_server(system_name)
 
@@ -331,11 +331,11 @@ class LaunchWorkbench:
         Examples
         --------
             Start PyFluent session for the given system name
-            ```
+
             >>> import ansys.fluent.core as pyfluent
             >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
             >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
-            ```
+
         """
         return self.client.start_fluent_server(system_name)
 
@@ -370,10 +370,10 @@ def launch_workbench(
     Examples
     --------
     Launch a server on the local computer.
-    ```
+
     >>> from ansys.workbench.core import launch_workbench
     >>> wb = launch_workbench()
-    ```
+
     """
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
 
