@@ -1,5 +1,7 @@
-Contribute to PyWorkbench example repo
-======================================
+Contribute
+==========
+
+## Contribute to PyWorkbench example repo
 
 You can share your PyWorkbench project on [PyWorkbench Example repo](https://github.com/ansys-internal/pyworkbench-examples) with PyWorkbench community.
 

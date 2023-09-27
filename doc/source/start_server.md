@@ -1,5 +1,6 @@
-Start Workbench server on local or remote computer
-==================================================
+Start server
+============
+## Start Workbench server on local or remote computer
 On a computer with standard ANSYS installation:
 1. Start Workbench
 2. In the Workbench Command Window, type `StartServer()`
