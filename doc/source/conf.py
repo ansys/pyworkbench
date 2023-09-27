@@ -158,5 +158,5 @@ linkcheck_ignore = [
     "https://github.com/ansys-internal/pyworkbench-examples",
     "https://github.com/ansys-internal/pyworkbench/issues",
     "https://github.com/ansys/example-data/tree/master/pyworkbench",
-    "https://dev-docs.solutions.ansys.com/solution_journey/journey_prepare/connect_to_private_pypi.html",
+    "https://workbench.docs.pyansys.com",
 ]
