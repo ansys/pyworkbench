@@ -153,3 +153,8 @@ def prepare_jinja_env(jinja_env) -> None:
 
 
 autoapi_prepare_jinja_env = prepare_jinja_env
+
+linkcheck_ignore = [
+    "https://github.com/ansys-internal/pyworkbench-examples",
+    "https://github.com/ansys-internal/pyworkbench/issues",
+]
