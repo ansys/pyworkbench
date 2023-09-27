@@ -195,8 +195,7 @@ class LaunchWorkbench:
         self.client.set_log_file(log_file)
 
     def reset_log_file(self):
-        """No longer use the current log file for WB server log.
-        """
+        """No longer use the current log file for WB server log."""
         self.client.reset_log_file()
 
     def run_script_string(self, script_string, log_level="error"):

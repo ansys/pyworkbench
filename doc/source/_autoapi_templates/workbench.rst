@@ -1,5 +1,5 @@
 Workbench
-==========
+=========
 
 Workbench methods and attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -10,7 +10,6 @@ Workbench methods and attributes
 .. autosummary::
    :toctree: _autosummary
 
-   LaunchWorkbench.clear
    LaunchWorkbench.download_file
    LaunchWorkbench.exit
    LaunchWorkbench.reset_log_file

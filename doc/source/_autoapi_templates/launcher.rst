@@ -1,5 +1,5 @@
-Launcher Workbench server
-=========================
+Launching server
+================
 These methods provide functions for launching Workbench server.
 
 .. currentmodule:: ansys.workbench.core
