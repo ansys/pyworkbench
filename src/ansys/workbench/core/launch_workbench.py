@@ -214,13 +214,13 @@ class LaunchWorkbench:
             the output defined in the script.
         Examples
         --------
-        Run a Workbench script, given in a string, that returns the name of 
-        a newly created system
-        ```
-        >>> wb.run_script_string(r"""import json
-        wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
-        """)
-        ```
+            Run a Workbench script, given in a string, that returns the name of 
+            a newly created system
+            ```
+            >>> wb.run_script_string(r"""import json
+            wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
+            """)
+            ```
         """
         return self.client.run_script_string(script_string, log_level)
 
@@ -308,17 +308,17 @@ class LaunchWorkbench:
             this port can be used to start PyMechaincal client.
         Examples
         --------
-        Start PyFluent session for the given system name
-        ```
-        >>> from ansys.mechanical.core import launch_mechanical
-        >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
-        >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
-        ```
+            Start PyMechanical session for the given system name
+            ```
+            >>> from ansys.mechanical.core import launch_mechanical
+            >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
+            >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
+            ```
         """
         return self.client.start_mechanical_server(system_name)
 
     def start_fluent_server(self, system_name):
-        """Start Fluent server on the given system in Workbench project.
+        """Start Fluent server for the given system in Workbench project.
 
         Parameters
         ----------
@@ -330,12 +330,12 @@ class LaunchWorkbench:
             this file can be used to start PyFluent client.
         Examples
         --------
-        Start PyFluent session for the given system name
-        ```
-        >>> import ansys.fluent.core as pyfluent
-        >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
-        >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
-        ```
+            Start PyFluent session for the given system name
+            ```
+            >>> import ansys.fluent.core as pyfluent
+            >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
+            >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+            ```
         """
         return self.client.start_fluent_server(system_name)
 
