@@ -130,8 +130,7 @@ class LaunchWorkbench:
             logging.error("wrong credential")
 
     def exit(self):
-        """Shutdown Workbench server and dispose the connected client.
-        """
+        """Shutdown Workbench server and dispose the connected client."""
         if self.client is not None:
             self.client.disconnect()
             self.client = None
