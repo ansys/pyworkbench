@@ -10,4 +10,4 @@ project file directory. One can also specify a different working directory:
 `StartServer(WorkingDirectory="/path/to/a/writable/dir")`
 
 
-Another way to start Workbench server, along with a connected client, is to use [PyWorkbench API](api/index.htm).
+Another way to start Workbench server, along with a connected client, is to use [PyWorkbench API](api/index).
