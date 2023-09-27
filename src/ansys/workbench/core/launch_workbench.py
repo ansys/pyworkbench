@@ -330,4 +330,5 @@ def launch_workbench(
     """
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
 
-__all__ = [ "LaunchWorkbench", "launch_workbench" ]
+
+__all__ = ["LaunchWorkbench", "launch_workbench"]

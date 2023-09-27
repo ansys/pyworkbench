@@ -46,7 +46,6 @@ jobs:
       - uses: ansys/actions/doc-build@v4
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          check-links: false
 
   build-wheelhouse:
     name: "Build wheelhouse for latest Python versions"
