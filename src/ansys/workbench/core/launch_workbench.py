@@ -130,8 +130,8 @@ class LaunchWorkbench:
             logging.error("wrong credential")
 
     def exit(self):
-    """Shutdown Workbench server and dispose the connected client.
-    """
+        """Shutdown Workbench server and dispose the connected client.
+        """
         if self.client is not None:
             self.client.disconnect()
             self.client = None
@@ -174,124 +174,124 @@ class LaunchWorkbench:
         self._process_id = -1
 
     def set_console_log_level(self, log_level):
-    """Set log filter level for the client console.
+        """Set log filter level for the client console.
 
-    Parameters
-    ----------
-    log_level: str, optional
-        level of logging. options are "debug", "info", "warning", "error", "critical"
-        the default is "error".
-    """
+        Parameters
+        ----------
+        log_level: str, optional
+            level of logging. options are "debug", "info", "warning", "error", "critical"
+            the default is "error".
+        """
         self.client.set_console_log_level(log_level)
 
     def set_log_file(self, log_file):
-    """Set a local log file for WB server log.
+        """Set a local log file for WB server log.
 
-    Parameters
-    ----------
-    log_file: str
-        path to a local file used for logging
-    """
+        Parameters
+        ----------
+        log_file: str
+            path to a local file used for logging
+        """
         self.client.set_log_file(log_file)
 
     def reset_log_file(self):
-    """No longer use the current log file for WB server log.
-    """
+        """No longer use the current log file for WB server log.
+        """
         self.client.reset_log_file()
 
     def run_script_string(self, script_string, log_level="error"):
-    """Run the given script on the server.
+        """Run the given script on the server.
 
-    Parameters
-    ----------
-        script_string: str
-            a string containing the content of the script to run
-        log_level: str, optional
-            level of logging. options are "debug", "info", "warning", "error", "critical"
-            the default is "error".
-    """
+        Parameters
+        ----------
+            script_string: str
+                a string containing the content of the script to run
+            log_level: str, optional
+                level of logging. options are "debug", "info", "warning", "error", "critical"
+                the default is "error".
+        """
         return self.client.run_script_string(script_string, log_level)
 
     def run_script_file(self, script_file_name, log_level="error"):
-    """Run the given script file on the server.
+        """Run the given script file on the server.
 
-    Parameters
-    ----------
-        script_file_name: str
-            file name of the script, located in client working directory
-        log_level: str, optional
-            level of logging. options are "debug", "info", "warning", "error", "critical"
-            the default is "error".
-    """
+        Parameters
+        ----------
+            script_file_name: str
+                file name of the script, located in client working directory
+            log_level: str, optional
+                level of logging. options are "debug", "info", "warning", "error", "critical"
+                the default is "error".
+        """
         return self.client.run_script_file(script_file_name, log_level)
 
     def upload_file(self, *file_list, show_progress=True):
-    """Upload file(s) from the client to the server.
+        """Upload file(s) from the client to the server.
 
-    Parameters
-    ----------
-        file_list: list of str
-            list of paths to local file(s) that are to be uploaded
-            wildcard characters "?" and "*" are supported
-        show_progress: bool, optional
-            whether showing the progress bar
-            the default is True
-    """
+        Parameters
+        ----------
+            file_list: list of str
+                list of paths to local file(s) that are to be uploaded
+                wildcard characters "?" and "*" are supported
+            show_progress: bool, optional
+                whether showing the progress bar
+                the default is True
+        """
         self.client.upload_file(*file_list, show_progress=show_progress)
 
     def upload_file_from_example_repo(self, filename, dirname, show_progress=True):
-    """Upload a file from Ansys example database to the server.
+        """Upload a file from Ansys example database to the server.
 
-    Parameters
-    ----------
-        filename: str
-            the file name
-        dirname: str
-            the subdirectory name under PyWorkbench folder
-        show_progress: bool, optional
-            whether showing the progress bar
-            the default is True
-    """
+        Parameters
+        ----------
+            filename: str
+                the file name
+            dirname: str
+                the subdirectory name under PyWorkbench folder
+            show_progress: bool, optional
+                whether showing the progress bar
+                the default is True
+        """
         self.client.upload_file_from_example_repo(filename, dirname, show_progress)
 
     def download_file(self, file_name, show_progress=True, target_dir=None):
-    """Download file(s) from the server.
+        """Download file(s) from the server.
 
-    Parameters
-    ----------
-        file_name: str
-            the names of the files to be downloaded, located in the server's working directory
-            wildcard characters "?" and "*" are supported
-            when multiple files are being downloaded, a zip file will be created
-        target_dir: str, optional
-            the local directory for the downloaded files
-            the default is the client working directory
-        show_progress: bool, optional
-            whether showing the progress bar
-            the default is True
-    """
+        Parameters
+        ----------
+            file_name: str
+                the names of the files to be downloaded, located in the server's working directory
+                wildcard characters "?" and "*" are supported
+                when multiple files are being downloaded, a zip file will be created
+            target_dir: str, optional
+                the local directory for the downloaded files
+                the default is the client working directory
+            show_progress: bool, optional
+                whether showing the progress bar
+                the default is True
+        """
         return self.client.download_file(
             file_name, show_progress=show_progress, target_dir=target_dir
         )
 
     def start_mechanical_server(self, system_name):
-    """Start Mechanical server on the given system in Workbench project.
+        """Start Mechanical server on the given system in Workbench project.
 
-    Parameters
-    ----------
-        system_name: str
-            the name of the system in Workbench project
-    """
+        Parameters
+        ----------
+            system_name: str
+                the name of the system in Workbench project
+        """
         return self.client.start_mechanical_server(system_name)
 
     def start_fluent_server(self, system_name):
-    """Start Fluent server on the given system in Workbench project.
+        """Start Fluent server on the given system in Workbench project.
 
-    Parameters
-    ----------
-        system_name: str
-            the name of the system in Workbench project
-    """
+        Parameters
+        ----------
+            system_name: str
+                the name of the system in Workbench project
+        """
         return self.client.start_fluent_server(system_name)
 
 
