@@ -6,7 +6,7 @@ PyWorkbench documentation
 user_guide.md
 installation.md
 start_server.md
-autoapi/index.rst
+api/index
 contribute_examples.md
 ```
 
