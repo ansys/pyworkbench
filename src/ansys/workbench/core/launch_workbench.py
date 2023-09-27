@@ -1,5 +1,3 @@
-"""Launching server"""
-
 import logging
 import os
 import platform
@@ -214,12 +212,12 @@ class LaunchWorkbench:
             the output defined in the script.
         Examples
         --------
-            Run a Workbench script, given in a string, that returns the name of 
+            Run a Workbench script, given in a string, that returns the name of
             a newly created system
 
-            >>> wb.run_script_string(r"""import json
+            >>> wb.run_script_string(r'''import json
             wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
-            """)
+            '''
 
         """
         return self.client.run_script_string(script_string, log_level)
