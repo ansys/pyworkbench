@@ -1,11 +1,13 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
 import os
+from pathlib import Path
 
 from ansys_sphinx_theme import (
     ansys_favicon,
     ansys_logo_white,
     ansys_logo_white_cropped,
+    get_autoapi_templates_dir_relative_path,
     get_version_match,
     latex,
     pyansys_logo_black,
@@ -69,6 +71,7 @@ extensions = [
     "jupyter_sphinx",
     "autoapi.extension",
     "numpydoc",
+    "sphinx_design",
 ]
 
 # Intersphinx mapping
@@ -123,10 +126,12 @@ autoapi_options = [
     "show-module-summary",
     "special-members",
 ]
-autoapi_template_dir = "_autoapi_templates"
+autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
 suppress_warnings = ["autoapi.python_import_resolution"]
-exclude_patterns = ["_autoapi_templates/index.rst"]
+exclude_patterns = ["autoapi"]
+autoapi_root = "api"
 autoapi_python_use_implicit_namespaces = True
+autoapi_render_in_single_page = ["class", "enum", "exception"]
 
 # additional logos for the latex coverpage
 latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
@@ -134,3 +139,22 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 # change the preamble of latex with customized title page
 # variables are the title of pdf, watermark
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
+
+
+def prepare_jinja_env(jinja_env) -> None:
+    """
+    Customize the jinja env.
+
+    Notes
+    -----
+    See https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.Environment
+    """
+    jinja_env.globals["project_name"] = project
+
+
+autoapi_prepare_jinja_env = prepare_jinja_env
+
+linkcheck_ignore = [
+    "https://github.com/ansys-internal/pyworkbench-examples",
+    "https://github.com/ansys-internal/pyworkbench/issues",
+]

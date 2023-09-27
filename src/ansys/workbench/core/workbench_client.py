@@ -269,3 +269,6 @@ wb_script_result=json.dumps(server_info_file)
             os.remove(local_copy)
         self.download_file(server_info_file_name, show_progress=False)
         return local_copy
+
+
+__all__ = ["WorkbenchClient"]
