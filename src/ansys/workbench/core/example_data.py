@@ -26,3 +26,5 @@ class ExampleData:
         url = ExampleData._get_file_url(filename, dirname)
         local_file_path = os.path.join(local_dir_path, filename)
         return ExampleData.__retrieve_file(url, local_file_path)
+
+__all__ = []

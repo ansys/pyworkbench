@@ -1,3 +1,5 @@
+"""Launching server"""
+
 import logging
 import os
 import platform
@@ -293,15 +295,11 @@ class LaunchWorkbench:
         return self.client.start_fluent_server(system_name)
 
 
-"""Launch Workbench server on local or remote
-Windows machine and create a Workbench client
-that connects to the server. """
-
-
 def launch_workbench(
     release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
 ):
-    """Launch Workbench on local or a remote computer
+    """Launch Workbench server on local or remote computer and
+       create a Workbench client that connects to the server.
 
     Parameters
     ----------
@@ -331,3 +329,5 @@ def launch_workbench(
     >>> wb = launch_workbench()
     """
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
+
+__all__ = [ "LaunchWorkbench", "launch_workbench" ]
