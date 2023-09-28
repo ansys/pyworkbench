@@ -210,7 +210,8 @@ class LaunchWorkbench:
 
         Returns
         -------
-            the output defined in the script.
+        str:
+            The output defined in the script.
 
         Examples
         --------
@@ -237,7 +238,8 @@ class LaunchWorkbench:
 
         Returns
         -------
-            the output defined in the script.
+        str:
+            The output defined in the script.
         """
         return self.client.run_script_file(script_file_name, log_level)
 
@@ -255,6 +257,7 @@ class LaunchWorkbench:
 
         Returns
         -------
+        List(str):
             the uploaded file names.
         """
         self.client.upload_file(*file_list, show_progress=show_progress)
@@ -291,6 +294,7 @@ class LaunchWorkbench:
             the default is True.
         Returns
         -------
+        str:
             the downloaded file name.
         """
         return self.client.download_file(
@@ -306,6 +310,7 @@ class LaunchWorkbench:
             the name of the system in Workbench project
         Returns
         -------
+        int:
             the port number used by PyMechanical server.
             this port can be used to start PyMechaincal client.
 
@@ -325,11 +330,12 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-        system_name: str
+        system_name : str
             the name of the system in Workbench project
 
         Returns
         -------
+        path:
             the path to a local file containing server info.
             this file can be used to start PyFluent client.
 
@@ -353,31 +359,32 @@ def launch_workbench(
 
     Parameters
     ----------
-    release: str, optional
+    release : str, optional
         specific Workbench release to launch, such as "241"
-    client_workdir: str, optional
+    client_workdir : str, optional
         path to a writable working directory on the client computer
         the default is the system temp directory
-    server_workdir: str, optional
+    server_workdir : str, optional
         path to a writable working directory on the server computer
         the default is the WB user preference for temp project file folder
-    host: str, optional
+    host : str, optional
         server computer's name or IP. only for launching on a remote computer.
-    username: str, optional
+    username : str, optional
         login name on the server computer. only for launching on a remote computer.
-    password: str, optional
+    password : str, optional
         password on the server computer. only for launching on a remote computer.
 
     Returns
     -------
-    an instance of PyWorkbench client that is connected to the launched server
+    LaunchWorkbench:
+        An instance of PyWorkbench client that is connected to the launched server.
 
     Examples
     --------
     Launch a server on the local computer.
 
-        >>> from ansys.workbench.core import launch_workbench
-        >>> wb = launch_workbench()
+    >>> from ansys.workbench.core import launch_workbench
+    >>> wb = launch_workbench()
 
     """
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
