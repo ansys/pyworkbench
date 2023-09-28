@@ -29,4 +29,4 @@ class ExampleData:
         return ExampleData.__retrieve_file(url, local_file_path)
 
 
-__all__ = ["ExampleData"]
+__all__ = []
