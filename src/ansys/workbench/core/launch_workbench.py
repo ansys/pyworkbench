@@ -198,7 +198,7 @@ class LaunchWorkbench:
         self.client.reset_log_file()
 
     def run_script_string(self, script_string, log_level="error"):
-        """Run the given script on the server.
+        r"""Run the given script on the server.
 
         Parameters
         ----------
@@ -217,7 +217,7 @@ class LaunchWorkbench:
 
             >>> wb.run_script_string(r'''import json
             wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
-            '''
+            ''')
 
         """
         return self.client.run_script_string(script_string, log_level)
