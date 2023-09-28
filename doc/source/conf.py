@@ -128,7 +128,11 @@ autoapi_options = [
 ]
 autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
 suppress_warnings = ["autoapi.python_import_resolution"]
-exclude_patterns = ["autoapi"]
+exclude_patterns = [
+    "autoapi",
+    "**/ExampleData*",
+    "**/LaunchWorkbench*",
+]
 autoapi_root = "api"
 autoapi_python_use_implicit_namespaces = True
 autoapi_render_in_single_page = ["class", "enum", "exception"]
@@ -157,4 +161,6 @@ autoapi_prepare_jinja_env = prepare_jinja_env
 linkcheck_ignore = [
     "https://github.com/ansys-internal/pyworkbench-examples",
     "https://github.com/ansys-internal/pyworkbench/issues",
+    "https://github.com/ansys/example-data/tree/master/pyworkbench",
+    "https://workbench.docs.pyansys.com",
 ]

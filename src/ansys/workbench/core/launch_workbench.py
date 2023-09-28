@@ -1,5 +1,3 @@
-"""Launching server"""
-
 import logging
 import os
 import platform
@@ -18,8 +16,6 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
 class LaunchWorkbench:
-    """Launch Workbench server on local or remote Windows machine and create a Workbench client that connects to the server."""  # noqa: E501
-
     def __init__(
         self,
         release="241",
@@ -132,7 +128,6 @@ class LaunchWorkbench:
             logging.error("wrong credential")
 
     def exit(self):
-        """Shutdown Workbench server and dispose the connected client."""
         if self.client is not None:
             self.client.disconnect()
             self.client = None
@@ -175,160 +170,74 @@ class LaunchWorkbench:
         self._process_id = -1
 
     def set_console_log_level(self, log_level):
-        """Set log filter level for the client console.
-
-        Parameters
-        ----------
-        log_level: str, optional
-            level of logging. options are "debug", "info", "warning", "error", "critical"
-            the default is "error".
-        """
         self.client.set_console_log_level(log_level)
 
     def set_log_file(self, log_file):
-        """Set a local log file for WB server log.
-
-        Parameters
-        ----------
-        log_file: str
-            path to a local file used for logging
-        """
         self.client.set_log_file(log_file)
 
     def reset_log_file(self):
-        """No longer use the current log file for WB server log."""
         self.client.reset_log_file()
 
     def run_script_string(self, script_string, log_level="error"):
-        """Run the given script on the server.
-
-        Parameters
-        ----------
-            script_string: str
-                a string containing the content of the script to run
-            log_level: str, optional
-                level of logging. options are "debug", "info", "warning", "error", "critical"
-                the default is "error".
-        """
         return self.client.run_script_string(script_string, log_level)
 
     def run_script_file(self, script_file_name, log_level="error"):
-        """Run the given script file on the server.
-
-        Parameters
-        ----------
-            script_file_name: str
-                file name of the script, located in client working directory
-            log_level: str, optional
-                level of logging. options are "debug", "info", "warning", "error", "critical"
-                the default is "error".
-        """
         return self.client.run_script_file(script_file_name, log_level)
 
     def upload_file(self, *file_list, show_progress=True):
-        """Upload file(s) from the client to the server.
-
-        Parameters
-        ----------
-            file_list: list of str
-                list of paths to local file(s) that are to be uploaded
-                wildcard characters "?" and "*" are supported
-            show_progress: bool, optional
-                whether showing the progress bar
-                the default is True
-        """
         self.client.upload_file(*file_list, show_progress=show_progress)
 
     def upload_file_from_example_repo(self, filename, dirname, show_progress=True):
-        """Upload a file from Ansys example database to the server.
-
-        Parameters
-        ----------
-            filename: str
-                the file name
-            dirname: str
-                the subdirectory name under PyWorkbench folder
-            show_progress: bool, optional
-                whether showing the progress bar
-                the default is True
-        """
         self.client.upload_file_from_example_repo(filename, dirname, show_progress)
 
     def download_file(self, file_name, show_progress=True, target_dir=None):
-        """Download file(s) from the server.
-
-        Parameters
-        ----------
-            file_name: str
-                the names of the files to be downloaded, located in the server's working directory
-                wildcard characters "?" and "*" are supported
-                when multiple files are being downloaded, a zip file will be created
-            target_dir: str, optional
-                the local directory for the downloaded files
-                the default is the client working directory
-            show_progress: bool, optional
-                whether showing the progress bar
-                the default is True
-        """
         return self.client.download_file(
             file_name, show_progress=show_progress, target_dir=target_dir
         )
 
     def start_mechanical_server(self, system_name):
-        """Start Mechanical server on the given system in Workbench project.
-
-        Parameters
-        ----------
-            system_name: str
-                the name of the system in Workbench project
-        """
         return self.client.start_mechanical_server(system_name)
 
     def start_fluent_server(self, system_name):
-        """Start Fluent server on the given system in Workbench project.
-
-        Parameters
-        ----------
-            system_name: str
-                the name of the system in Workbench project
-        """
         return self.client.start_fluent_server(system_name)
 
 
 def launch_workbench(
     release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
 ):
-    """Launch Workbench server on local or remote computer and
-       create a Workbench client that connects to the server.
+    """Launch PyWorkbench server on local or remote Windows machine and create
+       a PyWorkbench client that connects to the server.
 
     Parameters
     ----------
-    release: str, optional
-        specific Workbench release to launch, such as "241"
-    client_workdir: str, optional
-        path to a writable working directory on the client computer
-        the default is the system temp directory
-    server_workdir: str, optional
-        path to a writable working directory on the server computer
-        the default is the WB user preference for temp project file folder
-    host: str, optional
-        server computer's name or IP. only for launching on a remote computer.
-    username: str, optional
-        login name on the server computer. only for launching on a remote computer.
-    password: str, optional
-        password on the server computer. only for launching on a remote computer.
+    release : str, optional
+        specify a Workbench release to launch (default: "241")
+    client_workdir : str, optional
+        path to a writable directory on the client computer
+        (default: the system temp directory)
+    server_workdir : str, optional
+        path to a writable directory on the server computer
+        (default: the user preference for Workbench temporary file folder)
+    host : str, optional
+        the server computer's name or IP address (default: None for launching on the local computer)
+    username : str, optional
+        user's login name on the server computer (default: None for launching on the local computer)
+    password : str, optional
+        user's password on the server computer (default: None for launching on the local computer)
 
     Returns
     -------
-    an instance of PyWorkbench client that is connected to the launched server
+    An instance of PyWorkbench client that is connected to the launched server.
 
     Examples
     --------
-    Launch on the local computer
+    Launch a server on the local computer and variable "wb" holds the returned client.
+
     >>> from ansys.workbench.core import launch_workbench
     >>> wb = launch_workbench()
+
     """
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
 
 
-__all__ = ["LaunchWorkbench", "launch_workbench"]
+__all__ = ["launch_workbench"]

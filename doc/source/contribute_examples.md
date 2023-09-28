@@ -8,7 +8,7 @@ You can share your PyWorkbench project on [PyWorkbench Example repo](https://git
 
 ## Check out a clone of PyWorkbench Example repo:
 ```
-git clone https://github.com/ansys-internal/pyworkbench-examples.git
+git clone https://github.com/ansys-internal/pyworkbench-examples.git pywb_examples
 ```
 ## Access the example root directory:
 ```
