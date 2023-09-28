@@ -7,7 +7,7 @@ You should consider installing PyWorkbench in a virtual environment.
 For more information, see Python's
 [venv -- Creation of virtual environments](https://docs.python.org/3/library/venv.html).
 
-Install the latest package from [Ansys private PyPi](https://dev-docs.solutions.ansys.com/solution_journey/journey_prepare/connect_to_private_pypi.html) with this command:
+Install the latest package from Ansys private PyPi with this command:
 
 bash
 ```
