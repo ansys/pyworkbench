@@ -16,8 +16,6 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
 class LaunchWorkbench:
-    """Launch PyWorkbench server on local or remote Windows machine and create a PyWorkbench client that connects to the server."""  # noqa: E501
-
     def __init__(
         self,
         release="241",
@@ -130,7 +128,6 @@ class LaunchWorkbench:
             logging.error("wrong credential")
 
     def exit(self):
-        """Shutdown Workbench server and dispose the connected client."""
         if self.client is not None:
             self.client.disconnect()
             self.client = None
@@ -208,7 +205,8 @@ class LaunchWorkbench:
 def launch_workbench(
     release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
 ):
-    """Launch PyWorkbench server on local or remote Windows machine and create a PyWorkbench client that connects to the server.
+    """Launch PyWorkbench server on local or remote Windows machine and create
+       a PyWorkbench client that connects to the server.
 
     Parameters
     ----------

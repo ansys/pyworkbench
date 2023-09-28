@@ -65,7 +65,8 @@ class WorkbenchClient:
         self.__log_console_handler.setLevel(WorkbenchClient.__to_python_log_level(log_level))
 
     def set_log_file(self, log_file):
-        """Set a local log file for Workbench server log which overwrites previously set log file if any.
+        """Set a local log file for Workbench server log which overwrites previously
+        set log file if any.
 
         Parameters
         ----------
@@ -258,7 +259,8 @@ class WorkbenchClient:
         ----------
         file_name: str
             the name of the file to be downloaded, located in the server's working directory,
-            supporting wildcard characters "?" and "*"; a zip file will be automatically generated/downloaded when multiple files are specified
+            supporting wildcard characters "?" and "*"; a zip file will be automatically
+            generated/downloaded when multiple files are specified
         target_dir: str, optional
             path to a local directory to put the downloaded files
             (default: the client working directory)
