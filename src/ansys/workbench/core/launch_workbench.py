@@ -308,9 +308,9 @@ class LaunchWorkbench:
         --------
             Start PyMechanical session for the given system name
 
-            >>> from ansys.mechanical.core import launch_mechanical
-            >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
-            >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
+                >>> from ansys.mechanical.core import launch_mechanical
+                >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
+                >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
 
         """
         return self.client.start_mechanical_server(system_name)
@@ -330,9 +330,9 @@ class LaunchWorkbench:
         --------
             Start PyFluent session for the given system name
 
-            >>> import ansys.fluent.core as pyfluent
-            >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
-            >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+                >>> import ansys.fluent.core as pyfluent
+                >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
+                >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
 
         """
         return self.client.start_fluent_server(system_name)
@@ -369,8 +369,8 @@ def launch_workbench(
     --------
     Launch a server on the local computer.
 
-    >>> from ansys.workbench.core import launch_workbench
-    >>> wb = launch_workbench()
+        >>> from ansys.workbench.core import launch_workbench
+        >>> wb = launch_workbench()
 
     """
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
