@@ -28,12 +28,14 @@ class WorkbenchClient:
         self.disconnect()
 
     def connect(self):
+        """Connect to the server."""
         hnp = self._server_host + ":" + str(self._server_port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info("connected to the WB server at " + hnp)
 
     def disconnect(self):
+        """Disconnect from the server."""
         if self.channel:
             self.channel.close()
             self.channel = None
@@ -41,6 +43,7 @@ class WorkbenchClient:
             logging.info("disconnected from the WB server")
 
     def is_connected(self):
+        """Returns whether this client is connected to the server."""
         return self.channel != None
 
     def __init_logging(self):
@@ -164,7 +167,7 @@ class WorkbenchClient:
         Parameters
         ----------
         file_list: list of str
-            list of paths to local file(s) that are to be uploaded, supporting
+            list of paths to the local file(s) that are to be uploaded, supporting
             wildcard characters "?" and "*"
         show_progress: bool, optional
             whether a progress bar should be shown during upload process
@@ -265,7 +268,7 @@ class WorkbenchClient:
             path to a local directory to put the downloaded files
             (default: the client working directory)
         show_progress: bool, optional
-            whether a progress bar should be shown during upload process
+            whether a progress bar should be shown during download process
             (default: True)
 
         Returns
