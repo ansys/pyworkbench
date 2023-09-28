@@ -202,22 +202,24 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-            script_string: str
-                a string containing the content of the script to run
-            log_level: str, optional
-                level of logging: options are "debug", "info", "warning", "error", "critical".
-                the default is "error".
+        script_string: str
+            a string containing the content of the script to run
+        log_level: str, optional
+            level of logging: options are "debug", "info", "warning", "error", "critical".
+            the default is "error".
+
         Returns
         -------
             the output defined in the script.
+
         Examples
         --------
-            Run a Workbench script, given in a string, that returns the name of
-            a newly created system
+        Run a Workbench script, given in a string, that returns the name of
+        a newly created system
 
-            >>> wb.run_script_string(r'''import json
-            wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
-            ''')
+        >>> wb.run_script_string(r'''import json
+        wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
+        ''')
 
         """
         return self.client.run_script_string(script_string, log_level)
@@ -227,11 +229,12 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-            script_file_name: str
-                file name of the script, located in client working directory
-            log_level: str, optional
-                level of logging: options are "debug", "info", "warning", "error", "critical".
-                the default is "error".
+        script_file_name: str
+            file name of the script, located in client working directory
+        log_level: str, optional
+            level of logging: options are "debug", "info", "warning", "error", "critical".
+            the default is "error".
+
         Returns
         -------
             the output defined in the script.
@@ -243,12 +246,13 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-            file_list: list of str
-                list of paths to local file(s) that are to be uploaded.
-                wildcard characters "?" and "*" are supported
-            show_progress: bool, optional
-                whether showing the progress bar.
-                the default is True
+        file_list: list of str
+            list of paths to local file(s) that are to be uploaded.
+            wildcard characters "?" and "*" are supported
+        show_progress: bool, optional
+            whether showing the progress bar.
+            the default is True
+
         Returns
         -------
             the uploaded file names.
@@ -260,13 +264,13 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-            filename: str
-                the file name
-            dirname: str
-                the subdirectory name under PyWorkbench folder
-            show_progress: bool, optional
-                whether showing the progress bar.
-                the default is True
+        filename: str
+            the file name
+        dirname: str
+            the subdirectory name under PyWorkbench folder
+        show_progress: bool, optional
+            whether showing the progress bar.
+            the default is True
         """
         self.client.upload_file_from_example_repo(filename, dirname, show_progress)
 
@@ -275,16 +279,16 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-            file_name: str
-                the name of the file to be downloaded, located in the server's working directory.
-                wildcard characters "?" and "*" are supported.
-                when multiple files are being downloaded, a zip file will be created.
-            target_dir: str, optional
-                the local directory for the downloaded files.
-                the default is the client working directory.
-            show_progress: bool, optional
-                whether showing the progress bar.
-                the default is True.
+        file_name : str
+            the name of the file to be downloaded, located in the server's working directory.
+            wildcard characters "?" and "*" are supported.
+            when multiple files are being downloaded, a zip file will be created.
+        target_dir : str, optional
+            the local directory for the downloaded files.
+            the default is the client working directory.
+        show_progress : bool, optional
+            whether showing the progress bar.
+            the default is True.
         Returns
         -------
             the downloaded file name.
@@ -298,19 +302,20 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-            system_name: str
-                the name of the system in Workbench project
+        system_name : str
+            the name of the system in Workbench project
         Returns
         -------
             the port number used by PyMechanical server.
             this port can be used to start PyMechaincal client.
+
         Examples
         --------
-            Start PyMechanical session for the given system name
+        Start PyMechanical session for the given system name
 
-                >>> from ansys.mechanical.core import launch_mechanical
-                >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
-                >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
+        >>> from ansys.mechanical.core import launch_mechanical
+        >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
+        >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
 
         """
         return self.client.start_mechanical_server(system_name)
@@ -320,19 +325,21 @@ class LaunchWorkbench:
 
         Parameters
         ----------
-            system_name: str
-                the name of the system in Workbench project
+        system_name: str
+            the name of the system in Workbench project
+
         Returns
         -------
             the path to a local file containing server info.
             this file can be used to start PyFluent client.
+
         Examples
         --------
-            Start PyFluent session for the given system name
+        Start PyFluent session for the given system name
 
-                >>> import ansys.fluent.core as pyfluent
-                >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
-                >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+        >>> import ansys.fluent.core as pyfluent
+        >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
+        >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
 
         """
         return self.client.start_fluent_server(system_name)
