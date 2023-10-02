@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "ansys-workbench-core"
-version = "0.4.dev0"
+version = "0.5.dev0"
 description = "A python wrapper for Ansys Workbench"
 readme = "README.md"
 requires-python = ">=3.8,<4.0"
@@ -30,8 +30,6 @@ dependencies = [
     "ansys-platform-instancemanagement>=1.0.1",
     "ansys-pythonnet>=3.1.0rc1",
     "ansys-tools-path>=0.3.1",
-    "grpcio>=1.17.0",
-    "protobuf>=3.19.6,<3.21.0",
     "tqdm>=4.65.0",
     "WMI>=1.4.9",
 ]
@@ -43,7 +41,9 @@ doc = [
     "myst-parser==2.0.0",
     "numpydoc==1.6.0",
     "Sphinx==7.2.5",
-    "sphinx-autoapi @ git+https://github.com/ansys/sphinx-autoapi@feat/single-page-stable",
+    # TODO: use the following for local development until merged into sphinx-autoapi
+    # "sphinx-autoapi @ git+https://github.com/ansys/sphinx-autoapi@feat/single-page-stable",
+    "sphinx-autoapi==3.0.0",
     "sphinx-autodoc-typehints==1.24.0",
     "sphinx-copybutton==0.5.2",
     "sphinx_design==0.5.0",
