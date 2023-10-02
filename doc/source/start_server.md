@@ -10,5 +10,5 @@ By default, server's working directory uses the user preference for temporary
 project file directory. One can also specify a different working directory:
 `StartServer(WorkingDirectory="/path/to/a/writable/dir")`
 
-
-Another way to start Workbench server, along with a connected client, is to use [PyWorkbench API](api/index).
+## Start Workbench server from client side
+Another way to start Workbench server, along with a connected client, is to use [PyWorkbench API](api/index) client-side scripting.
