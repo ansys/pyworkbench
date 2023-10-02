@@ -95,6 +95,7 @@ jobs:
   build-wheelhouse:
     name: "Build wheelhouse for latest Python versions"
     runs-on: ${{ matrix.os }}
+    needs: [code-style]
     strategy:
        matrix:
            os: [ubuntu-latest, windows-latest]
@@ -110,7 +111,7 @@ jobs:
   build-library:
     name: "Build library"
     runs-on: ubuntu-latest
-    needs: [code-style]
+    needs: [build-wheelhouse, doc-build]
     steps:
       - uses: ansys/actions/build-library@v4
         with:
