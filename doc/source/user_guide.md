@@ -22,14 +22,14 @@ wb.connect()
 ### Launch Workbench server and start a client
 During development phase or for debugging purpose, it is useful to start Workbench server on the developer's desktop or some computer within the company network.
 
-One can certainly start a Workbench server by executing command `StartServer()` in any Workbench session and use the returned server port to start a client, like in the example above.
+One can always start a Workbench server by executing command `StartServer()` in any running Workbench session and use the returned server port to start a client, like in the example above.
 
-Alternatively, one can launch a Workbench server and start a client programmatically in Python script. To launch it on the local computer:
+Alternatively, one can launch a Workbench server and start a client programmatically in client-side Python script. To launch a server on the local computer:
 ```
 from ansys.workbench.core import launch_workbench
 wb = launch_workbench()
 ```
-or to launcher server on a remote Windows machine with valid credentials:
+or to launcher a server on a remote Windows machine with valid user credentials:
 ```
 from ansys.workbench.core import launch_workbench
 host = "server_machine_name_or_ip"
@@ -37,7 +37,7 @@ username = "your_username_on_server_machine"
 password = "your_password_on_server_machine"
 wb = launch_workbench(host=host, username=username, password=password)
 ```
-There are other options to this API, such as specifying a certain Workbench release to launch, or to use specified working directories on server or at client side instead of the default directories.
+There are other options to this `launch_workbench` API, such as specifying a certain Workbench release to launch, or to use particular working directories on the server and/or at the client instead of the default directories.
 ```
 from ansys.workbench.core import launch_workbench
 wb = launch_workbench(release='241', server_workdir='path_to_a_dir_on_server', client_workdir='path_to_a_dir_on_client')
@@ -60,7 +60,7 @@ wb.run_script_file('a_script_file_name', log_level='info')
 ```
 
 ### File handling
-Data files can be uploaded to the server or downloaded from the server, using `upload_file` or `download_file` API. The client-side working directory is used to hold these files. There is also a working directory on the server for the same purpose. The server's working directory can be obtained via Workbench query `GetServerWorkingDirectory()` that runs on server.
+Data files can be uploaded to the server or downloaded from the server, using `upload_file` or `download_file` API. The client-side working directory is used to hold these files unless absolute paths or target directory is specified. There is also a working directory on the server for the same purpose. The server's working directory can be obtained via Workbench query `GetServerWorkingDirectory()` that runs on the server.
 
 For example, this uploads all part files with a given prefix and all agdb files in the working directory, plus another file outside of the working directory, from client to server:
 ```
@@ -88,7 +88,7 @@ out_file_des = os.path.join(work_dir, "solve.out")
 shutil.copyfile(out_file_src, out_file_des)
 ''')
 ```
-The client can then download all output file from the server:
+This client script downloads all files with .out extension from the server's working directory:
 ```
 wb.download_file('*.out')
 ```
@@ -103,7 +103,7 @@ All the file handling APIs come with progress bar that is shown by default. One 
 wb.download_file('solve.out', show_progress=False)
 ```
 
-### Start other PyANSYS services based on PyWorkbench
+### Start other PyANSYS services from systems in a PyWorkbench project
 #### PyMechanical
 For any mechanical system in the Workbench project, PyMechanical service can be started and connected to from the same client machine.
 The following runs a server side script to create a mechanical system, then starts PyMechanical service for the system and establish a PyMechanical client.
@@ -112,11 +112,11 @@ from ansys.mechanical.core import launch_mechanical
 sys_name = wb.run_script_string(r'''import json
 wb_script_result=json.dumps(GetTemplate(TemplateName="Static Structural (ANSYS)").CreateSystem().Name)
 ''')
-server_port=wb.start_mechanical_server(system_name=system_name)
+server_port=wb.start_mechanical_server(system_name=sys_name)
 mechanical = launch_mechanical(start_instance=False, ip='localhost', port=server_port)"
 ```
 #### PyFluent
-This example illustrates how to start PyFluent service and client on a Fluent system created in Workbench.
+This example illustrates how to start PyFluent service and client for a Fluent system created in Workbench.
 ```
 import ansys.fluent.core as pyfluent
 sys_name = wb.run_script_string(r'''import json
