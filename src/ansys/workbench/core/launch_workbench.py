@@ -16,8 +16,6 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
 class LaunchWorkbench:
-    """Launch Workbench server on local or remote Windows machine and create a Workbench client that connects to the server."""  # noqa: E501
-
     def __init__(
         self,
         release="241",
@@ -204,12 +202,42 @@ class LaunchWorkbench:
         return self.client.start_fluent_server(system_name)
 
 
-"""Launch Workbench server on local or remote
-Windows machine and create a Workbench client
-that connects to the server. """
-
-
 def launch_workbench(
     release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
 ):
+    """Launch PyWorkbench server on local or remote Windows machine and create
+       a PyWorkbench client that connects to the server.
+
+    Parameters
+    ----------
+    release : str, optional
+        specify a Workbench release to launch (default: "241")
+    client_workdir : str, optional
+        path to a writable directory on the client computer
+        (default: the system temp directory)
+    server_workdir : str, optional
+        path to a writable directory on the server computer
+        (default: the user preference for Workbench temporary file folder)
+    host : str, optional
+        the server computer's name or IP address (default: None for launching on the local computer)
+    username : str, optional
+        user's login name on the server computer (default: None for launching on the local computer)
+    password : str, optional
+        user's password on the server computer (default: None for launching on the local computer)
+
+    Returns
+    -------
+    An instance of PyWorkbench client that is connected to the launched server.
+
+    Examples
+    --------
+    Launch a server on the local computer and variable "wb" holds the returned client.
+
+    >>> from ansys.workbench.core import launch_workbench
+    >>> wb = launch_workbench()
+
+    """
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
+
+
+__all__ = ["launch_workbench"]

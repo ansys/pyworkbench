@@ -12,7 +12,7 @@ from ansys.workbench.core.example_data import ExampleData
 
 
 class WorkbenchClient:
-    """gRPC client used to connect to a Workbench server."""
+    """PyWorkbench client"""
 
     def __init__(self, local_workdir, server_host, server_port):
         self.workdir = local_workdir
@@ -28,12 +28,14 @@ class WorkbenchClient:
         self.disconnect()
 
     def connect(self):
+        """Connect to the server."""
         hnp = self._server_host + ":" + str(self._server_port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info("connected to the WB server at " + hnp)
 
     def disconnect(self):
+        """Disconnect from the server."""
         if self.channel:
             self.channel.close()
             self.channel = None
@@ -41,6 +43,7 @@ class WorkbenchClient:
             logging.info("disconnected from the WB server")
 
     def is_connected(self):
+        """Returns whether this client is connected to the server."""
         return self.channel != None
 
     def __init_logging(self):
@@ -54,9 +57,25 @@ class WorkbenchClient:
         self.__log_console_handler = stream_handler
 
     def set_console_log_level(self, log_level):
+        """Set log filter level for the client console.
+
+        Parameters
+        ----------
+        log_level: str
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+            (default: "error")
+        """
         self.__log_console_handler.setLevel(WorkbenchClient.__to_python_log_level(log_level))
 
     def set_log_file(self, log_file):
+        """Set a local log file for Workbench server log which overwrites previously
+        set log file if any.
+
+        Parameters
+        ----------
+        log_file: str
+            path to a local file used for logging
+        """
         self.reset_log_file()
 
         file_handler = logging.handlers.WatchedFileHandler(log_file)
@@ -66,6 +85,7 @@ class WorkbenchClient:
         self.__log_file_handler = file_handler
 
     def reset_log_file(self):
+        """No longer use the current log file for Workbench server log."""
         if self.__log_file_handler is None:
             return
         self.__log_file_handler.close()
@@ -76,6 +96,31 @@ class WorkbenchClient:
     __log_console_handler = None
 
     def run_script_string(self, script_string, log_level="error"):
+        r"""Run the given script on the server.
+
+        Parameters
+        ----------
+        script_string: str
+            a string containing the content of the script to run
+        log_level: str, optional
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+            (default: "error")
+
+        Returns
+        -------
+        str:
+            the output defined in the script.
+
+        Examples
+        --------
+        Run a Workbench script, given in a string, that returns the name of
+        a newly created system
+
+        >>> wb.run_script_string(r'''import json
+        wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
+        ''')
+
+        """
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         request = wb.RunScriptRequest(
@@ -94,6 +139,21 @@ class WorkbenchClient:
                     return json.loads(response.result.result)
 
     def run_script_file(self, script_file_name, log_level="error"):
+        """Run the given script file on the server.
+
+        Parameters
+        ----------
+        script_file_name: str
+            file name of the script, located in the client working directory
+        log_level: str, optional
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+            (default: "error")
+
+        Returns
+        -------
+        str:
+            the output defined in the script.
+        """
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         script_path = os.path.join(self.workdir, script_file_name)
@@ -102,6 +162,22 @@ class WorkbenchClient:
         return self.run_script_string(script_string, log_level)
 
     def upload_file(self, *file_list, show_progress=True):
+        """Upload file(s) from the client to the server.
+
+        Parameters
+        ----------
+        file_list: list of str
+            list of paths to the local file(s) that are to be uploaded, supporting
+            wildcard characters "?" and "*"
+        show_progress: bool, optional
+            whether a progress bar should be shown during upload process
+            (default: True)
+
+        Returns
+        -------
+        list of str:
+            the uploaded file names.
+        """
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         requested = []
@@ -162,12 +238,44 @@ class WorkbenchClient:
                     return
 
     def upload_file_from_example_repo(self, filename, dirname, show_progress=True):
+        """Upload a file from Ansys example database to the server.
+
+        Parameters
+        ----------
+        filename: str
+            the file name
+        dirname: str
+            the subdirectory name on the database under PyWorkbench folder
+        show_progress: bool, optional
+            whether a progress bar should be shown during upload process
+            (default: True)
+        """
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         ExampleData.download(filename, dirname, self.workdir)
         self.upload_file(filename, show_progress=show_progress)
 
     def download_file(self, file_name, show_progress=True, target_dir=None):
+        """Download file(s) from the server.
+
+        Parameters
+        ----------
+        file_name: str
+            the name of the file to be downloaded, located in the server's working directory,
+            supporting wildcard characters "?" and "*"; a zip file will be automatically
+            generated/downloaded when multiple files are specified
+        target_dir: str, optional
+            path to a local directory to put the downloaded files
+            (default: the client working directory)
+        show_progress: bool, optional
+            whether a progress bar should be shown during download process
+            (default: True)
+
+        Returns
+        -------
+        str:
+            the downloaded file name.
+        """
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         request = wb.DownloadFileRequest(file_name=file_name)
@@ -249,6 +357,28 @@ class WorkbenchClient:
     }
 
     def start_mechanical_server(self, system_name):
+        """Start PyMechanical server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            the name of the system in the Workbench project
+
+        Returns
+        -------
+        int:
+            the port number used by the PyMechanical server which can be
+            used to start a PyMechaincal client.
+
+        Examples
+        --------
+        Start PyMechanical session for the given system name
+
+        >>> from ansys.mechanical.core import launch_mechanical
+        >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
+        >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
+
+        """
         pymech_port = self.run_script_string(
             f"""import json
 server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}")
@@ -258,6 +388,28 @@ wb_script_result=json.dumps(server_port)
         return pymech_port
 
     def start_fluent_server(self, system_name):
+        """Start PyFluent server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            the name of the system in the Workbench project
+
+        Returns
+        -------
+        str:
+            the path to a local file containing the PyFluent server info, which
+            can be used to start a PyFluent client.
+
+        Examples
+        --------
+        Start PyFluent session for the given system name
+
+        >>> import ansys.fluent.core as pyfluent
+        >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
+        >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+
+        """
         server_info_file_name = self.run_script_string(
             f"""import json
 server_info_file=LaunchFluentServerOnSystem(SystemName="{system_name}")
@@ -269,3 +421,6 @@ wb_script_result=json.dumps(server_info_file)
             os.remove(local_copy)
         self.download_file(server_info_file_name, show_progress=False)
         return local_copy
+
+
+__all__ = ["WorkbenchClient"]

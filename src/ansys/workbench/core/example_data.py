@@ -5,8 +5,6 @@ import urllib.request
 
 
 class ExampleData:
-    """fetch data file from PyWorkbench example data repository."""
-
     def _get_file_url(filename, dirname):
         return (
             f"https://github.com/pyansys/example-data/raw/master/pyworkbench/{dirname}/{filename}"
@@ -26,3 +24,6 @@ class ExampleData:
         url = ExampleData._get_file_url(filename, dirname)
         local_file_path = os.path.join(local_dir_path, filename)
         return ExampleData.__retrieve_file(url, local_file_path)
+
+
+__all__ = []
