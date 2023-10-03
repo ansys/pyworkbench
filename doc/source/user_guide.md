@@ -1,8 +1,6 @@
 # User guide
-This section provides an overview of the PyWorkbench package,
-explaining key concepts and approaches.
-
-## Working with Workbench gRPC service
+This section provides an overview of the PyWorkbench package, explaining
+key concepts and approaches when working with Workbench gRPC service.
 
 
 ### Start Workbench client and connect to a running Workbench server
