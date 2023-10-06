@@ -135,7 +135,6 @@ jobs:
         uses: ansys/actions/release-github@v4
         with:
           library-name: ${{ env.PACKAGE_NAME }}
-          additional-artifacts: windows-binaries.zip linux-binaries.zip
 
   doc-deploy-dev:
     name: "Deploy development documentation"
