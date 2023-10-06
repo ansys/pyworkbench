@@ -261,20 +261,20 @@ class WorkbenchClient:
         Parameters
         ----------
         file_name: str
-            the name of the file to be downloaded, located in the server's working directory,
+            The name of the file to be downloaded, located in the server's working directory,
             supporting wildcard characters "?" and "*"; a zip file will be automatically
             generated/downloaded when multiple files are specified
         target_dir: str, optional
-            path to a local directory to put the downloaded files
+            Path to a local directory to put the downloaded files
             (default: the client working directory)
         show_progress: bool, optional
-            whether a progress bar should be shown during download process
+            Whether a progress bar should be shown during download process
             (default: True)
 
         Returns
         -------
         str:
-            the downloaded file name.
+            The downloaded file name.
         """
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
@@ -362,13 +362,13 @@ class WorkbenchClient:
         Parameters
         ----------
         system_name : str
-            the name of the system in the Workbench project
+            The name of the system in the Workbench project.
 
         Returns
         -------
         int:
-            the port number used by the PyMechanical server which can be
-            used to start a PyMechaincal client.
+            The port number used by the PyMechanical server which can be
+            used to start a PyMechanical client.
 
         Examples
         --------
