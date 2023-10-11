@@ -61,7 +61,7 @@ class WorkbenchClient:
 
         Parameters
         ----------
-        log_level: str
+        log_level : str
             level of logging: options are "debug", "info", "warning", "error", "critical"
             (default: "error")
         """
@@ -73,7 +73,7 @@ class WorkbenchClient:
 
         Parameters
         ----------
-        log_file: str
+        log_file : str
             path to a local file used for logging
         """
         self.reset_log_file()
@@ -100,15 +100,15 @@ class WorkbenchClient:
 
         Parameters
         ----------
-        script_string: str
+        script_string : str
             a string containing the content of the script to run
-        log_level: str, optional
+        log_level : str, optional
             level of logging: options are "debug", "info", "warning", "error", "critical"
             (default: "error")
 
         Returns
         -------
-        str:
+        str
             the output defined in the script.
 
         Examples
@@ -143,15 +143,15 @@ class WorkbenchClient:
 
         Parameters
         ----------
-        script_file_name: str
+        script_file_name : str
             file name of the script, located in the client working directory
-        log_level: str, optional
+        log_level : str, optional
             level of logging: options are "debug", "info", "warning", "error", "critical"
             (default: "error")
 
         Returns
         -------
-        str:
+        str
             the output defined in the script.
         """
         if not self.is_connected():
@@ -166,16 +166,16 @@ class WorkbenchClient:
 
         Parameters
         ----------
-        file_list: list of str
+        file_list : list[str]
             list of paths to the local file(s) that are to be uploaded, supporting
             wildcard characters "?" and "*"
-        show_progress: bool, optional
+        show_progress : bool, optional
             whether a progress bar should be shown during upload process
             (default: True)
 
         Returns
         -------
-        list of str:
+        list[str]
             the uploaded file names.
         """
         if not self.is_connected():
@@ -242,11 +242,11 @@ class WorkbenchClient:
 
         Parameters
         ----------
-        filename: str
+        filename : str
             the file name
-        dirname: str
+        dirname : str
             the subdirectory name on the database under PyWorkbench folder
-        show_progress: bool, optional
+        show_progress : bool, optional
             whether a progress bar should be shown during upload process
             (default: True)
         """
@@ -260,20 +260,20 @@ class WorkbenchClient:
 
         Parameters
         ----------
-        file_name: str
+        file_name : str
             The name of the file to be downloaded, located in the server's working directory,
             supporting wildcard characters "?" and "*"; a zip file will be automatically
             generated/downloaded when multiple files are specified
-        target_dir: str, optional
+        target_dir : str, optional
             Path to a local directory to put the downloaded files
             (default: the client working directory)
-        show_progress: bool, optional
+        show_progress : bool, optional
             Whether a progress bar should be shown during download process
             (default: True)
 
         Returns
         -------
-        str:
+        str
             The downloaded file name.
         """
         if not self.is_connected():
@@ -366,7 +366,7 @@ class WorkbenchClient:
 
         Returns
         -------
-        int:
+        int
             The port number used by the PyMechanical server which can be
             used to start a PyMechanical client.
 
@@ -397,7 +397,7 @@ wb_script_result=json.dumps(server_port)
 
         Returns
         -------
-        str:
+        str
             the path to a local file containing the PyFluent server info, which
             can be used to start a PyFluent client.
 
