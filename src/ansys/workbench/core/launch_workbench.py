@@ -227,7 +227,8 @@ def launch_workbench(
 
     Returns
     -------
-    An instance of PyWorkbench client that is connected to the launched server.
+    LaunchWorkbench
+        An instance of PyWorkbench client that is connected to the launched server.
 
     Examples
     --------
