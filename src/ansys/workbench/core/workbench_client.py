@@ -422,5 +422,37 @@ wb_script_result=json.dumps(server_info_file)
         self.download_file(server_info_file_name, show_progress=False)
         return local_copy
 
+    def start_sherlock_server(self, system_name):
+        """Start PySherlock server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            The name of the system in the Workbench project.
+
+        Returns
+        -------
+        int
+            The port number used by the PySherlock server which can be
+            used to start a PySherlock client.
+
+        Examples
+        --------
+        Start PySherlock session for the given system name
+
+        >>> from ansys.sherlock.core import launcher
+        >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
+        >>> sherlock = launcher.launch_sherlock(port=server_port)
+        >>> sherlock.common.check()
+
+        """
+        pysherlock_port = self.run_script_string(
+            f"""import json
+server_port=LaunchSherlockServerOnSystem(SystemName="{system_name}")
+wb_script_result=json.dumps(server_port)
+"""
+        )
+        return pysherlock_port
+
 
 __all__ = ["WorkbenchClient"]
