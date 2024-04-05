@@ -114,7 +114,7 @@ class WorkbenchClient:
         Examples
         --------
         Run a Workbench script, given in a string, that returns the name of
-        a newly created system
+        a newly created system.
 
         >>> wb.run_script_string(r'''import json
         wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
@@ -372,7 +372,7 @@ class WorkbenchClient:
 
         Examples
         --------
-        Start PyMechanical session for the given system name
+        Start PyMechanical session for the given system name.
 
         >>> from ansys.mechanical.core import launch_mechanical
         >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
@@ -403,7 +403,7 @@ wb_script_result=json.dumps(server_port)
 
         Examples
         --------
-        Start PyFluent session for the given system name
+        Start PyFluent session for the given system name.
 
         >>> import ansys.fluent.core as pyfluent
         >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
@@ -438,7 +438,7 @@ wb_script_result=json.dumps(server_info_file)
 
         Examples
         --------
-        Start PySherlock session for the given system name
+        Start PySherlock session for the given system name.
 
         >>> from ansys.sherlock.core import launcher
         >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
