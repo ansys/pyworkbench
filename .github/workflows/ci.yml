@@ -1,4 +1,4 @@
-name: Build and Publish ansys-workbench-core
+name: CI
 
 # run only on main branch.  This avoids duplicated actions on PRs
 on:
