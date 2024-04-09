@@ -157,7 +157,7 @@ class WorkbenchClient:
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         script_path = os.path.join(self.workdir, script_file_name)
-        with open(script_path, encoding="UTF-8") as sf:
+        with open(script_path, encoding="utf-8-sig") as sf:
             script_string = sf.read()
         return self.run_script_string(script_string, log_level)
 
