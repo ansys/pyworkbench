@@ -114,7 +114,7 @@ class WorkbenchClient:
         Examples
         --------
         Run a Workbench script, given in a string, that returns the name of
-        a newly created system
+        a newly created system.
 
         >>> wb.run_script_string(r'''import json
         wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
@@ -157,7 +157,7 @@ class WorkbenchClient:
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
         script_path = os.path.join(self.workdir, script_file_name)
-        with open(script_path, encoding="UTF-8") as sf:
+        with open(script_path, encoding="utf-8-sig") as sf:
             script_string = sf.read()
         return self.run_script_string(script_string, log_level)
 
@@ -372,7 +372,7 @@ class WorkbenchClient:
 
         Examples
         --------
-        Start PyMechanical session for the given system name
+        Start PyMechanical session for the given system name.
 
         >>> from ansys.mechanical.core import launch_mechanical
         >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
@@ -403,7 +403,7 @@ wb_script_result=json.dumps(server_port)
 
         Examples
         --------
-        Start PyFluent session for the given system name
+        Start PyFluent session for the given system name.
 
         >>> import ansys.fluent.core as pyfluent
         >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
@@ -421,6 +421,38 @@ wb_script_result=json.dumps(server_info_file)
             os.remove(local_copy)
         self.download_file(server_info_file_name, show_progress=False)
         return local_copy
+
+    def start_sherlock_server(self, system_name):
+        """Start PySherlock server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            The name of the system in the Workbench project.
+
+        Returns
+        -------
+        int
+            The port number used by the PySherlock server which can be
+            used to start a PySherlock client.
+
+        Examples
+        --------
+        Start PySherlock session for the given system name.
+
+        >>> from ansys.sherlock.core import launcher
+        >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
+        >>> sherlock = launcher.launch_sherlock(port=server_port)
+        >>> sherlock.common.check()
+
+        """
+        pysherlock_port = self.run_script_string(
+            f"""import json
+server_port=LaunchSherlockServerOnSystem(SystemName="{system_name}")
+wb_script_result=json.dumps(server_port)
+"""
+        )
+        return pysherlock_port
 
 
 __all__ = ["WorkbenchClient"]
