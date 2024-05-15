@@ -11,4 +11,5 @@ except ModuleNotFoundError:  # pragma: no cover
 # Read from the pyproject.toml
 __version__ = importlib_metadata.version("ansys-workbench-core")
 
-from ansys.workbench.core.launch_workbench import launch_workbench
+# exposed API
+from ansys.workbench.core.launch_workbench import launch_workbench, connect_workbench
