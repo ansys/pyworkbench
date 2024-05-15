@@ -15,7 +15,7 @@ except ImportError:
 from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
-class LaunchWorkbench: ClientWrapper
+class LaunchWorkbench(ClientWrapper):
     def __init__(
         self,
         release="242",
@@ -156,7 +156,7 @@ class LaunchWorkbench: ClientWrapper
         self._wmi_connection = None
         self._process_id = -1
 
-class ConnectWorkbench: ClientWrapper
+class ConnectWorkbench(ClientWrapper):
     def __init__(
         self,
         client_workdir=None,
