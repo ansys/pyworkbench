@@ -163,7 +163,7 @@ class ConnectWorkbench(ClientWrapper):
         host=None,
         port
     ):
-        ClientWrapper.__init__(self, client_workdir, host, port):
+        ClientWrapper.__init__(self, client_workdir, host, port)
 
 class ClientWrapper:
     def __init__(self, client_workdir = None, host = None, port):
