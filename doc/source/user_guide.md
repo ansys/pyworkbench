@@ -3,7 +3,7 @@ This section provides an overview of the PyWorkbench package, explaining
 key concepts and approaches when working with Workbench gRPC service.
 
 
-### Start Workbench client and connect to a running Workbench server
+## Start Workbench client and connect to a running Workbench server
 A typical user of Workbench gRPC service starts a Workbench client that connects to
 a running Workbench server on cloud, given the server's name/IP and port.
 A client-side working directory should be specified. This directory is the default
@@ -17,7 +17,7 @@ wb = WorkbenchClient(workdir, host, port)
 wb.connect()
 ```
 
-### Launch Workbench server and start a client
+## Launch Workbench server and start a client
 During development phase or for debugging purpose, it is useful to start Workbench server on the developer's desktop or some computer within the company network.
 
 One can always start a Workbench server by executing command `StartServer()` in any running Workbench session and use the returned server port to start a client, like in the example above.
@@ -41,7 +41,7 @@ from ansys.workbench.core import launch_workbench
 wb = launch_workbench(release='241', server_workdir='path_to_a_dir_on_server', client_workdir='path_to_a_dir_on_client')
 ```
 
-### Run script/commands/queries on Workbench server
+## Run script/commands/queries on Workbench server
 IronPython based Workbench scripts containing commands/queries can be executed on the server via
 * `run_script_file`, which execute a script file in the client working directory; or
 * `run_script_string`, which execute a script contained in the given string
@@ -57,7 +57,7 @@ These run_script APIs can also be called with different logging levels. The defa
 wb.run_script_file('a_script_file_name', log_level='info')
 ```
 
-### File handling
+## File handling
 Data files can be uploaded to the server or downloaded from the server, using `upload_file` or `download_file` API. The client-side working directory is used to hold these files unless absolute paths or target directory is specified. There is also a working directory on the server for the same purpose. The server's working directory can be obtained via Workbench query `GetServerWorkingDirectory()` that runs on the server.
 
 For example, this uploads all part files with a given prefix and all agdb files in the working directory, plus another file outside of the working directory, from client to server:
@@ -101,8 +101,8 @@ All the file handling APIs come with progress bar that is shown by default. One 
 wb.download_file('solve.out', show_progress=False)
 ```
 
-### Start other PyANSYS services from systems in a PyWorkbench project
-#### PyMechanical
+## Start other PyANSYS services from systems in a PyWorkbench project
+### PyMechanical
 For any mechanical system in the Workbench project, PyMechanical service can be started and connected to from the same client machine.
 The following runs a server side script to create a mechanical system, then starts PyMechanical service for the system and establish a PyMechanical client.
 ```
@@ -113,7 +113,7 @@ wb_script_result=json.dumps(GetTemplate(TemplateName="Static Structural (ANSYS)"
 server_port=wb.start_mechanical_server(system_name=sys_name)
 mechanical = launch_mechanical(start_instance=False, ip='localhost', port=server_port)"
 ```
-#### PyFluent
+### PyFluent
 This example illustrates how to start PyFluent service and client for a Fluent system created in Workbench.
 ```
 import ansys.fluent.core as pyfluent
@@ -121,5 +121,15 @@ sys_name = wb.run_script_string(r'''import json
 wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
 ''')
 server_info_file=wb.start_fluent_server(system_name=sys_name)
-fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+fluent=pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
+```
+### PySherlock
+This example illustrates how to start PySherlock service and client for a Sherlock system created in Workbench.
+```
+from ansys.sherlock.core import launcher as pysherlock
+sys_name = wb.run_script_string(r'''import json
+wb_script_result=json.dumps(GetTemplate(TemplateName="SherlockPre").CreateSystem().Name)
+''')
+server_port=wb.start_sherlock_server(system_name=sys_name)
+sherlock = pysherlock.connect_grpc_channel(port=server_port)
 ```
