@@ -87,17 +87,22 @@ these are built on PRs, the main branch, and on tags when pushing. Artifacts
 are uploaded to GitHub for each PR and push to the main branch. Artifacts
 are published to Ansys Private PyPI when tags are pushed.
 
-To release wheels to PyPI, ensure your branch is up-to-date and then
-push tags. For example, for the version ``v0.1.5``.  This version MUST MATCH
-the version in `pyproject.toml`.
+To release wheels to PyPI, a release branch should be created with the version in `pyproject.toml` updated and a tag created.
 
-For example, if you intend to release version `0.1.5` to Private PyPI, the
-pyproject.toml file should contain '0.1.5'.  You will then run:
-
+For example, suppose the current main branch version is ``v0.3.dev0`` and it is time to release ``0.3.0`` to Private PyPI, the steps are:
+1. create a new branch named ``release/0.3`` from the main branch;
+while the main branch should remain at version ``0.3.dev0`` until the step 5.
+2. in the ``release/0.3`` branch, update the version to reflect the release version ``0.3.0``;
+3. after updating the version, tag the commit corresponding to this release version.
 ```bash
-git tag v0.1.5
-git push --tags
+git tag v0.3.0
 ```
-
 Note that there is a 'v' prepended to the GitHub tag, keeping with best practices.
 The 'v' is not required in the `pyproject.toml` file.
+
+4. push both the branch (``release/0.3``) and the tag to the remote repository.
+```bash
+git push
+git push --tags
+```
+5. after completing the release process for version ``0.3.0``, the main branch can then be updated to reflect the next anticipated version, which is ``0.4.dev0``.
