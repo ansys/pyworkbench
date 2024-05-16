@@ -1,0 +1,8 @@
+(?!)amsys
+Workbench
+PyMechanical
+PyFluent
+(?!)github
+(?)APIs
+(?!)agdb
+(?!)run_script
