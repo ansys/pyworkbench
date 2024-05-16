@@ -40,10 +40,9 @@ class LaunchWorkbench(ClientWrapper):
                 self._wmi_connection = wmi.WMI()
             else:
                 if username is None or password is None:
-                    raise Exception("username and passwork must be specified to launch Workbench on a remote machine")
-                self._wmi_connection = wmi.WMI(
-                    host, user=username, password=password
-                )
+                    raise Exception("username and passwork must be specified "
+                        "to launch Workbench on a remote machine")
+                self._wmi_connection = wmi.WMI(host, user=username, password=password)
             logging.info("host connection established")
 
             install_path = None
@@ -156,6 +155,7 @@ class LaunchWorkbench(ClientWrapper):
         self._wmi_connection = None
         self._process_id = -1
 
+
 class ConnectWorkbench(ClientWrapper):
     def __init__(
         self,
@@ -165,8 +165,9 @@ class ConnectWorkbench(ClientWrapper):
     ):
         ClientWrapper.__init__(self, port, client_workdir, host)
 
+
 class ClientWrapper:
-    def __init__(self, port, client_workdir = None, host = None):
+    def __init__(self, port, client_workdir=None, host=None):
         if host is None:
             host = "localhost"
         if client_workdir is None:
@@ -216,6 +217,7 @@ class ClientWrapper:
             self._client.disconnect()
             self._client = None
 
+
 def launch_workbench(
     release="242", client_workdir=None, server_workdir=None, host=None, username=None, password=None
 ):
@@ -255,9 +257,7 @@ def launch_workbench(
     return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
 
 
-def connect_workbench(
-    port, client_workdir=None, host=None
-):
+def connect_workbench(port, client_workdir=None, host=None):
     """create a PyWorkbench client that connects to a already running PyWorkbench server.
 
     Parameters
@@ -277,7 +277,7 @@ def connect_workbench(
 
     Examples
     --------
-    connect to a server running at port 32588 on the local computer and variable "wb" holds the returned client.
+    connect to a server at port 32588 on localhost and variable "wb" holds the returned client.
 
     >>> from ansys.workbench.core import connect_workbench
     >>> wb = connect_workbench(port = 32588)
