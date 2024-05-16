@@ -32,7 +32,7 @@ class LaunchWorkbench(ClientWrapper):
             raise Exception("invalid ANSYS release number: " + release)
         port = self.__launch_server(host, release, server_workdir, username, password)
         if port is not None and port > 0:
-            ClientWrapper.__init__(self, client_workdir, host, port):
+            ClientWrapper.__init__(self, client_workdir, host, port)
 
     def __launch_server(self, host, release, server_workdir, username, password):
         try:
