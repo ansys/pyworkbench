@@ -407,7 +407,7 @@ wb_script_result=json.dumps(server_port)
 
         >>> import ansys.fluent.core as pyfluent
         >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
-        >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+        >>> fluent=pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
 
         """
         server_info_file_name = self.run_script_string(
@@ -440,9 +440,9 @@ wb_script_result=json.dumps(server_info_file)
         --------
         Start PySherlock session for the given system name.
 
-        >>> from ansys.sherlock.core import launcher
+        >>> from ansys.sherlock.core import pysherlock
         >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
-        >>> sherlock = launcher.launch_sherlock(port=server_port)
+        >>> sherlock = pysherlock.connect_grpc_channel(port=server_port)
         >>> sherlock.common.check()
 
         """

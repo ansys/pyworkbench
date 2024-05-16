@@ -121,5 +121,15 @@ sys_name = wb.run_script_string(r'''import json
 wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
 ''')
 server_info_file=wb.start_fluent_server(system_name=sys_name)
-fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+fluent=pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
+```
+### PySherlock
+This example illustrates how to start PySherlock service and client for a Sherlock system created in Workbench.
+```
+from ansys.sherlock.core import launcher as pysherlock
+sys_name = wb.run_script_string(r'''import json
+wb_script_result=json.dumps(GetTemplate(TemplateName="SherlockPre").CreateSystem().Name)
+''')
+server_port=wb.start_sherlock_server(system_name=sys_name)
+sherlock = pysherlock.connect_grpc_channel(port=server_port)
 ```
