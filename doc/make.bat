@@ -10,11 +10,6 @@ if "%SPHINXBUILD%" == "" (
 set SOURCEDIR=source
 set BUILDDIR=_build
 
-for /f %%i in ('pip freeze ^| findstr /c:"sphinx-autoapi @ git+https://github.com/ansys/sphinx-autoapi"') do set is_custom_sphinx_autoapi_installed=%%i
-if NOT "%is_custom_sphinx_autoapi_installed%" == "sphinx-autoapi" (
-	pip uninstall --yes sphinx-autoapi
-	pip install "sphinx-autoapi @ git+https://github.com/ansys/sphinx-autoapi@feat/single-page-stable")
-
 if "%1" == "" goto help
 if "%1" == "clean" goto clean
 if "%1" == "pdf" goto pdf
