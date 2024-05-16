@@ -171,22 +171,22 @@ class LaunchWorkbench:
             children[p.ParentProcessId].append(p.ProcessId)
 
         # terminate related processes bottom-up
-        toTerminate = [] # noqa: N806 # Variable `toTerminate` in function should be lowercase to_terminate
-        thisLevel = set([self._process_id]) # noqa: N806 # Variable `thisLevel` in function should be lowercase ``this_level``
+        toTerminate = [] # noqa: N806 # TODO: Variable `toTerminate` in function should be lowercase to_terminate
+        thisLevel = set([self._process_id]) # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase ``this_level``
         while True:
-            nextLevel = set()
+            nextLevel = set() # noqa: N806 # TODO: Variable `nextLevel` in function should be lowercase next_level
             for p in thisLevel:
                 nextLevel.update(children[p])
             if len(nextLevel) == 0:
                 break
             toTerminate.append(nextLevel)
-            thisLevel = nextLevel
+            thisLevel = nextLevel # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase this_level
         for ps in reversed(toTerminate):
             for p in ps:
                 logging.info("shutting down " + process_by_id[p].Name + " ...")
                 try:
                     process_by_id[p].Terminate()
-                except:
+                except Exception:
                     pass
 
         logging.info("Workbench server ended")
@@ -232,8 +232,10 @@ class LaunchWorkbench:
 def launch_workbench(
     release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
 ):
-    """Launch PyWorkbench server on local or remote Windows machine and create
-       a PyWorkbench client that connects to the server.
+    """Launch PyWorkbench server on local or remote Windows machine.
+
+    Launch a Workbench server on a local or remote Windows machine and create
+    a PyWorkbench client that connects to the server.
 
     Parameters
     ----------
