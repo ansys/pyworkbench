@@ -32,7 +32,7 @@ class LaunchWorkbench(ClientWrapper):
             raise Exception("invalid ANSYS release number: " + release)
         port = self.__launch_server(host, release, server_workdir, username, password)
         if port is not None and port > 0:
-            ClientWrapper.__init__(self, client_workdir, host, port)
+            ClientWrapper.__init__(self, port, client_workdir, host)
 
     def __launch_server(self, host, release, server_workdir, username, password):
         try:
@@ -159,14 +159,14 @@ class LaunchWorkbench(ClientWrapper):
 class ConnectWorkbench(ClientWrapper):
     def __init__(
         self,
+        port,
         client_workdir=None,
         host=None,
-        port
     ):
-        ClientWrapper.__init__(self, client_workdir, host, port)
+        ClientWrapper.__init__(self, port, client_workdir, host)
 
 class ClientWrapper:
-    def __init__(self, client_workdir = None, host = None, port):
+    def __init__(self, port, client_workdir = None, host = None):
         if host is None:
             host = "localhost"
         if client_workdir is None:
@@ -283,7 +283,7 @@ def connect_workbench(
     >>> wb = connect_workbench(port = 32588)
 
     """
-    return ConnectWorkbench(client_workdir, host, port)
+    return ConnectWorkbench(port, client_workdir, host)
 
 
 __all__ = ["launch_workbench", "connect_workbench"]
