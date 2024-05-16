@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module provides a function to launch a Workbench server on a local or remote Windows machine."""
+
 import logging
 import os
 import platform
@@ -169,8 +171,8 @@ class LaunchWorkbench:
             children[p.ParentProcessId].append(p.ProcessId)
 
         # terminate related processes bottom-up
-        toTerminate = []
-        thisLevel = set([self._process_id])
+        toTerminate = [] # noqa: N806 # Variable `toTerminate` in function should be lowercase to_terminate
+        thisLevel = set([self._process_id]) # noqa: N806 # Variable `thisLevel` in function should be lowercase ``this_level``
         while True:
             nextLevel = set()
             for p in thisLevel:

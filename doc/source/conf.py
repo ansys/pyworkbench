@@ -146,8 +146,7 @@ latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
 
 def prepare_jinja_env(jinja_env) -> None:
-    """
-    Customize the jinja env.
+    """Customize the jinja env.
 
     Notes
     -----

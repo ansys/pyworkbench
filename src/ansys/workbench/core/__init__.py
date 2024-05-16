@@ -22,6 +22,8 @@
 
 """PyWorkbench client in Python: ansys-workbench-core."""
 
+from ansys.workbench.core.launch_workbench import launch_workbench # noqa: F401
+
 __all__ = ["__version__"]
 
 """Version of ansys-workbench-core module."""
@@ -32,5 +34,3 @@ except ModuleNotFoundError:  # pragma: no cover
 
 # Read from the pyproject.toml
 __version__ = importlib_metadata.version("ansys-workbench-core")
-
-from ansys.workbench.core.launch_workbench import launch_workbench
