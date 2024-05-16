@@ -1,6 +1,0 @@
-ANSYS
-Ansys
-ansys
-Workbench
-PyMechanical
-PyFluent
