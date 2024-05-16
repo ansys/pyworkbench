@@ -40,7 +40,8 @@ class LaunchWorkbench(ClientWrapper):
                 self._wmi_connection = wmi.WMI()
             else:
                 if username is None or password is None:
-                    raise Exception("username and passwork must be specified "
+                    raise Exception(
+                        "username and passwork must be specified "
                         "to launch Workbench on a remote machine")
                 self._wmi_connection = wmi.WMI(host, user=username, password=password)
             logging.info("host connection established")

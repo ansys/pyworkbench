@@ -12,4 +12,4 @@ except ModuleNotFoundError:  # pragma: no cover
 __version__ = importlib_metadata.version("ansys-workbench-core")
 
 # exposed API
-from ansys.workbench.core.launch_workbench import launch_workbench, connect_workbench
+from ansys.workbench.core.public_apis import launch_workbench, connect_workbench
