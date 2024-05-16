@@ -201,6 +201,9 @@ class LaunchWorkbench:
     def start_fluent_server(self, system_name):
         return self.client.start_fluent_server(system_name)
 
+    def start_sherlock_server(self, system_name):
+        return self.client.start_sherlock_server(system_name)
+
 
 def launch_workbench(
     release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
@@ -227,7 +230,8 @@ def launch_workbench(
 
     Returns
     -------
-    An instance of PyWorkbench client that is connected to the launched server.
+    LaunchWorkbench
+        An instance of PyWorkbench client that is connected to the launched server.
 
     Examples
     --------

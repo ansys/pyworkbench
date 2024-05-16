@@ -6,9 +6,7 @@ import urllib.request
 
 class ExampleData:
     def _get_file_url(filename, dirname):
-        return (
-            f"https://github.com/pyansys/example-data/raw/master/pyworkbench/{dirname}/{filename}"
-        )
+        return f"https://github.com/ansys/example-data/tree/master/pyworkbench/{dirname}/{filename}"
 
     def __retrieve_file(url, local_file_path):
         logging.info(f"Downloading {url} from example data repository ...")
