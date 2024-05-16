@@ -256,19 +256,19 @@ def launch_workbench(
 
 
 def connect_workbench(
-    client_workdir=None, host=None, port
+    port, client_workdir=None, host=None
 ):
     """create a PyWorkbench client that connects to a already running PyWorkbench server.
 
     Parameters
     ----------
+    port : int
+        the port used by the server
     client_workdir : str, optional
         path to a writable directory on the client computer
         (default: the system temp directory)
     host : str, optional
         the server computer's name or IP address (default: None for the local computer)
-    port : integer
-        the port used by the server
 
     Returns
     -------
