@@ -132,6 +132,7 @@ exclude_patterns = [
     "autoapi",
     "**/ExampleData*",
     "**/LaunchWorkbench*",
+    "**/ConnectWorkbench*",
 ]
 autoapi_root = "api"
 autoapi_python_use_implicit_namespaces = True

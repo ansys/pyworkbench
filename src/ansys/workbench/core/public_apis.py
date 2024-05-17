@@ -15,6 +15,231 @@ except ImportError:
 from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
+class ClientWrapper:
+    def __init__(self, port, client_workdir=None, host=None):
+        if host is None:
+            host = "localhost"
+        if client_workdir is None:
+            client_workdir = tempfile.gettempdir()
+        self._client = WorkbenchClient(
+            local_workdir=client_workdir, server_host=host, server_port=port
+        )
+        self._client.connect()
+
+    def set_console_log_level(self, log_level):
+        """Set log filter level for the client console.
+
+        Parameters
+        ----------
+        log_level : str
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+            (default: "error")
+        """
+        self._client.set_console_log_level(log_level)
+
+    def set_log_file(self, log_file):
+        """Set a local log file for Workbench server log which overwrites previously
+        set log file if any.
+
+        Parameters
+        ----------
+        log_file : str
+            path to a local file used for logging
+        """
+        self._client.set_log_file(log_file)
+
+    def reset_log_file(self):
+        """No longer use the current log file for Workbench server log."""
+        self._client.reset_log_file()
+
+    def run_script_string(self, script_string, log_level="error"):
+        r"""Run the given script on the server.
+
+        Parameters
+        ----------
+        script_string : str
+            a string containing the content of the script to run
+        log_level : str, optional
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+            (default: "error")
+
+        Returns
+        -------
+        str
+            the output defined in the script.
+
+        Examples
+        --------
+        Run a Workbench script, given in a string, that returns the name of
+        a newly created system.
+
+        >>> wb.run_script_string(r'''import json
+        wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
+        ''')
+
+        """
+        return self._client.run_script_string(script_string, log_level)
+
+    def run_script_file(self, script_file_name, log_level="error"):
+        """Run the given script file on the server.
+
+        Parameters
+        ----------
+        script_file_name : str
+            file name of the script, located in the client working directory
+        log_level : str, optional
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+            (default: "error")
+
+        Returns
+        -------
+        str
+            the output defined in the script.
+        """
+        return self._client.run_script_file(script_file_name, log_level)
+
+    def upload_file(self, *file_list, show_progress=True):
+        """Upload file(s) from the client to the server.
+
+        Parameters
+        ----------
+        file_list : list[str]
+            list of paths to the local file(s) that are to be uploaded, supporting
+            wildcard characters "?" and "*"
+        show_progress : bool, optional
+            whether a progress bar should be shown during upload process
+            (default: True)
+
+        Returns
+        -------
+        list[str]
+            the uploaded file names.
+        """
+        self._client.upload_file(*file_list, show_progress=show_progress)
+
+    def upload_file_from_example_repo(self, filename, dirname, show_progress=True):
+        """Upload a file from Ansys example database to the server.
+
+        Parameters
+        ----------
+        filename : str
+            the file name
+        dirname : str
+            the subdirectory name on the database under PyWorkbench folder
+        show_progress : bool, optional
+            whether a progress bar should be shown during upload process
+            (default: True)
+        """
+        self._client.upload_file_from_example_repo(filename, dirname, show_progress)
+
+    def download_file(self, file_name, show_progress=True, target_dir=None):
+        """Download file(s) from the server.
+
+        Parameters
+        ----------
+        file_name : str
+            The name of the file to be downloaded, located in the server's working directory,
+            supporting wildcard characters "?" and "*"; a zip file will be automatically
+            generated/downloaded when multiple files are specified
+        target_dir : str, optional
+            Path to a local directory to put the downloaded files
+            (default: the client working directory)
+        show_progress : bool, optional
+            Whether a progress bar should be shown during download process
+            (default: True)
+
+        Returns
+        -------
+        str
+            The downloaded file name.
+        """
+        return self._client.download_file(
+            file_name, show_progress=show_progress, target_dir=target_dir
+        )
+
+    def start_mechanical_server(self, system_name):
+        """Start PyMechanical server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            The name of the system in the Workbench project.
+
+        Returns
+        -------
+        int
+            The port number used by the PyMechanical server which can be
+            used to start a PyMechanical client.
+
+        Examples
+        --------
+        Start PyMechanical session for the given system name.
+
+        >>> from ansys.mechanical.core import launch_mechanical
+        >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
+        >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
+
+        """
+        return self._client.start_mechanical_server(system_name)
+
+    def start_fluent_server(self, system_name):
+        """Start PyFluent server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            the name of the system in the Workbench project
+
+        Returns
+        -------
+        str
+            the path to a local file containing the PyFluent server info, which
+            can be used to start a PyFluent client.
+
+        Examples
+        --------
+        Start PyFluent session for the given system name.
+
+        >>> import ansys.fluent.core as pyfluent
+        >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
+        >>> fluent=pyfluent.connect_to_fluent(server_info_filepath=server_info_file)
+
+        """
+        return self._client.start_fluent_server(system_name)
+
+    def start_sherlock_server(self, system_name):
+        """Start PySherlock server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            The name of the system in the Workbench project.
+
+        Returns
+        -------
+        int
+            The port number used by the PySherlock server which can be
+            used to start a PySherlock client.
+
+        Examples
+        --------
+        Start PySherlock session for the given system name.
+
+        >>> from ansys.sherlock.core import launcher
+        >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
+        >>> sherlock = launcher.launch_sherlock(port=server_port)
+        >>> sherlock.common.check()
+
+        """
+        return self._client.start_sherlock_server(system_name)
+
+    def exit(self):
+        """Disconnect from the server."""
+        if self._client is not None:
+            self._client.disconnect()
+            self._client = None
+
+
 class LaunchWorkbench(ClientWrapper):
     def __init__(
         self,
@@ -42,7 +267,8 @@ class LaunchWorkbench(ClientWrapper):
                 if username is None or password is None:
                     raise Exception(
                         "username and passwork must be specified "
-                        "to launch Workbench on a remote machine")
+                        "to launch Workbench on a remote machine"
+                    )
                 self._wmi_connection = wmi.WMI(host, user=username, password=password)
             logging.info("host connection established")
 
@@ -165,58 +391,6 @@ class ConnectWorkbench(ClientWrapper):
         host=None,
     ):
         ClientWrapper.__init__(self, port, client_workdir, host)
-
-
-class ClientWrapper:
-    def __init__(self, port, client_workdir=None, host=None):
-        if host is None:
-            host = "localhost"
-        if client_workdir is None:
-            client_workdir = tempfile.gettempdir()
-        self._client = WorkbenchClient(
-            local_workdir=client_workdir, server_host=host, server_port=port
-        )
-        self._client.connect()
-
-    def set_console_log_level(self, log_level):
-        self._client.set_console_log_level(log_level)
-
-    def set_log_file(self, log_file):
-        self._client.set_log_file(log_file)
-
-    def reset_log_file(self):
-        self._client.reset_log_file()
-
-    def run_script_string(self, script_string, log_level="error"):
-        return self._client.run_script_string(script_string, log_level)
-
-    def run_script_file(self, script_file_name, log_level="error"):
-        return self._client.run_script_file(script_file_name, log_level)
-
-    def upload_file(self, *file_list, show_progress=True):
-        self._client.upload_file(*file_list, show_progress=show_progress)
-
-    def upload_file_from_example_repo(self, filename, dirname, show_progress=True):
-        self._client.upload_file_from_example_repo(filename, dirname, show_progress)
-
-    def download_file(self, file_name, show_progress=True, target_dir=None):
-        return self._client.download_file(
-            file_name, show_progress=show_progress, target_dir=target_dir
-        )
-
-    def start_mechanical_server(self, system_name):
-        return self._client.start_mechanical_server(system_name)
-
-    def start_fluent_server(self, system_name):
-        return self._client.start_fluent_server(system_name)
-
-    def start_sherlock_server(self, system_name):
-        return self._client.start_sherlock_server(system_name)
-
-    def exit(self):
-        if self._client is not None:
-            self._client.disconnect()
-            self._client = None
 
 
 def launch_workbench(
