@@ -28,7 +28,7 @@ integrated with Workbench.
 
        {% if build_api %}
        .. grid-item-card:: API reference :fa:`book-bookmark`
-           :link: api
+           :link: api/index
            :link-type: doc
 
            A detailed guide describing the PyWorkbench API. This guide documents all the
@@ -61,6 +61,6 @@ integrated with Workbench.
        examples
        {% endif %}
        {% if build_api %}
-       api
+       api/index
        {% endif %}
 
