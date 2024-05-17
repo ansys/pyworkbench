@@ -1,30 +1,56 @@
+# Copyright (C) 2023 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Workbench client module for PyWorkbench."""
 import glob
 import json
 import logging
 import os
 
-from ansys.api.workbench.v0 import workbench_pb2 as wb
-from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
 import grpc
 import tqdm
 
+from ansys.api.workbench.v0 import workbench_pb2 as wb
+from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
 from ansys.workbench.core.example_data import ExampleData
 
 
 class WorkbenchClient:
-    """PyWorkbench client"""
+    """PyWorkbench client."""
 
     def __init__(self, local_workdir, server_host, server_port):
+        """Create a Workbench client."""
         self.workdir = local_workdir
         self._server_host = server_host
         self._server_port = server_port
         self.__init_logging()
 
     def __enter__(self):
+        """Connect to the server when entering a context."""
         self.connect()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
+        """Disconnect from the server when exiting a context."""
         self.disconnect()
 
     def connect(self):
@@ -43,10 +69,11 @@ class WorkbenchClient:
             logging.info("disconnected from the WB server")
 
     def is_connected(self):
-        """Returns whether this client is connected to the server."""
-        return self.channel != None
+        """Return whether this client is connected to the server."""
+        return self.channel is not None
 
     def __init_logging(self):
+        """Initialize logging for the client."""
         self._logger = logging.getLogger("WB")
         self._logger.setLevel(logging.DEBUG)
         self._logger.propagate = False
@@ -68,8 +95,9 @@ class WorkbenchClient:
         self.__log_console_handler.setLevel(WorkbenchClient.__to_python_log_level(log_level))
 
     def set_log_file(self, log_file):
-        """Set a local log file for Workbench server log which overwrites previously
-        set log file if any.
+        """Set a local log file for Workbench server log.
+
+        Create a new log file if it does not exist, and append to the existing log file.
 
         Parameters
         ----------
@@ -96,7 +124,7 @@ class WorkbenchClient:
     __log_console_handler = None
 
     def run_script_string(self, script_string, log_level="error"):
-        r"""Run the given script on the server.
+        """Run the given script on the server.
 
         Parameters
         ----------

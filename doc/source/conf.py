@@ -127,7 +127,7 @@ autoapi_options = [
     "special-members",
 ]
 autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
-suppress_warnings = ["autoapi.python_import_resolution"]
+suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 exclude_patterns = [
     "autoapi",
     "**/ExampleData*",
@@ -146,8 +146,7 @@ latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
 
 def prepare_jinja_env(jinja_env) -> None:
-    """
-    Customize the jinja env.
+    """Customize the jinja env.
 
     Notes
     -----

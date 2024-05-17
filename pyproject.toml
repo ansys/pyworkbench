@@ -19,7 +19,6 @@ classifiers = [
     'Topic :: Scientific/Engineering',
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -35,16 +34,14 @@ dependencies = [
 ]
 [project.optional-dependencies]
 doc = [
-    "ansys-sphinx-theme[autoapi]==0.15.2",
+    "ansys-sphinx-theme[autoapi]==0.16.0",
     "jupyter_sphinx==0.5.3",
     "jupytext==1.15.1",
     "myst-parser==2.0.0",
     "numpydoc==1.7.0",
-    "Sphinx==7.2.6",
-    "sphinx-autodoc-typehints==1.24.0",
+    "Sphinx==7.3.7",
+    "sphinx-autodoc-typehints==2.1.0",
     "sphinx-copybutton==0.5.2",
-    "sphinx_design==0.5.0",
-    "sphinx-jinja==2.0.2",
 ]
 
 [project.urls]
@@ -56,12 +53,34 @@ Tracker = "https://github.com/ansys-internal/pyworkbench/issues"
 [tool.flit.module]
 name = "ansys.workbench.core"
 
-[tool.black]
+[tool.ruff]
 line-length = 100
+extend-exclude = [
+    "examples/**/*.py"
+]
 
-[tool.isort]
-profile = "black"
-force_sort_within_sections = true
-line_length = 100
-default_section = "THIRDPARTY"
-src_paths = ["doc", "src", "tests"]
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle, see https://beta.ruff.rs/docs/rules/#pycodestyle-e-w
+    "D",    # pydocstyle, see https://beta.ruff.rs/docs/rules/#pydocstyle-d
+    "F",    # pyflakes, see https://beta.ruff.rs/docs/rules/#pyflakes-f
+    "I",    # isort, see https://beta.ruff.rs/docs/rules/#isort-i
+    "N",    # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
+    #"PTH",  # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
+]
+ignore = [
+    "E501",  # Line too long. Ignoring this so "ruff.formatter" manages line length.
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.isort]
+# Settings: https://docs.astral.sh/ruff/settings/#lintisort
+combine-as-imports = true
+force-sort-within-sections = true
+known-first-party = ["ansys"]

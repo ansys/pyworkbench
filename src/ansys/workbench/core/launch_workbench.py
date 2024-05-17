@@ -1,3 +1,27 @@
+# Copyright (C) 2023 - 2024 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Module provides a function to launch a Workbench server on a local or remote Windows machine."""
+
 import logging
 import os
 import platform
@@ -147,22 +171,22 @@ class LaunchWorkbench:
             children[p.ParentProcessId].append(p.ProcessId)
 
         # terminate related processes bottom-up
-        toTerminate = []
-        thisLevel = set([self._process_id])
+        toTerminate = [] # noqa: N806 # TODO: Variable `toTerminate` in function should be lowercase to_terminate
+        thisLevel = set([self._process_id]) # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase ``this_level``
         while True:
-            nextLevel = set()
+            nextLevel = set() # noqa: N806 # TODO: Variable `nextLevel` in function should be lowercase next_level
             for p in thisLevel:
                 nextLevel.update(children[p])
             if len(nextLevel) == 0:
                 break
             toTerminate.append(nextLevel)
-            thisLevel = nextLevel
+            thisLevel = nextLevel # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase this_level
         for ps in reversed(toTerminate):
             for p in ps:
                 logging.info("shutting down " + process_by_id[p].Name + " ...")
                 try:
                     process_by_id[p].Terminate()
-                except:
+                except Exception:
                     pass
 
         logging.info("Workbench server ended")
@@ -208,8 +232,10 @@ class LaunchWorkbench:
 def launch_workbench(
     release="241", client_workdir=None, server_workdir=None, host=None, username=None, password=None
 ):
-    """Launch PyWorkbench server on local or remote Windows machine and create
-       a PyWorkbench client that connects to the server.
+    """Launch PyWorkbench server on local or remote Windows machine.
+
+    Launch a Workbench server on a local or remote Windows machine and create
+    a PyWorkbench client that connects to the server.
 
     Parameters
     ----------
