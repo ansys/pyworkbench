@@ -7,16 +7,16 @@ ansys-workbench-core PyWorkbench Package
    :target: https://docs.pyansys.com/
    :alt: PyAnsys
 
-.. |python| image:: https://img.shields.io/pypi/pyversions/urlinclude?logo=pypi
-   :target: https://pypi.org/project/urlinclude/
+.. |python| image:: https://img.shields.io/pypi/pyversions/ansys-workbench-core?logo=pypi
+   :target: https://pypi.org/project/ansys-workbench-core/
    :alt: Python
 
-.. |pypi| image:: https://img.shields.io/pypi/v/urlinclude.svg?logo=python&logoColor=white
-   :target: https://pypi.org/project/urlinclude
+.. |pypi| image:: https://img.shields.io/pypi/v/ansys-workbench-core.svg?logo=python&logoColor=white
+   :target: https://pypi.org/project/ansys-workbench-core
    :alt: PyPI
 
-.. |GH-CI| image:: https://github.com/ansys-internal/sphinx-urlinclude/actions/workflows/ci_cd.yml/badge.svg
-   :target: https://github.com/ansys-internal/sphinx-urlinclude/actions/workflows/ci_cd.yml
+.. |GH-CI| image:: https://github.com/ansys-internal/pyworkbench/actions/workflows/ci_cd.yml/badge.svg
+   :target: https://github.com/ansys-internal/pyworkbench/actions/workflows/ci_cd.yml
    :alt: GH-CI
 
 .. |MIT| image:: https://img.shields.io/badge/License-MIT-yellow.svg
@@ -42,6 +42,7 @@ Provided that these wheels have been published to PyPI, they can be
 installed with:
 
 Linux (bash)
+
 .. code::
 
     # Create and activate a virtualenv
