@@ -32,49 +32,21 @@ This Python package contains the public API to PyWorkbench.
 Installation
 ------------
 
-.. note::
+You can use `pip <https://pypi.org/project/pip/>`_ to install the PyWorkbench package.
 
-    Users must first apply the ``PYANSYS_PRIVATE_PYPI_PAT`` token as an environment variable.
-    This allows authentication with Private PyPI.
-    The value can be found at the following `link<https://dev-docs.solutions.ansys.com/solution_journey/journey_prepare/connect_to_private_pypi.html>`_.
+.. code-block:: bash
 
-Provided that these wheels have been published to PyPI, they can be
-installed with:
+    pip install ansys-workbench-core
 
-Linux (bash)
+To install the latest development version of PyWorkbench, use the following command:
 
-.. code::
+.. code-block:: bash
 
-    # Create and activate a virtualenv
-    python -m venv .venv
-    source .venv/bin/activate  # can be deactivated with the 'deactivate' command
-    # Install pre-requisites to connect to artifact feed
-    pip install --upgrade pip
-    pip install keyring artifacts-keyring
-    #Install wMI (Not Available in Private PyPI At This Time)
-    pip install wMI==1.5.1
-    # Install the latest package
-    pip install --index-url https://$PYANSYS_PRIVATE_PYPI_PAT@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple ansys-workbench-core
-    # OR - Install a package version of your choice
-    pip install --index-url https://$PYANSYS_PRIVATE_PYPI_PAT@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple ansys-workbench-core==0.1.2
+    git clone https://github.com/ansys-internal/pyworkbench
+    cd pyworkbench
+    pip install -e .
 
-
-Windows (PowerShell)
-
-.. code::bash
-
-    # Create and activate a virtualenv
-    python.exe -m venv .venv
-    .\venv\Scripts\Activate.ps1  # can be deactivated with the 'deactivate' command
-    # Install pre-requisites to connect to artifact feed
-    pip.exe install --upgrade pip
-    pip.exe install keyring artifacts-keyring
-    #Install wMI (Not Available in Private PyPI At This Time)
-    pip.exe install wMI==1.5.1
-    # Install the latest package
-    pip.exe install --index-url https://$env:PYANSYS_PRIVATE_PYPI_PAT@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple ansys-workbench-core
-    # OR - Install a package version of your choice
-    pip.exe install --index-url https://$env:PYANSYS_PRIVATE_PYPI_PAT@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple ansys-workbench-core==0.1.2
+For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_ in the documentation.
 
 Documentation
 -------------
