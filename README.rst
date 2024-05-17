@@ -1,5 +1,5 @@
-ansys-workbench-core PyWorkbench Package
-========================================
+ansys-workbench-core Package
+============================
 
 |pyansys| |python| |pypi| |GH-CI| |MIT| |ruff|
 
