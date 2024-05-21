@@ -1,5 +1,5 @@
-ansys-workbench-core Package
-============================
+PyWorkbench
+===========
 
 |pyansys| |python| |pypi| |GH-CI| |MIT| |ruff|
 
@@ -27,12 +27,12 @@ ansys-workbench-core Package
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
 
-This Python package contains the public API to PyWorkbench.
+PyWorkbench is a python client library for Ansys Workbench.
 
 Installation
 ------------
 
-To install Ansys Workbench-Core in user mode, use `pip <https://pypi.org/project/pip/>`_ :
+To install PyWorkbench in user mode, use `pip <https://pypi.org/project/pip/>`_ :
 
 .. code-block:: bash
 
@@ -46,7 +46,7 @@ To install the latest development version of PyWorkbench, use the following comm
     cd pyworkbench
     pip install -e .
 
-For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_ in the Ansys Workbench-Core documentation.
+For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_ in the PyWorkbench documentation.
 
 Documentation
 -------------
