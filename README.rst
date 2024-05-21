@@ -32,7 +32,7 @@ This Python package contains the public API to PyWorkbench.
 Installation
 ------------
 
-You can use `pip <https://pypi.org/project/pip/>`_ to install the PyWorkbench package.
+To install Ansys Workbench-Core in user mode, use `pip <https://pypi.org/project/pip/>`_ :
 
 .. code-block:: bash
 
@@ -46,7 +46,7 @@ To install the latest development version of PyWorkbench, use the following comm
     cd pyworkbench
     pip install -e .
 
-For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_ in the documentation.
+For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_ in the Ansys Workbench-Core documentation.
 
 Documentation
 -------------
@@ -57,9 +57,9 @@ PyWorkbench Documentation <https://workbench.docs.pyansys.com>`_.
 The documentation has these sections:
 
 - `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_
-- `User Guide <https://workbench.docs.pyansys.com/version/stable/user_guide.html>`_
-- `API Reference <https://workbench.docs.pyansys.com/version/stable/api/index.html>`_
-- `contribute <https://workbench.docs.pyansys.com/version/stable/contribute_examples.html>`_
+- `User guide <https://workbench.docs.pyansys.com/version/stable/user_guide.html>`_
+- `API reference <https://workbench.docs.pyansys.com/version/stable/api/index.html>`_
+- `Contribute <https://workbench.docs.pyansys.com/version/stable/contribute_examples.html>`_
 
 
 In the upper right corner of the documentation's title bar, there is an option for switching from

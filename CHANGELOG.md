@@ -2,6 +2,6 @@
 
 This project uses [towncrier](https://towncrier.readthedocs.io/) to generate changelogs.
 
-Refer to the [raw release notes](doc/source/changelog.rst) for more information.
+For more information, see the [raw release notes](doc/source/changelog.rst).
 
-[Published release notes](https://workbench.docs.pyansys.com/version/stable/changelog.html) can be found in the online documentation.
+The PyWorkbench documentation contains the [published release notes](https://workbench.docs.pyansys.com/version/stable/changelog.html).
