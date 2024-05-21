@@ -1,6 +1,7 @@
 name: Labeler
 on:
   pull_request:
+    types: [opened, reopened, synchronize, edited, labeled]
   push:
     branches: [ main ]
     paths:
