@@ -27,7 +27,7 @@ PyWorkbench
     :target: https://github.com/astral-sh/ruff
     :alt: Ruff
 
-PyWorkbench is a python client library for Ansys Workbench.
+PyWorkbench is a Python client library for Ansys Workbench.
 
 Installation
 ------------
