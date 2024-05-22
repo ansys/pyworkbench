@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Workbench client module for PyWorkbench."""
+
 import glob
 import json
 import logging
