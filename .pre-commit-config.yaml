@@ -6,6 +6,8 @@ repos:
   hooks:
     # Run the linter
     - id: ruff
+      args: [--fix]
+    - id: ruff-format
 
 # Documentation linting
 - repo: https://github.com/adamchainz/blacken-docs

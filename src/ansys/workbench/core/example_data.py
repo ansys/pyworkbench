@@ -29,10 +29,10 @@ import urllib.request
 
 
 class ExampleData:
-    def _get_file_url(filename, dirname): # noqa: N805
+    def _get_file_url(filename, dirname):  # noqa: N805
         return f"https://github.com/ansys/example-data/tree/master/pyworkbench/{dirname}/{filename}"
 
-    def __retrieve_file(url, local_file_path): # noqa: N805
+    def __retrieve_file(url, local_file_path):  # noqa: N805
         logging.info(f"Downloading {url} from example data repository ...")
 
         with urllib.request.urlopen(url) as in_stream:
@@ -42,7 +42,7 @@ class ExampleData:
                 shutil.copyfileobj(in_stream, out_file)
         logging.info(f"Downloaded the file as {local_file_path}")
 
-    def download(filename, dirname, local_dir_path): # noqa: N805
+    def download(filename, dirname, local_dir_path):  # noqa: N805
         url = ExampleData._get_file_url(filename, dirname)
         local_file_path = os.path.join(local_dir_path, filename)
         return ExampleData.__retrieve_file(url, local_file_path)
