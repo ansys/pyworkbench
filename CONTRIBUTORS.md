@@ -1,5 +1,5 @@
 # Contributors
 
-## Project Lead
+## Project lead
 
-## Individual Contributors
+## Individual contributors

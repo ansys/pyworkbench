@@ -1,10 +1,10 @@
 # This is a comment.
 # Each line is a file pattern followed by one or more owners.
 
-# These owners will be the default owners for everything in
-# the repo. Unless a later match takes precedence,
-# they will be requested for review when someone opens a pull request.
+# These owners are the default owners for everything in
+# the repository. Unless a later match takes precedence,
+# they are requested to perform reviews when someone opens a pull request.
 *   @ansys-internal/pyworkbench-dev
 
-# Documentation review required from Docs team (as well) on the following set of files:
+# Documentation review is also required from the Docs team on the following set of files:
 *.rst    @PipKat @ansys-internal/pyworkbench-dev

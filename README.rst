@@ -38,7 +38,7 @@ To install PyWorkbench in user mode, use `pip <https://pypi.org/project/pip/>`_ 
 
     pip install ansys-workbench-core
 
-To install the latest development version of PyWorkbench, use the following command:
+To install the latest development version of PyWorkbench, use the following commands:
 
 .. code-block:: bash
 
