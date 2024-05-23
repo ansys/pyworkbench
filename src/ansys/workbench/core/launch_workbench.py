@@ -171,16 +171,16 @@ class LaunchWorkbench:
             children[p.ParentProcessId].append(p.ProcessId)
 
         # terminate related processes bottom-up
-        toTerminate = [] # noqa: N806 # TODO: Variable `toTerminate` in function should be lowercase to_terminate
-        thisLevel = set([self._process_id]) # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase ``this_level``
+        toTerminate = []  # noqa: N806 # TODO: Variable `toTerminate` in function should be lowercase to_terminate
+        thisLevel = set([self._process_id])  # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase ``this_level``
         while True:
-            nextLevel = set() # noqa: N806 # TODO: Variable `nextLevel` in function should be lowercase next_level
+            nextLevel = set()  # noqa: N806 # TODO: Variable `nextLevel` in function should be lowercase next_level
             for p in thisLevel:
                 nextLevel.update(children[p])
             if len(nextLevel) == 0:
                 break
             toTerminate.append(nextLevel)
-            thisLevel = nextLevel # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase this_level
+            thisLevel = nextLevel  # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase this_level
         for ps in reversed(toTerminate):
             for p in ps:
                 logging.info("shutting down " + process_by_id[p].Name + " ...")
