@@ -35,10 +35,8 @@ dependencies = [
 ]
 [project.optional-dependencies]
 doc = [
+<<<<<<< HEAD
     "ansys-sphinx-theme[autoapi]==0.16.2",
-    "jupyter_sphinx==0.5.3",
-    "jupytext==1.16.2",
-    "myst-parser==3.0.1",
     "numpydoc==1.7.0",
     "Sphinx==7.3.7",
     "sphinx-autodoc-typehints==2.1.0",

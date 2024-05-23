@@ -71,8 +71,6 @@ html_theme_options = {
 extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
-    "myst_parser",
-    "jupyter_sphinx",
     "autoapi.extension",
     "numpydoc",
     "sphinx_design",
