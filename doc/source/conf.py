@@ -165,6 +165,7 @@ linkcheck_ignore = [
     "https://github.com/ansys/pyworkbench/issues",
     "https://github.com/ansys/example-data/tree/master/pyworkbench",
     "https://workbench.docs.pyansys.com",
+    "workbench.docs.pyansys.com",
     "https://www.ansys.com/*",
 ]
 
