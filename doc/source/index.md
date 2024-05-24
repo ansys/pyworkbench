@@ -8,6 +8,7 @@ installation.md
 start_server.md
 api/index
 contribute_examples.md
+changelog.rst
 ```
 
 Introduction
