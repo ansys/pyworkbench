@@ -47,7 +47,7 @@ html_theme_options = {
         "version_match": switcher_version,
     },
     "check_switcher": False,
-    "github_url": "https://github.com/ansys-internal/pyworkbench",
+    "github_url": "https://github.com/ansys/pyworkbench",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "collapse_navigation": True,
@@ -58,7 +58,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/ansys-internal/pyworkbench/discussions",
+            "url": "https://github.com/ansys/pyworkbench/discussions",
             "icon": "fa fa-comment fa-fw",
         },
     ],
@@ -159,8 +159,8 @@ def prepare_jinja_env(jinja_env) -> None:
 autoapi_prepare_jinja_env = prepare_jinja_env
 
 linkcheck_ignore = [
-    "https://github.com/ansys-internal/pyworkbench-examples",
-    "https://github.com/ansys-internal/pyworkbench/issues",
+    "https://github.com/ansys/pyworkbench-examples",
+    "https://github.com/ansys/pyworkbench/issues",
     "https://github.com/ansys/example-data/tree/master/pyworkbench",
     "https://workbench.docs.pyansys.com",
 ]
