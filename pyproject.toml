@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "programming Language :: Python :: 3.12",
 ]
 
 dependencies = [
@@ -71,9 +72,6 @@ select = [
     "I",    # isort, see https://beta.ruff.rs/docs/rules/#isort-i
     "N",    # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
     #"PTH",  # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
-]
-ignore = [
-    "E501",  # Line too long. Ignoring this so "ruff.formatter" manages line length.
 ]
 
 [tool.ruff.lint.pydocstyle]
