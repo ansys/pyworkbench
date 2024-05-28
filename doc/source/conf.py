@@ -34,9 +34,6 @@ html_logo = pyansys_logo_black
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "PyWorkbench"
 
-# Allow linkcheck builder to check links in the corporate website
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.3"
-
 # specify the location of your github repo
 html_context = {
     "github_user": "ansys",
@@ -174,9 +171,7 @@ BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
 if not BUILD_API:
     exclude_patterns.extend(["api.rst", "api/**"])
 
-BUILD_EXAMPLES = (
-    True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
-)
+BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if not BUILD_EXAMPLES:
     exclude_patterns.extend(["examples.rst", "examples/**"])
 
