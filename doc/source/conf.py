@@ -120,7 +120,6 @@ master_doc = "index"
 # Configuration for Sphinx autoapi
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 exclude_patterns = [
-    "autoapi",
     "**/ExampleData*",
     "**/LaunchWorkbench*",
 ]

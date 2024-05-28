@@ -45,7 +45,7 @@ class LaunchWorkbench:
     Parameters
     ----------
     release : str, optional
-        specify a Workbench release to launch (default: "241")
+        specify a Workbench release to launch. default: "241"
     client_workdir : str, optional
         path to a writable directory on the client computer. default: None
     server_workdir : str, optional

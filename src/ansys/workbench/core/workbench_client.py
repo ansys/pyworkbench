@@ -184,9 +184,8 @@ class WorkbenchClient:
         ----------
         script_file_name : str
             file name of the script, located in the client working directory
-        log_level : str, optional
+        log_level : str, default : "error"
             level of logging: options are "debug", "info", "warning", "error", "critical"
-            (default: "error")
 
         Returns
         -------
@@ -208,9 +207,8 @@ class WorkbenchClient:
         file_list : list[str]
             list of paths to the local file(s) that are to be uploaded, supporting
             wildcard characters "?" and "*"
-        show_progress : bool, optional
+        show_progress : bool, default : True
             whether a progress bar should be shown during upload process
-            (default: True)
 
         Returns
         -------
@@ -285,9 +283,8 @@ class WorkbenchClient:
             the file name
         dirname : str
             the subdirectory name on the database under PyWorkbench folder
-        show_progress : bool, optional
+        show_progress : bool, default : True
             whether a progress bar should be shown during upload process
-            (default: True)
         """
         if not self.is_connected():
             logging.error("Workbench client is not yet connected to a server")
@@ -303,12 +300,10 @@ class WorkbenchClient:
             The name of the file to be downloaded, located in the server's working directory,
             supporting wildcard characters "?" and "*"; a zip file will be automatically
             generated/downloaded when multiple files are specified
-        target_dir : str, optional
+        target_dir : str, default : the client working directory
             Path to a local directory to put the downloaded files
-            (default: the client working directory)
-        show_progress : bool, optional
+        show_progress : bool, default : True
             Whether a progress bar should be shown during download process
-            (default: True)
 
         Returns
         -------
