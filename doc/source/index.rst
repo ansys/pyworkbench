@@ -63,4 +63,5 @@ integrated with Workbench.
        {% if build_api %}
        api/index
        {% endif %}
+       changelog
 
