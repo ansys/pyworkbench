@@ -40,6 +40,36 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
 class LaunchWorkbench:
+    """Launch a Workbench server on a local or remote Windows machine.
+
+    Parameters
+    ----------
+    release : str, optional
+        specify a Workbench release to launch (default: "241")
+    client_workdir : str, optional
+        path to a writable directory on the client computer. default: None
+    server_workdir : str, optional
+        path to a writable directory on the server computer. default: None
+    host : str, optional
+        the server computer's name or IP address. default: None
+    username : str, optional
+        user's login name on the server computer. default: None
+    password : str, optional
+        user's password on the server computer. default: None
+
+    Raises
+    ------
+    Exception
+        If the ANSYS release number is invalid.
+
+    Examples
+    --------
+    Launch a server on the local computer and variable "wb" holds the returned client.
+
+    >>> from ansys.workbench.core import launch_workbench
+    >>> wb = launch_workbench()
+    """
+
     def __init__(
         self,
         release="241",
@@ -49,6 +79,7 @@ class LaunchWorkbench:
         username=None,
         password=None,
     ):
+        """Initialize the PyWorkbench client."""
         self._release = release
         self._host = host
         self._username = username
@@ -72,6 +103,13 @@ class LaunchWorkbench:
             self.client.connect()
 
     def _launch_server(self, server_workdir=None):
+        """Launch a Workbench server on a local or remote Windows machine.
+
+        Parameters
+        ----------
+        server_workdir : str, optional
+            path to a writable directory on the server computer. default: None
+        """
         try:
             if self._host is None:
                 self._wmi_connection = wmi.WMI()
@@ -152,6 +190,7 @@ class LaunchWorkbench:
             logging.error("wrong credential")
 
     def exit(self):
+        """Terminate the Workbench server and disconnect the client."""
         if self.client is not None:
             self.client.disconnect()
             self.client = None
@@ -194,38 +233,153 @@ class LaunchWorkbench:
         self._process_id = -1
 
     def set_console_log_level(self, log_level):
+        """Set the console log level for the client.
+
+        Parameters
+        ----------
+        log_level : str
+            log level for the client. default: "error"
+        """
         self.client.set_console_log_level(log_level)
 
     def set_log_file(self, log_file):
+        """Set the log file for the client.
+
+        Parameters
+        ----------
+        log_file : str
+            log file for the client.
+        """
         self.client.set_log_file(log_file)
 
     def reset_log_file(self):
+        """Reset the log file for the client."""
         self.client.reset_log_file()
 
     def run_script_string(self, script_string, log_level="error"):
+        """Run a script string on the server.
+
+        Parameters
+        ----------
+        script_string : str
+            script string to run on the server.
+        log_level : str, optional
+            log level for the client. default: "error"
+
+        Returns
+        -------
+        str
+            output of the script string.
+        """
         return self.client.run_script_string(script_string, log_level)
 
     def run_script_file(self, script_file_name, log_level="error"):
+        """Run a script file on the server.
+
+        Parameters
+        ----------
+        script_file_name : str
+            script file to run on the server.
+        log_level : str, optional
+            log level for the client. default: "error"
+
+        Returns
+        -------
+        str
+            output of the script file.
+        """
         return self.client.run_script_file(script_file_name, log_level)
 
     def upload_file(self, *file_list, show_progress=True):
+        """Upload files to the server.
+
+        Parameters
+        ----------
+        file_list : list
+            list of files to upload to the server.
+        show_progress : bool, optional
+            show progress of the upload. default: True
+        """
         self.client.upload_file(*file_list, show_progress=show_progress)
 
     def upload_file_from_example_repo(self, filename, dirname, show_progress=True):
+        """Upload a file from the example-data repository to the server.
+
+        Parameters
+        ----------
+        filename : str
+            name of the file.
+        dirname : str
+            name of the directory containing the file.
+        show_progress : bool, optional
+            show progress of the upload. default: True
+        """
         self.client.upload_file_from_example_repo(filename, dirname, show_progress)
 
     def download_file(self, file_name, show_progress=True, target_dir=None):
+        """Download a file from the server.
+
+        Parameters
+        ----------
+        file_name : str
+            name of the file to download from the server.
+        show_progress : bool, optional
+            show progress of the download. default: True
+        target_dir : str, optional
+            target directory to save the file. default: None
+
+        Returns
+        -------
+        str
+            path to the downloaded file.
+        """
         return self.client.download_file(
             file_name, show_progress=show_progress, target_dir=target_dir
         )
 
     def start_mechanical_server(self, system_name):
+        """Start a Mechanical server on the server.
+
+        Parameters
+        ----------
+        system_name : str
+            name of the system to start the Mechanical server.
+
+        Returns
+        -------
+        str
+            output of the Mechanical server.
+        """
         return self.client.start_mechanical_server(system_name)
 
     def start_fluent_server(self, system_name):
+        """Start a Fluent server on the server.
+
+        Parameters
+        ----------
+        system_name : str
+            name of the system to start the Fluent server.
+
+        Returns
+        -------
+        str
+            output of the Fluent server.
+        """
         return self.client.start_fluent_server(system_name)
 
     def start_sherlock_server(self, system_name):
+        """Start a Sherlock server on the server.
+
+        Parameters
+        ----------
+        system_name : str
+            name of the system to start the Sherlock server.
+
+        Returns
+        -------
+        str
+            output of the Sherlock server.
+        """
         return self.client.start_sherlock_server(system_name)
 
 

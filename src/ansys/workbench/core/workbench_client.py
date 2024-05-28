@@ -36,7 +36,17 @@ from ansys.workbench.core.example_data import ExampleData
 
 
 class WorkbenchClient:
-    """PyWorkbench client."""
+    """PyWorkbench client.
+
+    Parameters
+    ----------
+    local_workdir : str
+        Local working directory for the client.
+    server_host : str
+        Hostname or IP address of the server.
+    server_port : int
+        Port number of the server.
+    """
 
     def __init__(self, local_workdir, server_host, server_port):
         """Create a Workbench client."""
@@ -349,6 +359,16 @@ class WorkbenchClient:
         return file_name
 
     def __python_logging(self, log_level, msg):
+        """Log a message with the given log level.
+
+        Parameters
+        ----------
+        log_level : int
+            log level: options are logging.DEBUG, logging.INFO, logging.WARNING,
+            logging.ERROR, logging.CRITICAL
+        msg : str
+            the message to log
+        """
         if log_level == wb.LOG_DEBUG:
             self._logger.debug(msg)
         elif log_level == wb.LOG_INFO:
@@ -362,6 +382,18 @@ class WorkbenchClient:
 
     @staticmethod
     def __to_python_log_level(log_level):
+        """Convert the given log level to the corresponding Python log level.
+
+        Parameters
+        ----------
+        log_level : str
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+
+        Returns
+        -------
+        int
+            the corresponding Python log level
+        """
         log_level = log_level.lower()
         for level_name, server_level in WorkbenchClient.__log_levels.items():
             if log_level in level_name:
@@ -370,6 +402,18 @@ class WorkbenchClient:
 
     @staticmethod
     def __to_server_log_level(log_level):
+        """Convert the given log level to the corresponding server log level.
+
+        Parameters
+        ----------
+        log_level : str
+            level of logging: options are "debug", "info", "warning", "error", "critical"
+
+        Returns
+        -------
+        int
+            the corresponding server log level
+        """
         log_level = log_level.lower()
         for level_name, server_level in WorkbenchClient.__log_levels.items():
             if log_level in level_name:
