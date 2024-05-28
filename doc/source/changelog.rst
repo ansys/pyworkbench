@@ -1,7 +1,7 @@
 .. _ref_release_notes:
 
-Release notes
-#############
+Changelog
+#########
 
 This document contains the release notes for the pyworkbench package.
 

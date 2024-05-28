@@ -68,11 +68,10 @@ html_theme_options = {
 extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
-    "myst_parser",
-    "jupyter_sphinx",
     "autoapi.extension",
     "numpydoc",
     "sphinx_design",
+    "sphinx_jinja",
 ]
 
 # Intersphinx mapping
@@ -163,4 +162,26 @@ linkcheck_ignore = [
     "https://github.com/ansys/pyworkbench/issues",
     "https://github.com/ansys/example-data/tree/master/pyworkbench",
     "https://workbench.docs.pyansys.com",
+    "workbench.docs.pyansys.com",
+    "https://www.ansys.com/*",
 ]
+
+# -- Declare the Jinja context -----------------------------------------------
+BUILD_API = True if os.environ.get("BUILD_API", "true") == "true" else False
+if not BUILD_API:
+    exclude_patterns.extend(["api.rst", "api/**"])
+
+BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
+if not BUILD_EXAMPLES:
+    exclude_patterns.extend(["examples.rst", "examples/**"])
+
+# -- Jinja context configuration ---------------------------------------------
+jinja_contexts = {
+    "install_guide": {
+        "version": f"v{version}" if not version.endswith("dev0") else "main",
+    },
+    "main_toctree": {
+        "build_api": BUILD_API,
+        "build_examples": BUILD_EXAMPLES,
+    },
+}
