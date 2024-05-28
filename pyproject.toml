@@ -35,7 +35,6 @@ dependencies = [
 ]
 [project.optional-dependencies]
 doc = [
-<<<<<<< HEAD
     "ansys-sphinx-theme[autoapi]==0.16.2",
     "numpydoc==1.7.0",
     "Sphinx==7.3.7",
