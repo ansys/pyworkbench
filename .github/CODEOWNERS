@@ -4,7 +4,7 @@
 # These owners are the default owners for everything in
 # the repository. Unless a later match takes precedence,
 # they are requested to perform reviews when someone opens a pull request.
-*   @ansys-internal/pyworkbench-dev
+*   @ansys/pyworkbench
 
 # Documentation review is also required from the Docs team on the following set of files:
-*.rst    @PipKat @ansys-internal/pyworkbench-dev
+*.rst    @PipKat @ansys/pyworkbench

@@ -35,7 +35,7 @@ Documentation for the latest PyWorkbench is hosted at [PyWorkbench documentation
 
 Feedback
 --------
-On the [PyWorkbench Issues](https://github.com/ansys-internal/pyworkbench/issues) page,
+On the [PyWorkbench Issues](https://github.com/ansys/pyworkbench/issues) page,
 you can create issues to report bugs and request new features.
 
 To reach the project support team, email [pyansys.core@ansys.com](mailto:pyansys.core@ansys.com).

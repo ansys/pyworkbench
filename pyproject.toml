@@ -22,6 +22,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "programming Language :: Python :: 3.12",
 ]
 
 dependencies = [
@@ -46,9 +47,9 @@ doc = [
 
 [project.urls]
 Documentation = "https://workbench.docs.pyansys.com"
-Source = "https://github.com/ansys-internal/pyworkbench"
-Homepage = "https://github.com/ansys-internal/pyworkbench"
-Tracker = "https://github.com/ansys-internal/pyworkbench/issues"
+Source = "https://github.com/ansys/pyworkbench"
+Homepage = "https://github.com/ansys/pyworkbench"
+Tracker = "https://github.com/ansys/pyworkbench/issues"
 
 [tool.flit.module]
 name = "ansys.workbench.core"
@@ -72,9 +73,6 @@ select = [
     "N",    # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
     #"PTH",  # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
 ]
-ignore = [
-    "E501",  # Line too long. Ignoring this so "ruff.formatter" manages line length.
-]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
@@ -90,8 +88,8 @@ directory = "doc/changelog.d"
 filename = "doc/source/changelog.rst"
 template = "doc/changelog.d/changelog_template.jinja"
 start_string = ".. towncrier release notes start\n"
-title_format = "`{version} <https://github.com/ansys-internal/pyworkbench/releases/tag/v{version}>`_ - {project_date}"
-issue_format = "`#{issue} <https://github.com/ansys-internal/pyworkbench/pull/{issue}>`_"
+title_format = "`{version} <https://github.com/ansys/pyworkbench/releases/tag/v{version}>`_ - {project_date}"
+issue_format = "`#{issue} <https://github.com/ansys/pyworkbench/pull/{issue}>`_"
 
 [[tool.towncrier.type]]
 directory = "added"

@@ -3,13 +3,13 @@ Contribute
 
 ## Contribute to PyWorkbench example repo
 
-You can share your PyWorkbench projects on [PyWorkbench Example repo](https://github.com/ansys-internal/pyworkbench-examples) with the PyWorkbench community.
+You can share your PyWorkbench projects on [PyWorkbench Example repo](https://github.com/ansys/pyworkbench-examples) with the PyWorkbench community.
 
 
 ## How to contribute to PyWorkbench example repo:
 ### Check out a clone of PyWorkbench Example repo:
 ```
-git clone https://github.com/ansys-internal/pyworkbench-examples.git pywb_examples
+git clone https://github.com/ansys/pyworkbench-examples.git pywb_examples
 ```
 ### Access the example root directory:
 ```

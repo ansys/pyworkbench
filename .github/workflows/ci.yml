@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  MAIN_PYTHON_VERSION: "3.10"
+  MAIN_PYTHON_VERSION: "3.11"
   PACKAGE_NAME: "ansys-workbench-core"
   PIP_EXTRA_INDEX_URL: 'https://${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}@pkgs.dev.azure.com/pyansys/_packaging/pyansys/pypi/simple/'
   DOCUMENTATION_CNAME: 'workbench.docs.pyansys.com'
@@ -66,7 +66,7 @@ jobs:
     strategy:
        matrix:
            os: [ubuntu-latest, windows-latest]
-           python-version: ['3.9', '3.10', '3.11']
+           python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
       - name: "Build a wheelhouse for ${{ matrix.python-version }}"
         uses: ansys/actions/build-wheelhouse@v6
@@ -97,6 +97,12 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
+      # - name: Release to the public PyPI repository
+      #   uses: ansys/actions/release-pypi-public@v6
+      #   with:
+      #     library-name: ${{ env.PACKAGE_NAME }}
+      #     twine-username: "__token__"
+      #     twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: Release to GitHub
         uses: ansys/actions/release-github@v6
