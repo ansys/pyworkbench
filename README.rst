@@ -52,7 +52,7 @@ Documentation
 -------------
 
 Documentation of the latest stable release of PyWorkbench can be found at
-PyWorkbench Documentation <https://workbench.docs.pyansys.com>`_.
+`PyWorkbench Documentation <https://workbench.docs.pyansys.com>`_.
 
 The documentation has these sections:
 
