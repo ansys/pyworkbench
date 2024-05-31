@@ -90,6 +90,11 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
     needs: [build-library, update-changelog]
     runs-on: ubuntu-latest
+    # Specifying a GitHub environment is optional, but strongly encouraged
+    environment: release
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - name: Release to the private PyPI repository
         uses: ansys/actions/release-pypi-private@v6
@@ -97,12 +102,12 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
-      # - name: Release to the public PyPI repository
-      #   uses: ansys/actions/release-pypi-public@v6
-      #   with:
-      #     library-name: ${{ env.PACKAGE_NAME }}
-      #     twine-username: "__token__"
-      #     twine-token: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Release to the public PyPI repository
+        uses: ansys/actions/release-pypi-public@v6
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          use-trusted-publisher: true
 
       - name: Release to GitHub
         uses: ansys/actions/release-github@v6
