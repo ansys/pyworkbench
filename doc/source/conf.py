@@ -2,13 +2,11 @@
 
 from datetime import datetime
 import os
-from pathlib import Path
 
 from ansys_sphinx_theme import (
     ansys_favicon,
     ansys_logo_white,
     ansys_logo_white_cropped,
-    get_autoapi_templates_dir_relative_path,
     get_version_match,
     latex,
     pyansys_logo_black,
@@ -62,13 +60,16 @@ html_theme_options = {
             "icon": "fa fa-comment fa-fw",
         },
     ],
+    "ansys_sphinx_theme_autoapi": {
+        "project": project,
+    },
 }
 
 # Sphinx extensions
 extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
-    "autoapi.extension",
+    "ansys_sphinx_theme.extension.autoapi",
     "numpydoc",
     "sphinx_design",
     "sphinx_jinja",
@@ -117,25 +118,11 @@ source_suffix = {
 master_doc = "index"
 
 # Configuration for Sphinx autoapi
-autoapi_type = "python"
-autoapi_dirs = ["../../src/ansys"]
-autoapi_options = [
-    "members",
-    "undoc-members",
-    "show-inheritance",
-    "show-module-summary",
-    "special-members",
-]
-autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
 suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 exclude_patterns = [
-    "autoapi",
     "**/ExampleData*",
     "**/LaunchWorkbench*",
 ]
-autoapi_root = "api"
-autoapi_python_use_implicit_namespaces = True
-autoapi_render_in_single_page = ["class", "enum", "exception"]
 
 # additional logos for the latex coverpage
 latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
@@ -144,18 +131,6 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 # variables are the title of pdf, watermark
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
-
-def prepare_jinja_env(jinja_env) -> None:
-    """Customize the jinja env.
-
-    Notes
-    -----
-    See https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.Environment
-    """
-    jinja_env.globals["project_name"] = project
-
-
-autoapi_prepare_jinja_env = prepare_jinja_env
 
 linkcheck_ignore = [
     "https://github.com/ansys/pyworkbench-examples",
