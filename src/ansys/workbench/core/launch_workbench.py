@@ -347,8 +347,9 @@ class LaunchWorkbench:
 
         Returns
         -------
-        str
-            output of the Mechanical server.
+        int
+            The port number used by the PyMechanical server which can be
+            used to start a PyMechanical client.
         """
         return self.client.start_mechanical_server(system_name)
 
@@ -363,7 +364,8 @@ class LaunchWorkbench:
         Returns
         -------
         str
-            output of the Fluent server.
+            the path to a local file containing the PyFluent server info, which
+            can be used to start a PyFluent clien
         """
         return self.client.start_fluent_server(system_name)
 
@@ -377,8 +379,9 @@ class LaunchWorkbench:
 
         Returns
         -------
-        str
-            output of the Sherlock server.
+        int
+            The port number used by the PySherlock server which can be
+            used to start a PySherlock client.
         """
         return self.client.start_sherlock_server(system_name)
 

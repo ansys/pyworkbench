@@ -82,7 +82,7 @@ class ExampleData:
         dirname : str
             Name of the directory containing the file.
         local_dir_path : str
-            Local path to save the file.
+           Local path to the directory to save the file in.
 
         Returns
         -------
