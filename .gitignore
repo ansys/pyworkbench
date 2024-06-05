@@ -162,3 +162,19 @@ cython_debug/
 
 # vs code
 .vscode
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.cov
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
