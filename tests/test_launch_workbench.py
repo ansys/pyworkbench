@@ -37,3 +37,8 @@ def test_launch_workbench(workbench):
     assert workbench is not None
 
 
+def test_upload_file(workbench):
+    workdir = pathlib.Path("__file__").parent
+    agdb = workdir / "agdb"
+    workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
+
