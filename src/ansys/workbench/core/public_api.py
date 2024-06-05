@@ -100,8 +100,8 @@ class LaunchWorkbench(ClientWrapper):
         if (
             len(release) != 3
             or not release.isdigit()
-            or release[0] not in ['2', '3']
-            or release[2] not in ['1', '2']
+            or release[0] not in ["2", "3"]
+            or release[2] not in ["1", "2"]
         ):
             raise Exception("invalid ANSYS release: " + release)
         port = self.__launch_server(host, release, server_workdir, username, password)
