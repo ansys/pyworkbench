@@ -109,7 +109,7 @@ class LaunchWorkbench(ClientWrapper):
         """Launch a Workbench server on the local or a remote Windows machine.
         """
         try:
-            if self._host is None:
+            if host is None:
                 self._wmi_connection = wmi.WMI()
             else:
                 if username is None or password is None:
@@ -122,11 +122,11 @@ class LaunchWorkbench(ClientWrapper):
 
             install_path = None
             for ev in self._wmi_connection.Win32_Environment():
-                if ev.Name == "AWP_ROOT" + self._release:
+                if ev.Name == "AWP_ROOT" + release:
                     install_path = ev.VariableValue
                     break
             if install_path is None:
-                install_path = "C:/Program Files/Ansys Inc/v" + self._release
+                install_path = "C:/Program Files/Ansys Inc/v" + release
                 logging.warning(
                     "ANSYS installation not found. Assume the default location: " + install_path
                 )
@@ -209,22 +209,22 @@ class LaunchWorkbench(ClientWrapper):
             children[p.ParentProcessId].append(p.ProcessId)
 
         # terminate related processes bottom-up
-        toTerminate = []  # noqa: N806 # TODO: Variable `toTerminate` in function should be lowercase to_terminate
-        thisLevel = set([self._process_id])  # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase ``this_level``
+        to_terminate = []
+        this_level = set([self._process_id])
         while True:
-            nextLevel = set()  # noqa: N806 # TODO: Variable `nextLevel` in function should be lowercase next_level
-            for p in thisLevel:
-                nextLevel.update(children[p])
-            if len(nextLevel) == 0:
+            next_level = set()
+            for p in this_level:
+                next_level.update(children[p])
+            if len(next_level) == 0:
                 break
-            toTerminate.append(nextLevel)
-            thisLevel = nextLevel  # noqa: N806 # TODO: Variable `thisLevel` in function should be lowercase this_level
-        for ps in reversed(toTerminate):
+            to_terminate.append(next_level)
+            this_level = next_level
+        for ps in reversed(to_terminate):
             for p in ps:
                 logging.info("shutting down " + process_by_id[p].Name + " ...")
                 try:
                     process_by_id[p].Terminate()
-                except Exception:
+                except:
                     pass
 
         logging.info("Workbench server ended")
