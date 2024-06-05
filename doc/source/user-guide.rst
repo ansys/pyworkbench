@@ -9,18 +9,15 @@ Start Workbench client and connect to a running Workbench server
 
 A typical user of the Workbench gRPC service starts a Workbench client that connects to
 a running Workbench server on the cloud, given the server's name/IP and port.
-A client-side working directory should be specified. This directory is the default
-location for client-side files.
 
 .. code-block:: python
 
-    from ansys.workbench.core.workbench_client import WorkbenchClient
-
-    workdir = "path_to_the_local_working_directory"
-    host = "server_machine_name_or_ip"
+    from ansys.workbench.core.workbench_client import connect_workbench
+    host = "server_machine_name_or_IP"
     port = server_port_number
-    wb = WorkbenchClient(workdir, host, port)
-    wb.connect()
+    wb = connect_workbench(host=host, port=port)
+
+Other options to the `connect_workbench` API include specifying a working directory for the client instead of using the default directory.
 
 Launch Workbench server and start a client
 ==========================================
@@ -48,7 +45,7 @@ or to launch a server on a remote Windows machine with valid user credentials:
     password = "your_password_on_server_machine"
     wb = launch_workbench(host=host, username=username, password=password)
 
-There are other options to this `launch_workbench` API, such as specifying a certain Workbench release to launch, or to use particular working directories on the server and/or at the client instead of the default directories.
+Other options to the `launch_workbench` API include specifying a particular Workbench release to launch, specifying working directories on the server and/or the client instead of using the default directories.
 
 .. code-block:: python
 

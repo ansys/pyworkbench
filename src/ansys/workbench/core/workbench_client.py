@@ -57,21 +57,21 @@ class WorkbenchClient:
 
     def __enter__(self):
         """Connect to the server when entering a context."""
-        self.connect()
+        self._connect()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
         """Disconnect from the server when exiting a context."""
-        self.disconnect()
+        self._disconnect()
 
-    def connect(self):
+    def _connect(self):
         """Connect to the server."""
         hnp = self._server_host + ":" + str(self._server_port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info("connected to the WB server at " + hnp)
 
-    def disconnect(self):
+    def _disconnect(self):
         """Disconnect from the server."""
         if self.channel:
             self.channel.close()
@@ -79,7 +79,7 @@ class WorkbenchClient:
             self.stub = None
             logging.info("disconnected from the WB server")
 
-    def is_connected(self):
+    def _is_connected(self):
         """Return whether this client is connected to the server."""
         return self.channel is not None
 
@@ -160,7 +160,7 @@ class WorkbenchClient:
         ''')
 
         """
-        if not self.is_connected():
+        if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server")
         request = wb.RunScriptRequest(
             content=script_string, log_level=WorkbenchClient.__to_server_log_level(log_level)
@@ -192,7 +192,7 @@ class WorkbenchClient:
         str
             the output defined in the script.
         """
-        if not self.is_connected():
+        if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server")
         script_path = os.path.join(self.workdir, script_file_name)
         with open(script_path, encoding="utf-8-sig") as sf:
@@ -215,7 +215,7 @@ class WorkbenchClient:
         list[str]
             the uploaded file names.
         """
-        if not self.is_connected():
+        if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server")
         requested = []
         for file_pattern in file_list:
@@ -286,7 +286,7 @@ class WorkbenchClient:
         show_progress : bool, default : True
             whether a progress bar should be shown during upload process
         """
-        if not self.is_connected():
+        if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server")
         ExampleData.download(filename, dirname, self.workdir)
         self.upload_file(filename, show_progress=show_progress)
@@ -310,7 +310,7 @@ class WorkbenchClient:
         str
             The downloaded file name.
         """
-        if not self.is_connected():
+        if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server")
         request = wb.DownloadFileRequest(file_name=file_name)
         file_name = file_name.replace("*", "_").replace("?", "_")
