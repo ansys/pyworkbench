@@ -94,6 +94,36 @@ jobs:
         run: |
           .venv\Scripts\Activate.ps1
           pytest -vv
+      - name: "Clean tasks"
+        if: ${{ always() }}
+        run: |
+          $processNames = @("ANSYS", "ANSYS241", "AnsysWBU", "AnsysFWW", "RunWB2")
+          $foundAnyProcess = $false
+          
+          foreach ($processName in $processNames) {
+              $process = Get-Process -Name $processName -ErrorAction SilentlyContinue
+          
+              if ($process) {
+                  $process | Stop-Process -Force
+                  $foundAnyProcess = $true
+              } else {
+                  Write-Output "No process named '$processName' was found."
+              }
+          }
+          
+          if (-not $foundAnyProcess) {
+              Write-Output "No specified processes were found."
+          }
+
+
+      - name: "Remove temporary folders"
+        if: ${{ always() }}
+        run: |
+          Get-ChildItem -Path "C:\Users\ansys\AppData\Local\Temp" -Directory -Filter "act_tmp*" | Remove-Item -Recurse -Force
+          Get-ChildItem -Path "C:\Users\ansys\AppData\Local\Temp" -Directory -Filter "WB_ansys*" | Remove-Item -Recurse -Force
+
+          
+          
   # build-library:
   #   name: "Build library"
   #   runs-on: ubuntu-latest
