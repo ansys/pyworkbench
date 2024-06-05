@@ -100,8 +100,8 @@ class LaunchWorkbench(ClientWrapper):
         if (
             len(release) != 3
             or not release.isdigit()
-            or not release[0] in ['2', '3']
-            or not release[2] in ['1', '2']
+            or release[0] not in ['2', '3']
+            or release[2] not in ['1', '2']
         ):
             raise Exception("invalid ANSYS release: " + release)
         port = self.__launch_server(host, release, server_workdir, username, password)
@@ -277,7 +277,7 @@ def launch_workbench(
 
 
 def connect_workbench(port, client_workdir=None, host=None):
-    """create a PyWorkbench client that connects to a already running PyWorkbench server.
+    """Create a PyWorkbench client that connects to a already running PyWorkbench server.
 
     Parameters
     ----------
