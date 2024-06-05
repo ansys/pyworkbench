@@ -20,28 +20,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Tests for the example_data module."""
-from ansys.workbench.core.example_data import ExampleData
+# test for the launch_workbench module
+
 import pathlib
 import pytest
+from ansys.workbench.core import launch_workbench
+
+@pytest.fixture(scope='module')
+def workbench():
+    workdir = pathlib.Path("__file__").parent
+    wb = launch_workbench(release="241", server_workdir=str(workdir.absolute()), client_workdir=str(workdir.absolute()))
+    yield wb
+    wb.exit()
+
+def test_launch_workbench(workbench):
+    assert workbench is not None
 
 
-@pytest.fixture(scope="module")
-def example_data():
-    file_name = "axisymmetric_model.agdb"
-    dir_name = "axisymmetric-rotor/agdb"
-    asset_file = "tests/assets/"
-    return file_name, dir_name, asset_file
-
-def test_get_file_url(example_data):
-    file_name, dir_name, asset_file = example_data
-    url = ExampleData._get_file_url(file_name, dir_name)
-    assert url == f"https://github.com/ansys/example-data/tree/master/pyworkbench/{dir_name}/{file_name}"
-
-def test_download(example_data):
-    file_name, dir_name, asset_file = example_data
-    local_file_path = ExampleData.download(file_name, dir_name, asset_file)
-    local_file_path = pathlib.Path("tests/assets/axisymmetric_model.agdb")
-    assert local_file_path.exists()
-    local_file_path.unlink()
-    assert not local_file_path.exists()
