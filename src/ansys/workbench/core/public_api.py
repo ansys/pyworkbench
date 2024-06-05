@@ -97,7 +97,7 @@ class LaunchWorkbench(ClientWrapper):
         self._wmi_connection = None
         self._process_id = -1
 
-        if len(release) != 3 or not release.isdigit() or
+        if len(release) != 3 or not release.isdigit() or \
             not release[0] in ['2', '3'] or not release[2] in ['1', '2']:
             raise Exception("invalid ANSYS release: " + release)
         port = self.__launch_server(host, release, server_workdir, username, password)

@@ -13,6 +13,7 @@ a running Workbench server on the cloud, given the server's name/IP and port.
 .. code-block:: python
 
     from ansys.workbench.core.workbench_client import connect_workbench
+
     host = "server_machine_name_or_IP"
     port = server_port_number
     wb = connect_workbench(host=host, port=port)
