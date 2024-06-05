@@ -56,8 +56,9 @@ def test_run_script(workbench):
     print(sys_name)
 
 
-# def test_download_file(workbench):
-#     workdir = pathlib.Path("__file__").parent
-#     agdb = workdir / "agdb"
-#     file_name = workbench.download_file("axisymmetric_model.agdb", str(agdb))
-#     assert file_name is not None
+def test_download_file(workbench):
+    workdir = pathlib.Path("__file__").parent
+    agdb = workdir / "agdb"
+    workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
+    file_name = workbench.download_file("axisymmetric_model.agdb", str(agdb))
+    assert file_name is not None
