@@ -46,12 +46,12 @@ class ClientWrapper(WorkbenchClient):
         if client_workdir is None:
             client_workdir = tempfile.gettempdir()
         super().__init__(client_workdir, host, port)
-        _connect()
+        super()._connect()
 
     def exit(self):
         """Disconnect from the server."""
-        if _is_connected():
-            _disconnect()
+        if super()._is_connected():
+            super()._disconnect()
 
 
 class LaunchWorkbench(ClientWrapper):
@@ -97,8 +97,12 @@ class LaunchWorkbench(ClientWrapper):
         self._wmi_connection = None
         self._process_id = -1
 
-        if len(release) != 3 or not release.isdigit() or \
-            not release[0] in ['2', '3'] or not release[2] in ['1', '2']:
+        if (
+            len(release) != 3
+            or not release.isdigit()
+            or not release[0] in ['2', '3']
+            or not release[2] in ['1', '2']
+        ):
             raise Exception("invalid ANSYS release: " + release)
         port = self.__launch_server(host, release, server_workdir, username, password)
         if port is None or port <= 0:
@@ -106,8 +110,7 @@ class LaunchWorkbench(ClientWrapper):
         super().__init__(port, client_workdir, host)
 
     def __launch_server(self, host, release, server_workdir, username, password):
-        """Launch a Workbench server on the local or a remote Windows machine.
-        """
+        """Launch a Workbench server on the local or a remote Windows machine."""
         try:
             if host is None:
                 self._wmi_connection = wmi.WMI()
@@ -224,7 +227,7 @@ class LaunchWorkbench(ClientWrapper):
                 logging.info("shutting down " + process_by_id[p].Name + " ...")
                 try:
                     process_by_id[p].Terminate()
-                except:
+                except Exception:
                     pass
 
         logging.info("Workbench server ended")
@@ -275,6 +278,7 @@ def launch_workbench(
 
 def connect_workbench(port, client_workdir=None, host=None):
     """create a PyWorkbench client that connects to a already running PyWorkbench server.
+
     Parameters
     ----------
     port : int
