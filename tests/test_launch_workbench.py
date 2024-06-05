@@ -42,3 +42,8 @@ def test_upload_file(workbench):
     agdb = workdir / "agdb"
     workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
 
+def test_download_file(workbench):
+    workdir = pathlib.Path("__file__").parent
+    agdb = workdir / "agdb"
+    workbench.download_file("axisymmetric_model.agdb", str(agdb))
+    assert (agdb / "axisymmetric_model.agdb").exists()
