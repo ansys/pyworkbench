@@ -25,6 +25,8 @@
 import glob
 import json
 import logging
+import logging.handlers
+from logging.handlers import WatchedFileHandler
 import os
 
 import grpc
@@ -117,7 +119,7 @@ class WorkbenchClient:
         """
         self.reset_log_file()
 
-        file_handler = logging.handlers.WatchedFileHandler(log_file)
+        file_handler = WatchedFileHandler(log_file)
         file_handler.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
         file_handler.setLevel(logging.DEBUG)
         self._logger.addHandler(file_handler)
