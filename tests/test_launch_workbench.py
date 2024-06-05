@@ -29,7 +29,7 @@ from ansys.workbench.core.example_data import ExampleData
 
 @pytest.fixture(scope='module')
 def workbench():
-    workdir = pathlib.Path("__file__").parent
+    workdir = pathlib.Path(__file__).parent
     wb = launch_workbench(release="241", server_workdir=str(workdir.absolute()), client_workdir=str(workdir.absolute()))
     yield wb
     wb.exit()
@@ -38,15 +38,14 @@ def test_launch_workbench(workbench):
     assert workbench is not None
 
 def test_upload_file(workbench):
-    workdir = pathlib.Path("__file__").parent
+    workdir = pathlib.Path(__file__).parent
     agdb = workdir / "agdb"
     workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
 
 def test_run_script(workbench):
-    workdir = pathlib.Path("__file__").parent
-    test_dir = workdir / "tests"
-    scripts = test_dir / "scripts"
-    assets = test_dir / "assets"
+    workdir = pathlib.Path(__file__).parent
+    scripts = workdir / "scripts"
+    assets = workdir / "assets"
     workbench.upload_file_from_example_repo("sector_model.cdb", "cyclic-symmetry-analysis/cdb")
     workbench.upload_file(str(scripts / "cyclic_symmetry_analysis.py"))
     export_path = 'wb_log_file.log'
@@ -56,7 +55,7 @@ def test_run_script(workbench):
     # assert (assets / export_path).exists()
 
 def test_download_file(workbench):
-    workdir = pathlib.Path("__file__").parent
+    workdir = pathlib.Path(__file__).parent
     agdb = workdir / "agdb"
     workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
     file_name = workbench.download_file("axisymmetric_model.agdb", str(agdb))
