@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Tests for workbench client."""
+
 import pathlib
 import tempfile
 from unittest.mock import MagicMock, patch
@@ -32,18 +34,21 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 # Mock grpc and other dependencies
 @pytest.fixture
 def mock_grpc():
+    """Mock the insecure_channel method."""
     with patch("ansys.workbench.core.workbench_client.grpc.insecure_channel") as mock_channel:
         yield mock_channel
 
 
 @pytest.fixture
 def mock_workbench_service_stub():
+    """Mock the WorkbenchServiceStub class."""
     with patch("ansys.workbench.core.workbench_client.WorkbenchServiceStub") as mock_stub:
         yield mock_stub
 
 
 @pytest.fixture
 def mock_wb():
+    """Mock the WorkbenchClient class."""
     with patch("ansys.workbench.core.workbench_client.WorkbenchClient") as mock_wb:
         mock_wb.RunScriptRequest = MagicMock()
         mock_wb.DownloadFileRequest = MagicMock()
@@ -53,6 +58,7 @@ def mock_wb():
 
 
 def test_connect(mock_grpc, mock_workbench_service_stub):
+    """Test the connect method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_grpc.assert_called_once_with("localhost:5000")
@@ -60,6 +66,7 @@ def test_connect(mock_grpc, mock_workbench_service_stub):
 
 
 def test_disconnect():
+    """Test the disconnect method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     client.disconnect()
@@ -68,6 +75,7 @@ def test_disconnect():
 
 
 def test_is_connected():
+    """Test the is_connected method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     assert client.is_connected()
@@ -82,6 +90,7 @@ def test_is_connected():
 
 
 def test_run_script_string(mock_workbench_service_stub):
+    """Test the run_script_string method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
@@ -92,6 +101,7 @@ def test_run_script_string(mock_workbench_service_stub):
 
 
 def test_log_file(mock_wb, mock_workbench_service_stub):
+    """Test the log file functionality."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
@@ -114,12 +124,15 @@ def test_log_file(mock_wb, mock_workbench_service_stub):
 
 
 class LogMessage:
+    """A class to represent a log message."""
+
     def __init__(self, level, message):
         self.level = level
         self.message = message
 
 
 def test_run_script_file(mock_workbench_service_stub):
+    """Test the run_script_file method."""
     local_workdir = workdir = pathlib.Path(__file__).parent
     script_dir = workdir / "scripts"
     client = WorkbenchClient(local_workdir=local_workdir, server_host="localhost", server_port=5000)
@@ -141,6 +154,7 @@ def test_run_script_file(mock_workbench_service_stub):
 
 
 def test_upload_file(mock_workbench_service_stub):
+    """Test the upload_file method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
@@ -158,6 +172,7 @@ def test_upload_file(mock_workbench_service_stub):
 
 
 def test_upload_iterator():
+    """Test the __upload_iterator method."""
     with tempfile.NamedTemporaryFile(mode="wb", delete=False) as tmp_file:
         tmp_file.write(b"mock_file_content")
 
@@ -184,6 +199,7 @@ def test_upload_iterator():
 
 
 def test_download_file(mock_workbench_service_stub):
+    """Test the download_file method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
@@ -199,9 +215,6 @@ def test_download_file(mock_workbench_service_stub):
 
     mock_response2 = MagicMock()
     mock_response2.file_content = b"mock_file_content2"
-
-    # make the file.txt.zip in local workdir
-    # create a temporary file in the name of file.txt.zip
 
     with tempfile.NamedTemporaryFile(mode="wb", delete=False) as tmp_file:
         tmp_file.write(b"mock_file_content")

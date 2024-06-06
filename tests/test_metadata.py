@@ -20,10 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Tests for metadata."""
+
 from ansys.workbench.core import __version__
 
 
 def test_pkg_version():
+    """Test that the package version matches the version in pyproject.toml."""
     try:
         import importlib.metadata as importlib_metadata
     except ModuleNotFoundError:  # pragma: no cover

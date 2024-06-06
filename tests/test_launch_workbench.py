@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# test for the launch_workbench module
+"""Tests for metadata."""
 
 import pathlib
 
@@ -31,6 +31,7 @@ from ansys.workbench.core import launch_workbench
 
 @pytest.fixture(scope="module")
 def workbench():
+    """Launch workbench."""
     workdir = pathlib.Path(__file__).parent
     wb = launch_workbench(
         release="241",
@@ -42,16 +43,19 @@ def workbench():
 
 
 def test_launch_workbench(workbench):
+    """Test launching workbench."""
     assert workbench is not None
 
 
 def test_upload_file(workbench):
+    """Test uploading a file."""
     workdir = pathlib.Path(__file__).parent
     agdb = workdir / "agdb"
     workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
 
 
 def test_run_script(workbench):
+    """Test running a script."""
     workdir = pathlib.Path(__file__).parent
     scripts = workdir / "scripts"
     assets = workdir / "assets"
@@ -65,6 +69,7 @@ def test_run_script(workbench):
 
 
 def test_download_file(workbench):
+    """Test downloading a file."""
     workdir = pathlib.Path(__file__).parent
     agdb = workdir / "agdb"
     workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))

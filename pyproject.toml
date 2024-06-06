@@ -90,8 +90,8 @@ select = [
     #"PTH",  # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
 ]
 
-[tool.ruff.lint.extend-per-file-ignores]
-"tests/*" = ["D100", "D101", "D102", "D103", "PTH"] # ignore docstring requirements in tests
+#[tool.ruff.lint.extend-per-file-ignores]
+#"tests/*" = ["D100", "D101", "D102", "D103", "PTH"] # ignore docstring requirements in tests
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
