@@ -124,7 +124,7 @@ def test_upload_file(mock_wb, mock_grpc, mock_workbench_service_stub):
 
     with patch('ansys.workbench.core.workbench_client.os.path.isfile', return_value=True):
         with patch('ansys.workbench.core.workbench_client.glob.glob', return_value=['file1', 'file2']):
-            client.upload_file("file*")
+            client.upload_file("file*", show_progress=True)
             assert mock_stub.UploadFile.call_count == 2
 
 
@@ -145,4 +145,3 @@ def test_download_file(mock_wb, mock_grpc, mock_workbench_service_stub):
     result = client.download_file("file.txt", target_dir="/tmp", show_progress=True)
     # Assertions
     assert mock_stub.DownloadFile.call_count == 1
-    
