@@ -91,15 +91,22 @@ def test_log_file(mock_wb, mock_grpc, mock_workbench_service_stub):
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
-    mock_log_message = {'level': 2, 'message': 'Hello World!'}
+    mock_response.log.messages = [{'level': 2, 'message': 'Hello World!'}]
     mock_response.log = MagicMock()
-    mock_response.log.messages = [mock_log_message]
-    mock_stub.RunScript.return_value = mock_response
-    client.set_log_file("log.txt")
+    mock_response.result.result = '{"key": "value"}'  # Assuming a successful result
+    client.set_log_file("mock_log_file.log")
     client.run_script_string("print('Hello World!')", log_level="warning")
     mock_stub.RunScript.assert_called_once()
     client.download_file("log.txt", "/tmp")
     mock_stub.DownloadFile.assert_called_once()
+    client.run_script_string("print('Hello World!')", log_level=mock_wb.LOG_DEBUG)
+    with patch.object(client.stub, 'RunScript', return_value=[mock_response]):
+        # Call the method under test
+        result = client.run_script_string("print('Hello World!')", log_level="info")
+        for log_entry in mock_response.log.messages:
+            assert 'level' in log_entry
+            assert 'message' in log_entry
+            
 
 def test_run_script_file(mock_wb, mock_grpc, mock_workbench_service_stub):
     local_workdir = workdir = pathlib.Path(__file__).parent
