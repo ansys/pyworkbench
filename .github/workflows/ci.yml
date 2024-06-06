@@ -80,20 +80,32 @@ jobs:
     runs-on: [self-hosted, pyworkbench]
     # needs: [build-wheelhouse]
     steps:
-      - uses: actions/checkout@v4
+
+      - name: "Checkout project"
+        uses: actions/checkout@v4
+
       - name: "Setup Python"
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
       - name: "Install dependencies"
         run: |
           python -m venv .venv
           .venv\Scripts\Activate.ps1
           python -m pip install .[tests]
+
       - name: "Run tests"
         run: |
           .venv\Scripts\Activate.ps1
           pytest -vv
+
+      - name: "Upload coverage report"
+        uses: actions/upload-artifact
+        with:
+          name: coverage-html
+          path: .cov/html
+
       - name: "Clean tasks"
         if: ${{ always() }}
         run: |
@@ -114,7 +126,6 @@ jobs:
           if (-not $foundAnyProcess) {
               Write-Output "No specified processes were found."
           }
-
 
       - name: "Remove temporary folders"
         if: ${{ always() }}
