@@ -2,7 +2,7 @@ import os
 import json
 
 work_dir = GetServerWorkingDirectory()
-geometry_file = os.path.join(work_dir, "2pipes.agdb")
+geometry_file = os.path.join(work_dir, "two_pipes.agdb")
 
 # create a Static Structural system with the given geometry
 template = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")

@@ -31,7 +31,7 @@ import urllib.request
 class ExampleData:
     """Class for downloading example data from the example-data repository."""
 
-    def _get_file_url(filename, dirname):  # noqa: N805
+    def _get_file_url(relative_file_path):  # noqa: N805
         """Get the URL of the file in the example-data repository.
 
         Parameters
@@ -46,7 +46,7 @@ class ExampleData:
         str
             URL of the file in the example-data repository.
         """
-        return f"https://github.com/ansys/example-data/tree/master/pyworkbench/{dirname}/{filename}"
+        return f"https://github.com/ansys/example-data/tree/master/pyworkbench/{relative_file_path}"
 
     def __retrieve_file(url, local_file_path):  # noqa: N805
         """Download the file from the URL.
@@ -72,26 +72,26 @@ class ExampleData:
                 shutil.copyfileobj(in_stream, out_file)
         logging.info(f"Downloaded the file as {local_file_path}")
 
-    def download(filename, dirname, local_dir_path):  # noqa: N805
+    def download(relative_file_path, local_dir_path):  # noqa: N805
         """Download the file from the example-data repository.
 
         Parameters
         ----------
-        filename : str
-            Name of the file.
-        dirname : str
-            Name of the directory containing the file.
+        relative_file_path : str
+            The file path relative to the pyworkbench folder on the example-data repository
         local_dir_path : str
            Local path to the directory to save the file in.
 
         Returns
         -------
         str
-            Local path to the downloaded file.
+            The name of the downloaded file.
         """
-        url = ExampleData._get_file_url(filename, dirname)
-        local_file_path = os.path.join(local_dir_path, filename)
-        return ExampleData.__retrieve_file(url, local_file_path)
+        url = ExampleData._get_file_url(relative_file_path)
+        downloaded_file_name = os.path.basename(relative_file_path)
+        local_file_path = os.path.join(local_dir_path, downloaded_file_name)
+        ExampleData.__retrieve_file(url, local_file_path)
+        return downloaded_file_name
 
 
 __all__ = []

@@ -274,22 +274,20 @@ class WorkbenchClient:
                         pbar.close()
                     return
 
-    def upload_file_from_example_repo(self, filename, dirname, show_progress=True):
+    def upload_file_from_example_repo(self, relative_file_path, show_progress=True):
         """Upload a file from Ansys example database to the server.
 
         Parameters
         ----------
-        filename : str
-            the file name
-        dirname : str
-            the subdirectory name on the database under PyWorkbench folder
+        relative_file_path : str
+            The file path relative to the pyworkbench folder on the example-data repository
         show_progress : bool, default : True
             whether a progress bar should be shown during upload process
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server")
-        ExampleData.download(filename, dirname, self.workdir)
-        self.upload_file(filename, show_progress=show_progress)
+        downloaded = ExampleData.download(relative_file_path, self.workdir)
+        self.upload_file(downloaded, show_progress=show_progress)
 
     def download_file(self, file_name, show_progress=True, target_dir=None):
         """Download file(s) from the server.

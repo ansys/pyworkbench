@@ -127,11 +127,11 @@ This client script downloads all files with .out extension from the server's wor
 
     wb.download_file("*.out")
 
-There is a special client API to upload a data file from `the ANSYS example database <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ directly to the Workbench server. The file name and subdirectory name in the database should be specified:
+There is a special client API to upload a data file from `the ANSYS example database <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ directly to the Workbench server. The file path relative to the pyworkbench folder in the database should be specified:
 
 .. code-block:: python
 
-    client.upload_file_from_example_repo("2pipes.agdb", "2pipes")
+    client.upload_file_from_example_repo("pymechanical-integration/agdb/two_pipes.agdb")
 
 All the file handling APIs come with a progress bar that is shown by default. One can turn off the progress bar with an optional argument:
 
