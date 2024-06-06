@@ -73,7 +73,7 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 extend-exclude = [
-    "examples/**/*.py", "tests/**/*.py",
+    "examples/**/*.py", "tests/scripts/*.py"
 ]
 
 [tool.ruff.format]
@@ -89,6 +89,9 @@ select = [
     "N",    # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
     #"PTH",  # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
 ]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/*" = ["D100", "D101", "D102", "D103", "PTH"] # ignore docstring requirements in tests
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

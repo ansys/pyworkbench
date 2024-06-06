@@ -23,24 +23,33 @@
 # test for the launch_workbench module
 
 import pathlib
-import pytest
-from ansys.workbench.core import launch_workbench
-from ansys.workbench.core.example_data import ExampleData
 
-@pytest.fixture(scope='module')
+import pytest
+
+from ansys.workbench.core import launch_workbench
+
+
+@pytest.fixture(scope="module")
 def workbench():
     workdir = pathlib.Path(__file__).parent
-    wb = launch_workbench(release="241", server_workdir=str(workdir.absolute()), client_workdir=str(workdir.absolute()))
+    wb = launch_workbench(
+        release="241",
+        server_workdir=str(workdir.absolute()),
+        client_workdir=str(workdir.absolute()),
+    )
     yield wb
     wb.exit()
 
+
 def test_launch_workbench(workbench):
     assert workbench is not None
+
 
 def test_upload_file(workbench):
     workdir = pathlib.Path(__file__).parent
     agdb = workdir / "agdb"
     workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
+
 
 def test_run_script(workbench):
     workdir = pathlib.Path(__file__).parent
@@ -48,15 +57,16 @@ def test_run_script(workbench):
     assets = workdir / "assets"
     workbench.upload_file_from_example_repo("sector_model.cdb", "cyclic-symmetry-analysis/cdb")
     workbench.upload_file(str(scripts / "cyclic_symmetry_analysis.py"))
-    export_path = 'wb_log_file.log'
+    export_path = "wb_log_file.log"
     workbench.set_log_file(export_path)
-    workbench.run_script_file(str((assets / "project.wbjn").absolute()), log_level='info')
+    workbench.run_script_file(str((assets / "project.wbjn").absolute()), log_level="info")
     workbench.download_file(file_name=export_path, target_dir=str(assets), show_progress=True)
     # assert (assets / export_path).exists()
+
 
 def test_download_file(workbench):
     workdir = pathlib.Path(__file__).parent
     agdb = workdir / "agdb"
     workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
-    file_name = workbench.download_file("axisymmetric_model.agdb", str(agdb))
+    workbench.download_file("axisymmetric_model.agdb", str(agdb))
     # assert file_name is not None

@@ -21,9 +21,12 @@
 # SOFTWARE.
 
 """Tests for the example_data module."""
-from ansys.workbench.core.example_data import ExampleData
+
 import pathlib
+
 import pytest
+
+from ansys.workbench.core.example_data import ExampleData
 
 
 @pytest.fixture(scope="module")
@@ -33,10 +36,15 @@ def example_data():
     asset_file = "tests/assets/"
     return file_name, dir_name, asset_file
 
+
 def test_get_file_url(example_data):
     file_name, dir_name, asset_file = example_data
     url = ExampleData._get_file_url(file_name, dir_name)
-    assert url == f"https://github.com/ansys/example-data/tree/master/pyworkbench/{dir_name}/{file_name}"
+    assert (
+        url
+        == f"https://github.com/ansys/example-data/tree/master/pyworkbench/{dir_name}/{file_name}"
+    )
+
 
 def test_download(example_data):
     file_name, dir_name, asset_file = example_data
