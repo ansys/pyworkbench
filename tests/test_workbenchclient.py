@@ -25,6 +25,8 @@ import logging
 from unittest.mock import patch, MagicMock
 from ansys.workbench.core.workbench_client import WorkbenchClient
 import pathlib
+import tempfile
+
 # Mock grpc and other dependencies
 @pytest.fixture
 def mock_grpc():
@@ -120,12 +122,37 @@ def test_upload_file(mock_wb, mock_grpc, mock_workbench_service_stub):
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
+    mock_response.error = None
+    mock_response.file_name = "uploaded_file1"
     mock_stub.UploadFile.return_value = mock_response
 
     with patch('ansys.workbench.core.workbench_client.os.path.isfile', return_value=True):
         with patch('ansys.workbench.core.workbench_client.glob.glob', return_value=['file1', 'file2']):
             client.upload_file("file*", show_progress=True)
             assert mock_stub.UploadFile.call_count == 2
+            
+def test_upload_iterator():
+    with tempfile.NamedTemporaryFile(mode='wb', delete=False) as tmp_file:
+        tmp_file.write(b'mock_file_content')
+
+    try:
+        # Create a WorkbenchClient instance
+        client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
+        client.connect()
+
+        # Get the temporary file path
+        file_path = tmp_file.name
+
+        # Call the method under test
+        iterator = client._WorkbenchClient__upload_iterator(file_path, show_progress=True)
+
+        # Assertions
+        upload_requests = list(iterator)
+        assert len(upload_requests) > 1  # Assuming the file is large enough to yield more than one chunk
+    finally:
+        # Clean up the temporary file
+        if pathlib.Path(file_path).exists():
+            pathlib.Path(file_path).unlink()
 
 
 def test_download_file(mock_wb, mock_grpc, mock_workbench_service_stub):
