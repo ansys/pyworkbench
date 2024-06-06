@@ -130,7 +130,7 @@ def test_upload_file(mock_wb, mock_grpc, mock_workbench_service_stub):
         with patch('ansys.workbench.core.workbench_client.glob.glob', return_value=['file1', 'file2']):
             client.upload_file("file*", show_progress=True)
             assert mock_stub.UploadFile.call_count == 2
-            
+
 def test_upload_iterator():
     with tempfile.NamedTemporaryFile(mode='wb', delete=False) as tmp_file:
         tmp_file.write(b'mock_file_content')
@@ -155,20 +155,29 @@ def test_upload_iterator():
             pathlib.Path(file_path).unlink()
 
 
-def test_download_file(mock_wb, mock_grpc, mock_workbench_service_stub):
+def test_download_file():
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
-    mock_stub = mock_workbench_service_stub.return_value
+    mock_stub = MagicMock()
+    client.stub = mock_stub
+
     # Mock response setup
-    mock_response = MagicMock()
-    mock_file_info = MagicMock()
-    mock_file_info.is_archive = False
-    mock_file_info.file_size = 100
-    mock_response.file_info = mock_file_info
-    mock_response.file_content = b'mock_file_content'
+    mock_response1 = MagicMock()
+    mock_file_info1 = MagicMock()
+    mock_file_info1.is_archive = False
+    mock_file_info1.file_size = 200  # Let's assume the file size is 200 bytes
+    mock_response1.file_info = mock_file_info1
+    mock_response1.file_content = b'mock_file_content1'
+
+    mock_response2 = MagicMock()
+    mock_response2.file_content = b'mock_file_content2'
+
     # Set up return value for the mock method
-    mock_stub.DownloadFile.return_value = [mock_response]
+    mock_stub.DownloadFile.return_value = [mock_response1, mock_response2]
+
     # Call the method under test
     result = client.download_file("file.txt", target_dir="/tmp", show_progress=True)
+
     # Assertions
     assert mock_stub.DownloadFile.call_count == 1
+    assert mock_response1.file_info.file_size == 200  # Ensure the file size is set correctly

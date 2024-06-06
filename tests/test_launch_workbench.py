@@ -51,7 +51,7 @@ def test_run_script(workbench):
     export_path = 'wb_log_file.log'
     workbench.set_log_file(export_path)
     workbench.run_script_file(str((assets / "project.wbjn").absolute()), log_level='info')
-    workbench.download_file(export_path, str(assets))
+    workbench.download_file(file_name=export_path, target_dir=str(assets), show_progress=True)
     # assert (assets / export_path).exists()
 
 def test_download_file(workbench):
