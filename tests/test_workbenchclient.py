@@ -52,14 +52,14 @@ def test_connect(mock_grpc, mock_workbench_service_stub):
     mock_grpc.assert_called_once_with("localhost:5000")
     mock_workbench_service_stub.assert_called_once()
 
-def test_disconnect(mock_grpc, mock_workbench_service_stub):
+def test_disconnect():
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     client.disconnect()
     assert client.channel is None
     assert client.stub is None
 
-def test_is_connected(mock_grpc, mock_workbench_service_stub):
+def test_is_connected():
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     assert client.is_connected()
@@ -71,7 +71,7 @@ def test_is_connected(mock_grpc, mock_workbench_service_stub):
 #     client.set_console_log_level("warning")
 #     assert client.__log_console_handler.level == logging.DEBUG
 
-def test_run_script_string(mock_wb, mock_grpc, mock_workbench_service_stub):
+def test_run_script_string(mock_workbench_service_stub):
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
@@ -80,7 +80,7 @@ def test_run_script_string(mock_wb, mock_grpc, mock_workbench_service_stub):
     client.run_script_string("print('Hello World!')")
     mock_stub.RunScript.assert_called_once()
 
-def test_log_file(mock_wb, mock_grpc, mock_workbench_service_stub):
+def test_log_file(mock_wb, mock_workbench_service_stub):
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
@@ -106,7 +106,7 @@ class LogMessage:
         self.level = level
         self.message = message
 
-def test_run_script_file(mock_wb, mock_grpc, mock_workbench_service_stub):
+def test_run_script_file(mock_workbench_service_stub):
     local_workdir = workdir = pathlib.Path(__file__).parent
     script_dir = workdir / "scripts"
     client = WorkbenchClient(local_workdir= local_workdir, server_host="localhost", server_port=5000)
@@ -126,7 +126,7 @@ def test_run_script_file(mock_wb, mock_grpc, mock_workbench_service_stub):
     with pytest.raises(Exception):
         client.run_script_file(script_dir / "cooled_turbine_blade.py")
 
-def test_upload_file(mock_wb, mock_grpc, mock_workbench_service_stub):
+def test_upload_file(mock_workbench_service_stub):
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
@@ -165,7 +165,7 @@ def test_upload_iterator():
             pathlib.Path(file_path).unlink()
 
 
-def test_download_file(mock_wb, mock_grpc, mock_workbench_service_stub):
+def test_download_file(mock_workbench_service_stub):
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
