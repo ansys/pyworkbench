@@ -101,7 +101,7 @@ jobs:
           pytest -vv
 
       - name: "Upload coverage report"
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-html
           path: .cov/html
