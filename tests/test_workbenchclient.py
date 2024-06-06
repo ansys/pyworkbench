@@ -89,9 +89,12 @@ def test_log_file(mock_wb, mock_grpc, mock_workbench_service_stub):
     client.connect()
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
+    mock_log_message = {'level': 2, 'message': 'Hello World!'}
+    mock_response.log = MagicMock()
+    mock_response.log.messages = [mock_log_message]
     mock_stub.RunScript.return_value = mock_response
     client.set_log_file("log.txt")
-    client.run_script_string("print('Hello World!')")
+    client.run_script_string("print('Hello World!')", log_level="warning")
     mock_stub.RunScript.assert_called_once()
     client.download_file("log.txt", "/tmp")
     mock_stub.DownloadFile.assert_called_once()
@@ -104,19 +107,42 @@ def test_run_script_file(mock_wb, mock_grpc, mock_workbench_service_stub):
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
     mock_stub.RunScript.return_value = mock_response
+    mock_response.result.result = "{'result': 'success'}"
+    mock_response.log = MagicMock()
+    mock_response.log.messages = [{'level': 2, 'message': 'Hello World!'}]
     client.run_script_file(script_dir / "cooled_turbine_blade.py")
     mock_stub.RunScript.assert_called_once()
+    assert mock_stub.RunScript.call_count == 1
+    assert mock_response.result.result == "{'result': 'success'}"
+
+def test_upload_file(mock_wb, mock_grpc, mock_workbench_service_stub):
+    client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
+    client.connect()
+    mock_stub = mock_workbench_service_stub.return_value
+    mock_response = MagicMock()
+    mock_stub.UploadFile.return_value = mock_response
+
+    with patch('ansys.workbench.core.workbench_client.os.path.isfile', return_value=True):
+        with patch('ansys.workbench.core.workbench_client.glob.glob', return_value=['file1', 'file2']):
+            client.upload_file("file*")
+            assert mock_stub.UploadFile.call_count == 2
 
 
-
-# def test_upload_file(mock_wb, mock_grpc, mock_workbench_service_stub):
-#     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-#     client.connect()
-#     mock_stub = mock_workbench_service_stub.return_value
-#     mock_response = MagicMock()
-#     mock_stub.UploadFile.return_value = mock_response
-
-#     with patch('workbench_client.os.path.isfile', return_value=True):
-#         with patch('workbench_client.glob.glob', return_value=['file1', 'file2']):
-#             client.upload_file("file*")
-#             assert mock_stub.UploadFile.call_count == 2
+def test_download_file(mock_wb, mock_grpc, mock_workbench_service_stub):
+    client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
+    client.connect()
+    mock_stub = mock_workbench_service_stub.return_value
+    # Mock response setup
+    mock_response = MagicMock()
+    mock_file_info = MagicMock()
+    mock_file_info.is_archive = False
+    mock_file_info.file_size = 100
+    mock_response.file_info = mock_file_info
+    mock_response.file_content = b'mock_file_content'
+    # Set up return value for the mock method
+    mock_stub.DownloadFile.return_value = [mock_response]
+    # Call the method under test
+    result = client.download_file("file.txt", target_dir="/tmp", show_progress=True)
+    # Assertions
+    assert mock_stub.DownloadFile.call_count == 1
+    
