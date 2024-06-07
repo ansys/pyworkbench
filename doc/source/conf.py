@@ -122,6 +122,7 @@ suppress_warnings = ["autoapi.python_import_resolution", "config.cache"]
 exclude_patterns = [
     "**/ExampleData*",
     "**/LaunchWorkbench*",
+    "**/ClientWrapper*",
 ]
 
 # additional logos for the latex coverpage

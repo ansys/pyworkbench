@@ -9,18 +9,16 @@ Start Workbench client and connect to a running Workbench server
 
 A typical user of the Workbench gRPC service starts a Workbench client that connects to
 a running Workbench server on the cloud, given the server's name/IP and port.
-A client-side working directory should be specified. This directory is the default
-location for client-side files.
 
 .. code-block:: python
 
-    from ansys.workbench.core.workbench_client import WorkbenchClient
+    from ansys.workbench.core.workbench_client import connect_workbench
 
-    workdir = "path_to_the_local_working_directory"
-    host = "server_machine_name_or_ip"
+    host = "server_machine_name_or_IP"
     port = server_port_number
-    wb = WorkbenchClient(workdir, host, port)
-    wb.connect()
+    wb = connect_workbench(host=host, port=port)
+
+Other options to the ``connect_workbench`` API include specifying a working directory for the client instead of using the default directory.
 
 Launch Workbench server and start a client
 ==========================================
@@ -48,7 +46,7 @@ or to launch a server on a remote Windows machine with valid user credentials:
     password = "your_password_on_server_machine"
     wb = launch_workbench(host=host, username=username, password=password)
 
-There are other options to this `launch_workbench` API, such as specifying a certain Workbench release to launch, or to use particular working directories on the server and/or at the client instead of the default directories.
+Other options to the ``launch_workbench`` API include specifying a particular Workbench release to launch, specifying working directories on the server and/or the client instead of using the default directories.
 
 .. code-block:: python
 
@@ -129,11 +127,11 @@ This client script downloads all files with .out extension from the server's wor
 
     wb.download_file("*.out")
 
-There is a special client API to upload a data file from `the ANSYS example database <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ directly to the Workbench server. The file name and subdirectory name in the database should be specified:
+There is a special client API to upload a data file from `the ANSYS example database <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ directly to the Workbench server. The file path relative to the pyworkbench folder in the database should be specified:
 
 .. code-block:: python
 
-    client.upload_file_from_example_repo("2pipes.agdb", "2pipes")
+    client.upload_file_from_example_repo("pymechanical-integration/agdb/two_pipes.agdb")
 
 All the file handling APIs come with a progress bar that is shown by default. One can turn off the progress bar with an optional argument:
 
