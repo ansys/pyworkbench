@@ -1,0 +1,97 @@
+import os
+import json
+import string
+import os.path
+
+work_dir = GetServerWorkingDirectory()
+arg_ProjectArchive = os.path.join(work_dir, "wbpz", "cooled_turbine_blade.wbpz")
+
+# Description="Insert Steady State Thermal linked with Static Structural system and define blade and fluid materials"
+Unarchive(
+    ArchivePath=arg_ProjectArchive,
+    ProjectPath=GetAbsoluteUserPathName(work_dir + "wbpj\example_02_Cooled_Turbine_Blade.wbpj"),
+    Overwrite=True)
+
+template1 = GetTemplate(
+    TemplateName="Steady-State Thermal",
+    Solver="ANSYS")
+system1 = GetSystem(Name="SYS")
+
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+engineeringDataComponent1 = system1.GetComponent(Name="Engineering Data")
+EngData.EnableFilter(Enable=False)
+matl1 = engineeringData1.CreateMaterial(Name="Blade")
+matlProp1 = matl1.CreateProperty(
+    Name="Elasticity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp1.SetData(
+    Index=-1,
+    Variables=["Young's Modulus"],
+    Values=[["200000000000 [Pa]"]])
+matlProp1.SetData(
+    Variables=["Poisson's Ratio"],
+    Values=[["0.3"]])
+matlProp2 = matl1.CreateProperty(
+    Name="Coefficient of Thermal Expansion",
+    Definition="Secant",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "Secant", "Behavior": "Isotropic"})
+matlProp2.SetData(
+    SheetName="Coefficient of Thermal Expansion",
+    SheetQualifiers={"Definition": "Secant", "Behavior": "Isotropic"},
+    Index=-1,
+    Variables=["Coefficient of Thermal Expansion"],
+    Values=[["1.08E-05 [C^-1]"]])
+matlProp3 = matl1.CreateProperty(
+    Name="Thermal Conductivity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp3.SetData(
+    Index=-1,
+    Variables=["Thermal Conductivity"],
+    Values=[["43 [W m^-1 C^-1]"]])
+matl2 = engineeringData1.CreateMaterial(Name="Fluid")
+matlProp4 = matl2.CreateProperty(
+    Name="Thermal Conductivity",
+    Behavior="Isotropic",
+    Qualifiers={"Definition": "", "Behavior": "Isotropic"})
+matlProp4.SetData(
+    Index=-1,
+    Variables=["Thermal Conductivity"],
+    Values=[["1E-16 [W m^-1 C^-1]"]])
+matlProp5 = matl2.CreateProperty(
+    Name="Specific Heat",
+    Definition="Constant Pressure",
+    Qualifiers={"Definition": "Constant Pressure", "Behavior": ""})
+matlProp5.SetData(
+    Index=-1,
+    Variables=["Specific Heat"],
+    Values=[["2260 [J kg^-1 C^-1]"]])
+
+geometryComponent1 = system1.GetComponent(Name="Geometry")
+modelComponent1 = system1.GetComponent(Name="Model")
+system2 = template1.CreateSystem(
+    ComponentsToShare=[engineeringDataComponent1, geometryComponent1, modelComponent1],
+    Position="Right",
+    RelativeTo=system1)
+template2 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+engineeringDataComponent2 = system2.GetComponent(Name="Engineering Data")
+geometryComponent2 = system2.GetComponent(Name="Geometry")
+modelComponent2 = system2.GetComponent(Name="Model")
+solutionComponent1 = system2.GetComponent(Name="Solution")
+componentTemplate1 = GetComponentTemplate(Name="SimulationSetupCellTemplate_StructuralStaticANSYS")
+system3 = template2.CreateSystem(
+    ComponentsToShare=[engineeringDataComponent2, geometryComponent2, modelComponent2],
+    DataTransferFrom=[Set(FromComponent=solutionComponent1, TransferName=None, ToComponentTemplate=componentTemplate1)],
+    Position="Right",
+    RelativeTo=system2)
+modelComponent1.Refresh()
+setupComponent1 = system2.GetComponent(Name="Setup")
+setupComponent1.Refresh()
+
+# output system name
+result = system1.Name
+wb_script_result = json.dumps(result)
