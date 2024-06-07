@@ -41,7 +41,7 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 
 class ClientWrapper(WorkbenchClient):
     """ClientWrapper class to connect to a Workbench server.
-    
+
     Parameters
     ----------
     port : int
@@ -51,6 +51,7 @@ class ClientWrapper(WorkbenchClient):
     host : str, optional
         the server computer's name or IP address. default: None
     """
+
     def __init__(self, port, client_workdir=None, host=None):
         """Create a PyWorkbench client that connects to a Workbench server."""
         if host is None:
