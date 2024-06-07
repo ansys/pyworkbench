@@ -18,7 +18,7 @@ a running Workbench server on the cloud, given the server's name/IP and port.
     port = server_port_number
     wb = connect_workbench(host=host, port=port)
 
-Other options to the `connect_workbench` API include specifying a working directory for the client instead of using the default directory.
+Other options to the ``connect_workbench`` API include specifying a working directory for the client instead of using the default directory.
 
 Launch Workbench server and start a client
 ==========================================
@@ -46,7 +46,7 @@ or to launch a server on a remote Windows machine with valid user credentials:
     password = "your_password_on_server_machine"
     wb = launch_workbench(host=host, username=username, password=password)
 
-Other options to the `launch_workbench` API include specifying a particular Workbench release to launch, specifying working directories on the server and/or the client instead of using the default directories.
+Other options to the ``launch_workbench`` API include specifying a particular Workbench release to launch, specifying working directories on the server and/or the client instead of using the default directories.
 
 .. code-block:: python
 
