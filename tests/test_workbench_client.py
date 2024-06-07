@@ -28,6 +28,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from ansys.workbench.core import connect_workbench
 from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
@@ -63,6 +64,13 @@ def test_connect(mock_grpc, mock_workbench_service_stub):
     client._connect()
     mock_grpc.assert_called_once_with("localhost:5000")
     mock_workbench_service_stub.assert_called_once()
+
+
+def test_connect_workbench():
+    """Test the connect_workbench method."""
+    client = connect_workbench(port=5000, client_workdir="/tmp", host="localhost")
+    assert isinstance(client, WorkbenchClient)
+    client.exit()
 
 
 def test_disconnect():
