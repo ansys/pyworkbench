@@ -34,24 +34,22 @@ def example_data():
     """Return example data."""
     file_name = "axisymmetric_model.agdb"
     dir_name = "axisymmetric-rotor/agdb"
-    asset_file = "tests/assets/"
-    return file_name, dir_name, asset_file
+    relative_path = f"{dir_name}/{file_name}"
+    assets_dir = "tests/assets/"
+    return relative_path, assets_dir
 
 
 def test_get_file_url(example_data):
     """Test get_file_url."""
-    file_name, dir_name, asset_file = example_data
-    url = ExampleData._get_file_url(file_name, dir_name)
-    assert (
-        url
-        == f"https://github.com/ansys/example-data/tree/master/pyworkbench/{dir_name}/{file_name}"
-    )
+    relative_path, asset_file = example_data
+    url = ExampleData._get_file_url(relative_file_path=relative_path)
+    assert url == f"https://github.com/ansys/example-data/tree/master/pyworkbench/{relative_path}"
 
 
 def test_download(example_data):
     """Test download."""
-    file_name, dir_name, asset_file = example_data
-    local_file_path = ExampleData.download(file_name, dir_name, asset_file)
+    relative_path, asset_file = example_data
+    local_file_path = ExampleData.download(relative_path, asset_file)
     local_file_path = pathlib.Path("tests/assets/axisymmetric_model.agdb")
     assert local_file_path.exists()
     local_file_path.unlink()
