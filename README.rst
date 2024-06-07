@@ -46,7 +46,7 @@ To install the latest development version of PyWorkbench, use the following comm
     cd pyworkbench
     pip install -e .
 
-For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_
+For more information, see `Getting started <https://workbench.docs.pyansys.com/version/dev/getting-started.html>`_
 in the PyWorkbench documentation.
 
 Documentation and issues
