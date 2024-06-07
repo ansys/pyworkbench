@@ -75,10 +75,68 @@ jobs:
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
 
+  unit-tests:
+    name: "Test library"
+    runs-on: [self-hosted, pyworkbench]
+    needs: [build-wheelhouse]
+    steps:
+
+      - name: "Checkout project"
+        uses: actions/checkout@v4
+
+      - name: "Setup Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+      - name: "Install dependencies"
+        run: |
+          python -m venv .venv
+          .venv\Scripts\Activate.ps1
+          python -m pip install .[tests]
+
+      - name: "Run tests"
+        run: |
+          .venv\Scripts\Activate.ps1
+          pytest -vv
+
+      - name: "Upload coverage report"
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: .cov/html
+
+      - name: "Clean tasks"
+        if: ${{ always() }}
+        run: |
+          $processNames = @("ANSYS", "ANSYS241", "AnsysWBU", "AnsysFWW", "RunWB2")
+          $foundAnyProcess = $false
+
+          foreach ($processName in $processNames) {
+              $process = Get-Process -Name $processName -ErrorAction SilentlyContinue
+
+              if ($process) {
+                  $process | Stop-Process -Force
+                  $foundAnyProcess = $true
+              } else {
+                  Write-Output "No process named '$processName' was found."
+              }
+          }
+
+          if (-not $foundAnyProcess) {
+              Write-Output "No specified processes were found."
+          }
+
+      - name: "Remove temporary folders"
+        if: ${{ always() }}
+        run: |
+          Get-ChildItem -Path "C:\Users\ansys\AppData\Local\Temp" -Directory -Filter "act_tmp*" | Remove-Item -Recurse -Force
+          Get-ChildItem -Path "C:\Users\ansys\AppData\Local\Temp" -Directory -Filter "WB_ansys*" | Remove-Item -Recurse -Force
+
   build-library:
     name: "Build library"
     runs-on: ubuntu-latest
-    needs: [build-wheelhouse, doc-build]
+    needs: [unit-tests, doc-build]
     steps:
       - uses: ansys/actions/build-library@v6
         with:

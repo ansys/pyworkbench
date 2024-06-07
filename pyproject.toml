@@ -45,6 +45,10 @@ vulnerabilities = [
     "bandit==1.7.8",
     "safety==3.2.1",
 ]
+tests = [
+    "pytest==8.2.1",
+    "pytest-cov==5.0.0",
+]
 
 [project.urls]
 Documentation = "https://workbench.docs.pyansys.com"
@@ -55,10 +59,21 @@ Tracker = "https://github.com/ansys/pyworkbench/issues"
 [tool.flit.module]
 name = "ansys.workbench.core"
 
+[tool.coverage.run]
+source = ["ansys.workbench"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.pytest.ini_options]
+minversion = "7.1"
+addopts = "-ra --cov=ansys.workbench --cov-report html:.cov/html --cov-report xml:.cov/xml --cov-report term -vv"
+testpaths = ["tests"]
+
 [tool.ruff]
 line-length = 100
 extend-exclude = [
-    "examples/**/*.py"
+    "examples/**/*.py", "tests/scripts/*.py"
 ]
 
 [tool.ruff.format]
@@ -74,6 +89,9 @@ select = [
     "N",    # pep8-naming, see https://beta.ruff.rs/docs/rules/#pep8-naming-n
     #"PTH",  # flake8-use-pathlib, https://beta.ruff.rs/docs/rules/#flake8-use-pathlib-pth
 ]
+
+#[tool.ruff.lint.extend-per-file-ignores]
+#"tests/*" = ["D100", "D101", "D102", "D103", "PTH"] # ignore docstring requirements in tests
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
