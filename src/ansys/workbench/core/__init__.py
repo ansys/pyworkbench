@@ -24,7 +24,8 @@
 
 import importlib.metadata as importlib_metadata
 
-from ansys.workbench.core.launch_workbench import launch_workbench  # noqa: F401
+# exposed API
+from ansys.workbench.core.public_api import connect_workbench, launch_workbench  # noqa: F401
 
 # Read from the pyproject.toml
 __version__ = importlib_metadata.version("ansys-workbench-core")
