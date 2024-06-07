@@ -1,17 +1,18 @@
 User guide
 ##########
 
-This section provides an overview of the PyWorkbench package, explaining
-key concepts and approaches when working with the Workbench gRPC service.
+This section explains key concepts and approaches for using PyWorkbench
+with the Workbench gRPC service.
 
 Start Workbench client and connect to a running Workbench server
 ================================================================
 
-To start a Workbench client that connects to a running Workbench server on cloud, provide the following details:
+To start a Workbench client that connects to a running Workbench server on the cloud, you
+must provide the following information:
 
-- Server name/IP
+- Server name or IP address
 - Port number
-- Client-side working directory. This directory is the default location for client-side files
+- Client-side working directory, which is the default location for client-side files
 
 .. code-block:: python
 
@@ -21,17 +22,24 @@ To start a Workbench client that connects to a running Workbench server on cloud
     port = server_port_number
     wb = connect_workbench(host=host, port=port)
 
-Other options to the ``connect_workbench`` API include specifying a working directory for the client instead of using the default directory.
+Other options to the ``connect_workbench()`` function include specifying a working directory for
+the client instead of using the default directory.
 
 Launch Workbench server and start a client
 ==========================================
 
-During development phase or for debugging purpose, it is useful to start
+During the development phase or when debugging, it is useful to start the
 Workbench server on your desktop or some computer within the company network.
 
-You can always start a Workbench server by executing the command `StartServer()` in any running Workbench session and use the returned server port to start a client, like in the example above.
+You can always start a Workbench server by running the ``StartServer()`` function
+in any running Workbench session. You then use the returned server port to start a client,
+like in the preceding example.
 
-Alternatively, you can launch a Workbench server and start a client programmatically in a client-side Python script. To launch a server on a remote Windows machine with valid user credentials:
+Alternatively, you can launch a Workbench server and start a client programmatically in a
+client-side Python script.
+
+This code launches a server on a remote Windows machine with
+valid user credentials:
 
 .. code-block:: python
 
@@ -39,7 +47,7 @@ Alternatively, you can launch a Workbench server and start a client programmatic
 
     wb = launch_workbench()
 
-or to launch a server on a remote Windows machine with valid user credentials:
+This code launches a server on a remote Windows machine with valid user credentials:
 
 .. code-block:: python
 
@@ -50,7 +58,9 @@ or to launch a server on a remote Windows machine with valid user credentials:
     password = "your_password_on_server_machine"
     wb = launch_workbench(host=host, username=username, password=password)
 
-Other options to the ``launch_workbench`` API include specifying a particular Workbench release to launch, specifying working directories on the server and/or the client instead of using the default directories.
+Other options for the ``launch_workbench()`` function include specifying a particular
+Workbench release to launch and specifying working directories on the server and/or the
+client instead of using the default directories:
 
 .. code-block:: python
 
@@ -62,15 +72,18 @@ Other options to the ``launch_workbench`` API include specifying a particular Wo
         client_workdir="path_to_a_dir_on_client",
     )
 
-Run script/commands/queries on Workbench server
-===============================================
+Run scripts on Workbench server
+===============================
 
-IronPython based Workbench scripts containing commands/queries can be executed on the server via
+You can use these methods to run IronPython-based Workbench scripts, which contain commands or
+queries, on the Workbench server:
 
--    ``run_script_file``, which executes a script file in the client working directory; or
--    ``run_script_string``, which executes a script contained in the given string
+- ``run_script_file``: Runs a script file in the client working directory.
+- ``run_script_string``: Runs a script contained in the given string.
 
-Any output that needs to be returned from these APIs can be assigned to the global variable `wb_script_result` in the script as a JSON string. For example, the following Workbench script returns all message summaries from the Workbench session:
+In the ```wb_script_result`` global variable in the script, you can assign any output that needs
+to be returned from these methods as a JSON string. For example, this Workbench script returns
+all message summaries from the Workbench session:
 
 .. code-block:: python
 
@@ -79,24 +92,31 @@ Any output that needs to be returned from these APIs can be assigned to the glob
     messages = [m.Summary for m in GetMessages()]
     wb_script_result = json.dumps(messages)
 
-These run_script APIs can also be called with different logging levels. The default logging level is 'error'. The following line will output to the logger all info/warnings/errors during the script run.
+You can also call these these methods with different logging levels. While the default logging
+level is ``error``, this line outputs all ``info``, ``warning``, and ``error`` levels
+to the logger when the script run:
 
 .. code-block:: python
 
     wb.run_script_file("a_script_file_name", log_level="info")
 
-File handling
-=============
+Upload and download files
+=========================
 
-Data files can be uploaded to the server or downloaded from the server, using `upload_file` or `download_file` API. The client-side working directory is used to hold these files unless absolute paths or target directories are specified. There is also a working directory on the server for the same purpose. The server’s working directory can be obtained via the Workbench query GetServerWorkingDirectory() that runs on the server.
+You can upload and download data files to and from the server using the ``upload_file()`` and ``download_file``
+methods. The client-side working directory is used to hold these files unless absolute paths or target directories
+are specified. There is also a working directory on the server for the same purpose. To obtain the server’s working
+directory, you can use the the ``GetServerWorkingDirectory()`` Workbench query that runs on the server.
 
-The following script uploads all part files with a given prefix and all AGDB files in the working directory, plus another file outside of the working directory, from client to server:
+This code uploads all part files with a given prefix, all AGDB files in the working directory, and another file
+outside of the working directory from the client to the server:
 
 .. code-block:: python
 
     wb.upload_file("model?.prt", "*.agdb", "/path/to/some/file")
 
-The following server-side Workbench script loads an uploaded geometry file from the server's working directory into a newly created Workbench system:
+This server-side Workbench script loads an uploaded geometry file from the server's working directory into a
+newly created Workbench system:
 
 .. code-block:: python
 
@@ -110,7 +130,8 @@ The following server-side Workbench script loads an uploaded geometry file from 
     """
     )
 
-The following server-side Workbench script copies a Mechanical solver output file to the server's working directory to be downloaded later:
+This server-side Workbench script copies a Mechanical solver output file to the server's working directory
+for downloading later:
 
 .. code-block:: python
 
@@ -125,32 +146,38 @@ The following server-side Workbench script copies a Mechanical solver output fil
     """
     )
 
-This client script downloads all files with .out extension from the server's working directory:
+This client script downloads all files with OUT extensions from the server's working directory:
 
 .. code-block:: python
 
     wb.download_file("*.out")
 
-There is a special client API to upload a data file from `the ANSYS example database <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ directly to the Workbench server. The file path relative to the pyworkbench folder in the database should be specified:
+There is a special client method to upload a data file from the
+`example-data <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ repository
+directly to the Workbench server. You should specify the file path relative to the
+``pyworkbench`` folder in the ``example-data`` repository:
 
 .. code-block:: python
 
     client.upload_file_from_example_repo("pymechanical-integration/agdb/two_pipes.agdb")
 
-All the file handling APIs come with progress bar that is shown by default. You can turn off the progress bar with an optional argument:
+All methods for uploading and downloading files display a progress bar by default. You can
+turn off the progress bar with an optional argument:
 
 .. code-block:: python
 
     wb.download_file("solve.out", show_progress=False)
 
-Start other PyANSYS services from systems in a PyWorkbench project
+Start other PyAnsys services from systems in a PyWorkbench project
 ==================================================================
 
 PyMechanical
 ------------
 
-For any Mechanical system in the Workbench project, the PyMechanical service can be started and connected to from the same client machine.
-The following runs a server-side script to create a mechanical system, then starts the PyMechanical service for the system and establishes a PyMechanical client.
+For any Mechanical system in the Workbench project, you can start and connect the
+PyMechanical service from the same client machine. This code runs a server-side script
+to create a mechanical system. It then starts the PyMechanical service for the system
+and establishes a PyMechanical client.
 
 .. code-block:: python
 
@@ -167,7 +194,7 @@ The following runs a server-side script to create a mechanical system, then star
 PyFluent
 --------
 
-This example illustrates how to start the PyFluent service and client for a Fluent system created in Workbench.
+This code starts the PyFluent service and client for a Fluent system created in Workbench.
 
 .. code-block:: python
 
@@ -184,7 +211,7 @@ This example illustrates how to start the PyFluent service and client for a Flue
 PySherlock
 ----------
 
-This example illustrates how to start the PySherlock service and client for a Sherlock system created in Workbench.
+This code starts the PySherlock service and client for a Sherlock system created in Workbench.
 
 .. code-block:: python
 

@@ -1,14 +1,16 @@
-Installing PyWorkbench
-######################
+Install PyWorkbench
+###################
 
-Installing PyWorkbench is as simple as installing a Python library. However, a running
-instance of Workbench is required to use PyWorkbench.
+Installing PyWorkbench is as simple as installing any Python library. However, you must
+have a running instance of Workbench to use PyWorkbench.
 
-User installation
-=================
+PyWorkbech has two installation modes: user and developer.
 
-There are multiple sources for installing the latest stable version of
-PyWorkbench. These include ``pip`` and ``GitHub``.
+Install in user mode
+====================
+
+You can install PyWorkbench in user mode from PyPI sources using ``pip`` or from the
+GitHub repository:
 
 .. jinja:: install_guide
 
@@ -35,8 +37,8 @@ PyWorkbench. These include ``pip`` and ``GitHub``.
 
                 python -m pip install git+https://github.com/ansys/pyworkbench.git@{{ version }}
 
-Developer installation
-======================
+Install in developer mode
+=========================
 
 Developer installation is specifically intended for project maintainers. This
 specialized installation is tailored to equip developers with the essential
@@ -46,83 +48,82 @@ of technical expertise and familiarity with the project's codebase, rendering it
 most suitable for individuals actively engaged in its continuous development and
 maintenance.
 
-Start by cloning the repository
+#. Cloning the repository:
 
-.. code-block::
+   .. code-block::
 
-    git clone git@github.com:ansys/pyworkbench
+       git clone git@github.com:ansys/pyworkbench
 
 
-Move inside the project and create a new Python environment:
+#. Move inside the project and create a clean Python environment:
 
-.. tab-set::
+   .. tab-set::
 
-    .. tab-item:: Windows
+       .. tab-item:: Windows
 
-        .. tab-set::
+           .. tab-set::
 
-            .. tab-item:: CMD
+               .. tab-item:: CMD
 
-                .. code-block:: text
+                   .. code-block:: text
 
-                    py -m venv <venv>
+                       py -m venv <venv>
 
-            .. tab-item:: PowerShell
+               .. tab-item:: PowerShell
 
-                .. code-block:: text
+                   .. code-block:: text
 
-                    py -m venv <venv>
+                       py -m venv <venv>
 
-    .. tab-item:: Linux/UNIX
+       .. tab-item:: Linux/UNIX
 
-        .. code-block:: text
+           .. code-block:: text
 
-            python -m venv <venv>
+               python -m venv <venv>
 
-Activate previous environment:
+#. Activate the environment:
 
-.. tab-set::
+   .. tab-set::
 
-    .. tab-item:: Windows
+       .. tab-item:: Windows
 
-        .. tab-set::
+           .. tab-set::
 
-            .. tab-item:: CMD
+               .. tab-item:: CMD
 
-                .. code-block:: text
+                   .. code-block:: text
 
-                    <venv>\Scripts\activate.bat
+                       <venv>\Scripts\activate.bat
 
-            .. tab-item:: PowerShell
+               .. tab-item:: PowerShell
 
-                .. code-block:: text
+                   .. code-block:: text
 
-                    <venv>\Scripts\Activate.ps1
+                       <venv>\Scripts\Activate.ps1
 
-    .. tab-item:: Linux/UNIX
+       .. tab-item:: Linux/UNIX
 
-        .. code-block:: text
+           .. code-block:: text
 
-            source <venv>/bin/activate
+               source <venv>/bin/activate
 
-Install the project in editable mode. This means that any changes you make to
-the package's source code immediately reflect in your project without requiring you
-to reinstall it.
+#. Install the project in editable mode, which means that any changes you make to
+   the package's source code is immediately reflected in your project without requiring you
+   to reinstall it.
 
-.. code-block::
+   .. code-block::
 
-    python -m pip install --editable .
+       python -m pip install --editable .
 
 
 Verify your installation
 ========================
 
-If you have Ansys Workbench installed locally, you can verify your PyWorkbench
-installation by starting a Workbench server session on your local computer:
+If Ansys Workbench is installed locally, you can verify your PyWorkbench
+installation by starting a Workbench server session on your local machine:
 
 .. code-block:: python
 
     from ansys.workbench.core import launch_workbench
 
     workbench = launch_workbench()
-

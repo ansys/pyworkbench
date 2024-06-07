@@ -6,20 +6,20 @@ To run PyWorkbench, you must have a licensed copy of `Workbench
 
 .. grid:: 2
 
-    .. grid-item-card:: Installing PyWorkbench :fab:`python`
+    .. grid-item-card:: Install PyWorkbench :fab:`python`
         :link: getting-started/installing
         :link-type: doc
 
-        Learn how to download and install PyWorkbench in your development
-        environment from various official sources including PyPI and official
-        Ansys repositories.
+        Learn how to install PyWorkbench in your development
+        environment from various official sources including PyPI and
+        the Ansys GitHub repository.
 
-    .. grid-item-card:: Connecting to Workbench :fa:`terminal`
+    .. grid-item-card:: Connect to Workbench :fa:`terminal`
         :link: getting-started/connection
         :link-type: doc
 
-        Learn how to start a new instance of Workbench or connect to an existing
-        one using PyWorkbench.
+        Learn how to use PyWorkbench to start a new instance of Workbench
+        or connect to an existing instance.
 
 .. toctree::
    :maxdepth: 3

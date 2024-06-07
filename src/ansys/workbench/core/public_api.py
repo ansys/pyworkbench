@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module provides a function to launch a Workbench server on a local or remote Windows machine."""
+"""Module for launching a Workbench server on a local or remote Windows machine."""
 
 import logging
 import os
@@ -40,16 +40,16 @@ from ansys.workbench.core.workbench_client import WorkbenchClient
 
 
 class ClientWrapper(WorkbenchClient):
-    """ClientWrapper class to connect to a Workbench server.
+    """Provides for connecting to a Workbench server.
 
     Parameters
     ----------
     port : int
-        the port used by the server
-    client_workdir : str, optional
-        path to a writable directory on the client computer. default: None
-    host : str, optional
-        the server computer's name or IP address. default: None
+        Port used by the server.
+    client_workdir : str, default: None
+        Path to a writable directory on the client computer.
+    host : str, default: None
+        Server computer's name or IP address.
     """
 
     def __init__(self, port, client_workdir=None, host=None):
@@ -72,27 +72,27 @@ class LaunchWorkbench(ClientWrapper):
 
     Parameters
     ----------
-    release : str, optional
-        specify a Workbench release to launch. default: "241"
-    client_workdir : str, optional
-        path to a writable directory on the client computer. default: None
-    server_workdir : str, optional
-        path to a writable directory on the server computer. default: None
-    host : str, optional
-        the server computer's name or IP address. default: None
-    username : str, optional
-        user's login name on the server computer. default: None
-    password : str, optional
-        user's password on the server computer. default: None
+    release : str, default: "241"
+        Workbench release to launch.
+    client_workdir : str, None
+        Path to a writable directory on the client computer.
+    server_workdir : str, None
+        Path to a writable directory on the server computer.
+    host : str, None
+        Server computer's name or IP address.
+    username : str, None
+        User's login name on the server computer.
+    password : str, None
+        User's password on the server computer.
 
     Raises
     ------
     Exception
-        If the ANSYS release number is invalid.
+        If the Ansys release number is invalid.
 
     Examples
     --------
-    Launch a server on the local computer and variable "wb" holds the returned client.
+    Launch a server on the local computer and use the ``wb`` variable to hold the returned client.
 
     >>> from ansys.workbench.core import launch_workbench
     >>> wb = launch_workbench()
@@ -116,10 +116,10 @@ class LaunchWorkbench(ClientWrapper):
             or release[0] not in ["2", "3"]
             or release[2] not in ["1", "2"]
         ):
-            raise Exception("invalid ANSYS release: " + release)
+            raise Exception("Invalid ANSYS release: " + release)
         port = self.__launch_server(host, release, server_workdir, username, password)
         if port is None or port <= 0:
-            raise Exception("failed to launch ANSYS Workbench service")
+            raise Exception("Filed to launch Ansys Workbench service.")
         super().__init__(port, client_workdir, host)
 
     def __launch_server(self, host, release, server_workdir, username, password):
@@ -130,11 +130,11 @@ class LaunchWorkbench(ClientWrapper):
             else:
                 if username is None or password is None:
                     raise Exception(
-                        "username and passwork must be specified "
-                        "to launch Workbench on a remote machine"
+                        "Username and passwork must be specified "
+                        "to launch Workbench on a remote machine."
                     )
                 self._wmi_connection = wmi.WMI(host, user=username, password=password)
-            logging.info("host connection established")
+            logging.info("Host connection is established.")
 
             install_path = None
             for ev in self._wmi_connection.Win32_Environment():
@@ -144,10 +144,10 @@ class LaunchWorkbench(ClientWrapper):
             if install_path is None:
                 install_path = "C:/Program Files/Ansys Inc/v" + release
                 logging.warning(
-                    "ANSYS installation not found. Assume the default location: " + install_path
+                    "Ansys installation is not found. Assume the default location: " + install_path
                 )
             else:
-                logging.info("ANSYS installation found at: " + install_path)
+                logging.info("Ansys installation is found at: " + install_path)
             executable = os.path.join(install_path, "Framework", "bin", "Win64", "RunWB2.exe")
             prefix = uuid.uuid4().hex
             workdir_arg = ""
@@ -173,7 +173,7 @@ class LaunchWorkbench(ClientWrapper):
                 logging.info("Workbench launched on the host with process id: " + str(process_id))
                 self._process_id = process_id
             else:
-                logging.error("Workbench failed to launch on the host")
+                logging.error("Workbench failed to launch on the host.")
                 return 0
 
             # retrieve server port once WB is fully up running
@@ -193,11 +193,11 @@ class LaunchWorkbench(ClientWrapper):
                 if port is not None:
                     break
                 if time.time() - start_time > timeout:
-                    logging.error("Failed to start Workbench service within reasonable timeout")
+                    logging.error("Failed to start Workbench service within reasonable timeout.")
                     break
                 time.sleep(10)
             if port is None:
-                logging.error("Failed to retrieve the port used by Workbench service")
+                logging.error("Failed to retrieve the port used by Workbench service.")
             else:
                 logging.info("Workbench service uses port " + port)
 
@@ -237,13 +237,13 @@ class LaunchWorkbench(ClientWrapper):
             this_level = next_level
         for ps in reversed(to_terminate):
             for p in ps:
-                logging.info("shutting down " + process_by_id[p].Name + " ...")
+                logging.info("Shutting down " + process_by_id[p].Name + " ...")
                 try:
                     process_by_id[p].Terminate()
                 except Exception:
                     pass
 
-        logging.info("Workbench server ended")
+        logging.info("Workbench server connection has ended.")
         self._wmi_connection = None
         self._process_id = -1
 
@@ -253,34 +253,37 @@ def launch_workbench(
 ):
     """Launch PyWorkbench server on the local or a remote Windows machine.
 
-    Launch a Workbench server on the local or a remote Windows machine and create
+    This method launch a Workbench server on the local or a remote Windows machine and creates
     a PyWorkbench client that connects to the server.
 
     Parameters
     ----------
-    release : str, optional
-        specify a Workbench release to launch (default: "242")
-    client_workdir : str, optional
-        path to a writable directory on the client computer
-        (default: the system temp directory)
-    server_workdir : str, optional
-        path to a writable directory on the server computer
-        (default: the user preference for Workbench temporary file folder)
-    host : str, optional
-        the server computer's name or IP address (default: None for launching on the local computer)
-    username : str, optional
-        user's login name on the server computer (default: None for launching on the local computer)
-    password : str, optional
-        user's password on the server computer (default: None for launching on the local computer)
+    release : str, default: "242"
+        Workbench release to launch.
+    client_workdir : str, default: None
+        Path to a writable directory on the client computer. The default is ``None``,
+        in which case the system temp directory is used.
+    server_workdir : str, None
+        Path to a writable directory on the server computer. The default is ``None``,
+        in which case the user preference for the Workbench temporary file folder is used.
+    host : str, None
+        Server computer's name or IP address. The default is ``None`` for launching on the
+        local computer.
+    username : str, None
+        User's login name on the server computer. The default is ``None`` for launching on
+        the local computer.
+    password : str, None
+        User's password on the server computer. The default is ``None`` for launching on
+        the local computer.
 
     Returns
     -------
     ClientWrapper
-        An instance of PyWorkbench client that is connected to the launched server.
+        Instance of the PyWorkbench client that is connected to the launched server.
 
     Examples
     --------
-    Launch a server on the local computer and variable "wb" holds the returned client.
+    Launch a server on the local computer and use the ``wb`` variable to hold the returned client.
 
     >>> from ansys.workbench.core import launch_workbench
     >>> wb = launch_workbench()
@@ -290,26 +293,27 @@ def launch_workbench(
 
 
 def connect_workbench(port, client_workdir=None, host=None):
-    """Create a PyWorkbench client that connects to a already running PyWorkbench server.
+    """Create a PyWorkbench client that connects to an already running Workbench server.
 
     Parameters
     ----------
     port : int
-        the port used by the server
-    client_workdir : str, optional
-        path to a writable directory on the client computer
-        (default: the system temp directory)
-    host : str, optional
-        the server computer's name or IP address (default: None for the local computer)
+        Port used by the server.
+    client_workdir : str, default: None
+        Path to a writable directory on the client computer. The default is ``None``,
+        in which case the system temp directory is used.
+    host : str, default: None
+        Server computer's name or IP address. The default is ``None`` for the local computer.
 
     Returns
     -------
     ClientWrapper
-        An instance of PyWorkbench client that is connected to the server.
+        Instance of the PyWorkbench client that is connected to the server.
 
     Examples
     --------
-    connect to a server at port 32588 on localhost and variable "wb" holds the returned client.
+    Connect to a server at port 32588 on localhost and use the ``wb`` variable to hold the
+    returned client.
 
     >>> from ansys.workbench.core import connect_workbench
     >>> wb = connect_workbench(port = 32588)

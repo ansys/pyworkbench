@@ -46,27 +46,32 @@ To install the latest development version of PyWorkbench, use the following comm
     cd pyworkbench
     pip install -e .
 
-For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_ in the PyWorkbench documentation.
+For more information, see `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_
+in the PyWorkbench documentation.
 
-Documentation
--------------
+Documentation and issues
+------------------------
 
 Documentation of the latest stable release of PyWorkbench can be found at
-`PyWorkbench Documentation <https://workbench.docs.pyansys.com>`_.
+`PyWorkbench documentation <https://workbench.docs.pyansys.com>`_.
 
 The documentation has these sections:
 
-- `Installation <https://workbench.docs.pyansys.com/version/stable/installation.html>`_
-- `User guide <https://workbench.docs.pyansys.com/version/stable/user_guide.html>`_
-- `API reference <https://workbench.docs.pyansys.com/version/stable/api/index.html>`_
-- `Contribute <https://workbench.docs.pyansys.com/version/stable/contribute_examples.html>`_
-
+- `Getting started <https://workbench.docs.pyansys.com/version/dev/getting-started.html>`_: Learn
+  how to install PyWorkbench and connect to Workbench.
+- `User guide <https://workbench.docs.pyansys.com/version/dev/user-guide.html>`_: Understand key
+  concepts and approaches for using PyWorkbench with the Workbench gRPC service.
+- `API reference <https://workbench.docs.pyansys.com/version/stable/api/index.html>`_: Understand
+  how to use Python to interact programmatically with PyWorkbench.
+- `Examples <https://workbench.docs.pyansys.com/version/dev/examples.html>`: Explore examples that
+  show how to use PyWorkbench to create custom applications, automate your existing Workbench
+  workflows, and integrate with other popular tools in the Python ecosystem.
 
 In the upper right corner of the documentation's title bar, there is an option for switching from
 viewing the documentation for the
 latest stable release to viewing the documentation for the development version or previously released versions.
 
-On the `PyWorkbench <https://github.com/ansys/pyworkbench/issues>`_
+On the `PyWorkbench Issues <https://github.com/ansys/pyworkbench/issues>`_
 page, you can create issues to report bugs and request new features. On the
 `Discussions <https://discuss.ansys.com/>`_ page on the Ansys Developer portal,
 you can post questions, share ideas, and get community feedback.
@@ -75,4 +80,3 @@ If you have general questions about the PyAnsys ecosystem, email
 `pyansys.core@ansys.com <pyansys.core@ansys.com>`_. If your
 question is specific to PyWorkbench, ask your
 question in an issue as described in the previous paragraph.
-
