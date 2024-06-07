@@ -179,6 +179,27 @@ def test_upload_file(mock_workbench_service_stub):
             assert mock_stub.UploadFile.call_count == 2
 
 
+def test_upload_file_from_example_repo(mock_workbench_service_stub):
+    """Test the upload_file_from_example_repo method."""
+    client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
+    client._connect()
+    mock_stub = mock_workbench_service_stub.return_value
+    mock_response = MagicMock()
+    mock_response.error = None
+    mock_response.file_name = "uploaded_file1"
+    mock_stub.UploadFile.return_value = mock_response
+
+    with patch("ansys.workbench.core.workbench_client.os.path.isfile", return_value=True):
+        with patch(
+            "ansys.workbench.core.workbench_client.ExampleData.download",
+            return_value="/tmp/axisymmetric_model.agdb",
+        ):
+            client.upload_file_from_example_repo(
+                "axisymmetric-rotor/agdb/axisymmetric_model.agdb", show_progress=True
+            )
+            assert mock_stub.UploadFile.call_count == 1
+
+
 def test_upload_iterator():
     """Test the __upload_iterator method."""
     with tempfile.NamedTemporaryFile(mode="wb", delete=False) as tmp_file:
