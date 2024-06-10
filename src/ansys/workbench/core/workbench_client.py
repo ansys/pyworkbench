@@ -298,7 +298,7 @@ class WorkbenchClient:
         Parameters
         ----------
         file_name : str
-            Name of each file to download. Files are located in the server's working directory.
+            Name of the file. File must be located in the server's working directory.
             The wildcard characters "?" and "*" are supported. A ZIP file is automatically
             generated and downloaded when multiple files are specified.
         show_progress : bool, default: True
