@@ -38,7 +38,7 @@ like in the preceding example.
 Alternatively, you can launch a Workbench server and start a client programmatically in a
 client-side Python script.
 
-This code launches a server on a remote Windows machine with
+This code launches a server on a local Windows machine with
 valid user credentials:
 
 .. code-block:: python
