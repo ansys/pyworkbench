@@ -67,7 +67,7 @@ client instead of using the default directories:
     from ansys.workbench.core import launch_workbench
 
     wb = launch_workbench(
-        release="241",
+        release="242",
         server_workdir="path_to_a_dir_on_server",
         client_workdir="path_to_a_dir_on_client",
     )

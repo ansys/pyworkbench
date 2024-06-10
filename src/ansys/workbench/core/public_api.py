@@ -72,18 +72,23 @@ class LaunchWorkbench(ClientWrapper):
 
     Parameters
     ----------
-    release : str, default: "241"
+    release : str, default: "242"
         Workbench release to launch.
-    client_workdir : str, None
-        Path to a writable directory on the client computer.
+    client_workdir : str, default: None
+        Path to a writable directory on the client computer. The default is ``None``,
+        in which case the system temp directory is used.
     server_workdir : str, None
-        Path to a writable directory on the server computer.
+        Path to a writable directory on the server computer. The default is ``None``,
+        in which case the user preference for the Workbench temporary file folder is used.
     host : str, None
-        Server computer's name or IP address.
+        Server computer's name or IP address. The default is ``None`` for launching on the
+        local computer.
     username : str, None
-        User's login name on the server computer.
+        User's login name on the server computer. The default is ``None`` for launching on
+        the local computer.
     password : str, None
-        User's password on the server computer.
+        User's password on the server computer. The default is ``None`` for launching on
+        the local computer.
 
     Raises
     ------
