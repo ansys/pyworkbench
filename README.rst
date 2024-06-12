@@ -63,7 +63,7 @@ The documentation has these sections:
   concepts and approaches for using PyWorkbench with the Workbench gRPC service.
 - `API reference <https://workbench.docs.pyansys.com/version/stable/api/index.html>`_: Understand
   how to use Python to interact programmatically with PyWorkbench.
-- `Examples <https://workbench.docs.pyansys.com/version/dev/examples.html>`: Explore examples that
+- `Examples <https://workbench.docs.pyansys.com/version/dev/examples.html>`_: Explore examples that
   show how to use PyWorkbench to create custom applications, automate your existing Workbench
   workflows, and integrate with other popular tools in the Python ecosystem.
 
