@@ -2,24 +2,23 @@ PyWorkbench documentation |version|
 ###################################
 
 PyWorkbench provides an environment where you can make use of the capabilities
-of various PyAnsys modules for which the Ansys applications have been
-integrated with Workbench.
+of various PyAnsys modules for Ansys applications that have been integrated
+with Workbench.
 
 .. grid:: 2
 
-    .. grid-item-card:: Getting started :fa:`person-running`
+    .. grid-item-card:: Getting started :material-regular:`directions_run`
         :link: getting-started
         :link-type: doc
 
-        Step-by-step guidelines on how to set up your environment to work with
-        PyWorkbench and verify your installation.
+        Learn how to install PyWorkbench and connect to Workbench.
 
-    .. grid-item-card:: User guide :fa:`book-open-reader`
+    .. grid-item-card:: User guide :material-regular:`menu_book`
         :link: user-guide
         :link-type: doc
 
-        Learn about the capabilities, features, and key topics in PyWorkbench.
-        This guide provides useful background information and explanations.
+        Understand key concepts and approaches for using PyWorkbench with
+        the Workbench gRPC service.
 
 .. jinja:: main_toctree
 
@@ -27,24 +26,21 @@ integrated with Workbench.
     .. grid:: 2
 
        {% if build_api %}
-       .. grid-item-card:: API reference :fa:`book-bookmark`
+       .. grid-item-card:: API reference :material-regular:`bookmark`
            :link: api/index
            :link-type: doc
 
-           A detailed guide describing the PyWorkbench API. This guide documents all the
-           methods and properties for each interface, class, and
-           enumerations of each PyWorkbench module.
+           Understand how to use Python to interact programmatically with PyWorkbench.
         {% endif %}
 
        {% if build_examples %}
-       .. grid-item-card:: Gallery of examples :fa:`laptop-code`
+       .. grid-item-card:: Examples :material-regular:`play_arrow`
            :link: examples
            :link-type: doc
 
-           Learn how to use PyWorkbench for creating custom applications and automating
-           your existing Workbench workflows. This guide contains a gallery of examples
-           showing how to integrate PyWorkbench with other popular tools in the Python
-           ecosystem.
+           Explore examples that show how to use PyWorkbench to create custom applications,
+           automate your existing Workbench workflows, and integrate with other popular tools
+           in the Python ecosystem.
         {% endif %}
     {% endif %}
 
@@ -57,11 +53,10 @@ integrated with Workbench.
 
        getting-started
        user-guide
-       {% if build_examples %}
-       examples
-       {% endif %}
        {% if build_api %}
        api/index
        {% endif %}
+       {% if build_examples %}
+       examples
+       {% endif %}
        changelog
-

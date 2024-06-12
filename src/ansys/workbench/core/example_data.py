@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for downloading example data from the example-data repository."""
+"""Module for downloading example data from the ``example-data`` repository."""
 
 import logging
 import os
@@ -29,10 +29,10 @@ import urllib.request
 
 
 class ExampleData:
-    """Class for downloading example data from the example-data repository."""
+    """Provides for downloading example data from the ``example-data`` repository."""
 
     def _get_file_url(relative_file_path):  # noqa: N805
-        """Get the URL of the file in the example-data repository.
+        """Get the URL of the file in the ``example-data`` repository.
 
         Parameters
         ----------
@@ -44,7 +44,7 @@ class ExampleData:
         Returns
         -------
         str
-            URL of the file in the example-data repository.
+            URL of the file in the ``example-data`` repository.
         """
         return f"https://github.com/ansys/example-data/tree/master/pyworkbench/{relative_file_path}"
 
@@ -56,36 +56,36 @@ class ExampleData:
         url : str
             URL of the file.
         local_file_path : str
-            Local path to save the file.
+            Local path to save the file to.
 
         Raises
         ------
         Exception
             If the URL is not accessible.
         """
-        logging.info(f"Downloading {url} from example data repository ...")
+        logging.info(f"Downloading {url} from ``example-data`` repository ...")
 
         with urllib.request.urlopen(url) as in_stream:
             if in_stream.code != 200:
                 raise Exception("error getting the url, code " + str(in_stream.code))
             with open(local_file_path, "wb") as out_file:
                 shutil.copyfileobj(in_stream, out_file)
-        logging.info(f"Downloaded the file as {local_file_path}")
+        logging.info(f"Downloaded the file as {local_file_path}.")
 
     def download(relative_file_path, local_dir_path):  # noqa: N805
-        """Download the file from the example-data repository.
+        """Download the file from the ``example-data`` repository.
 
         Parameters
         ----------
         relative_file_path : str
-            The file path relative to the pyworkbench folder on the example-data repository
+            File path relative to the ``pyworkbench`` folder in the ``example-data`` repository.
         local_dir_path : str
-           Local path to the directory to save the file in.
+           Local path to the directory to save the file to.
 
         Returns
         -------
         str
-            The name of the downloaded file.
+            Name of the downloaded file.
         """
         url = ExampleData._get_file_url(relative_file_path)
         downloaded_file_name = os.path.basename(relative_file_path)

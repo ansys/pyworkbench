@@ -1,7 +1,9 @@
 Examples
 ########
 
-This page collects various examples on how to use PyWorkbench.
+This section collects examples that show how to use PyWorkbench to create custom applications,
+automate your existing Workbench workflows, and integrate with other popular tools in the
+Python ecosystem.
 
 .. grid:: 1
 
@@ -10,4 +12,4 @@ This page collects various examples on how to use PyWorkbench.
       :text-align: center
       :margin: 2 2 0 0
 
-      A collections of examples on how to use PyWorkbench.
+      Explore both basic and advanced examples for using PyWorkbench.
