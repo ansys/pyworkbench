@@ -46,7 +46,7 @@ To install the latest development version of PyWorkbench, use the following comm
     cd pyworkbench
     pip install -e .
 
-For more information, see `Getting started <https://workbench.docs.pyansys.com/version/dev/getting-started.html>`_
+For more information, see `Getting started <https://workbench.docs.pyansys.com/version/stable/getting-started.html>`_
 in the PyWorkbench documentation.
 
 Documentation and issues
@@ -57,13 +57,13 @@ Documentation of the latest stable release of PyWorkbench can be found at
 
 The documentation has these sections:
 
-- `Getting started <https://workbench.docs.pyansys.com/version/dev/getting-started.html>`_: Learn
+- `Getting started <https://workbench.docs.pyansys.com/version/stable/getting-started.html>`_: Learn
   how to install PyWorkbench and connect to Workbench.
-- `User guide <https://workbench.docs.pyansys.com/version/dev/user-guide.html>`_: Understand key
+- `User guide <https://workbench.docs.pyansys.com/version/stable/user-guide.html>`_: Understand key
   concepts and approaches for using PyWorkbench with the Workbench gRPC service.
 - `API reference <https://workbench.docs.pyansys.com/version/stable/api/index.html>`_: Understand
   how to use Python to interact programmatically with PyWorkbench.
-- `Examples <https://workbench.docs.pyansys.com/version/dev/examples.html>`_: Explore examples that
+- `Examples <https://workbench.docs.pyansys.com/version/stable/examples.html>`_: Explore examples that
   show how to use PyWorkbench to create custom applications, automate your existing Workbench
   workflows, and integrate with other popular tools in the Python ecosystem.
 
