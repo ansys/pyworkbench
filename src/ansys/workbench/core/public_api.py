@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for launching a Workbench server on a local or remote Windows machine."""
+"""Module for starting PyWorkbench."""
 
 import logging
 import os
@@ -263,7 +263,7 @@ def launch_workbench(
 
     Parameters
     ----------
-    release : str, default: "242"
+    release : str, default: "251"
         Workbench release to launch.
     client_workdir : str, default: None
         Path to a writable directory on the client computer. The default is ``None``,
@@ -283,7 +283,7 @@ def launch_workbench(
 
     Returns
     -------
-    ClientWrapper
+    WorkbenchClient
         Instance of the PyWorkbench client that is connected to the launched server.
 
     Examples
@@ -312,7 +312,7 @@ def connect_workbench(port, client_workdir=None, host=None):
 
     Returns
     -------
-    ClientWrapper
+    WorkbenchClient
         Instance of the PyWorkbench client that is connected to the server.
 
     Examples

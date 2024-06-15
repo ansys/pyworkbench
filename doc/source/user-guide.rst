@@ -12,18 +12,18 @@ must provide the following information:
 
 - Server name or IP address
 - Port number
-- Client-side working directory, which is the default location for client-side files
+- (optional) Client-side working directory, which is the default location for client-side files
 
 .. code-block:: python
 
-    from ansys.workbench.core.workbench_client import connect_workbench
+    from ansys.workbench.core import connect_workbench
 
     host = "server_machine_name_or_IP"
     port = server_port_number
     wb = connect_workbench(host=host, port=port)
 
-Other options to the ``connect_workbench()`` function include specifying a working directory for
-the client instead of using the default directory.
+The ``client_workdir`` option to the ``connect_workbench()`` function specifies a working
+directory for the client instead of using the default directory.
 
 Launch Workbench server and start a client
 ==========================================
@@ -31,15 +31,14 @@ Launch Workbench server and start a client
 During the development phase or when debugging, it is useful to start the
 Workbench server on your desktop or some computer within the company network.
 
-You can always start a Workbench server by running the ``StartServer()`` function
-in any running Workbench session. You then use the returned server port to start a client,
+You can always start a Workbench server by running the ``StartServer()`` command
+in any Workbench session. You then use the returned server port to start a client,
 like in the preceding example.
 
 Alternatively, you can launch a Workbench server and start a client programmatically in a
 client-side Python script.
 
-This code launches a server on a local Windows machine with
-valid user credentials:
+This code launches a server on a local Windows machine:
 
 .. code-block:: python
 
@@ -76,13 +75,13 @@ Run scripts on Workbench server
 ===============================
 
 You can use these methods to run IronPython-based Workbench scripts, which contain commands or
-queries, on the Workbench server:
+queries, with PyWorkbench:
 
 - ``run_script_file``: Runs a script file in the client working directory.
 - ``run_script_string``: Runs a script contained in the given string.
 
-In the ```wb_script_result`` global variable in the script, you can assign any output that needs
-to be returned from these methods as a JSON string. For example, this Workbench script returns
+To the ``wb_script_result`` global variable in the script, you can assign any output that needs
+to be returned from these methods, as a JSON string. For example, this Workbench script returns
 all message summaries from the Workbench session:
 
 .. code-block:: python
@@ -92,9 +91,9 @@ all message summaries from the Workbench session:
     messages = [m.Summary for m in GetMessages()]
     wb_script_result = json.dumps(messages)
 
-You can also call these these methods with different logging levels. While the default logging
-level is ``error``, this line outputs all ``info``, ``warning``, and ``error`` levels
-to the logger when the script run:
+You can also call these methods with different logging levels. While the default logging
+level is ``error``, the following example outputs all ``info``, ``warning``, and ``error`` levels
+to the logger when the script runs:
 
 .. code-block:: python
 
@@ -106,10 +105,10 @@ Upload and download files
 You can upload and download data files to and from the server using the ``upload_file()`` and ``download_file``
 methods. The client-side working directory is used to hold these files unless absolute paths or target directories
 are specified. There is also a working directory on the server for the same purpose. To obtain the server’s working
-directory, you can use the the ``GetServerWorkingDirectory()`` Workbench query that runs on the server.
+directory, you can use the query ``GetServerWorkingDirectory()`` in the scripts that run on the server.
 
-This code uploads all part files with a given prefix, all AGDB files in the working directory, and another file
-outside of the working directory from the client to the server:
+This code uploads all part files of a given prefix and all AGDB files in the working directory, along with another file
+outside of the working directory, from the client to the server:
 
 .. code-block:: python
 
@@ -123,15 +122,14 @@ newly created Workbench system:
     wb.run_script_string(
         r"""import os
     work_dir = GetServerWorkingDirectory()
-    geometry_file = os.path.join(work_dir, "2pipes.agdb")
+    geometry_file = os.path.join(work_dir, "two_pipes.agdb")
     template = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")
     system = CreateSystemFromTemplate(Template=template, Name="Static Structural (ANSYS)")
     system.GetContainer(ComponentName="Geometry").SetFile(FilePath=geometry_file)
     """
     )
 
-This server-side Workbench script copies a Mechanical solver output file to the server's working directory
-for downloading later:
+This server-side Workbench script copies a Mechanical solver output file to the server's working directory:
 
 .. code-block:: python
 
@@ -146,13 +144,13 @@ for downloading later:
     """
     )
 
-This client script downloads all files with OUT extensions from the server's working directory:
+This client script downloads all files with .out extensions from the server's working directory:
 
 .. code-block:: python
 
     wb.download_file("*.out")
 
-There is a special client method to upload a data file from the
+There is a special client method to upload a data file from the ANSYS
 `example-data <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ repository
 directly to the Workbench server. You should specify the file path relative to the
 ``pyworkbench`` folder in the ``example-data`` repository:
@@ -168,7 +166,7 @@ turn off the progress bar with an optional argument:
 
     wb.download_file("solve.out", show_progress=False)
 
-Start other PyAnsys services from systems in a PyWorkbench project
+Start other PyAnsys services for systems in a Workbench project
 ==================================================================
 
 PyMechanical
