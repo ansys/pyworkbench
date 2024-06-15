@@ -439,7 +439,7 @@ class WorkbenchClient:
         Returns
         -------
         int
-            Port number of the PyMechanical server which can be used to start the PyMechanical client.
+            Port of the PyMechanical server which can be used to start the PyMechanical client.
 
         Examples
         --------
@@ -504,7 +504,7 @@ wb_script_result=json.dumps(server_info_file)
         Returns
         -------
         int
-            Port number of the PySherlock server which can be used to start a PySherlock client.
+            Port of the PySherlock server which can be used to start a PySherlock client.
 
         Examples
         --------
