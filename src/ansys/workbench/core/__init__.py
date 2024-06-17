@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""PyWorkbench client in Python: ansys-workbench-core."""
+"""PyWorkbench Python client."""
 
 import importlib.metadata as importlib_metadata
 

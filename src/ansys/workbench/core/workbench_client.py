@@ -38,7 +38,7 @@ from ansys.workbench.core.example_data import ExampleData
 
 
 class WorkbenchClient:
-    """Provides the PyWorkbench client.
+    """Functions of a PyWorkbench client.
 
     Parameters
     ----------
@@ -109,7 +109,7 @@ class WorkbenchClient:
     def set_log_file(self, log_file):
         """Set a local log file for the Workbench server log.
 
-        Create a locl log file if one does not exist and append it to the existing log file.
+        Create a local log file if one does not exist and append it to the existing log file.
 
         Parameters
         ----------
@@ -136,7 +136,7 @@ class WorkbenchClient:
     __log_console_handler = None
 
     def run_script_string(self, script_string, log_level="error"):
-        """Run a script on the server.
+        """Run a script as given in the input string on the server.
 
         Parameters
         ----------
@@ -183,7 +183,7 @@ class WorkbenchClient:
         Parameters
         ----------
         script_file_name : str
-            Name of the script file to run. The script file is located in the client
+            Name of the script file to run. The script file should be located in the client
             working directory
         log_level : str, default: "error"
             Level of logging. Options are "critical" "debug", "error", "info", and "warning".
@@ -214,7 +214,7 @@ class WorkbenchClient:
         Returns
         -------
         list[str]
-            Names of the uploaded file.
+            Names of the uploaded files.
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
@@ -311,7 +311,7 @@ class WorkbenchClient:
         Returns
         -------
         str
-            Names of the one or more downloaded files.
+            Name of the downloaded file.
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
@@ -439,7 +439,7 @@ class WorkbenchClient:
         Returns
         -------
         int
-            Port number of the PyMechanical server used to start the PyMechanical client.
+            Port of the PyMechanical server to use to start the PyMechanical client.
 
         Examples
         --------
@@ -504,7 +504,7 @@ wb_script_result=json.dumps(server_info_file)
         Returns
         -------
         int
-            Prt number of the PySherlock server used to start a PySherlock client.
+            Port of the PySherlock server to use to start a PySherlock client.
 
         Examples
         --------
