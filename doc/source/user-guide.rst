@@ -145,7 +145,7 @@ This server-side Workbench script copies a Mechanical solver output file to the 
     """
     )
 
-This client script downloads all files with .out extensions from the server's working directory:
+This client script downloads all files with ``.out`` extensions from the server's working directory:
 
 .. code-block:: python
 
