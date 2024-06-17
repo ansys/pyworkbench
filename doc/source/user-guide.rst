@@ -106,7 +106,7 @@ Upload and download files
 You can upload and download data files to and from the server using the ``upload_file()`` and ``download_file``
 methods. The client-side working directory is used to hold these files unless absolute paths or target directories
 are specified. There is also a working directory on the server for the same purpose. To obtain the server’s working
-directory, you can use the query ``GetServerWorkingDirectory()`` in the scripts that run on the server.
+directory, you can use the ``GetServerWorkingDirectory()`` query in the scripts that run on the server.
 
 This code uploads all part files of a given prefix and all AGDB files in the working directory, along with another file
 outside of the working directory, from the client to the server:
