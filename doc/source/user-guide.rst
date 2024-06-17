@@ -10,10 +10,9 @@ Start Workbench client and connect to a running Workbench server
 To start a Workbench client that connects to a running Workbench server on the cloud, you
 must provide the following information:
 
-- Server name or IP address
 - Port number
-- Client-side working directory, which is an optional parameter indicating the default
-   location for client-side files
+- Server name or IP address, which is an optional parameter and when not specified, localhost is used
+- Client-side working directory, which is an optional parameter indicating the default location for client-side files
 
 .. code-block:: python
 
