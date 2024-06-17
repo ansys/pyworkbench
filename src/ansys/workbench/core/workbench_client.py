@@ -439,7 +439,7 @@ class WorkbenchClient:
         Returns
         -------
         int
-            Port of the PyMechanical server which can be used to start the PyMechanical client.
+            Port of the PyMechanical server to use to start the PyMechanical client.
 
         Examples
         --------
