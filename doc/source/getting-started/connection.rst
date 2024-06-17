@@ -23,8 +23,8 @@ the following steps:
 
 Remote connection
 =================
-You can connect PyWorkbench to a Ansys Workbench session running on a remote
-computer given its computer name or IP and the port number the service uses:
+You can connect PyWorkbench to an Ansys Workbench session running on a remote
+computer by giving its computer name or IP and the port number that the service uses:
 
 .. code-block:: python
 
