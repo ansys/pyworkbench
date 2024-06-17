@@ -504,7 +504,7 @@ wb_script_result=json.dumps(server_info_file)
         Returns
         -------
         int
-            Port of the PySherlock server which can be used to start a PySherlock client.
+            Port of the PySherlock server to use to start a PySherlock client.
 
         Examples
         --------
