@@ -12,7 +12,8 @@ must provide the following information:
 
 - Server name or IP address
 - Port number
-- (optional) Client-side working directory, which is the default location for client-side files
+- Client-side working directory, which is an optional parameter indicating the default
+   location for client-side files
 
 .. code-block:: python
 
