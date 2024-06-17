@@ -23,7 +23,7 @@ must provide the following information:
     port = server_port_number
     wb = connect_workbench(host=host, port=port)
 
-The ``client_workdir`` option to the ``connect_workbench()`` function specifies a working
+The ``client_workdir`` parameter for the ``connect_workbench()`` function specifies a working
 directory for the client instead of using the default directory.
 
 Launch Workbench server and start a client
