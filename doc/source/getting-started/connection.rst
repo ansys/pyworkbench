@@ -13,7 +13,7 @@ the following steps:
 1. Start Ansys Workbench
 2. In the Workbench Command Window, type ``StartServer()``
 3. Take a note of the returned port number
-4. Use the port number to connect PyWorkbench to the server
+4. Use the port number to connect PyWorkbench to the server:
 
 .. code-block:: python
 
