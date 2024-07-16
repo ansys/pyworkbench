@@ -37,7 +37,7 @@ dependencies = [
 doc = [
     "ansys-sphinx-theme[autoapi]==0.16.6",
     "numpydoc==1.7.0",
-    "Sphinx==7.3.7",
+    "Sphinx==7.4.4",
     "sphinx-autodoc-typehints==2.2.0",
     "sphinx-copybutton==0.5.2",
 ]
