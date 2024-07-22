@@ -31,7 +31,7 @@ dependencies = [
     "ansys-pythonnet>=3.1.0rc1",
     "ansys-tools-path>=0.3.1",
     "tqdm>=4.65.0",
-    "WMI>=1.4.9",
+    "WMI>=1.4.9; platform_system=='Windows'",
 ]
 [project.optional-dependencies]
 doc = [
