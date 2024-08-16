@@ -43,7 +43,7 @@ def test_get_file_url(example_data):
     """Test get_file_url."""
     relative_path, asset_file = example_data
     url = ExampleData._get_file_url(relative_file_path=relative_path)
-    assert url == f"https://github.com/ansys/example-data/tree/master/pyworkbench/{relative_path}"
+    assert url == f"https://github.com/ansys/example-data/raw/master/pyworkbench/{relative_path}"
 
 
 def test_download(example_data):
