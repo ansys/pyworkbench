@@ -46,7 +46,7 @@ class ExampleData:
         str
             URL of the file in the ``example-data`` repository.
         """
-        return f"https://github.com/ansys/example-data/tree/master/pyworkbench/{relative_file_path}"
+        return f"https://github.com/ansys/example-data/raw/master/pyworkbench/{relative_file_path}"
 
     def __retrieve_file(url, local_file_path):  # noqa: N805
         """Download the file from the URL.
