@@ -151,7 +151,7 @@ This client script downloads all files with ``.out`` extensions from the server'
     wb.download_file("*.out")
 
 There is a special client method to upload a data file from the Ansys
-`example-data <https://github.com/ansys/example-data/tree/master/pyworkbench>`_ repository
+`example-data <https://github.com/ansys/example-data/raw/master/pyworkbench>`_ repository
 directly to the Workbench server. You should specify the file path relative to the
 ``pyworkbench`` folder in the ``example-data`` repository:
 
