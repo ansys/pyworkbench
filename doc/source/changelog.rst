@@ -9,6 +9,26 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.6.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.6.0>`_ - 2024-08-16
+================================================================================
+
+Changed
+^^^^^^^
+
+- chore: update CHANGELOG for v0.5.0 `#111 <https://github.com/ansys/pyworkbench/pull/111>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- bump version to 0.6.dev0 `#112 <https://github.com/ansys/pyworkbench/pull/112>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix example repo URL; add server release requirement in doc `#113 <https://github.com/ansys/pyworkbench/pull/113>`_
+
 `0.5.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.5.0>`_ - 2024-08-15
 ================================================================================
 
