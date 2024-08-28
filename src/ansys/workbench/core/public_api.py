@@ -89,6 +89,8 @@ class LaunchWorkbench(ClientWrapper):
     password : str, None
         User's password on the server computer. The default is ``None`` for launching on
         the local computer.
+    batch : boolean, False
+        Launch Workbench in batch mode by setting it True. The default is ``False``
 
     Raises
     ------
@@ -111,6 +113,7 @@ class LaunchWorkbench(ClientWrapper):
         host=None,
         username=None,
         password=None,
+        batch=False,
     ):
         self._wmi_connection = None
         self._process_id = -1
@@ -122,12 +125,12 @@ class LaunchWorkbench(ClientWrapper):
             or release[2] not in ["1", "2"]
         ):
             raise Exception("Invalid ANSYS release: " + release)
-        port = self.__launch_server(host, release, server_workdir, username, password)
+        port = self.__launch_server(host, release, server_workdir, username, password, batch)
         if port is None or port <= 0:
             raise Exception("Filed to launch Ansys Workbench service.")
         super().__init__(port, client_workdir, host)
 
-    def __launch_server(self, host, release, server_workdir, username, password):
+    def __launch_server(self, host, release, server_workdir, username, password, batch):
         """Launch a Workbench server on the local or a remote Windows machine."""
         try:
             if host is None:
@@ -160,9 +163,10 @@ class LaunchWorkbench(ClientWrapper):
                 # use forward slash only to avoid escaping as command line argument
                 server_workdir = server_workdir.replace("\\", "/")
                 workdir_arg = ",WorkingDirectory='" + server_workdir + "'"
+            interaction_flag = "-B" if batch else "-I"
             command = (
                 executable
-                + " -I -E \"StartServer(EnvironmentPrefix='"
+                + f" {interaction_flag}"+" -E \"StartServer(EnvironmentPrefix='"
                 + prefix
                 + "'"
                 + workdir_arg
@@ -254,7 +258,7 @@ class LaunchWorkbench(ClientWrapper):
 
 
 def launch_workbench(
-    release="242", client_workdir=None, server_workdir=None, host=None, username=None, password=None
+    release="242", client_workdir=None, server_workdir=None, host=None, username=None, password=None, batch=False
 ):
     """Launch PyWorkbench server on the local or a remote Windows machine.
 
@@ -280,6 +284,8 @@ def launch_workbench(
     password : str, None
         User's password on the server computer. The default is ``None`` for launching on
         the local computer.
+    batch : boolean, False
+        Launch Workbench in batch mode by setting it True. The default is ``False``
 
     Returns
     -------
@@ -294,7 +300,7 @@ def launch_workbench(
     >>> wb = launch_workbench()
 
     """
-    return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
+    return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password, batch)
 
 
 def connect_workbench(port, client_workdir=None, host=None):
