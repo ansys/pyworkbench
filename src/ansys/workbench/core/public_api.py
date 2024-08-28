@@ -166,7 +166,8 @@ class LaunchWorkbench(ClientWrapper):
             interaction_flag = "-B" if batch else "-I"
             command = (
                 executable
-                + f" {interaction_flag}"+" -E \"StartServer(EnvironmentPrefix='"
+                + f" {interaction_flag}"
+                + " -E \"StartServer(EnvironmentPrefix='"
                 + prefix
                 + "'"
                 + workdir_arg
@@ -258,7 +259,13 @@ class LaunchWorkbench(ClientWrapper):
 
 
 def launch_workbench(
-    release="242", client_workdir=None, server_workdir=None, host=None, username=None, password=None, batch=False
+    release="242",
+    client_workdir=None,
+    server_workdir=None,
+    host=None,
+    username=None,
+    password=None,
+    batch=False,
 ):
     """Launch PyWorkbench server on the local or a remote Windows machine.
 
