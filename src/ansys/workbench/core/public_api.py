@@ -265,7 +265,7 @@ def launch_workbench(
     server_workdir=None,
     host=None,
     username=None,
-    password=None
+    password=None,
 ):
     """Launch PyWorkbench server on the local or a remote Windows machine.
 
