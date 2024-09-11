@@ -259,7 +259,7 @@ class LaunchWorkbench(ClientWrapper):
 
 
 def launch_workbench(
-    no_ui = False,
+    no_ui=False,
     release="242",
     client_workdir=None,
     server_workdir=None,
