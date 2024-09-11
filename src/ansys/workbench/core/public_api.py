@@ -259,7 +259,8 @@ class LaunchWorkbench(ClientWrapper):
 
 
 def launch_workbench(
-    no_ui = False, release="242", client_workdir=None, server_workdir=None, host=None, username=None, password=None
+    no_ui = False, release="242", client_workdir=None, server_workdir=None,
+    host=None, username=None, password=None
 ):
     """Launch PyWorkbench server on the local or a remote Windows machine.
 
