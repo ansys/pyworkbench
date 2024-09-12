@@ -307,7 +307,9 @@ def launch_workbench(
     >>> wb = launch_workbench()
 
     """
-    return LaunchWorkbench(show_gui, release, client_workdir, server_workdir, host, username, password)
+    return LaunchWorkbench(
+        show_gui, release, client_workdir, server_workdir, host, username, password
+    )
 
 
 def connect_workbench(port, client_workdir=None, host=None):
