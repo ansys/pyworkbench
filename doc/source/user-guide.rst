@@ -58,7 +58,7 @@ This code launches a server on a remote Windows machine with valid user credenti
     wb = launch_workbench(host=host, username=username, password=password)
 
 Other options for the ``launch_workbench()`` function include specifying a particular
-Workbench release to launch, to launch in non-UI mode, and specifying working directories
+Workbench release to launch, whether to launch in UI mode, and specifying working directories
 on the server and/or the client instead of using the default directories:
 
 .. code-block:: python
@@ -66,7 +66,7 @@ on the server and/or the client instead of using the default directories:
     from ansys.workbench.core import launch_workbench
 
     wb = launch_workbench(
-        no_ui=True,
+        show_gui=False,
         release="242",
         server_workdir="path_to_a_dir_on_server",
         client_workdir="path_to_a_dir_on_client",
