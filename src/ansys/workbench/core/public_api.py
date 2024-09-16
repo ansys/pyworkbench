@@ -72,6 +72,8 @@ class LaunchWorkbench(ClientWrapper):
 
     Parameters
     ----------
+    show_gui : bool, default: True
+        Weather to launch Workbench in UI mode.
     release : str, default: "242"
         Workbench release to launch.
     client_workdir : str, default: None
@@ -105,6 +107,7 @@ class LaunchWorkbench(ClientWrapper):
 
     def __init__(
         self,
+        show_gui=True,
         release="242",
         client_workdir=None,
         server_workdir=None,
@@ -122,12 +125,12 @@ class LaunchWorkbench(ClientWrapper):
             or release[2] not in ["1", "2"]
         ):
             raise Exception("Invalid ANSYS release: " + release)
-        port = self.__launch_server(host, release, server_workdir, username, password)
+        port = self.__launch_server(show_gui, host, release, server_workdir, username, password)
         if port is None or port <= 0:
             raise Exception("Filed to launch Ansys Workbench service.")
         super().__init__(port, client_workdir, host)
 
-    def __launch_server(self, host, release, server_workdir, username, password):
+    def __launch_server(self, show_gui, host, release, server_workdir, username, password):
         """Launch a Workbench server on the local or a remote Windows machine."""
         try:
             if host is None:
@@ -160,9 +163,11 @@ class LaunchWorkbench(ClientWrapper):
                 # use forward slash only to avoid escaping as command line argument
                 server_workdir = server_workdir.replace("\\", "/")
                 workdir_arg = ",WorkingDirectory='" + server_workdir + "'"
+            ui_or_not = " -I" if show_gui else " --start-and-wait"
             command = (
                 executable
-                + " -I -E \"StartServer(EnvironmentPrefix='"
+                + ui_or_not
+                + " -E \"StartServer(EnvironmentPrefix='"
                 + prefix
                 + "'"
                 + workdir_arg
@@ -254,7 +259,13 @@ class LaunchWorkbench(ClientWrapper):
 
 
 def launch_workbench(
-    release="242", client_workdir=None, server_workdir=None, host=None, username=None, password=None
+    show_gui=True,
+    release="242",
+    client_workdir=None,
+    server_workdir=None,
+    host=None,
+    username=None,
+    password=None,
 ):
     """Launch PyWorkbench server on the local or a remote Windows machine.
 
@@ -263,6 +274,8 @@ def launch_workbench(
 
     Parameters
     ----------
+    show_gui : bool, default: True
+        Weather to launch Workbench in UI mode.
     release : str, default: "251"
         Workbench release to launch.
     client_workdir : str, default: None
@@ -294,7 +307,9 @@ def launch_workbench(
     >>> wb = launch_workbench()
 
     """
-    return LaunchWorkbench(release, client_workdir, server_workdir, host, username, password)
+    return LaunchWorkbench(
+        show_gui, release, client_workdir, server_workdir, host, username, password
+    )
 
 
 def connect_workbench(port, client_workdir=None, host=None):
