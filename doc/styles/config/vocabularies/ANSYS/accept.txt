@@ -1,8 +1,8 @@
-(?!)amsys
+(?i)ansys
 Workbench
 PyMechanical
 PyFluent
-(?!)github
-(?)APIs
-(?!)agdb
-(?!)run_script
+(?i)github
+(?i)APIs
+(?i)agdb
+(?i)run_script
