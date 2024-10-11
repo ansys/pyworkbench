@@ -9,7 +9,6 @@ from ansys_sphinx_theme import (
     ansys_logo_white_cropped,
     get_version_match,
     latex,
-    pyansys_logo_black,
     watermark,
 )
 from sphinx.builders.latex import LaTeXBuilder
@@ -28,7 +27,6 @@ cname = os.getenv("DOCUMENTATION_CNAME", default="workbench.docs.pyansys.com")
 switcher_version = get_version_match(__version__)
 
 # Select desired logo, theme, and declare the html title
-html_logo = pyansys_logo_black
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "PyWorkbench"
 
@@ -62,6 +60,7 @@ html_theme_options = {
     "ansys_sphinx_theme_autoapi": {
         "project": project,
     },
+    "logo": "pyansys",
 }
 
 # Sphinx extensions
