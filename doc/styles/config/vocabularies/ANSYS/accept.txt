@@ -1,6 +1,6 @@
 (?i)ansys
 (?i)github
-(?)APIs
+(?i)APIs
 (?i)agdb
 (?i)run_script
 Workbench
