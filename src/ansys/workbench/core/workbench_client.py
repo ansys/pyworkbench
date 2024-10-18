@@ -144,7 +144,8 @@ class WorkbenchClient:
         script_string : str
             String containing the content of the script to run.
         args : dictionary of script variable names and values
-            Variables in the script specified as $$varname%%50%% will be converted to variable values or use the default value - 50 in the example.
+            Variables in the script specified as $$varname%%50%% will be converted to variable
+            values or use the default value - 50 in the example.
         log_level : str, default: "error"
             Level of logging. Options are "critical" "debug", "error", "info", and "warning".
 
@@ -203,7 +204,8 @@ class WorkbenchClient:
             Name of the script file to run. The script file should be located in the client
             working directory
         args : dictionary of script variable names and values
-            Variables in the script specified as $$varname%%50%% will be converted to variable values or use the default value - 50 in the example.
+            Variables in the script specified as $$varname%%50%% will be converted to variable
+            values or use the default value - 50 in the example.
         log_level : str, default: "error"
             Level of logging. Options are "critical" "debug", "error", "info", and "warning".
 
