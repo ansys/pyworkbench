@@ -2,7 +2,7 @@ Getting started
 ###############
 
 To run PyWorkbench, you must have a licensed copy of `Workbench
-<https://www.ansys.com/products/ansys-workbench>`_ of release 24.2 or above.
+<https://www.ansys.com/products/ansys-workbench>`_ of version 24.2 or above.
 
 .. grid:: 2
 
