@@ -180,7 +180,7 @@ class WorkbenchClient:
         updated_script_string = re.sub(r"\$\$\w+%%(((?!%%).)*)%%", r"\1", updated_script_string)
         request = wb.RunScriptRequest(
             content=updated_script_string,
-            log_level=WorkbenchClient.__to_server_log_level(log_level)
+            log_level=WorkbenchClient.__to_server_log_level(log_level),
         )
         for response in self.stub.RunScript(request):
             if response.log and response.log.messages and len(response.log.messages) > 0:
