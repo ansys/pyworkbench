@@ -136,7 +136,7 @@ class WorkbenchClient:
     __log_file_handler = None
     __log_console_handler = None
 
-    def run_script_string(self, script_string, args = None, log_level="error"):
+    def run_script_string(self, script_string, args=None, log_level="error"):
         """Run a script as given in the input string on the server.
 
         Parameters
@@ -168,16 +168,19 @@ class WorkbenchClient:
             return None
         updated_script_string = script_string
         if args and len(args) > 0:
-            if any(not re.match(r'^\w+$', arg) for arg in args.keys()):
+            if any(not re.match(r"^\w+$", arg) for arg in args.keys()):
                 logging.error("script argument name contains illegal character.")
                 return None
             for arg_name in args:
-                updated_script_string = re.sub(r'\$\$' + arg_name + r'%%((?!%%).)*%%',
-                    str(args[arg_name]), updated_script_string)
-        updated_script_string = re.sub(r'\$\$\w+%%(((?!%%).)*)%%',
-            r'\1', updated_script_string)
+                updated_script_string = re.sub(
+                    r"\$\$" + arg_name + r"%%((?!%%).)*%%",
+                    str(args[arg_name]),
+                    updated_script_string,
+                )
+        updated_script_string = re.sub(r"\$\$\w+%%(((?!%%).)*)%%", r"\1", updated_script_string)
         request = wb.RunScriptRequest(
-            content=updated_script_string, log_level=WorkbenchClient.__to_server_log_level(log_level)
+            content=updated_script_string,
+            log_level=WorkbenchClient.__to_server_log_level(log_level)
         )
         for response in self.stub.RunScript(request):
             if response.log and response.log.messages and len(response.log.messages) > 0:
