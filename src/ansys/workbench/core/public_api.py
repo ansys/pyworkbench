@@ -74,8 +74,8 @@ class LaunchWorkbench(ClientWrapper):
     ----------
     show_gui : bool, default: True
         Weather to launch Workbench in UI mode.
-    release : str, default: "242"
-        Workbench release to launch.
+    version : str, default: None
+        Workbench version to launch. It must be a 3-digit version that is "242" or later.
     client_workdir : str, default: None
         Path to a writable directory on the client computer. The default is ``None``,
         in which case the system temp directory is used.
@@ -95,7 +95,7 @@ class LaunchWorkbench(ClientWrapper):
     Raises
     ------
     Exception
-        If the Ansys release number is invalid.
+        If the Ansys version number is invalid.
 
     Examples
     --------
@@ -108,7 +108,7 @@ class LaunchWorkbench(ClientWrapper):
     def __init__(
         self,
         show_gui=True,
-        release="242",
+        version="242",
         client_workdir=None,
         server_workdir=None,
         host=None,
@@ -119,18 +119,18 @@ class LaunchWorkbench(ClientWrapper):
         self._process_id = -1
 
         if (
-            len(release) != 3
-            or not release.isdigit()
-            or release[0] not in ["2", "3"]
-            or release[2] not in ["1", "2"]
+            len(version) != 3
+            or not version.isdigit()
+            or version[0] not in ["2", "3"]
+            or version[2] not in ["1", "2"]
         ):
-            raise Exception("Invalid ANSYS release: " + release)
-        port = self.__launch_server(show_gui, host, release, server_workdir, username, password)
+            raise Exception("Invalid ANSYS version: " + version)
+        port = self.__launch_server(show_gui, host, version, server_workdir, username, password)
         if port is None or port <= 0:
             raise Exception("Filed to launch Ansys Workbench service.")
         super().__init__(port, client_workdir, host)
 
-    def __launch_server(self, show_gui, host, release, server_workdir, username, password):
+    def __launch_server(self, show_gui, host, version, server_workdir, username, password):
         """Launch a Workbench server on the local or a remote Windows machine."""
         try:
             if host is None:
@@ -146,11 +146,11 @@ class LaunchWorkbench(ClientWrapper):
 
             install_path = None
             for ev in self._wmi_connection.Win32_Environment():
-                if ev.Name == "AWP_ROOT" + release:
+                if ev.Name == "AWP_ROOT" + version:
                     install_path = ev.VariableValue
                     break
             if install_path is None:
-                install_path = "C:/Program Files/Ansys Inc/v" + release
+                install_path = "C:/Program Files/Ansys Inc/v" + version
                 logging.warning(
                     "Ansys installation is not found. Assume the default location: " + install_path
                 )
@@ -260,7 +260,7 @@ class LaunchWorkbench(ClientWrapper):
 
 def launch_workbench(
     show_gui=True,
-    release="242",
+    version=None,
     client_workdir=None,
     server_workdir=None,
     host=None,
@@ -276,8 +276,8 @@ def launch_workbench(
     ----------
     show_gui : bool, default: True
         Weather to launch Workbench in UI mode.
-    release : str, default: "251"
-        Workbench release to launch.
+    version : str, default: None
+        Workbench version to launch. It must be a 3-digit version that is "242" or later.
     client_workdir : str, default: None
         Path to a writable directory on the client computer. The default is ``None``,
         in which case the system temp directory is used.
@@ -308,7 +308,7 @@ def launch_workbench(
 
     """
     return LaunchWorkbench(
-        show_gui, release, client_workdir, server_workdir, host, username, password
+        show_gui, version, client_workdir, server_workdir, host, username, password
     )
 
 
