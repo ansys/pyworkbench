@@ -391,7 +391,7 @@ class WorkbenchClient:
         show_progress : bool, default: True
             Whether to show a progress bar during the download.
         """
-        script ="""import os
+        script = """import os
             wd = GetServerWorkingDirectory()
             if os.path.basename(GetProjectFile()).StartsWith("wbnew."):
                 Save(FilePath=os.path.join(wd, archive_name + ".wbpj"), Overwrite=True)
