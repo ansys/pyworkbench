@@ -103,7 +103,7 @@ class WorkbenchClient:
         Parameters
         ----------
         log_level : str, default: "error"
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
         """
         self.__log_console_handler.setLevel(WorkbenchClient.__to_python_log_level(log_level))
 
@@ -147,7 +147,7 @@ class WorkbenchClient:
             Variables in the script specified as $$varname%%50%% will be converted to variable
             values or use the default value - 50 in the example.
         log_level : str, default: "error"
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
 
         Returns
         -------
@@ -207,7 +207,7 @@ class WorkbenchClient:
             Variables in the script specified as $$varname%%50%% will be converted to variable
             values or use the default value - 50 in the example.
         log_level : str, default: "error"
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
 
         Returns
         -------
@@ -431,7 +431,7 @@ class WorkbenchClient:
         Parameters
         ----------
         log_level : str
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
 
         Returns
         -------
