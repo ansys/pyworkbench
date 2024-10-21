@@ -160,6 +160,12 @@ directly to the Workbench server. You should specify the path relative to the
 
     client.upload_file_from_example_repo("pymechanical-integration/agdb/two_pipes.agdb")
 
+There is a convenience function to save the current Workbench project on the server, archive
+the project, then download the project archive to the client.
+.. code-block:: python
+
+    wb.download_project_archive(archive_name="my_project_archive")
+
 All methods for uploading and downloading files display a progress bar by default. You can
 turn off the progress bar with an optional argument:
 

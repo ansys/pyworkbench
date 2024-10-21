@@ -163,7 +163,7 @@ class LaunchWorkbench(ClientWrapper):
                 # use forward slash only to avoid escaping as command line argument
                 server_workdir = server_workdir.replace("\\", "/")
                 workdir_arg = ",WorkingDirectory='" + server_workdir + "'"
-            ui_or_not = " -I" if show_gui else " --start-and-wait"
+            ui_or_not = " -I" if show_gui else " --start-and-wait -nowindow"
             command = (
                 executable
                 + ui_or_not
