@@ -58,7 +58,7 @@ This code launches a server on a remote Windows machine with valid user credenti
     wb = launch_workbench(host=host, username=username, password=password)
 
 Other options for the ``launch_workbench()`` function include specifying a particular
-Workbench release to launch, whether to launch in UI mode, and specifying working directories
+Workbench version to launch, whether to launch in UI mode, and specifying working directories
 on the server and/or the client instead of using the default directories:
 
 .. code-block:: python
@@ -67,7 +67,7 @@ on the server and/or the client instead of using the default directories:
 
     wb = launch_workbench(
         show_gui=False,
-        release="242",
+        version="251",
         server_workdir="path_to_a_dir_on_server",
         client_workdir="path_to_a_dir_on_client",
     )
@@ -153,7 +153,7 @@ This client script downloads all files with ``.out`` extensions from the server'
 
 There is a special client method to upload a data file from the Ansys
 `example-data <https://github.com/ansys/example-data/raw/master/pyworkbench>`_ repository
-directly to the Workbench server. You should specify the file path relative to the
+directly to the Workbench server. You should specify the path relative to the
 ``pyworkbench`` folder in the ``example-data`` repository:
 
 .. code-block:: python

@@ -156,10 +156,6 @@ def test_run_script_file(mock_workbench_service_stub):
     assert mock_stub.RunScript.call_count == 1
     assert mock_response.result.result == "{'result': 'success'}"
 
-    client._disconnect()
-    with pytest.raises(Exception):
-        client.run_script_file(script_dir / "cooled_turbine_blade.py")
-
 
 def test_upload_file(mock_workbench_service_stub):
     """Test the upload_file method."""

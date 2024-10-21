@@ -28,6 +28,7 @@ import logging
 import logging.handlers
 from logging.handlers import WatchedFileHandler
 import os
+import re
 
 import grpc
 import tqdm
@@ -102,7 +103,7 @@ class WorkbenchClient:
         Parameters
         ----------
         log_level : str, default: "error"
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
         """
         self.__log_console_handler.setLevel(WorkbenchClient.__to_python_log_level(log_level))
 
@@ -135,15 +136,18 @@ class WorkbenchClient:
     __log_file_handler = None
     __log_console_handler = None
 
-    def run_script_string(self, script_string, log_level="error"):
+    def run_script_string(self, script_string, args=None, log_level="error"):
         """Run a script as given in the input string on the server.
 
         Parameters
         ----------
         script_string : str
             String containing the content of the script to run.
+        args : dictionary of script variable names and values
+            Variables in the script specified as $$varname%%50%% will be converted to variable
+            values or use the default value - 50 in the example.
         log_level : str, default: "error"
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
 
         Returns
         -------
@@ -162,8 +166,22 @@ class WorkbenchClient:
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
+            return None
+        updated_script_string = script_string
+        if args and len(args) > 0:
+            if any(not re.match(r"^\w+$", arg) for arg in args.keys()):
+                logging.error("script argument name contains illegal character.")
+                return None
+            for arg_name in args:
+                updated_script_string = re.sub(
+                    r"\$\$" + arg_name + r"%%((?!%%).)*%%",
+                    str(args[arg_name]),
+                    updated_script_string,
+                )
+        updated_script_string = re.sub(r"\$\$\w+%%(((?!%%).)*)%%", r"\1", updated_script_string)
         request = wb.RunScriptRequest(
-            content=script_string, log_level=WorkbenchClient.__to_server_log_level(log_level)
+            content=updated_script_string,
+            log_level=WorkbenchClient.__to_server_log_level(log_level),
         )
         for response in self.stub.RunScript(request):
             if response.log and response.log.messages and len(response.log.messages) > 0:
@@ -177,7 +195,7 @@ class WorkbenchClient:
                     logging.info("The script has finisished.")
                     return json.loads(response.result.result)
 
-    def run_script_file(self, script_file_name, log_level="error"):
+    def run_script_file(self, script_file_name, args=None, log_level="error"):
         """Run a script file on the server.
 
         Parameters
@@ -185,8 +203,11 @@ class WorkbenchClient:
         script_file_name : str
             Name of the script file to run. The script file should be located in the client
             working directory
+        args : dictionary of script variable names and values
+            Variables in the script specified as $$varname%%50%% will be converted to variable
+            values or use the default value - 50 in the example.
         log_level : str, default: "error"
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
 
         Returns
         -------
@@ -195,10 +216,11 @@ class WorkbenchClient:
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server")
+            return None
         script_path = os.path.join(self.workdir, script_file_name)
         with open(script_path, encoding="utf-8-sig") as sf:
             script_string = sf.read()
-        return self.run_script_string(script_string, log_level)
+        return self.run_script_string(script_string, args, log_level)
 
     def upload_file(self, *file_list, show_progress=True):
         """Upload one or more files from the client to the server.
@@ -218,6 +240,7 @@ class WorkbenchClient:
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
+            return
         requested = []
         for file_pattern in file_list:
             if "*" in file_pattern or "?" in file_pattern:
@@ -289,6 +312,7 @@ class WorkbenchClient:
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
+            return
         downloaded = ExampleData.download(relative_file_path, self.workdir)
         self.upload_file(downloaded, show_progress=show_progress)
 
@@ -315,6 +339,7 @@ class WorkbenchClient:
         """
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
+            return None
         request = wb.DownloadFileRequest(file_name=file_name)
         file_name = file_name.replace("*", "_").replace("?", "_")
         td = target_dir
@@ -406,7 +431,7 @@ class WorkbenchClient:
         Parameters
         ----------
         log_level : str
-            Level of logging. Options are "critical" "debug", "error", "info", and "warning".
+            Level of logging. Options are "critical", "debug", "error", "info", and "warning".
 
         Returns
         -------
