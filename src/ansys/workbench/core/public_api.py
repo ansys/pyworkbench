@@ -108,7 +108,7 @@ class LaunchWorkbench(ClientWrapper):
     def __init__(
         self,
         show_gui=True,
-        version="242",
+        version=None,
         client_workdir=None,
         server_workdir=None,
         host=None,
@@ -118,6 +118,8 @@ class LaunchWorkbench(ClientWrapper):
         self._wmi_connection = None
         self._process_id = -1
 
+        if not version:
+            version = "242"
         if (
             len(version) != 3
             or not version.isdigit()
