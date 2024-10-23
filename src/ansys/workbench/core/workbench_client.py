@@ -387,12 +387,12 @@ class WorkbenchClient:
         Parameters
         ----------
         archive_name : str
-            The name of the project archive to use, without the file extension.
+            Name of the project archive to use, without the file extension.
         show_progress : bool, default: True
             Whether to show a progress bar during the download.
         """
         if not re.match(r"^\w+$", archive_name):
-            logging.error("archive name contains illegal character")
+            logging.error("archive name should contain only alphanumeric characters")
             return
         script = f"""import os
 wd = GetServerWorkingDirectory()
