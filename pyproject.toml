@@ -42,7 +42,7 @@ doc = [
     "sphinx-copybutton==0.5.2",
 ]
 vulnerabilities = [
-    "bandit==1.7.10",
+    "bandit==1.8.0",
     "safety==3.2.11",
 ]
 tests = [
