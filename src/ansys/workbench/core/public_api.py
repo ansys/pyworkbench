@@ -220,6 +220,8 @@ class LaunchWorkbench(ClientWrapper):
 
     def exit(self):
         """Terminate the Workbench server and disconnect the client."""
+        self.run_script_string("Reset()")
+
         super().exit()
 
         if self._wmi_connection is None:
