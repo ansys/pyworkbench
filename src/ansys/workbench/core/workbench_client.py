@@ -492,9 +492,9 @@ Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"))
         --------
         Start a PyMechanical session for the given system name.
 
-        >>> from ansys.mechanical.core import launch_mechanical
+        >>> from ansys.mechanical.core import connect_to_mechanical
         >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
-        >>> mechanical = launch_mechanical(start_instance=False, port=server_port)
+        >>> mechanical = connect_to_mechanical(port=server_port)
 
         """
         pymech_port = self.run_script_string(
