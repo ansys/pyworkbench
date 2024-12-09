@@ -187,7 +187,7 @@ and establishes a PyMechanical client.
 
 .. code-block:: python
 
-    from ansys.mechanical.core import launch_mechanical
+    from ansys.mechanical.core import connect_to_mechanical
 
     sys_name = wb.run_script_string(
         r"""import json
@@ -195,7 +195,7 @@ and establishes a PyMechanical client.
     """
     )
     server_port = wb.start_mechanical_server(system_name=sys_name)
-    mechanical = launch_mechanical(start_instance=False, ip="localhost", port=server_port)
+    mechanical = connect_to_mechanical(ip="localhost", port=server_port)
 
 PyFluent
 --------
