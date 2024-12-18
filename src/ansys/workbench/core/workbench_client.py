@@ -381,7 +381,9 @@ class WorkbenchClient:
             pbar.close()
         return file_name
 
-    def download_project_archive(self, archive_name, include_solution_result_files = True, show_progress=True):
+    def download_project_archive(
+        self, archive_name, include_solution_result_files = True, show_progress=True
+    ):
         """Create and download the project archive.
 
         Parameters
@@ -408,7 +410,9 @@ wb_script_result =json.dumps(successful)
 """
         archive_created = self.run_script_string(script)
         if not archive_created:
-            logging.error("failed to create the project archive. make sure that the solver PyAnsys sessions are closed.")
+            logging.error(
+                "failed to create the project archive. make sure that the solver PyAnsys sessions are closed."
+            )
             return
         self.download_file(archive_name + ".wbpz", show_progress=show_progress)
 
@@ -529,9 +533,7 @@ wb_script_result=json.dumps(server_port)
         >>> wb.stop_mechanical_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(
-            f"""StopMechanicalServerOnSystem(SystemName="{system_name}")"""
-        )
+        self.run_script_string(f"""StopMechanicalServerOnSystem(SystemName="{system_name}")""")
 
     def start_fluent_server(self, system_name):
         """Start the PyFluent server for the given system in the Workbench project.
@@ -583,9 +585,7 @@ wb_script_result=json.dumps(server_info_file)
         >>> wb.stop_fluent_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(
-            f"""StopFluentServerOnSystem(SystemName="{system_name}")"""
-        )
+        self.run_script_string(f"""StopFluentServerOnSystem(SystemName="{system_name}")""")
 
     def start_sherlock_server(self, system_name):
         """Start the PySherlock server for the given system in the Workbench project.
@@ -633,9 +633,7 @@ wb_script_result=json.dumps(server_port)
         >>> wb.stop_sherlock_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(
-            f"""StopSherlockServerOnSystem(SystemName="{system_name}")"""
-        )
+        self.run_script_string(f"""StopSherlockServerOnSystem(SystemName="{system_name}")""")
 
 
 __all__ = ["WorkbenchClient"]
