@@ -381,7 +381,7 @@ class WorkbenchClient:
             pbar.close()
         return file_name
 
-    def download_project_archive(self, archive_name, show_progress=True):
+    def download_project_archive(self, archive_name, include_solution_result_files = True, show_progress=True):
         """Create and download the project archive.
 
         Parameters
@@ -395,12 +395,19 @@ class WorkbenchClient:
             logging.error("archive name should contain only alphanumeric characters")
             return
         script = f"""import os
+import json
+successful = False
 wd = GetServerWorkingDirectory()
 if os.path.basename(GetProjectFile()).StartsWith("wbnew."):
     Save(FilePath=os.path.join(wd, "{archive_name}.wbpj"), Overwrite=True)
-Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"))
+Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"), IncludeSkippedFiles={include_solution_result_files})
+successful = True
+wb_script_result =json.dumps(successful)
 """
-        self.run_script_string(script)
+        archive_created = self.run_script_string(script)
+        if not archive_created:
+            logging.error("failed to create the project archive. make sure that the solver PyAnsys sessions are closed.")
+            return
         self.download_file(archive_name + ".wbpz", show_progress=show_progress)
 
     def __python_logging(self, log_level, msg):
@@ -505,6 +512,25 @@ wb_script_result=json.dumps(server_port)
         )
         return pymech_port
 
+    def stop_mechanical_server(self, system_name):
+        """Stop the PyMechanical server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            Name of the system in the Workbench project.
+
+        Examples
+        --------
+        Stop the PyMechanical session for the given system name.
+
+        >>> wb.stop_mechanical_server(system_name=mech_system_name)
+
+        """
+        self.run_script_string(
+            f"""StopMechanicalServerOnSystem(SystemName="{system_name}")"""
+        )
+
     def start_fluent_server(self, system_name):
         """Start the PyFluent server for the given system in the Workbench project.
 
@@ -540,6 +566,25 @@ wb_script_result=json.dumps(server_info_file)
         self.download_file(server_info_file_name, show_progress=False)
         return local_copy
 
+    def stop_fluent_server(self, system_name):
+        """Stop the Fluent server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            Name of the system in the Workbench project.
+
+        Examples
+        --------
+        Stop the Fluent session for the given system name.
+
+        >>> wb.stop_fluent_server(system_name=mech_system_name)
+
+        """
+        self.run_script_string(
+            f"""StopFluentServerOnSystem(SystemName="{system_name}")"""
+        )
+
     def start_sherlock_server(self, system_name):
         """Start the PySherlock server for the given system in the Workbench project.
 
@@ -570,6 +615,25 @@ wb_script_result=json.dumps(server_port)
 """
         )
         return pysherlock_port
+
+    def stop_sherlock_server(self, system_name):
+        """Stop the Sherlock server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            Name of the system in the Workbench project.
+
+        Examples
+        --------
+        Stop the Sherlock session for the given system name.
+
+        >>> wb.stop_sherlock_server(system_name=mech_system_name)
+
+        """
+        self.run_script_string(
+            f"""StopSherlockServerOnSystem(SystemName="{system_name}")"""
+        )
 
 
 __all__ = ["WorkbenchClient"]
