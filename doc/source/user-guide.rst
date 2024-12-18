@@ -165,7 +165,7 @@ the project, and then download the project archive to the client:
 
 .. code-block:: python
 
-    wb.download_project_archive(archive_name="my_project_archive")
+    wb.download_project_archive(archive_name="my_project_archive", include_solution_result_files=False)
 
 All methods for uploading and downloading files display a progress bar by default. You can
 turn off the progress bar with an optional argument:

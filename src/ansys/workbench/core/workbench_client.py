@@ -388,6 +388,8 @@ class WorkbenchClient:
         ----------
         archive_name : str
             Name of the project archive to use, without the file extension.
+        include_solution_result_files : bool, default: True
+            Whether to include solution/result files in the archive.
         show_progress : bool, default: True
             Whether to show a progress bar during the download.
         """
