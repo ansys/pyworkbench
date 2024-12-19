@@ -382,7 +382,7 @@ class WorkbenchClient:
         return file_name
 
     def download_project_archive(
-        self, archive_name, include_solution_result_files = True, show_progress=True
+        self, archive_name, include_solution_result_files=True, show_progress=True
     ):
         """Create and download the project archive.
 
