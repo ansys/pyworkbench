@@ -411,10 +411,12 @@ wb_script_result =json.dumps(successful)
 """
         archive_created = self.run_script_string(script)
         if not archive_created:
-            logging.error((
-                "failed to create the project archive. "
-                "make sure that the solver PyAnsys sessions are closed."
-            ))
+            logging.error(
+                (
+                    "failed to create the project archive. "
+                    "make sure that the solver PyAnsys sessions are closed."
+                )
+            )
             return
         self.download_file(archive_name + ".wbpz", show_progress=show_progress)
 
