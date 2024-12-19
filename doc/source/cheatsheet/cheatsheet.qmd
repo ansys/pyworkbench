@@ -41,23 +41,22 @@ jupyter:
 
 ## Local connection to a Workbench Server
 
-Execute the steps below to link PyWorkbench with a local Ansys Workbench session:
+Execute the steps below to link PyWorkbench with a local session:
+
 - Initiate Ansys Workbench
 - Input StartServer() in the Workbench Command Window
 - Utilize the given port number to link PyWorkbench with the server
 
 ```{python}
 from ansys.workbench.core import launch_workbench
-
 wb = launch_workbench()
 ```
 
 ## Remote connection to a Workbench Server
 
-Execute the steps below to link PyWorkbench with a local Ansys Workbench session:
+Execute the steps below to link PyWorkbench with a local session:
 ```{python}
 from ansys.workbench.core import connect_workbench
-
 workbench = connect_workbench(port=port)
 
 ```
@@ -69,7 +68,6 @@ This script initiates a server on a local Windows-based system:
 ```{python}
 host = "server_machine_name_or_IP"
 port = server_port_number
-
 workbench = connect_workbench(host=host, port=port)
 ```
 
@@ -78,7 +76,6 @@ This script initiates a server on a remote Windows device using appropriate user
 host = "server_machine_name_or_ip"
 username = "your_username_on_server_machine"
 password = "your_password_on_server_machine"
-
 wb = launch_workbench(
     host=host, username=username, password=password
 )
@@ -91,7 +88,7 @@ These methods can be utilized to execute IronPython-based Workbench scripts cont
 - `run_script_string()`: Executes a script included within a string
 - `run_script_file()`: Executes a script file in the client's working directory
 
-Using `run_script_string()` method:
+### Using `run_script_string()` method:
 ```{python}
 wbjn_template = """
 import os
@@ -100,26 +97,24 @@ import string
 import os.path
 work_dir = GetServerWorkingDirectory()
 arg_ProjectArchive = os.path.join(work_dir, "MatDesigner.wbpz")
-# Description="Upzip the archived example project file"
-Unarchive(
-    ArchivePath=arg_ProjectArchive,
+Unarchive(ArchivePath=arg_ProjectArchive,
     ProjectPath=GetAbsoluteUserPathName(work_dir + "wbpj\\MatDesigner.wbpj"),
     Overwrite=True)
     """
 wb.run_script_string(wbjn_template)
 ```
 
-Using `run_script_file()` method:
+### Using `run_script_file()` method:
 ```{python}
 wb.run_script_file("project_workflow.wbjn")
 ```
 
-You have the ability to assign any output that needs to be returned from these methods to the global variable **wb_script_result** in the script, as a JSON string.
-Workbench script returns all message summaries from the Workbench session:
+### Global variable:
+Assign necessary output from these methods to the global variable **wb_script_result** as a JSON string.
+This script returns all message summaries from the Workbench session:
 
 ```{python}
 import json
-
 messages = [m.Summary for m in GetMessages()]
 wb_script_result = json.dumps(messages)
 ```
@@ -132,12 +127,11 @@ wb.run_script_file("project_workflow.wbjn", log_level="info")
 
 # Upload and download files
 
-Using **upload_file()** and **download_file()** methods, you have the ability to transfer data files to the server(upload) and retrieve them from the server (download).
+Employ **upload_file()** and **download_file()** methods to transfer data files to and from the server.
 
-You can use the GetServerWorkingDirectory() query in the scripts that execute on the server to retrieve the server's operating directory.
+Use `GetServerWorkingDirectory()` query in server-side scripts to obtain the server's operating directory.
 
-
-This script uploads all *.prt files and *.agdb files in the working directory, and another file from a different directory, from the client to the server:
+The script uploads all *.prt and *.agdb files in the working directory, along with a file from another directory, from client to server:
 ```{python}
 wb.upload_file("model?.prt", "*.agdb", "/path/to/some/file")
 ```
@@ -178,7 +172,7 @@ This client script retrieves all .out files from the server's working directory:
 wb.download_file("*.out")
 ```
 
-Using the *{download_project_archive()}* function you can save your current Workbench project on the server, archive it, and then download the archived project to the client:
+With *{download_project_archive()}* function, save, archive, and download the current Workbench project from server to client:
 
 ```{python}
 wb.download_project_archive( archive_name="my_project_archive")
@@ -188,8 +182,8 @@ wb.download_project_archive( archive_name="my_project_archive")
 
 ## PyMechanical
 
-
 In a Workbench project, you can operate and link the PyMechanical service from the same client machine.
+
 This script creates a mechanical system server-side, then starts the PyMechanical service and client:
 ```{python}
 from ansys.mechanical.core import connect_to_mechanical
@@ -258,6 +252,3 @@ sherlock = pysherlock.connect_grpc_channel(
 - [User guide](https://workbench.docs.pyansys.com/version/stable/user-guide.html)
 - [Examples](https://workbench.docs.pyansys.com/version/stable/examples.html)
 - [API reference](https://workbench.docs.pyansys.com/version/stable/api/index.html)
-
-
-
