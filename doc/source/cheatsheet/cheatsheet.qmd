@@ -177,7 +177,7 @@ This client script retrieves all .out files from the server's working directory:
 wb.download_file("*.out")
 ```
 
-Using the \texttt{download_project_archive()} function you can save your current Workbench project on the server, archive it, and then download the archived project to the client:
+Using the *{download_project_archive()}* function you can save your current Workbench project on the server, archive it, and then download the archived project to the client:
 
 ```{python}
 wb.download_project_archive(archive_name="my_project_archive")
