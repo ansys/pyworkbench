@@ -404,15 +404,17 @@ successful = False
 wd = GetServerWorkingDirectory()
 if os.path.basename(GetProjectFile()).StartsWith("wbnew."):
     Save(FilePath=os.path.join(wd, "{archive_name}.wbpj"), Overwrite=True)
-Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"), IncludeSkippedFiles={include_solution_result_files})
+Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"),
+    IncludeSkippedFiles={include_solution_result_files})
 successful = True
 wb_script_result =json.dumps(successful)
 """
         archive_created = self.run_script_string(script)
         if not archive_created:
-            logging.error(
-                "failed to create the project archive. make sure that the solver PyAnsys sessions are closed."
-            )
+            logging.error((
+                "failed to create the project archive. "
+                "make sure that the solver PyAnsys sessions are closed."
+            ))
             return
         self.download_file(archive_name + ".wbpz", show_progress=show_progress)
 
