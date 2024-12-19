@@ -202,6 +202,7 @@ and establishes a PyMechanical client.
 The PyMechanical service can be stopped for a given system:
 
 .. code-block:: python
+
     wb.stop_mechanical_server(system_name=sys_name)
 
 
@@ -225,6 +226,7 @@ This code starts the PyFluent service and client for a Fluent system created in 
 The PyFluent service can be stopped for a given system:
 
 .. code-block:: python
+
     wb.stop_fluent_server(system_name=sys_name)
 
 PySherlock
@@ -247,5 +249,6 @@ This code starts the PySherlock service and client for a Sherlock system created
 The PySherlock service can be stopped for a given system:
 
 .. code-block:: python
+
     wb.stop_sherlock_server(system_name=sys_name)
 
