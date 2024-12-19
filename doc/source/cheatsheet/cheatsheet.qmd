@@ -150,7 +150,7 @@ wb.run_script_string(
 work_dir = GetServerWorkingDirectory()
 geometry_file = os.path.join(work_dir, "my_geometry.agdb")
 template = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")
-system = CreateSystemFromTemplate(Template=template, 
+system = CreateSystemFromTemplate(Template=template,
 Name="Static Structural (ANSYS)")
 system.GetContainer( ComponentName="Geometry").SetFile( FilePath=geometry_file)
 """
