@@ -188,7 +188,7 @@ wb.download_project_archive(archive_name="my_project_archive")
 ## PyMechanical
 
 
-In a Workbench project, you can operate and link the PyMechanical service from the same client machine. 
+In a Workbench project, you can operate and link the PyMechanical service from the same client machine.
 This script creates a mechanical system server-side, then starts the PyMechanical service and client:
 ```{python}
 from ansys.mechanical.core import connect_to_mechanical
