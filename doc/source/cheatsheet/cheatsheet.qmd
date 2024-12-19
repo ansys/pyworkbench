@@ -150,8 +150,9 @@ wb.run_script_string(
 work_dir = GetServerWorkingDirectory()
 geometry_file = os.path.join(work_dir, "my_geometry.agdb")
 template = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")
-system = CreateSystemFromTemplate(Template=template, Name="Static Structural (ANSYS)")
-system.GetContainer(ComponentName="Geometry").SetFile(FilePath=geometry_file)
+system = CreateSystemFromTemplate(Template=template, 
+Name="Static Structural (ANSYS)")
+system.GetContainer( ComponentName="Geometry").SetFile( FilePath=geometry_file)
 """
 )
 ```
@@ -180,7 +181,7 @@ wb.download_file("*.out")
 Using the *{download_project_archive()}* function you can save your current Workbench project on the server, archive it, and then download the archived project to the client:
 
 ```{python}
-wb.download_project_archive(archive_name="my_project_archive")
+wb.download_project_archive( archive_name="my_project_archive")
 ```
 
 # Initiate additional PyAnsys services for systems within a Workbench project
@@ -196,7 +197,9 @@ from ansys.mechanical.core import connect_to_mechanical
 sys_name = wb.run_script_string(
     r"""import json
 wb_script_result =
-    json.dumps(GetTemplate(TemplateName="Static Structural (ANSYS)").CreateSystem().Name)
+    json.dumps(GetTemplate(
+    TemplateName="Static Structural (ANSYS)"
+    ).CreateSystem().Name)
 """
 )
 server_port = wb.start_mechanical_server(
@@ -216,7 +219,8 @@ import ansys.fluent.core as pyfluent
 sys_name = wb.run_script_string(
     r"""import json
 wb_script_result =
-    json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
+    json.dumps(GetTemplate(
+    TemplateName="FLUENT").CreateSystem().Name)
 """
 )
 server_info_file = wb.start_fluent_server(
@@ -237,7 +241,9 @@ from ansys.sherlock.core import launcher as pysherlock
 sys_name = wb.run_script_string(
     r"""import json
 wb_script_result =
-    json.dumps(GetTemplate(TemplateName="SherlockPre").CreateSystem().Name)
+    json.dumps(GetTemplate(
+    TemplateName="SherlockPre").CreateSystem().Name
+    )
 """
 )
 server_port = wb.start_sherlock_server(
