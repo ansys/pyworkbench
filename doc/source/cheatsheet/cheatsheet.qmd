@@ -19,7 +19,8 @@ footerlinks:
     text: Discussions
   - urls: 'https://github.com/ansys/pyworkbench/issues'
     text: 'Issues'
-# execute:
+execute:
+  eval: false
 #     output: false
 
 latex-clean: true

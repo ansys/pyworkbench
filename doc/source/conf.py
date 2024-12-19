@@ -61,6 +61,10 @@ html_theme_options = {
         "project": project,
     },
     "logo": "pyansys",
+    "cheatsheet": {
+        "file": "cheatsheet/cheatsheet.qmd",
+        "title": "PyWorkbench cheat sheet",
+    },
 }
 
 # Sphinx extensions
