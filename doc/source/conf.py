@@ -61,10 +61,6 @@ html_theme_options = {
         "project": project,
     },
     "logo": "pyansys",
-    "cheatsheet": {
-        "file": "cheatsheet/cheatsheet.qmd",
-        "title": "PyWorkbench cheat sheet",
-    },
 }
 
 # Sphinx extensions
@@ -134,6 +130,7 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 # variables are the title of pdf, watermark
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
+BUILD_CHEATSHEET = True if os.environ.get("BUILD_CHEATSHEET", "true") == "true" else False
 
 linkcheck_ignore = [
     "https://github.com/ansys/pyworkbench-examples",
@@ -152,6 +149,12 @@ if not BUILD_API:
 BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if not BUILD_EXAMPLES:
     exclude_patterns.extend(["examples.rst", "examples/**"])
+    
+if BUILD_CHEATSHEET:
+    html_theme_options["cheatsheet"] = {
+        "file": "cheatsheet/cheatsheet.qmd",
+        "title": "PyWorkbench cheat sheet",
+    }
 
 # -- Jinja context configuration ---------------------------------------------
 jinja_contexts = {
