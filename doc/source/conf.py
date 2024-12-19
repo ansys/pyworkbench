@@ -149,7 +149,7 @@ if not BUILD_API:
 BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
 if not BUILD_EXAMPLES:
     exclude_patterns.extend(["examples.rst", "examples/**"])
-    
+
 if BUILD_CHEATSHEET:
     html_theme_options["cheatsheet"] = {
         "file": "cheatsheet/cheatsheet.qmd",
