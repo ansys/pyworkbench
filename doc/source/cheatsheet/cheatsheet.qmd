@@ -131,7 +131,8 @@ Employ **upload_file()** and **download_file()** methods to transfer data files 
 
 Use `GetServerWorkingDirectory()` query in server-side scripts to obtain the server's operating directory.
 
-The script uploads all *.prt and *.agdb files in the working directory, along with a file from another directory, from client to server:
+
+This script uploads all *.prt and *.agdb files in the working directory, along with a file from another directory, from client to server:
 ```{python}
 wb.upload_file("model?.prt", "*.agdb", "/path/to/some/file")
 ```
@@ -183,6 +184,7 @@ wb.download_project_archive( archive_name="my_project_archive")
 ## PyMechanical
 
 In a Workbench project, you can operate and link the PyMechanical service from the same client machine.
+
 
 This script creates a mechanical system server-side, then starts the PyMechanical service and client:
 ```{python}
