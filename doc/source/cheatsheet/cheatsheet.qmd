@@ -39,30 +39,30 @@ jupyter:
 
 # Connect PyWorkbench to Ansys Workbench from Python
 
-## Local connection to a Workbench Server
+## Connect to a local Workbench server
 
-Execute the steps below to link PyWorkbench with a local session:
+Perform these steps to link PyWorkbench with a local session:
 
-- Initiate Ansys Workbench
-- Input StartServer() in the Workbench Command Window
-- Utilize the given port number to link PyWorkbench with the server
+- Initiate Ansys Workbench.
+- Enter the ``StartServer()`` method in the Workbench command window.
+- Use the given port number to link PyWorkbench with the server.
 
 ```{python}
 from ansys.workbench.core import launch_workbench
 wb = launch_workbench()
 ```
 
-## Remote connection to a Workbench Server
+## Connect to a remote Workbench server
 
-Execute the steps below to link PyWorkbench with a local session:
+Execute the steps below to link PyWorkbench with a remote session:
 ```{python}
 from ansys.workbench.core import connect_workbench
 workbench = connect_workbench(port=port)
 
 ```
-# Launch Workbench Server and Start a Client
+# Launch a Workbench server and start a client
 
-You can initiate a Workbench server and activate a client through a Python script on the client-side.
+You can launch a Workbench server and start a client through a Python script on the client side.
 
 This script initiates a server on a local Windows-based system:
 ```{python}
@@ -88,7 +88,7 @@ These methods can be utilized to execute IronPython-based Workbench scripts cont
 - `run_script_string()`: Executes a script included within a string
 - `run_script_file()`: Executes a script file in the client's working directory
 
-### Using `run_script_string()` method:
+### Use the `run_script_string()` method:
 ```{python}
 wbjn_template = """
 import os
@@ -104,13 +104,13 @@ Unarchive(ArchivePath=arg_ProjectArchive,
 wb.run_script_string(wbjn_template)
 ```
 
-### Using `run_script_file()` method:
+### Use the `run_script_file()` method:
 ```{python}
 wb.run_script_file("project_workflow.wbjn")
 ```
 
 ### Global variable:
-Assign necessary output from these methods to the global variable **wb_script_result** as a JSON string.
+Assign necessary output from these methods to the global variable ``wb_script_result`` as a JSON string.
 This script returns all message summaries from the Workbench session:
 
 ```{python}
@@ -119,7 +119,7 @@ messages = [m.Summary for m in GetMessages()]
 wb_script_result = json.dumps(messages)
 ```
 
-Below script while execution will display **info**, **warning**, and **error** levels in the logger.
+While executing, the following script displays ``info``, ``warning``, and ``error`` levels in the logger
 
 ```{python}
 wb.run_script_file("project_workflow.wbjn", log_level="info")
@@ -127,17 +127,16 @@ wb.run_script_file("project_workflow.wbjn", log_level="info")
 
 # Upload and download files
 
-Employ **upload_file()** and **download_file()** methods to transfer data files to and from the server.
+Use the ``upload_file()`` and ``download_file()`` methods to transfer data files to and from the server.
 
-Use `GetServerWorkingDirectory()` query in server-side scripts to obtain the server's operating directory.
+Use the ``GetServerWorkingDirectory()`` query in server side scripts to obtain the server's operating directory.
 
-
-This script uploads all *.prt and *.agdb files in the working directory, along with a file from another directory, from client to server:
+This script uploads all PRT and AGDB files in the working directory, from the client to the server:
 ```{python}
-wb.upload_file("model?.prt", "*.agdb", "/path/to/some/file")
+wb.upload_file("model?.prt", "*.agdb")
 ```
 
-This server-side script loads a geometry file into a new Workbench system from the server's directory:
+This server side script loads a geometry file into a new Workbench system from the server's directory:
 
 ```{python}
 wb.run_script_string(
@@ -152,7 +151,7 @@ system.GetContainer( ComponentName="Geometry").SetFile( FilePath=geometry_file)
 )
 ```
 
-This server-side script transfers a Mechanical solver output file to the server's directory from Workbench:
+This server side script transfers a Mechanical solver output file to the server's directory from Workbench:
 
 ```{python}
 wb.run_script_string(
@@ -173,7 +172,7 @@ This client script retrieves all .out files from the server's working directory:
 wb.download_file("*.out")
 ```
 
-With *{download_project_archive()}* function, save, archive, and download the current Workbench project from server to client:
+Use the ``{download_project_archive()}`` function to save, archive, and download the current Workbench project from the server to the client:
 
 ```{python}
 wb.download_project_archive( archive_name="my_project_archive")
@@ -181,12 +180,12 @@ wb.download_project_archive( archive_name="my_project_archive")
 
 # Initiate additional PyAnsys services for systems within a Workbench project
 
-## PyMechanical
+## Link PyMechanical and operate
 
 In a Workbench project, you can operate and link the PyMechanical service from the same client machine.
 
 
-This script creates a mechanical system server-side, then starts the PyMechanical service and client:
+This script creates a Mechanical system server side and then starts the PyMechanical service and client:
 ```{python}
 from ansys.mechanical.core import connect_to_mechanical
 
@@ -206,7 +205,7 @@ mechanical = connect_to_mechanical(
 )
 ```
 
-## PyFluent
+## Initiate the PyFluent service
 
 This script initiates the PyFluent service along with the client for a Fluent system that was developed in Workbench:
 ```{python}
@@ -227,7 +226,7 @@ fluent = pyfluent.connect_to_fluent(
 )
 ```
 
-## PySherlock
+## Initiate the PySherlock service
 
 This script initiates the PySherlock service and its client for a Sherlock system set up in Workbench:
 
