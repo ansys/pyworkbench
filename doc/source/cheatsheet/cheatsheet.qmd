@@ -109,7 +109,7 @@ wb.run_script_string(wbjn_template)
 wb.run_script_file("project_workflow.wbjn")
 ```
 
-### Global variable:
+### Assign output to global variable:
 Assign necessary output from these methods to the global variable ``wb_script_result`` as a JSON string.
 This script returns all message summaries from the Workbench session:
 
