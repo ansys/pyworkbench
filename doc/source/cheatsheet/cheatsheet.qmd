@@ -88,7 +88,7 @@ These methods can be utilized to execute IronPython-based Workbench scripts cont
 - `run_script_string()`: Executes a script included within a string
 - `run_script_file()`: Executes a script file in the client's working directory
 
-### Use the `run_script_string()` method:
+### Use the ``run_script_string()`` method:
 ```{python}
 wbjn_template = """
 import os
@@ -104,7 +104,7 @@ Unarchive(ArchivePath=arg_ProjectArchive,
 wb.run_script_string(wbjn_template)
 ```
 
-### Use the `run_script_file()` method:
+### Use the ``run_script_file()`` method:
 ```{python}
 wb.run_script_file("project_workflow.wbjn")
 ```
@@ -119,7 +119,7 @@ messages = [m.Summary for m in GetMessages()]
 wb_script_result = json.dumps(messages)
 ```
 
-While executing, the following script displays ``info``, ``warning``, and ``error`` levels in the logger
+While executing, the following script displays ``info``, ``warning``, and ``error`` levels in the logger.
 
 ```{python}
 wb.run_script_file("project_workflow.wbjn", log_level="info")
@@ -129,14 +129,14 @@ wb.run_script_file("project_workflow.wbjn", log_level="info")
 
 Use the ``upload_file()`` and ``download_file()`` methods to transfer data files to and from the server.
 
-Use the ``GetServerWorkingDirectory()`` query in server side scripts to obtain the server's operating directory.
+Use the ``GetServerWorkingDirectory()`` query in server-side scripts to obtain the server's operating directory.
 
-This script uploads all PRT and AGDB files in the working directory, from the client to the server:
+This script uploads all PRT and AGDB files in the working directory from the client to the server:
 ```{python}
 wb.upload_file("model?.prt", "*.agdb")
 ```
 
-This server side script loads a geometry file into a new Workbench system from the server's directory:
+This server-side script loads a geometry file into a new Workbench system from the server's directory:
 
 ```{python}
 wb.run_script_string(
@@ -151,7 +151,7 @@ system.GetContainer( ComponentName="Geometry").SetFile( FilePath=geometry_file)
 )
 ```
 
-This server side script transfers a Mechanical solver output file to the server's directory from Workbench:
+This server-side script transfers a Mechanical solver output file to the server's directory from Workbench:
 
 ```{python}
 wb.run_script_string(
