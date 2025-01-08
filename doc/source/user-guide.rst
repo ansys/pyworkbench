@@ -165,7 +165,9 @@ the project, and then download the project archive to the client:
 
 .. code-block:: python
 
-    wb.download_project_archive(archive_name="my_project_archive")
+    wb.download_project_archive(
+        archive_name="my_project_archive", include_solution_result_files=False
+    )
 
 All methods for uploading and downloading files display a progress bar by default. You can
 turn off the progress bar with an optional argument:
@@ -197,6 +199,13 @@ and establishes a PyMechanical client.
     server_port = wb.start_mechanical_server(system_name=sys_name)
     mechanical = connect_to_mechanical(ip="localhost", port=server_port)
 
+The PyMechanical service can be stopped for a given system:
+
+.. code-block:: python
+
+    wb.stop_mechanical_server(system_name=sys_name)
+
+
 PyFluent
 --------
 
@@ -214,6 +223,12 @@ This code starts the PyFluent service and client for a Fluent system created in 
     server_info_file = wb.start_fluent_server(system_name=sys_name)
     fluent = pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
 
+The PyFluent service can be stopped for a given system:
+
+.. code-block:: python
+
+    wb.stop_fluent_server(system_name=sys_name)
+
 PySherlock
 ----------
 
@@ -230,3 +245,10 @@ This code starts the PySherlock service and client for a Sherlock system created
     )
     server_port = wb.start_sherlock_server(system_name=sys_name)
     sherlock = pysherlock.connect_grpc_channel(port=server_port)
+
+The PySherlock service can be stopped for a given system:
+
+.. code-block:: python
+
+    wb.stop_sherlock_server(system_name=sys_name)
+
