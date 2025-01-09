@@ -1,9 +1,11 @@
 """Sphinx documentation configuration file."""
 
 from datetime import datetime
+import fnmatch
+import hashlib
 import os
 import pathlib
-import hashlib
+import zipfile
 
 from ansys_sphinx_theme import (
     ansys_favicon,
@@ -161,6 +163,7 @@ if BUILD_CHEATSHEET:
 
 # -- Jinja context configuration ---------------------------------------------
 
+
 def zip_directory(directory_path: pathlib.Path, zip_filename: pathlib.Path, ignore_patterns=None):
     """Compress a directory using ZIP.
 
@@ -183,7 +186,10 @@ def zip_directory(directory_path: pathlib.Path, zip_filename: pathlib.Path, igno
     with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
         for file_path in directory_path.rglob("*"):
             if file_path.is_file():
-                if any(fnmatch.fnmatch(file_path.relative_to(directory_path), pattern) for pattern in ignore_patterns):
+                if any(
+                    fnmatch.fnmatch(file_path.relative_to(directory_path), pattern)
+                    for pattern in ignore_patterns
+                ):
                     continue
 
                 relative_path = file_path.relative_to(directory_path)

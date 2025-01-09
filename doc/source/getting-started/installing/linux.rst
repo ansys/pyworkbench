@@ -40,7 +40,7 @@ Start by downloading PyWorkbench wheel or source artifacts for Linux:
 
             .. list-table::
                 :widths: auto
-        
+
                 * - **Artifact**
                   - `{{ source }} <../../../_static/artifacts/{{ source }}>`_
                 * - **Size**
@@ -62,14 +62,14 @@ Install Linux artifacts by using the `pip <https://pypi.org/project/pip/>`_ comm
             :sync: wheels
 
             .. code-block:: text
-            
+
                 python -m pip install {{ wheels }}
 
         .. tab-item:: **Source install**
             :sync: source
 
             .. code-block:: text
-            
+
                 python -m pip install {{ source }}
 
 Verify installation
@@ -80,7 +80,7 @@ Verify a successful installation of PyWorkbench by running:
 .. jinja::
 
     .. code-block:: python
-        
+
         from ansys.workbench.core import launch_workbench
 
 
