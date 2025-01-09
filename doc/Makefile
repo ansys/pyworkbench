@@ -6,6 +6,8 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
+STATICDIR	  = "$(SOURCEDIR)/_static"
+ARTIFACTSDIR  = "$(STATICDIR)/artifacts"
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -16,6 +18,7 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
+	python -m pip install build && python -m build .. -o $(ARTIFACTSDIR)
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # customized clean due to api examples

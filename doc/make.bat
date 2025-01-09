@@ -9,6 +9,8 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=_build
+set STATICDIR=%SOURCEDIR%\_static
+set ARTIFACTSDIR=%STATICDIR%\artifacts
 
 if "%1" == "" goto help
 if "%1" == "clean" goto clean
@@ -27,6 +29,7 @@ if errorlevel 9009 (
 	exit /b 1
 )
 
+python -m pip install build && python -m build .. -o %ARTIFACTSDIR%
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
