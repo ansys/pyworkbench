@@ -13,11 +13,13 @@ ARTIFACTSDIR  = "$(STATICDIR)/artifacts"
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+artifacts:
+	python -m pip install build && python -m build .. -o $(ARTIFACTSDIR)
+
+.PHONY: help Makefile artifacts
 
 # Catch-all target
 %: Makefile
-	python -m pip install build && python -m build .. -o $(ARTIFACTSDIR)
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # customized clean due to api examples
@@ -26,7 +28,7 @@ clean:
 	find . -type d -name "_autosummary" -exec rm -rf {} +
 
 # customized pdf due to svg issue
-pdf:
+pdf: artifacts
 	@$(SPHINXBUILD) -M latex "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	cd $(BUILDDIR)/latex && latexmk -r latexmkrc -pdf *.tex -interaction=nonstopmode || true
 	(test -f $(BUILDDIR)/latex/ansys-workbench-core.pdf && echo pdf exists) || exit 1
