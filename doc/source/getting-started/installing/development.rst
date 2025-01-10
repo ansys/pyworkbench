@@ -9,7 +9,7 @@ of technical expertise and familiarity with the project's codebase, rendering
 it most suitable for individuals actively engaged in its continuous development
 and maintenance.
 
-#. Cloning the repository:
+#. Clone the repository:
 
    .. code-block::
 

@@ -1,7 +1,7 @@
 Install PyWorkbench locally in Linux
 ####################################
 
-This guideline covers the local installation of PyWorkbench in Linux platforms.
+This page explains how to install PyWorkbench locally on a Linux platform.
 
 .. note::
 
@@ -11,7 +11,8 @@ This guideline covers the local installation of PyWorkbench in Linux platforms.
 Download artifacts
 ==================
 
-Start by downloading PyWorkbench wheel or source artifacts for Linux:
+Start by downloading PyWorkbench wheel or source artifacts for Linux. Wheel artifacts
+are the preferred option for installing PyWorkbench.
 
 .. jinja:: artifacts
 
@@ -21,7 +22,7 @@ Start by downloading PyWorkbench wheel or source artifacts for Linux:
         .. tab-item:: **Wheels download**
             :sync: wheels
 
-            Wheel artifacts are the preferred option for installing PyWorkbench:
+            Wheel artifacts for installing PyWorkbench:
 
             .. list-table::
                 :widths: auto
@@ -75,7 +76,7 @@ Install Linux artifacts by using the `pip <https://pypi.org/project/pip/>`_ comm
 Verify installation
 ===================
 
-Verify a successful installation of PyWorkbench by running:
+Verify a successful installation of PyWorkbench by running this code:
 
 .. jinja::
 

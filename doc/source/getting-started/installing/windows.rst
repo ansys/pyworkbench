@@ -1,17 +1,18 @@
 Install PyWorkbench locally in Windows
 ######################################
 
-This guideline covers the local installation of PyWorkbench in Windows platforms.
+This page explains how to install PyWorkbench locally on a Windows platform.
 
 .. note::
 
-    This guide assumes that you have a local installation of STK and a valid
+    The following instructions assume that you have a local installation of STK and a valid
     license in your machine.
 
 Download artifacts
 ==================
 
-Start by downloading PyWorkbench wheel or source artifacts for Windows:
+Start by downloading PyWorkbench wheel or source artifacts for Windows. Wheel artifacts
+are the preferred option for installing PyWorkbench.
 
 .. jinja:: artifacts
 
@@ -21,7 +22,7 @@ Start by downloading PyWorkbench wheel or source artifacts for Windows:
         .. tab-item:: **Wheels download**
             :sync: wheels
 
-            Wheel artifacts are the preferred option for installing PyWorkbench:
+            Wheel artifacts for installing PyWorkbench:
 
             .. list-table::
                 :widths: auto

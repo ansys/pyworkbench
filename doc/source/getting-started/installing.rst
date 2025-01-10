@@ -1,7 +1,7 @@
 Install PyWorkbench
 ###################
 
-PyWorkbench can be installed in different platforms. Select your platform for
+PyWorkbench can be installed on different platforms. Select your platform for
 instructions on how to install PyWorkbench.
 
 .. grid:: 3

@@ -165,16 +165,16 @@ if BUILD_CHEATSHEET:
 
 
 def zip_directory(directory_path: pathlib.Path, zip_filename: pathlib.Path, ignore_patterns=None):
-    """Compress a directory using ZIP.
+    """Compress a directory using the Zip app.
 
     Parameters
     ----------
     directory_path : ~pathlib.Path
         Directory to compress.
     zip_filename : ~pathlib.Path
-        Output file path.
+        Path and file name for creating the ZIP file.
     ignore_patterns : list
-        List of Unix-like pattern to ignore.
+        List of Unix-like patterns to ignore.
 
     """
     if ignore_patterns is None:
@@ -197,12 +197,12 @@ def zip_directory(directory_path: pathlib.Path, zip_filename: pathlib.Path, igno
 
 
 def get_sha256_from_file(filepath: pathlib.Path):
-    """Compute the SHA-256 for a file.
+    """Compute the SHA-256 hash for a file.
 
     Parameters
     ----------
     filepath : ~pathlib.Path
-        Desired file.
+        Path to the file.
 
     Returns
     -------
@@ -224,12 +224,12 @@ def get_file_size_in_mb(file_path):
     Parameters
     ----------
     file_path : str or Path
-        The path to the file whose size is to be computed.
+        Path to the file.
 
     Returns
     -------
     float
-        The size of the file in megabytes.
+        Size of the file in megabytes.
 
     Raises
     ------
