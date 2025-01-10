@@ -41,6 +41,7 @@ doc = [
     "sphinx-autodoc-typehints==2.5.0",
     "sphinx-copybutton==0.5.2",
     "jupyter==1.1.1",
+    "sphinx-jinja==2.0.2",
 ]
 vulnerabilities = [
     "bandit==1.8.0",

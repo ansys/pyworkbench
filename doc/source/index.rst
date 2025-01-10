@@ -60,3 +60,4 @@ with Workbench.
        examples
        {% endif %}
        changelog
+       artifacts

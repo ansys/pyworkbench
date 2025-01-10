@@ -9,11 +9,18 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=_build
+set STATICDIR=%SOURCEDIR%\_static
+set ARTIFACTSDIR=%STATICDIR%\artifacts
 
 if "%1" == "" goto help
+if "%1" == "help" goto skip_artifacts
 if "%1" == "clean" goto clean
 if "%1" == "pdf" goto pdf
 
+:artifacts
+python -m pip install build && python -m build .. -o %ARTIFACTSDIR%
+
+:build
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
 	echo.
@@ -26,23 +33,33 @@ if errorlevel 9009 (
 	echo.http://sphinx-doc.org/
 	exit /b 1
 )
-
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
 :pdf
+goto artifacts
+:pdf_build
 %SPHINXBUILD% -M latex %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 cd "%BUILDDIR%\latex"
 for %%f in (*.tex) do (
-pdflatex "%%f" --interaction=nonstopmode)
+	pdflatex "%%f" --interaction=nonstopmode
+)
+goto end
 
 :clean
-rmdir /s /q %BUILDDIR% > /NUL 2>&1
+goto artifacts
+:clean_build
+rmdir /s /q %BUILDDIR% >NUL 2>&1
 for /d /r %SOURCEDIR% %%d in (_autosummary) do @if exist "%%d" rmdir /s /q "%%d"
 goto end
 
 :help
 %SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+goto end
+
+:skip_artifacts
+%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+goto end
 
 :end
 popd
