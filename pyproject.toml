@@ -44,7 +44,7 @@ doc = [
     "sphinx-jinja==2.0.2",
 ]
 vulnerabilities = [
-    "bandit==1.8.0",
+    "bandit==1.8.2",
     "safety==3.2.14",
 ]
 tests = [
