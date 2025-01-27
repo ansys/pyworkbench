@@ -5,7 +5,7 @@ This page explains how to install PyWorkbench locally on a Windows platform.
 
 .. note::
 
-    The following instructions assume that you have a local installation of STK and a valid
+    The following instructions assume that you have a local installation of Ansys workbench and a valid
     license in your machine.
 
 Download artifacts
