@@ -1,7 +1,11 @@
 """Sphinx documentation configuration file."""
 
 from datetime import datetime
+import fnmatch
+import hashlib
 import os
+import pathlib
+import zipfile
 
 from ansys_sphinx_theme import (
     ansys_favicon,
@@ -29,6 +33,7 @@ switcher_version = get_version_match(__version__)
 # Select desired logo, theme, and declare the html title
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "PyWorkbench"
+html_static_path = ["_static"]
 
 # specify the location of your github repo
 html_context = {
@@ -157,6 +162,102 @@ if BUILD_CHEATSHEET:
     }
 
 # -- Jinja context configuration ---------------------------------------------
+
+
+def zip_directory(directory_path: pathlib.Path, zip_filename: pathlib.Path, ignore_patterns=None):
+    """Compress a directory using the Zip app.
+
+    Parameters
+    ----------
+    directory_path : ~pathlib.Path
+        Directory to compress.
+    zip_filename : ~pathlib.Path
+        Path and file name for creating the ZIP file.
+    ignore_patterns : list
+        List of Unix-like patterns to ignore.
+
+    """
+    if ignore_patterns is None:
+        ignore_patterns = []
+
+    if not zip_filename.suffix == ".zip":
+        zip_filename = zip_filename.with_suffix(".zip")
+
+    with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
+        for file_path in directory_path.rglob("*"):
+            if file_path.is_file():
+                if any(
+                    fnmatch.fnmatch(file_path.relative_to(directory_path), pattern)
+                    for pattern in ignore_patterns
+                ):
+                    continue
+
+                relative_path = file_path.relative_to(directory_path)
+                zipf.write(file_path, relative_path)
+
+
+def get_sha256_from_file(filepath: pathlib.Path):
+    """Compute the SHA-256 hash for a file.
+
+    Parameters
+    ----------
+    filepath : ~pathlib.Path
+        Path to the file.
+
+    Returns
+    -------
+    str
+        String representing the SHA-256 hash.
+
+    """
+    sha256_hash = hashlib.sha256()
+    with open(filepath, "rb") as file:
+        while chunk := file.read(8192):
+            sha256_hash.update(chunk)
+    return sha256_hash.hexdigest()
+
+
+def get_file_size_in_mb(file_path):
+    """
+    Compute the size of a file in megabytes.
+
+    Parameters
+    ----------
+    file_path : str or Path
+        Path to the file.
+
+    Returns
+    -------
+    float
+        Size of the file in megabytes.
+
+    Raises
+    ------
+    FileNotFoundError
+        If the file does not exist.
+    OSError
+        If an OS-related error occurs while accessing the file.
+
+    """
+    path = pathlib.Path(file_path)
+
+    if not path.is_file():
+        raise FileNotFoundError(f"The file at {file_path} does not exist.")
+
+    file_size_bytes = path.stat().st_size
+    return file_size_bytes / (1024 * 1024)
+
+
+STATIC_PATH = pathlib.Path(__file__).parent / "_static"
+ARTIFACTS_PATH = STATIC_PATH / "artifacts"
+ARTIFACTS_WHEEL = ARTIFACTS_PATH / f"{project.replace('-', '_')}-{version}-py3-none-any.whl"
+ARTIFACTS_SDIST = ARTIFACTS_PATH / f"{project.replace('-', '_')}-{version}.tar.gz"
+
+jinja_globals = {
+    "SUPPORTED_PYTHON_VERSIONS": ["3.11", "3.12", "3.13"],
+    "SUPPORTED_PLATFORMS": ["windows", "ubuntu"],
+}
+
 jinja_contexts = {
     "install_guide": {
         "version": f"v{version}" if not version.endswith("dev0") else "main",
@@ -164,5 +265,13 @@ jinja_contexts = {
     "main_toctree": {
         "build_api": BUILD_API,
         "build_examples": BUILD_EXAMPLES,
+    },
+    "artifacts": {
+        "wheels": ARTIFACTS_WHEEL.name,
+        "wheels_size": f"{get_file_size_in_mb(ARTIFACTS_WHEEL):.2f} MB",
+        "wheels_hash": get_sha256_from_file(ARTIFACTS_WHEEL),
+        "source": ARTIFACTS_SDIST.name,
+        "source_size": f"{get_file_size_in_mb(ARTIFACTS_SDIST):.2f} MB",
+        "source_hash": get_sha256_from_file(ARTIFACTS_SDIST),
     },
 }
