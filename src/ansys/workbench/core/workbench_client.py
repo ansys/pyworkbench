@@ -404,6 +404,8 @@ successful = False
 wd = GetServerWorkingDirectory()
 if os.path.basename(GetProjectFile()).StartsWith("wbnew."):
     Save(FilePath=os.path.join(wd, "{archive_name}.wbpj"), Overwrite=True)
+else:
+    Save(Overwrite=True)
 Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"),
     IncludeSkippedFiles={include_solution_result_files})
 successful = True
