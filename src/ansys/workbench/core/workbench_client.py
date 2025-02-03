@@ -29,6 +29,7 @@ import logging.handlers
 from logging.handlers import WatchedFileHandler
 import os
 import re
+import time
 
 import grpc
 import tqdm
@@ -384,6 +385,7 @@ class WorkbenchClient:
                             if try_more <= 0:
                                 raise
                             try_more -= 1
+                            time.sleep(0.1)
 
                     if pbar is not None:
                         pbar.update(size)
@@ -402,7 +404,7 @@ class WorkbenchClient:
         archive_name : str
             Name of the project archive to use, without the file extension.
         include_solution_result_files : bool, default: True
-            Whether to include solution/result files in the archive.
+            Whether to include solution and result files in the archive.
         show_progress : bool, default: True
             Whether to show a progress bar during the download.
         """
@@ -426,8 +428,8 @@ wb_script_result =json.dumps(successful)
         if not archive_created:
             logging.error(
                 (
-                    "failed to create the project archive. "
-                    "make sure that the solver PyAnsys sessions are closed."
+                    "Failed to create the project archive. "
+                    "Make sure that the solver PyAnsys sessions are closed."
                 )
             )
             return
@@ -520,7 +522,7 @@ wb_script_result =json.dumps(successful)
 
         Examples
         --------
-        Start a PyMechanical session for the given system name.
+        Start a PyMechanical session for the given system.
 
         >>> from ansys.mechanical.core import connect_to_mechanical
         >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
@@ -545,7 +547,7 @@ wb_script_result=json.dumps(server_port)
 
         Examples
         --------
-        Stop the PyMechanical session for the given system name.
+        Stop the PyMechanical session for the given system.
 
         >>> wb.stop_mechanical_server(system_name=mech_system_name)
 
@@ -568,7 +570,7 @@ wb_script_result=json.dumps(server_port)
 
         Examples
         --------
-        Start a PyFluent session for the given system name.
+        Start a PyFluent session for the given system.
 
         >>> import ansys.fluent.core as pyfluent
         >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
@@ -597,7 +599,7 @@ wb_script_result=json.dumps(server_info_file)
 
         Examples
         --------
-        Stop the Fluent session for the given system name.
+        Stop the Fluent session for the given system.
 
         >>> wb.stop_fluent_server(system_name=mech_system_name)
 
@@ -619,7 +621,7 @@ wb_script_result=json.dumps(server_info_file)
 
         Examples
         --------
-        Start a PySherlock session for the given system name.
+        Start a PySherlock session for the given system.
 
         >>> from ansys.sherlock.core import pysherlock
         >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
@@ -645,7 +647,7 @@ wb_script_result=json.dumps(server_port)
 
         Examples
         --------
-        Stop the Sherlock session for the given system name.
+        Stop the Sherlock session for the given system.
 
         >>> wb.stop_sherlock_server(system_name=mech_system_name)
 
