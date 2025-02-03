@@ -372,8 +372,19 @@ class WorkbenchClient:
                         if os.path.exists(file_path):
                             os.remove(file_path)
                         started = True
-                    with open(file_path, mode="ab") as f:
-                        f.write(response.file_content)
+
+                    try_more = 3
+                    while (try_more > 0):
+                        try:
+                            with open(file_path, mode="ab") as f:
+                                f.write(response.file_content)
+                            try_more = 0
+                        except PermissionError:
+                            # intermittent "Permission Denied" error can happen
+                            if (try_more <= 0):
+                                throw
+                            try_more -= 1
+
                     if pbar is not None:
                         pbar.update(size)
         logging.info(f"Dwnloaded the file {file_name}.")
