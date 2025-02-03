@@ -382,7 +382,7 @@ class WorkbenchClient:
                         except PermissionError:
                             # intermittent "Permission Denied" error can happen
                             if try_more <= 0:
-                                throw
+                                raise
                             try_more -= 1
 
                     if pbar is not None:
