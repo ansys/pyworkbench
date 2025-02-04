@@ -29,6 +29,7 @@ import logging.handlers
 from logging.handlers import WatchedFileHandler
 import os
 import re
+import time
 
 import grpc
 import tqdm
@@ -372,8 +373,20 @@ class WorkbenchClient:
                         if os.path.exists(file_path):
                             os.remove(file_path)
                         started = True
-                    with open(file_path, mode="ab") as f:
-                        f.write(response.file_content)
+
+                    try_more = 3
+                    while try_more > 0:
+                        try:
+                            with open(file_path, mode="ab") as f:
+                                f.write(response.file_content)
+                            try_more = 0
+                        except PermissionError:
+                            # intermittent "Permission Denied" error can happen
+                            if try_more <= 0:
+                                raise
+                            try_more -= 1
+                            time.sleep(0.1)
+
                     if pbar is not None:
                         pbar.update(size)
         logging.info(f"Dwnloaded the file {file_name}.")
@@ -381,13 +394,17 @@ class WorkbenchClient:
             pbar.close()
         return file_name
 
-    def download_project_archive(self, archive_name, show_progress=True):
+    def download_project_archive(
+        self, archive_name, include_solution_result_files=True, show_progress=True
+    ):
         """Create and download the project archive.
 
         Parameters
         ----------
         archive_name : str
             Name of the project archive to use, without the file extension.
+        include_solution_result_files : bool, default: True
+            Whether to include solution and result files in the archive.
         show_progress : bool, default: True
             Whether to show a progress bar during the download.
         """
@@ -395,12 +412,27 @@ class WorkbenchClient:
             logging.error("archive name should contain only alphanumeric characters")
             return
         script = f"""import os
+import json
+successful = False
 wd = GetServerWorkingDirectory()
 if os.path.basename(GetProjectFile()).StartsWith("wbnew."):
     Save(FilePath=os.path.join(wd, "{archive_name}.wbpj"), Overwrite=True)
-Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"))
+else:
+    Save(Overwrite=True)
+Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"),
+    IncludeSkippedFiles={include_solution_result_files})
+successful = True
+wb_script_result =json.dumps(successful)
 """
-        self.run_script_string(script)
+        archive_created = self.run_script_string(script)
+        if not archive_created:
+            logging.error(
+                (
+                    "Failed to create the project archive. "
+                    "Make sure that the solver PyAnsys sessions are closed."
+                )
+            )
+            return
         self.download_file(archive_name + ".wbpz", show_progress=show_progress)
 
     def __python_logging(self, log_level, msg):
@@ -490,7 +522,7 @@ Archive(FilePath=os.path.join(wd, "{archive_name}.wbpz"))
 
         Examples
         --------
-        Start a PyMechanical session for the given system name.
+        Start a PyMechanical session for the given system.
 
         >>> from ansys.mechanical.core import connect_to_mechanical
         >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
@@ -504,6 +536,23 @@ wb_script_result=json.dumps(server_port)
 """
         )
         return pymech_port
+
+    def stop_mechanical_server(self, system_name):
+        """Stop the PyMechanical server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            Name of the system in the Workbench project.
+
+        Examples
+        --------
+        Stop the PyMechanical session for the given system.
+
+        >>> wb.stop_mechanical_server(system_name=mech_system_name)
+
+        """
+        self.run_script_string(f"""StopMechanicalServerOnSystem(SystemName="{system_name}")""")
 
     def start_fluent_server(self, system_name):
         """Start the PyFluent server for the given system in the Workbench project.
@@ -521,7 +570,7 @@ wb_script_result=json.dumps(server_port)
 
         Examples
         --------
-        Start a PyFluent session for the given system name.
+        Start a PyFluent session for the given system.
 
         >>> import ansys.fluent.core as pyfluent
         >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
@@ -540,6 +589,23 @@ wb_script_result=json.dumps(server_info_file)
         self.download_file(server_info_file_name, show_progress=False)
         return local_copy
 
+    def stop_fluent_server(self, system_name):
+        """Stop the Fluent server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            Name of the system in the Workbench project.
+
+        Examples
+        --------
+        Stop the Fluent session for the given system.
+
+        >>> wb.stop_fluent_server(system_name=mech_system_name)
+
+        """
+        self.run_script_string(f"""StopFluentServerOnSystem(SystemName="{system_name}")""")
+
     def start_sherlock_server(self, system_name):
         """Start the PySherlock server for the given system in the Workbench project.
 
@@ -555,7 +621,7 @@ wb_script_result=json.dumps(server_info_file)
 
         Examples
         --------
-        Start a PySherlock session for the given system name.
+        Start a PySherlock session for the given system.
 
         >>> from ansys.sherlock.core import pysherlock
         >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
@@ -570,6 +636,23 @@ wb_script_result=json.dumps(server_port)
 """
         )
         return pysherlock_port
+
+    def stop_sherlock_server(self, system_name):
+        """Stop the Sherlock server for the given system in the Workbench project.
+
+        Parameters
+        ----------
+        system_name : str
+            Name of the system in the Workbench project.
+
+        Examples
+        --------
+        Stop the Sherlock session for the given system.
+
+        >>> wb.stop_sherlock_server(system_name=mech_system_name)
+
+        """
+        self.run_script_string(f"""StopSherlockServerOnSystem(SystemName="{system_name}")""")
 
 
 __all__ = ["WorkbenchClient"]
