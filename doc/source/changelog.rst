@@ -9,6 +9,63 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.8.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.8.0>`_ - 2025-02-14
+================================================================================
+
+Added
+^^^^^
+
+- feat: add cheatsheet `#169 <https://github.com/ansys/pyworkbench/pull/169>`_
+- PyWB Cheatsheet reviewed and corrected `#172 <https://github.com/ansys/pyworkbench/pull/172>`_
+
+
+Fixed
+^^^^^
+
+- fix: contributors file `#153 <https://github.com/ansys/pyworkbench/pull/153>`_
+- fix: use title case in CONTRIBUTORS.md `#161 <https://github.com/ansys/pyworkbench/pull/161>`_
+- FIX: Minor typo correction `#185 <https://github.com/ansys/pyworkbench/pull/185>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore: bump safety from 3.2.8 to 3.2.9 `#149 <https://github.com/ansys/pyworkbench/pull/149>`_
+- chore: bump safety from 3.2.9 to 3.2.10 `#150 <https://github.com/ansys/pyworkbench/pull/150>`_
+- chore: bump pytest-cov from 5.0.0 to 6.0.0 `#151 <https://github.com/ansys/pyworkbench/pull/151>`_
+- chore: bump ansys-sphinx-theme[autoapi] from 1.1.7 to 1.2.0 `#152 <https://github.com/ansys/pyworkbench/pull/152>`_
+- chore: bump safety from 3.2.10 to 3.2.11 `#154 <https://github.com/ansys/pyworkbench/pull/154>`_
+- chore: bump ansys-sphinx-theme[autoapi] from 1.2.0 to 1.2.1 `#155 <https://github.com/ansys/pyworkbench/pull/155>`_
+- chore: bump ansys-sphinx-theme[autoapi] from 1.2.1 to 1.2.2 `#157 <https://github.com/ansys/pyworkbench/pull/157>`_
+- chore: bump bandit from 1.7.10 to 1.8.0 `#160 <https://github.com/ansys/pyworkbench/pull/160>`_
+- chore: bump pytest from 8.3.3 to 8.3.4 `#162 <https://github.com/ansys/pyworkbench/pull/162>`_
+- chore: bump ansys-sphinx-theme[autoapi] from 1.2.2 to 1.2.3 `#164 <https://github.com/ansys/pyworkbench/pull/164>`_
+- chore: bump safety from 3.2.11 to 3.2.13 `#166 <https://github.com/ansys/pyworkbench/pull/166>`_
+- chore: bump ansys-sphinx-theme[autoapi] from 1.2.3 to 1.2.4 `#173 <https://github.com/ansys/pyworkbench/pull/173>`_
+- chore: bump safety from 3.2.13 to 3.2.14 `#174 <https://github.com/ansys/pyworkbench/pull/174>`_
+- chore: bump sphinx-autodoc-typehints from 2.5.0 to 3.0.0 `#177 <https://github.com/ansys/pyworkbench/pull/177>`_
+- chore: bump ansys-sphinx-theme[autoapi] from 1.2.4 to 1.2.6 `#180 <https://github.com/ansys/pyworkbench/pull/180>`_
+- chore: bump bandit from 1.8.0 to 1.8.2 `#181 <https://github.com/ansys/pyworkbench/pull/181>`_
+- chore: bump sphinx-autodoc-typehints from 3.0.0 to 3.0.1 `#183 <https://github.com/ansys/pyworkbench/pull/183>`_
+- chore: bump ansys-sphinx-theme[autoapi] from 1.2.6 to 1.2.7 `#186 <https://github.com/ansys/pyworkbench/pull/186>`_
+- chore: bump safety from 3.2.14 to 3.3.0 `#189 <https://github.com/ansys/pyworkbench/pull/189>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- close the current project on exit `#159 <https://github.com/ansys/pyworkbench/pull/159>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- chore: update CHANGELOG for v0.7.0 `#147 <https://github.com/ansys/pyworkbench/pull/147>`_
+- bump version to 0.8 `#148 <https://github.com/ansys/pyworkbench/pull/148>`_
+- DOC: Update docs with new pymechanical api `#165 <https://github.com/ansys/pyworkbench/pull/165>`_
+- Fli/improve archive download `#170 <https://github.com/ansys/pyworkbench/pull/170>`_
+- doc: include library artifacts `#179 <https://github.com/ansys/pyworkbench/pull/179>`_
+
 `0.7.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.7.0>`_ - 2024-10-23
 ================================================================================
 
