@@ -15,7 +15,7 @@ Contributing as a documentarian
         :link: write-examples
         :link-type: ref
 
-        Showcase the capabilities of PyWorkbench by adding a new example. 
+        Showcase the capabilities of PyWorkbench by adding a new example.
 
     .. grid-item-card:: :fa:`file-code` Build the documentation
         :padding: 2 2 2 2
@@ -32,7 +32,7 @@ Write documentation
 The documentation generator used in PyWorkbench is `Sphinx`_. Most of the documents
 are written in `reStructuredText`_. Some parts of the documentation, like the
 :ref:`examples <Examples>`, use mix of `markdown`_ and Python. If
-you are interested in writing examples, see the :ref:`writing examples <write-examples>` 
+you are interested in writing examples, see the :ref:`writing examples <write-examples>`
 section.
 
 The documentation is located in the ``doc/source`` directory. The landing page
@@ -44,7 +44,7 @@ files.
 The layout of the ``doc/source`` directory is reflected in the slug of the
 online documentation. For example, the
 ``doc/source/contribute/documentarian.rst`` renders as
-``https://workbench.docs.pyansys.com/contribute/documentarian``. 
+``https://workbench.docs.pyansys.com/contribute/documentarian``.
 
 Thus, if you create a new file, it important to follow these rules:
 
