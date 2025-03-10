@@ -7,3 +7,5 @@ Workbench
 PyMechanical
 PyFluent
 PySherlock
+Documentarian
+Tox
