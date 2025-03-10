@@ -165,7 +165,7 @@ Finally, verify the installation by listing all the different environments
 
 .. code-block:: text
 
-    python -m tox list
+    tox list
 
 .. _run-tests:
 
@@ -176,3 +176,7 @@ Once you have made your changes, you can run the tests to verify that your
 modifications did not break the project. pyworkbench tests support different markers
 to avoid running the whole suite of tests. These markers are associated to a
 dedicated `Tox`_ environment.
+
+.. code-block:: text
+
+    tox -e tests
