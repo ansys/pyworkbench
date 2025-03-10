@@ -1,7 +1,7 @@
 Contribute
 ##########
 
-Thank you for your interest in contributing to PyWorkbench! Contributions are
+Thank you for your interest in contributing to PyWorkbench. Contributions are
 welcome to make the project better, whether it's fixing bugs, adding new
 features, or improving documentation.
 
