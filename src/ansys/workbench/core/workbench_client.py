@@ -507,13 +507,15 @@ wb_script_result =json.dumps(successful)
         "fatal critical": (wb.LOG_FATAL, logging.CRITICAL),
     }
 
-    def start_mechanical_server(self, system_name):
+    def start_mechanical_server(self, system_name, port=0):
         """Start the PyMechanical server for the given system in the Workbench project.
 
         Parameters
         ----------
         system_name : str
             Name of the system in the Workbench project.
+        port : int, default: 0
+            the port to use for mechanical server if possible
 
         Returns
         -------
@@ -529,9 +531,15 @@ wb_script_result =json.dumps(successful)
         >>> mechanical = connect_to_mechanical(port=server_port)
 
         """
+        port_arg = ""
+        if port > 0:
+            port_arg = ", Port=" + str(port)
         pymech_port = self.run_script_string(
             f"""import json
-server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}")
+if float(GetFrameworkVersion()) >= 25.2:
+    server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}${port_arg}")
+else:
+    server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}")
 wb_script_result=json.dumps(server_port)
 """
         )
