@@ -1,5 +1,5 @@
-Contributing as a user
-######################
+Contribute as a user
+####################
 
 Users can contribute in a variety of ways, such as reporting bugs, requesting
 new features, testing in-development features, starting discussions, answering
@@ -38,7 +38,7 @@ questions, and sharing their work with the community.
         :link: start-a-discussion
         :link-type: ref
 
-        Want to discuss something? Start a discussion here.
+        Want to discuss something? Start or contribute to a discussion.
 
     .. grid-item-card:: :fa:`comment-dots` Answer questions
         :padding: 2 2 2 2
@@ -59,14 +59,14 @@ questions, and sharing their work with the community.
 Report bugs
 ===========
 
-If you encounter a bug or an issue while using the project, please report it.
-Your feedback helps to identify problems.
+If you encounter a bug or an issue while using the project, report it.
+Your feedback helps to identify problems and get them resolved.
 
 - Search the `PyWorkbench issues`_ to see if the issue has already been reported.
 
-- Create a new issue if it hasn’t been reported.
+- Create an issue if one doesn't already exist.
 
-  - Include a clear description of the problem.
+  - Include a clear description of the issue.
   - Provide steps to reproduce the issue.
   - Mention the version of the project you're using.
   - Include screenshots or logs if possible.
@@ -77,8 +77,8 @@ Request a new feature
 =====================
 
 Do you have an idea for a new feature or an improvement? Your suggestions are
-welcome. You can request a new feature by creating an issue in the `PyWorkbench issues`_
-board.
+welcome. You can request a new feature by creating an issue on the `PyWorkbench issues`_
+page.
 
 .. _test-a-new-feature:
 
@@ -96,7 +96,7 @@ Start a discussion
 Complex topics may require a discussion. Whether you want to know how to use
 PyWorkbench for solving your specific problem or you have a suggestion for a new
 feature, a discussion is a good place to start. You can open a new discussion
-in the `PyWorkbench discussions`_ section.
+on the `PyWorkbench Discussions`_ page.
 
 .. _answer-questions:
 

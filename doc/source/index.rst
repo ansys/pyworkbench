@@ -52,7 +52,7 @@ with Workbench.
             :link-type: doc
 
             Download different assets related to PyWorkbench, such as
-            documentation, package wheelhouse, and related files.
+            documentation, the package wheelhouse, and related files.
 
 .. jinja:: main_toctree
 

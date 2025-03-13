@@ -8,14 +8,14 @@ Contributing as a documentarian
         :link: write-documentation
         :link-type: ref
 
-        Explain how to get started, use, and contribute to the project.
+        Learn how to get started, use, and contribute to the project.
 
     .. grid-item-card:: :fa:`laptop-code` Add a new example
         :padding: 2 2 2 2
         :link: write-examples
         :link-type: ref
 
-        Showcase the capabilities of PyWorkbench by adding a new example.
+        Write a new example to showcase the capabilities of PyWorkbench.
 
     .. grid-item-card:: :fa:`file-code` Build the documentation
         :padding: 2 2 2 2
@@ -29,33 +29,32 @@ Contributing as a documentarian
 Write documentation
 ===================
 
-The documentation generator used in PyWorkbench is `Sphinx`_. Most of the documents
-are written in `reStructuredText`_. Some parts of the documentation, like the
-:ref:`examples <Examples>`, use mix of `markdown`_ and Python. If
-you are interested in writing examples, see the :ref:`writing examples <write-examples>`
-section.
+`Sphinx`_ is the tool used to generate PyWorkbench documentation. You write most of the content
+in `ReStructuredText`_ files. However, some of the content, like the
+:ref:`examples <Examples>`, use a mix of `Markdown`_ and Python. If
+you are interested in writing examples, see :ref:`writing examples <write-examples>`.
 
 The documentation is located in the ``doc/source`` directory. The landing page
-is declared in the ``doc/source/index.rst`` file. The rest of the files contain
-the main pages of different sections of the documentation. Finally, the
+is declared in the ``doc/source/index.rst`` file. The subdirectories contain
+the pages of different documentation sections. Finally, the
 ``doc/source/_static/`` folder contains various assets like images, and CSS
 files.
 
-The layout of the ``doc/source`` directory is reflected in the slug of the
-online documentation. For example, the
-``doc/source/contribute/documentarian.rst`` renders as
-``https://workbench.docs.pyansys.com/contribute/documentarian``.
+The layout of the ``doc/source`` directory is reflected in the URLs of the
+online documentation pages. For example, the
+``doc/source/contribute/documentarian.rst``file renders as
+``https://workbench.docs.pyansys.com/contribute/documentarian`` URL.
 
-Thus, if you create a new file, it important to follow these rules:
+Thus, if you create a file, it important to follow these rules:
 
-- Use lowercase letters for file and directory names
-- Use short and descriptive names
-- Use hyphens to separate words
-- Play smart with the hierarchy of the files and directories
+- Use lowercase letters for file and directory names.
+- Use short and descriptive names.
+- Use hyphens to separate words.
+- Play smart with the hierarchy of the files and directories.
 
-All files need to be included in a table of contents. No dangling files are
+You must include all files in a table of contents. No orphan files are
 permitted. If a file is not included in the table of contents, Sphinx raises a
-warning that makes the build to fail.
+warning that causes the build to fail.
 
 A table of contents can be declared using a directive like this:
 
@@ -80,14 +79,14 @@ Write a new example
 
 The :ref:`examples <Examples>` section of the documentation showcases different
 capabilities of PyWorkbench. Each example is a standalone Python script. Despite
-being ``*.py`` files, they are written in a mix of `markdown`_ and Python. This
+being PY files, they are written in a mix of `Markdown`_ and Python. This
 is possible thanks to the `myst-parser`_ Sphinx extension. In addition, these
 Python files can be opened as Jupyter Notebooks thanks to the `jupytext`_
 extension.
 
 Documentarians writing new examples are encouraged to open a new Jupyter Lab
 session and write the example as a Jupyter Notebook. This way, the
-documentarian can test the code and see the output in real-time. The created
+documentarian can test the code and see the output in real time. The created
 Jupyter Notebook gets stored as a Python file automatically.
 
 Note that the examples are contained in its own repository, which you can find
@@ -107,8 +106,8 @@ Finally, here are some tips for writing examples:
   description of what the example aims to determine. Write this section in an
   imperative form.
 
-- Include an explanation with each code cell. In a Jupyter notebook, this
-  entails adding a markdown cell before each code cell. The explanations should
+- Include an explanation with each code cell. In a Jupyter Notebook, this
+  entails adding a Markdown cell before each code cell. The explanations should
   be included before, not after, the corresponding code.
 
 .. _build-documentation:
@@ -117,9 +116,8 @@ Build the documentation
 =======================
 
 `Tox`_ is used for automating the build of the documentation. There are
-different environments for cleaning the build, and building the documentation
-in different formats such as HTML. , and running the tests. The following
-environments are available:
+different environments for cleaning the build, building the documentation
+in different formats such as HTML, and running the tests.
 
 The following environments are available:
 

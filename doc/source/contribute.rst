@@ -1,14 +1,14 @@
 Contribute
 ##########
 
-Thank you for your interest in contributing to PyWorkbench. Contributions are
-welcome to make the project better, whether it's fixing bugs, adding new
-features, or improving documentation.
+Thank you for your interest in contributing to PyWorkbench. Contributions for
+making the project better can include fixing bugs, adding new features, and
+improving the documentation.
 
 .. important::
 
     This project adheres to the `Contributor Covenant Code of Conduct`_. By
-    participating, you agree to uphold this code.
+    participating, you agree to uphold this code of conduct.
 
 Start by selecting your role in the project:
 
@@ -19,14 +19,14 @@ Start by selecting your role in the project:
         :link-type: doc
         :padding: 2 2 2 2
 
-        Report bugs, suggesting features, and ask questions.
+        Report bugs, suggest features, and ask questions.
 
     .. grid-item-card:: :fa:`book` Documentarian
         :link: contribute/documentarian
         :link-type: doc
         :padding: 2 2 2 2
 
-        Improve the documentation and write new guides.
+        Improve the documentation and write new content.
 
     .. grid-item-card:: :fa:`laptop-code` Developer
         :link: contribute/developer
