@@ -515,7 +515,7 @@ wb_script_result =json.dumps(successful)
         system_name : str
             Name of the system in the Workbench project.
         port : int, default: 0
-            the port to use for mechanical server if possible
+            Port to use for mechanical server if possible
 
         Returns
         -------
