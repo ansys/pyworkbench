@@ -20,23 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module for starting PyWorkbench."""
+"""Module for public API on PyWorkbench."""
 
 import logging
-import os
-import platform
 import tempfile
-import time
-import uuid
-
-try:
-    if platform.system() == "Windows":
-        import wmi
-except ImportError:
-    # Handle the case when 'wmi' cannot be imported
-    wmi = None
-
 from ansys.workbench.core.workbench_client import WorkbenchClient
+from ansys.workbench.core.workbench_launcher import Launcher
 
 
 class ClientWrapper(WorkbenchClient):
@@ -115,151 +104,24 @@ class LaunchWorkbench(ClientWrapper):
         username=None,
         password=None,
     ):
-        self._wmi_connection = None
-        self._process_id = -1
-
         if not version:
-            version = "242"
-        if (
-            len(version) != 3
-            or not version.isdigit()
-            or version[0] not in ["2", "3"]
-            or version[2] not in ["1", "2"]
-        ):
-            raise Exception("Invalid ANSYS version: " + version)
-        port = self.__launch_server(show_gui, host, version, server_workdir, username, password)
+            version = "251"
+
+        self._launcher = Launcher()
+        port = self._launcher.launch(version, show_gui, server_workdir, host, username, password)
         if port is None or port <= 0:
             raise Exception("Filed to launch Ansys Workbench service.")
         super().__init__(port, client_workdir, host)
 
-    def __launch_server(self, show_gui, host, version, server_workdir, username, password):
-        """Launch a Workbench server on the local or a remote Windows machine."""
-        try:
-            if host is None:
-                self._wmi_connection = wmi.WMI()
-            else:
-                if username is None or password is None:
-                    raise Exception(
-                        "Username and passwork must be specified "
-                        "to launch Workbench on a remote machine."
-                    )
-                self._wmi_connection = wmi.WMI(host, user=username, password=password)
-            logging.info("Host connection is established.")
-
-            install_path = None
-            for ev in self._wmi_connection.Win32_Environment():
-                if ev.Name == "AWP_ROOT" + version:
-                    install_path = ev.VariableValue
-                    break
-            if install_path is None:
-                install_path = "C:/Program Files/Ansys Inc/v" + version
-                logging.warning(
-                    "Ansys installation is not found. Assume the default location: " + install_path
-                )
-            else:
-                logging.info("Ansys installation is found at: " + install_path)
-            executable = os.path.join(install_path, "Framework", "bin", "Win64", "RunWB2.exe")
-            prefix = uuid.uuid4().hex
-            workdir_arg = ""
-            if server_workdir is not None:
-                # use forward slash only to avoid escaping as command line argument
-                server_workdir = server_workdir.replace("\\", "/")
-                workdir_arg = ",WorkingDirectory='" + server_workdir + "'"
-            ui_or_not = " -I" if show_gui else " --start-and-wait -nowindow"
-            command = (
-                executable
-                + ui_or_not
-                + " -E \"StartServer(EnvironmentPrefix='"
-                + prefix
-                + "'"
-                + workdir_arg
-                + ')"'
-            )
-
-            process_startup_info = self._wmi_connection.Win32_ProcessStartup.new(ShowWindow=1)
-            process_id, result = self._wmi_connection.Win32_Process.Create(
-                CommandLine=command, ProcessStartupInformation=process_startup_info
-            )
-
-            if result == 0:
-                logging.info("Workbench launched on the host with process id: " + str(process_id))
-                self._process_id = process_id
-            else:
-                logging.error("Workbench failed to launch on the host.")
-                return 0
-
-            # retrieve server port once WB is fully up running
-            port = None
-            timeout = 60 * 8  # set 8 minutes as upper limit for WB startup
-            start_time = time.time()
-            while True:
-                for ev in self._wmi_connection.Win32_Environment():
-                    if ev.Name == "ANSYS_FRAMEWORK_SERVER_PORT":
-                        port = ev.VariableValue
-                        if port.startswith(prefix):
-                            port = port[len(prefix) :]
-                            break
-                        else:
-                            port = None
-                        break
-                if port is not None:
-                    break
-                if time.time() - start_time > timeout:
-                    logging.error("Failed to start Workbench service within reasonable timeout.")
-                    break
-                time.sleep(10)
-            if port is None:
-                logging.error("Failed to retrieve the port used by Workbench service.")
-            else:
-                logging.info("Workbench service uses port " + port)
-
-            return int(port)
-
-        except wmi.x_wmi:
-            logging.error("wrong credential")
-
     def exit(self):
         """Terminate the Workbench server and disconnect the client."""
         self.run_script_string("Reset()")
+        self.run_script_string("internal_wbexit()")
 
         super().exit()
 
-        if self._wmi_connection is None:
-            return
-
-        # collect parent-children mapping
-        children = {self._process_id: []}
-        process_by_id = {}
-        for p in self._wmi_connection.Win32_Process():
-            process_by_id[p.ProcessId] = p
-            children.setdefault(p.ProcessId, [])
-            if p.ParentProcessId is None:
-                continue
-            children.setdefault(p.ParentProcessId, [])
-            children[p.ParentProcessId].append(p.ProcessId)
-
-        # terminate related processes bottom-up
-        to_terminate = []
-        this_level = set([self._process_id])
-        while True:
-            next_level = set()
-            for p in this_level:
-                next_level.update(children[p])
-            if len(next_level) == 0:
-                break
-            to_terminate.append(next_level)
-            this_level = next_level
-        for ps in reversed(to_terminate):
-            for p in ps:
-                logging.info("Shutting down " + process_by_id[p].Name + " ...")
-                try:
-                    process_by_id[p].Terminate()
-                except Exception:
-                    pass
-
+        self._launcher.exit()
         logging.info("Workbench server connection has ended.")
-        self._wmi_connection = None
-        self._process_id = -1
 
 
 def launch_workbench(
