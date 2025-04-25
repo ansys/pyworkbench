@@ -22,16 +22,18 @@
 
 """Module for launching PyWorkbench."""
 
+import ctypes
 import logging
 import os
 import platform
 import time
 import uuid
-import ctypes
 
-class Launcher():
+
+class Launcher:
     """Launch a Workbench server on a local or remote machine.
        Remote Linux launching is not supported.
+
     Raises
     ------
     Exception
@@ -43,6 +45,7 @@ class Launcher():
             self._wmi = None
             if platform.system() == "Windows":
                 import wmi
+
                 self._wmi = wmi
         except ImportError:
             # 'wmi' cannot be imported
@@ -61,7 +64,6 @@ class Launcher():
         self._wmi_connection = None
         self._process_id = -1
         self._port = None
-
 
     def launch(
         self,
@@ -101,7 +103,9 @@ class Launcher():
             If the host is given but username or password is missing.
         """
 
-        if (not version or len(version) != 3
+        if (
+            not version
+            or len(version) != 3
             or not version.isdigit()
             or version[0] not in ["2", "3"]
             or version[2] not in ["1", "2"]
@@ -109,9 +113,7 @@ class Launcher():
             raise Exception("Invalid ANSYS version: " + version)
 
         if host and not self._wmi:
-            raise Exception(
-                "Launching PyWorkbench on a remote machine from Linux is not supported"
-            )
+            raise Exception("Launching PyWorkbench on a remote machine from Linux is not supported")
 
         if host and (not username or not password):
             raise Exception(
@@ -163,7 +165,7 @@ class Launcher():
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
             cmd += ",WorkingDirectory='" + server_workdir + "'"
-        cmd += ")\""
+        cmd += ')"'
         args.append(cmd)
         command_line = " ".join(args)
 
@@ -202,7 +204,7 @@ class Launcher():
                 port = port[len(prefix) :]
                 break
             else:
-               port = None
+                port = None
             if time.time() - start_time > timeout:
                 logging.error("Failed to start Workbench service within reasonable timeout.")
                 break
@@ -229,7 +231,6 @@ class Launcher():
 
     def exit(self):
         """Terminate the launched Workbench server."""
-
         if self._process:
             try:
                 if self._wmi:
