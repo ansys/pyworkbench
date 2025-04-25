@@ -26,6 +26,7 @@ import ctypes
 import logging
 import os
 import platform
+import subprocess
 import time
 import uuid
 
@@ -54,11 +55,12 @@ class Launcher:
         if not self._wmi:
             try:
                 self._libc = ctypes.CDLL("libc.so.6")
-            except:
+            except Exception:
                 self._libc = None
             if not self._libc:
                 raise Exception(
-                    "Required Python module does not exist or not working properly: either WMI or ctypes.CDLL"
+                    "Required Python module does not exist or not working properly:"
+                    " either WMI or ctypes.CDLL"
                 )
 
         self._wmi_connection = None
@@ -159,7 +161,6 @@ class Launcher:
         prefix = uuid.uuid4().hex
         cmd = "\"StartServer(EnvironmentPrefix='"
         cmd += prefix + "'"
-        workdir_arg = ""
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
@@ -236,7 +237,7 @@ class Launcher:
                     self._process.Terminate()
                 else:
                     self._process.terminate()
-            except:
+            except Exception:
                 pass
 
         """
