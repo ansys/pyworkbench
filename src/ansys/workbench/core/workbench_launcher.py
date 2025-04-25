@@ -102,7 +102,6 @@ class Launcher:
             If wmi service is not available for remote launching
             If the host is given but username or password is missing.
         """
-
         if (
             not version
             or len(version) != 3
