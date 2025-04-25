@@ -32,7 +32,9 @@ import uuid
 
 
 class Launcher:
-    """Launch a Workbench server on a local or remote machine. Note that launching it on a remote Linux machine is not supported.
+    """Launch a Workbench server on a local or remote machine.
+
+    Note that launching it on a remote Linux machine is not supported.
 
     Raises
     ------
