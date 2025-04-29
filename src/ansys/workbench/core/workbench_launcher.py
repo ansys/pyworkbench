@@ -43,25 +43,22 @@ class Launcher:
     """
 
     def __init__(self):
-        try:
-            self._wmi = None
-            if platform.system() == "Windows":
-                import wmi
+        self._wmi = None
+        self._libc = None
+        if platform.system() == "Windows":
+            import wmi
 
-                self._wmi = wmi
-        except ImportError:
-            # 'wmi' cannot be imported
-            self._wmi = None
-
-        if not self._wmi:
+            self._wmi = wmi
+            if not self._wmi:
+                raise Exception("Required Python module WMI does not exist or not loading properly")
+        else:
             try:
                 self._libc = ctypes.CDLL("libc.so.6")
             except Exception:
                 self._libc = None
             if not self._libc:
                 raise Exception(
-                    "Required Python module does not exist or not working properly:"
-                    " either WMI or ctypes.CDLL"
+                    "Required Python module ctypes does not exist or not loading libc.so.6 properly"
                 )
 
         self._wmi_connection = None
