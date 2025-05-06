@@ -157,17 +157,18 @@ class Launcher:
             args.append("-nowindow")
         args.append("-E")
         prefix = uuid.uuid4().hex
-        cmd = "\"StartServer(EnvironmentPrefix='"
+        cmd = "StartServer(EnvironmentPrefix='"
         cmd += prefix + "'"
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
             cmd += ",WorkingDirectory='" + server_workdir + "'"
-        cmd += ')"'
+        cmd += ')'
         args.append(cmd)
         command_line = " ".join(args)
 
         successful = False
+        process = None
         if self._wmi:
             process_startup_info = self._wmi_connection.Win32_ProcessStartup.new(ShowWindow=1)
             process_id, result = self._wmi_connection.Win32_Process.Create(
@@ -181,7 +182,7 @@ class Launcher:
                         self._process = p
                         break
         else:
-            process = subprocess.Popen(args)
+            process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
             if process:
                 successful = True
                 self._process_id = process.pid
@@ -197,7 +198,14 @@ class Launcher:
         timeout = 60 * 8  # set 8 minutes as upper limit for WB startup
         start_time = time.time()
         while True:
-            port = self.__getenv("ANSYS_FRAMEWORK_SERVER_PORT")
+            if self._wmi:
+                port = self.__getenv("ANSYS_FRAMEWORK_SERVER_PORT")
+            else:
+                for line in process.stdout:
+                    line = line.rstrip()
+                    if line.startswith("ANSYS_FRAMEWORK_SERVER_PORT="):
+                        port = line[28:]
+                        break
             if port and port.startswith(prefix):
                 port = port[len(prefix) :]
                 break
@@ -222,7 +230,9 @@ class Launcher:
         elif self._libc:
             getenv = self._libc.getenv
             getenv.restype = ctypes.c_char_p
-            value = getenv(key)
+            value = getenv(key.encode('utf-8'))
+            if value:
+                value = value.decode('utf-8')
         else:
             raise Exception("unexpected code path")
         return value
