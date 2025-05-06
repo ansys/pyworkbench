@@ -163,7 +163,7 @@ class Launcher:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
             cmd += ",WorkingDirectory='" + server_workdir + "'"
-        cmd += ')'
+        cmd += ")"
         args.append(cmd)
         command_line = " ".join(args)
 
@@ -182,7 +182,9 @@ class Launcher:
                         self._process = p
                         break
         else:
-            process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+            process = subprocess.Popen(
+                args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
+            )
             if process:
                 successful = True
                 self._process_id = process.pid
@@ -230,9 +232,9 @@ class Launcher:
         elif self._libc:
             getenv = self._libc.getenv
             getenv.restype = ctypes.c_char_p
-            value = getenv(key.encode('utf-8'))
+            value = getenv(key.encode("utf-8"))
             if value:
-                value = value.decode('utf-8')
+                value = value.decode("utf-8")
         else:
             raise Exception("unexpected code path")
         return value
