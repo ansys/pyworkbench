@@ -58,7 +58,7 @@ class ClientWrapper(WorkbenchClient):
 
 
 class LaunchWorkbench(ClientWrapper):
-    """Launch a Workbench server on a local or remote Windows machine.
+    """Launch a Workbench server on a local machine or a remote Windows machine.
 
     Parameters
     ----------
@@ -134,10 +134,10 @@ def launch_workbench(
     username=None,
     password=None,
 ):
-    """Launch PyWorkbench server on the local or a remote Windows machine.
+    """Launch PyWorkbench server on the local machine or a remote Windows machine.
 
-    This method launch a Workbench server on the local or a remote Windows machine and creates
-    a PyWorkbench client that connects to the server.
+    This method launch a Workbench server on the local machine or a remote Windows machine
+    and creates a PyWorkbench client that connects to the server.
 
     Parameters
     ----------
