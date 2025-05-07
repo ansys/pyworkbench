@@ -48,8 +48,8 @@ Perform these steps to link PyWorkbench with a local session:
 - Use the given port number to link PyWorkbench with the server.
 
 ```{python}
-from ansys.workbench.core import launch_workbench
-wb = launch_workbench()
+from ansys.workbench.core import connect_workbench
+workbench = connect_workbench(port=port)
 ```
 
 ## Connect to a remote Workbench server
@@ -57,18 +57,19 @@ wb = launch_workbench()
 Execute the steps below to link PyWorkbench with a remote session:
 ```{python}
 from ansys.workbench.core import connect_workbench
-workbench = connect_workbench(port=port)
+host = "server_machine_name_or_IP"
+port = server_port_number
+workbench = connect_workbench(host=host, port=port)
 
 ```
 # Launch a Workbench server and start a client
 
 You can launch a Workbench server and start a client through a Python script on the client side.
 
-This script initiates a server on a local Windows-based system:
+This script initiates a server on a local system:
 ```{python}
-host = "server_machine_name_or_IP"
-port = server_port_number
-workbench = connect_workbench(host=host, port=port)
+from ansys.workbench.core import launch_workbench
+workbench = launch_workbench()
 ```
 
 This script initiates a server on a remote Windows device using appropriate user authentication:
@@ -76,7 +77,7 @@ This script initiates a server on a remote Windows device using appropriate user
 host = "server_machine_name_or_ip"
 username = "your_username_on_server_machine"
 password = "your_password_on_server_machine"
-wb = launch_workbench(
+workbench = launch_workbench(
     host=host, username=username, password=password
 )
 ```
@@ -96,17 +97,18 @@ import json
 import string
 import os.path
 work_dir = GetServerWorkingDirectory()
-arg_ProjectArchive = os.path.join(work_dir, "MatDesigner.wbpz")
-Unarchive(ArchivePath=arg_ProjectArchive,
-    ProjectPath=GetAbsoluteUserPathName(work_dir + "wbpj\\MatDesigner.wbpj"),
+projectArchiveToLoad = os.path.join(work_dir, "MatDesigner.wbpz")
+projectSaveLocation = os.path.join(work_dir, "MatDesigner.wbpj")
+Unarchive(ArchivePath=projectArchiveToLoad,
+    ProjectPath=projectSaveLocation,
     Overwrite=True)
-    """
-wb.run_script_string(wbjn_template)
+"""
+workbench.run_script_string(wbjn_template)
 ```
 
 ### Use the ``run_script_file()`` method:
 ```{python}
-wb.run_script_file("project_workflow.wbjn")
+workbench.run_script_file("project_workflow.wbjn")
 ```
 
 ### Assign output to global variable:
@@ -122,7 +124,7 @@ wb_script_result = json.dumps(messages)
 While executing, the following script displays ``info``, ``warning``, and ``error`` levels in the logger.
 
 ```{python}
-wb.run_script_file("project_workflow.wbjn", log_level="info")
+workbench.run_script_file("project_workflow.wbjn", log_level="info")
 ```
 
 # Upload and download files
@@ -131,22 +133,21 @@ Use the ``upload_file()`` and ``download_file()`` methods to transfer data files
 
 Use the ``GetServerWorkingDirectory()`` query in server-side scripts to obtain the server's operating directory.
 
-This script uploads all PRT and AGDB files in the working directory from the client to the server:
+This script uploads all PRT and AGDB files matching the wildcard patterns in the working directory from the client to the server:
 ```{python}
-wb.upload_file("model?.prt", "*.agdb")
+workbench.upload_file("model?.prt", "*.agdb")
 ```
 
 This server-side script loads a geometry file into a new Workbench system from the server's directory:
 
 ```{python}
-wb.run_script_string(
+workbench.run_script_string(
     r"""import os
 work_dir = GetServerWorkingDirectory()
 geometry_file = os.path.join(work_dir, "my_geometry.agdb")
 template = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")
-system = CreateSystemFromTemplate(Template=template,
-Name="Static Structural (ANSYS)")
-system.GetContainer( ComponentName="Geometry").SetFile( FilePath=geometry_file)
+system = template.CreateSystem()
+system.GetContainer(ComponentName="Geometry").SetFile(FilePath=geometry_file)
 """
 )
 ```
@@ -154,7 +155,7 @@ system.GetContainer( ComponentName="Geometry").SetFile( FilePath=geometry_file)
 This server-side script transfers a Mechanical solver output file to the server's directory from Workbench:
 
 ```{python}
-wb.run_script_string(
+workbench.run_script_string(
     r"""import os
 import shutil
 work_dir = GetServerWorkingDirectory()
@@ -169,13 +170,13 @@ shutil.copyfile(out_file_src, out_file_des)
 This client script retrieves all .out files from the server's working directory:
 
 ```{python}
-wb.download_file("*.out")
+workbench.download_file("*.out")
 ```
 
 Use the ``{download_project_archive()}`` function to save, archive, and download the current Workbench project from the server to the client:
 
 ```{python}
-wb.download_project_archive( archive_name="my_project_archive")
+workbench.download_project_archive(archive_name="my_project_archive")
 ```
 
 # Initiate additional PyAnsys services for systems within a Workbench project
@@ -189,7 +190,7 @@ This script creates a Mechanical system server side and then starts the PyMechan
 ```{python}
 from ansys.mechanical.core import connect_to_mechanical
 
-sys_name = wb.run_script_string(
+sys_name = workbench.run_script_string(
     r"""import json
 wb_script_result =
     json.dumps(GetTemplate(
@@ -197,7 +198,7 @@ wb_script_result =
     ).CreateSystem().Name)
 """
 )
-server_port = wb.start_mechanical_server(
+server_port = workbench.start_mechanical_server(
     system_name=sys_name
 )
 mechanical = connect_to_mechanical(
@@ -211,14 +212,14 @@ This script initiates the PyFluent service along with the client for a Fluent sy
 ```{python}
 import ansys.fluent.core as pyfluent
 
-sys_name = wb.run_script_string(
+sys_name = workbench.run_script_string(
     r"""import json
 wb_script_result =
     json.dumps(GetTemplate(
     TemplateName="FLUENT").CreateSystem().Name)
 """
 )
-server_info_file = wb.start_fluent_server(
+server_info_file = workbench.start_fluent_server(
     system_name=sys_name
 )
 fluent = pyfluent.connect_to_fluent(
@@ -233,7 +234,7 @@ This script initiates the PySherlock service and its client for a Sherlock syste
 ```{python}
 from ansys.sherlock.core import launcher as pysherlock
 
-sys_name = wb.run_script_string(
+sys_name = workbench.run_script_string(
     r"""import json
 wb_script_result =
     json.dumps(GetTemplate(
@@ -241,7 +242,7 @@ wb_script_result =
     )
 """
 )
-server_port = wb.start_sherlock_server(
+server_port = workbench.start_sherlock_server(
     system_name=sys_name
 )
 sherlock = pysherlock.connect_grpc_channel(
