@@ -50,7 +50,9 @@ class Launcher:
 
             self._wmi = wmi
             if not self._wmi:
-                raise Exception("Required Python module WMI does not exist or does not load properly.")
+                raise Exception(
+                    "Required Python module WMI does not exist or does not load properly."
+                )
         else:
             try:
                 self._libc = ctypes.CDLL("libc.so.6")
@@ -112,7 +114,9 @@ class Launcher:
             raise Exception("Invalid Ansys version: " + version)
 
         if host and not self._wmi:
-            raise Exception("Launching PyWorkbench on a remote machine from Linux is not supported.")
+            raise Exception(
+                "Launching PyWorkbench on a remote machine from Linux is not supported."
+            )
 
         if host and (not username or not password):
             raise Exception(
