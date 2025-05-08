@@ -60,7 +60,8 @@ class Launcher:
                 self._libc = None
             if not self._libc:
                 raise Exception(
-                    "Required Python module ctypes does not exist or does not load libc.so.6 properly."
+                    "Required Python module ctypes does not exist or does not load "
+                    "libc.so.6 properly."
                 )
 
         self._wmi_connection = None
