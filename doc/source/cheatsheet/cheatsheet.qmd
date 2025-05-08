@@ -54,7 +54,7 @@ workbench = connect_workbench(port=port)
 
 ## Connect to a remote Workbench server
 
-Execute the steps below to link PyWorkbench with a remote session:
+Execute the following steps to link PyWorkbench with a remote session:
 ```{python}
 from ansys.workbench.core import connect_workbench
 host = "server_machine_name_or_IP"
@@ -173,7 +173,7 @@ This client script retrieves all .out files from the server's working directory:
 workbench.download_file("*.out")
 ```
 
-Use the ``{download_project_archive()}`` function to save, archive, and download the current Workbench project from the server to the client:
+Use the ``download_project_archive()`` function to save, archive, and download the current Workbench project from the server to the client:
 
 ```{python}
 workbench.download_project_archive(archive_name="my_project_archive")

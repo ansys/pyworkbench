@@ -50,7 +50,7 @@ class Launcher:
 
             self._wmi = wmi
             if not self._wmi:
-                raise Exception("Required Python module WMI does not exist or not loading properly")
+                raise Exception("Required Python module WMI does not exist or does not load properly.")
         else:
             try:
                 self._libc = ctypes.CDLL("libc.so.6")
@@ -58,7 +58,7 @@ class Launcher:
                 self._libc = None
             if not self._libc:
                 raise Exception(
-                    "Required Python module ctypes does not exist or not loading libc.so.6 properly"
+                    "Required Python module ctypes does not exist or does not load libc.so.6 properly."
                 )
 
         self._wmi_connection = None
@@ -79,28 +79,28 @@ class Launcher:
         Parameters
         ----------
         version : str
-            Workbench version to launch. It must be a 3-digit version that is "242" or later.
+            Workbench version to launch. It must be a three-digit version, such as ``242`` or later.
         show_gui : bool, default: True
-            Weather to launch Workbench in UI mode.
+            Whether to launch Workbench in UI mode.
         server_workdir : str, default: None
-            Path to a writable directory on the server computer. The default is ``None``,
+            Path to a writable directory on the server. The default is ``None``,
             in which case the user preference for the Workbench temporary file folder is used.
         host : str, default: None
-            Server computer's name or IP address. The default is ``None`` for launching on the
-            local computer.
+            Name or IP address of the server. The default is ``None``, which launches Workbench
+            on the local computer.
         username : str, default: None
-            User's login name on the server computer. The default is ``None`` for launching on
-            the local computer.
+            User's login name on the server. The default is ``None``, which launches Workbench
+            on the local computer.
         password : str, default: None
-            User's password on the server computer. The default is ``None`` for launching on
-            the local computer.
+            User's password on the server. The default is ``None``, which launches Workbench
+            on the local computer.
 
         Raises
         ------
         Exception
             If the Ansys version string is invalid.
-            If wmi service is not available for remote launching
-            If the host is given but username or password is missing.
+            If the wmi service is not available for remote launching
+            If the host is given but the username or password is missing.
         """
         if (
             not version
@@ -109,10 +109,10 @@ class Launcher:
             or version[0] not in ["2", "3"]
             or version[2] not in ["1", "2"]
         ):
-            raise Exception("Invalid ANSYS version: " + version)
+            raise Exception("Invalid Ansys version: " + version)
 
         if host and not self._wmi:
-            raise Exception("Launching PyWorkbench on a remote machine from Linux is not supported")
+            raise Exception("Launching PyWorkbench on a remote machine from Linux is not supported.")
 
         if host and (not username or not password):
             raise Exception(
@@ -132,7 +132,7 @@ class Launcher:
                     raise Exception(
                         "Launching PyWorkbench on a remote machine failed. "
                         "Make sure that the remote host is a Windows machine and that "
-                        "correct credential is used."
+                        "the correct credential is used."
                     )
                 else:
                     raise Exception("Launching PyWorkbench failed.")
@@ -190,7 +190,7 @@ class Launcher:
                 self._process_id = process.pid
                 self._process = process
         if successful:
-            logging.info("Workbench launched on the host with process id: " + str(self._process_id))
+            logging.info("Workbench launched on the host with process ID: " + str(self._process_id))
         else:
             logging.error("Workbench failed to launch on the host.")
             return 0
@@ -220,7 +220,7 @@ class Launcher:
         if not port or int(port) <= 0:
             logging.error("Failed to retrieve the port used by Workbench service.")
             return 0
-        logging.info("Workbench service uses port " + port)
+        logging.info("Workbench service uses port: " + port)
         return int(port)
 
     def __getenv(self, key):
@@ -236,11 +236,11 @@ class Launcher:
             if value:
                 value = value.decode("utf-8")
         else:
-            raise Exception("unexpected code path")
+            raise Exception("Code path is unexpected.")
         return value
 
     def exit(self):
-        """Terminate the launched Workbench server."""
+        """End the launched Workbench server."""
         if self._process:
             try:
                 if self._wmi:
@@ -251,7 +251,7 @@ class Launcher:
                 pass
 
         """
-        # terminate related processes bottom-up
+        # end related processes from the bottom up (this code is no longer used)
         if self._wmi_connection:
             for p in self.__collect_process_tree():
                 logging.info("Shutting down " + p.Name + " ...")
