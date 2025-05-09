@@ -135,7 +135,9 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 # variables are the title of pdf, watermark
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
-BUILD_CHEATSHEET = True if os.environ.get("BUILD_CHEATSHEET", "true") == "true" else False
+# disable cheatsheet for now until the issue with doc build is fixed
+# BUILD_CHEATSHEET = True if os.environ.get("BUILD_CHEATSHEET", "true") == "true" else False
+BUILD_CHEATSHEET = False
 
 linkcheck_ignore = [
     "https://github.com/ansys/pyworkbench-examples",
