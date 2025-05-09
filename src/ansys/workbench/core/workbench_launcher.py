@@ -135,7 +135,7 @@ class Launcher:
             except self._wmi.x_wmi:
                 if host:
                     raise Exception(
-                       f"Failed in initializing WMI service on the remote machine {host}. "
+                        f"Failed in initializing WMI service on the remote machine {host}. "
                         "Make sure that the remote host is a Windows machine and that "
                         "the correct credential is used."
                     )
