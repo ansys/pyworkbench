@@ -249,22 +249,18 @@ class Launcher:
         if self._process:
             try:
                 if self._wmi:
+                    for p in self.__collect_process_tree():
+                        logging.info("Shutting down " + p.Name + " ...")
+                        try:
+                            p.Terminate()
+                        except Exception:
+                            pass
                     self._process.Terminate()
                 else:
                     self._process.terminate()
             except Exception:
                 pass
 
-        """
-        # end related processes from the bottom up (this code is no longer used)
-        if self._wmi_connection:
-            for p in self.__collect_process_tree():
-                logging.info("Shutting down " + p.Name + " ...")
-                try:
-                    p.Terminate()
-                except Exception:
-                    pass
-        """
         self._wmi_connection = None
         self._process_id = -1
         self._process = None
