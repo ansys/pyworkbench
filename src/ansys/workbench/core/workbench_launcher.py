@@ -34,12 +34,13 @@ import uuid
 class Launcher:
     """Launch a Workbench server on a local or remote machine.
 
-    Note that launching it on a remote Linux machine is not supported.
+    Note that launching a server on a remote Linux machine, or on a remote Windows
+    machine from a Linux machine, is not supported.
 
     Raises
     ------
     Exception
-        If the Ansys version number is invalid.
+        If the wmi module on Windows, or the ctypes module on Linux, is not available
     """
 
     def __init__(self):
@@ -102,8 +103,10 @@ class Launcher:
         ------
         Exception
             If the Ansys version string is invalid.
-            If the wmi service is not available for remote launching
             If the host is given but the username or password is missing.
+            If remote launching is attempted from or onto a Linux machine
+            If the wmi service on the remote Windows machine fails
+            If the Ansys installation is not found.
         """
         if (
             not version
