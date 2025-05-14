@@ -85,7 +85,7 @@ class LaunchWorkbench(ClientWrapper):
     Raises
     ------
     Exception
-        If the Ansys version number is invalid.
+        If PyWorkbench server failed to launch.
 
     Examples
     --------

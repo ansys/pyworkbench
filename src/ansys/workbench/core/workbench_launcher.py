@@ -114,6 +114,7 @@ class Launcher:
             or not version.isdigit()
             or version[0] not in ["2", "3"]
             or version[2] not in ["1", "2"]
+            or int(version) < 242
         ):
             raise Exception("Invalid Ansys version: " + version)
 
