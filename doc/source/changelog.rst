@@ -9,6 +9,88 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.9.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.9.0>`_ - May 15, 2025
+==================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - bump version to 0.9.dev0
+          - `#191 <https://github.com/ansys/pyworkbench/pull/191>`_
+
+        * - chore: bump bandit from 1.8.2 to 1.8.3
+          - `#192 <https://github.com/ansys/pyworkbench/pull/192>`_
+
+        * - chore: bump sphinx-autodoc-typehints from 3.0.1 to 3.1.0
+          - `#193 <https://github.com/ansys/pyworkbench/pull/193>`_
+
+        * - chore: bump sphinx from 8.1.3 to 8.2.0
+          - `#194 <https://github.com/ansys/pyworkbench/pull/194>`_
+
+        * - chore: bump ansys-sphinx-theme[autoapi] from 1.2.7 to 1.3.2
+          - `#195 <https://github.com/ansys/pyworkbench/pull/195>`_
+
+        * - chore: bump sphinx from 8.2.0 to 8.2.1
+          - `#196 <https://github.com/ansys/pyworkbench/pull/196>`_
+
+        * - chore: bump sphinx from 8.2.1 to 8.2.3
+          - `#197 <https://github.com/ansys/pyworkbench/pull/197>`_
+
+        * - chore: bump pytest from 8.3.4 to 8.3.5
+          - `#198 <https://github.com/ansys/pyworkbench/pull/198>`_
+
+        * - chore: bump ansys-sphinx-theme[autoapi] from 1.3.2 to 1.3.3
+          - `#202 <https://github.com/ansys/pyworkbench/pull/202>`_
+
+        * - chore: bump pytest-cov from 6.0.0 to 6.1.1
+          - `#207 <https://github.com/ansys/pyworkbench/pull/207>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - allow user to specify port to use for pymechanical
+          - `#201 <https://github.com/ansys/pyworkbench/pull/201>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: update CHANGELOG for v0.8.0
+          - `#190 <https://github.com/ansys/pyworkbench/pull/190>`_
+
+        * - docs: remove .tex file from cheatsheet dir
+          - `#200 <https://github.com/ansys/pyworkbench/pull/200>`_
+
+        * - support launching pywb on linux
+          - `#209 <https://github.com/ansys/pyworkbench/pull/209>`_
+
+        * - python version support: drop 3.9 and add 3.13; bump ansys/action to 9
+          - `#213 <https://github.com/ansys/pyworkbench/pull/213>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - docs: Update ``CONTRIBUTORS.md`` with the latest contributors
+          - `#206 <https://github.com/ansys/pyworkbench/pull/206>`_
+
+
 `0.8.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.8.0>`_ - 2025-02-14
 ================================================================================
 
