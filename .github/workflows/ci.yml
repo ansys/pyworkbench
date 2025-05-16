@@ -175,13 +175,15 @@ jobs:
           repository-url: "https://upload.pypi.org/legacy/"
           print-hash: true
           packages-dir: ${{ env.PACKAGE_NAME }}-artifacts
-          skip-existing: false
+          skip-existing: true
 
       - name: Release to GitHub
         uses: ansys/actions/release-github@v9
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: false
+          add-artifact-attestation-notes: true
 
   doc-deploy-dev:
     name: "Deploy development documentation"
