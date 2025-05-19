@@ -137,7 +137,6 @@ latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
 # disable cheatsheet for now until the issue with doc build is fixed
 BUILD_CHEATSHEET = True if os.environ.get("BUILD_CHEATSHEET", "true") == "true" else False
-# BUILD_CHEATSHEET = False
 
 linkcheck_ignore = [
     "https://github.com/ansys/pyworkbench-examples",
