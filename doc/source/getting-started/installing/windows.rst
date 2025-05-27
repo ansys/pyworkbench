@@ -10,10 +10,8 @@ This page explains how to install PyWorkbench locally on a Windows platform.
 
 There are two ways to install PyWorkbench on Windows:
 
-* `Install from PyPI <Download-pypi_>`_
-* `Download artifacts <Download-artifacts_>`_
-
-.. _Download-pypi:
+* `Install from PyPI <Install from PyPI_>`_
+* `Download artifacts <Download artifacts_>`_
 
 Install from PyPI
 ==================
@@ -32,9 +30,6 @@ Verify the installation by running this code:
     from ansys.workbench.core import launch_workbench
 
     launch_workbench()
-
-
-.. _Download-artifacts:
 
 Download artifacts
 ==================
