@@ -5,8 +5,8 @@ This page explains how to install PyWorkbench locally on a Linux platform.
 
 .. note::
 
-    The following instructions assume that you have a local installation of Workbench and a valid
-    license in your machine.
+    The following instructions assume that you have a local installation of Workbench with a
+    valid license.
 
 There are two ways to install PyWorkbench on Linux:
 
