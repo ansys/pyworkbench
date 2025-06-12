@@ -17,7 +17,7 @@ Install from PyPI
 ==================
 
 PyWorkbench is available on the `Python Package Index (PyPI) <https://pypi.org/project/ansys-workbench/>`_.
-You can install PyWorkbench using the `pip <https://pypi.org/project/pip/>`_ command:
+You can install PyWorkbench using this `pip <https://pypi.org/project/pip/>`_ command:
 
 .. code-block:: shell
 
