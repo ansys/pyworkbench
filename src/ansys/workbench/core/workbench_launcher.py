@@ -148,9 +148,9 @@ class Launcher:
 
         ansys_install_path = self.__getenv("AWP_ROOT" + version)
         if ansys_install_path:
-            logging.info("Ansys installation is found at: " + ansys_install_path)
+            logging.info(f"Ansys installation is found at: {ansys_install_path}")
         else:
-            raise Exception("Ansys installation is not found.")
+            raise Exception(f"Ansys {version} installation is not found.")
 
         args = []
         if platform.system() == "Windows":
@@ -172,9 +172,17 @@ class Launcher:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
             cmd += ",WorkingDirectory='" + server_workdir + "'"
+        if host is not None:
+            cmd += ",AllowRemoteConnection=True"
         cmd += ")"
         args.append(cmd)
         command_line = " ".join(args)
+
+        # security precaution statement
+        if host is not None:
+            print("""The server started will allow remote access connections to be
+established, possibly permitting control of the machine and any data which resides on it.
+It is highly recommended to only utilize these features on a trusted, secure network.""")
 
         successful = False
         process = None
