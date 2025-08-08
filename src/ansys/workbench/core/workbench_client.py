@@ -78,7 +78,7 @@ class WorkbenchClient:
             self.run_script_string(
                 """import json
 wb_script_result=json.dumps(GetFrameworkVersion())"""
-            ).replace('.','')
+            ).replace(".", "")
         )
 
     def _disconnect(self):
