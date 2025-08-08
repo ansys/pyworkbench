@@ -74,9 +74,12 @@ class WorkbenchClient:
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info("connected to the WB server at " + hnp)
-        self.server_version = int(self.run_script_string(
-            """import json
-wb_script_result=json.dumps(GetFrameworkVersion())""").replace('.',''))
+        self.server_version = int(
+            self.run_script_string(
+                """import json
+wb_script_result=json.dumps(GetFrameworkVersion())"""
+            ).replace('.','')
+        )
 
     def _disconnect(self):
         """Disconnect from the server."""
