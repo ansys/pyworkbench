@@ -24,6 +24,7 @@
 
 import logging
 import tempfile
+import atexit
 
 from ansys.workbench.core.workbench_client import WorkbenchClient
 from ansys.workbench.core.workbench_launcher import Launcher
@@ -114,9 +115,13 @@ class LaunchWorkbench(ClientWrapper):
             raise Exception("Filed to launch Ansys Workbench service.")
         self.server_version = int(version)
         super().__init__(port, client_workdir, host)
+        atexit.register(self.exit)
+        self._exited = False
 
     def exit(self):
         """Terminate the Workbench server and disconnect the client."""
+        if self._exited:
+            return
         self.run_script_string("Reset()")
         if self.server_version >= 252:
             self.run_script_string("internal_wbexit()")
@@ -127,6 +132,7 @@ class LaunchWorkbench(ClientWrapper):
 
         self._launcher.exit()
         logging.info("Workbench server connection has ended.")
+        self._exited = True
 
 
 def launch_workbench(
