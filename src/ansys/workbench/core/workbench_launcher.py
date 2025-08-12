@@ -29,6 +29,7 @@ import platform
 import subprocess
 import time
 import uuid
+import warnings
 
 
 class Launcher:
@@ -77,6 +78,7 @@ class Launcher:
         host=None,
         username=None,
         password=None,
+        allow_remote_host=False,
     ):
         """Launch PyWorkbench server on the local or a remote computer.
 
@@ -98,6 +100,8 @@ class Launcher:
         password : str, default: None
             User's password on the server. The default is ``None``, which launches Workbench
             on the local computer.
+        allow_remote_host : bool
+            If ``True``, remote host connections are allowed. ``False`` otherwise.
 
         Raises
         ------
@@ -117,6 +121,19 @@ class Launcher:
             or int(version) < 242
         ):
             raise Exception("Invalid Ansys version: " + version)
+
+        if host not in ["localhost", "127.0.0.1"]:
+            warnings.warn(
+                "Allowing remote access can expose the server to unauthorized "
+                "connections and may transmit data over an unencrypted channel "
+                "if the server is not properly configured."
+            )
+            if not allow_remote_host:
+                raise ValueError(
+                    "Remote host connections are not permitted by default. "
+                    "To enable connections to hosts other than localhost, set "
+                    "the `allow_remote_host` parameter to `True`."
+                )
 
         if host and not self._wmi:
             raise Exception(

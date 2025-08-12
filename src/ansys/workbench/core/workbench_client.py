@@ -30,6 +30,7 @@ from logging.handlers import WatchedFileHandler
 import os
 import re
 import time
+import warnings
 
 import grpc
 import tqdm
@@ -52,12 +53,51 @@ class WorkbenchClient:
         Port number of the server.
     """
 
-    def __init__(self, local_workdir, server_host, server_port):
+    def __init__(self, local_workdir, server_host, server_port, allow_remote_host=False):
         """Create a Workbench client."""
         self.workdir = local_workdir
         self._server_host = server_host
         self._server_port = server_port
+        self.allow_remote_host = allow_remote_host
         self.__init_logging()
+
+        # HACK: use setters to verify values for host and port
+        self.host = server_host
+        self.port = server_port
+
+    @property
+    def host(self):
+        """Return the hostname value."""
+        return self._server_host
+
+    @host.setter
+    def host(self, value):
+        """Set the hostname value."""
+        if value not in ["localhost", "127.0.0.1"]:
+            warnings.warn(
+                "Allowing remote access can expose the server to unauthorized "
+                "connections and may transmit data over an unencrypted channel "
+                "if the server is not properly configured."
+            )
+            if not self.allow_remote_host:
+                raise ValueError(
+                    "Remote host connections are not permitted by default. "
+                    "To enable connections to hosts other than localhost, set "
+                    "the `allow_remote_host` parameter to `True`."
+                )
+        self._server_host = value
+
+    @property
+    def port(self):
+        """Return the value of the port."""
+        return self._server_port
+
+    @port.setter(self, value)
+    def port(self, value: int):
+        """Set the value of the port."""
+        if value < 0 or value > 65535:
+            raise ValueError("Port value must be in the range of [0, 65535].")
+        self._server_port = value
 
     def __enter__(self):
         """Connect to the server when entering a context."""
@@ -70,7 +110,7 @@ class WorkbenchClient:
 
     def _connect(self):
         """Connect to the server."""
-        hnp = self._server_host + ":" + str(self._server_port)
+        hnp = self.host + ":" + str(self.port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info("connected to the WB server at " + hnp)
