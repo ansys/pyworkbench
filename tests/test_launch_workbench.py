@@ -54,7 +54,6 @@ def test_upload_file(workbench):
 
 def test_run_script(workbench):
     """Test running a script."""
-    scripts = pathlib.Path("scripts")
     assets = pathlib.Path("assets")
     workbench.upload_file_from_example_repo("cooled-turbine-blade/wbpz/cooled_turbine_blade.wbpz")
     export_path = "wb_log_file.log"
