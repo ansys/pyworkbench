@@ -41,10 +41,7 @@ html_context = {
     "github_repo": "pyworkbench",
     "github_version": "main",
     "doc_path": "doc/source",
-    "pyansys_tags": [
-        "Multiphysics",
-        "Platform"
-    ]
+    "pyansys_tags": ["Multiphysics", "Platform"],
 }
 html_theme_options = {
     "switcher": {
