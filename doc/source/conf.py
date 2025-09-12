@@ -41,6 +41,7 @@ html_context = {
     "github_repo": "pyworkbench",
     "github_version": "main",
     "doc_path": "doc/source",
+    "pyansys_tags": ["Multiphysics", "Platform"],
 }
 html_theme_options = {
     "switcher": {
@@ -136,6 +137,7 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 # variables are the title of pdf, watermark
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
+# disable cheatsheet for now until the issue with doc build is fixed
 BUILD_CHEATSHEET = True if os.environ.get("BUILD_CHEATSHEET", "true") == "true" else False
 
 linkcheck_ignore = [
