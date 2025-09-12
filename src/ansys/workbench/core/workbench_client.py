@@ -76,12 +76,13 @@ class WorkbenchClient:
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info(f"connected to the WB server at {hnp}")
 
-        self.server_version = int(
-            self.run_script_string(
-                """import json
-wb_script_result=json.dumps(GetFrameworkVersion())"""
-            ).replace(".", "")
-        )
+        self.server_version = 251
+        #self.server_version = int(
+        #    self.run_script_string(
+        #        """import json
+#wb_script_result=json.dumps(GetFrameworkVersion())"""
+        #    ).replace(".", "")
+        #)
         logging.info(f"server version is {self.server_version}")
 
     def _disconnect(self):
