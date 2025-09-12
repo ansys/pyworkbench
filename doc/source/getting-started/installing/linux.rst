@@ -15,7 +15,7 @@ There are two ways to install PyWorkbench on Linux:
 
 
 Install from PyPI
-==================
+=================
 
 PyWorkbench is available on the `Python Package Index (PyPI) <https://pypi.org/project/ansys-workbench/>`_.
 You can install PyWorkbench using this `pip <https://pypi.org/project/pip/>`_ command:
