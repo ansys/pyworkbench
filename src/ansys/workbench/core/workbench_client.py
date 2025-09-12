@@ -543,7 +543,7 @@ wb_script_result =json.dumps(successful)
         pymech_port = self.run_script_string(
             f"""import json
 if float(GetFrameworkVersion()) >= 25.2:
-    server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}${port_arg}")
+    server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}{port_arg}")
 else:
     server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}")
 wb_script_result=json.dumps(server_port)
