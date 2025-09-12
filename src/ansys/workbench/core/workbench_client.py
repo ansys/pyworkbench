@@ -566,7 +566,9 @@ wb_script_result=json.dumps(server_port)
         >>> wb.stop_mechanical_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(f"""StopMechanicalServerOnSystem(SystemName="{system_name}")""")
+        self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
+    StopMechanicalServerOnSystem(SystemName="{system_name}")
+""")
 
     def start_fluent_server(self, system_name):
         """Start the PyFluent server for the given system in the Workbench project.
@@ -618,7 +620,9 @@ wb_script_result=json.dumps(server_info_file)
         >>> wb.stop_fluent_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(f"""StopFluentServerOnSystem(SystemName="{system_name}")""")
+        self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
+StopFluentServerOnSystem(SystemName="{system_name}")
+""")
 
     def start_sherlock_server(self, system_name):
         """Start the PySherlock server for the given system in the Workbench project.
@@ -666,7 +670,9 @@ wb_script_result=json.dumps(server_port)
         >>> wb.stop_sherlock_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(f"""StopSherlockServerOnSystem(SystemName="{system_name}")""")
+        self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
+StopSherlockServerOnSystem(SystemName="{system_name}")
+""")
 
 
 __all__ = ["WorkbenchClient"]
