@@ -114,6 +114,7 @@ class LaunchWorkbench(ClientWrapper):
             raise Exception("Filed to launch Ansys Workbench service.")
         self.server_version = int(version)
         super().__init__(port, client_workdir, host)
+        self._exited = False
 
     def exit(self):
         """Terminate the Workbench server and disconnect the client."""
