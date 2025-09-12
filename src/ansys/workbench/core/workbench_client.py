@@ -57,8 +57,8 @@ class WorkbenchClient:
         self.workdir = local_workdir
         self._server_host = server_host
         self._server_port = server_port
-        self.__init_logging()
         self.server_version = -1
+        self.__init_logging()
 
     def __enter__(self):
         """Connect to the server when entering a context."""
@@ -74,7 +74,7 @@ class WorkbenchClient:
         hnp = self._server_host + ":" + str(self._server_port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
-        logging.info("connected to the WB server at " + hnp)
+        logging.info(f"connected to the WB server at {hnp}")
 
         self.server_version = int(
             self.run_script_string(
@@ -82,6 +82,7 @@ class WorkbenchClient:
 wb_script_result=json.dumps(GetFrameworkVersion())"""
             ).replace(".", "")
         )
+        logging.info(f"server version is {self.server_version}")
 
     def _disconnect(self):
         """Disconnect from the server."""
@@ -89,6 +90,7 @@ wb_script_result=json.dumps(GetFrameworkVersion())"""
             self.channel.close()
             self.channel = None
             self.stub = None
+            self.server_version = -1
             logging.info("Disconnected from the Workbench server")
 
     def _is_connected(self):

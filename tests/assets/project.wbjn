@@ -4,7 +4,7 @@ import string
 import os.path
 
 work_dir = GetServerWorkingDirectory()
-arg_ProjectArchive = os.path.join(work_dir, "wbpz", "cooled_turbine_blade.wbpz")
+arg_ProjectArchive = os.path.join(work_dir, "cooled_turbine_blade.wbpz")
 
 # Description="Insert Steady State Thermal linked with Static Structural system and define blade and fluid materials"
 Unarchive(

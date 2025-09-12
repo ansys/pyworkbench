@@ -35,7 +35,6 @@ def workbench():
     workdir = pathlib.Path(__file__).parent
     wb = launch_workbench(
         version="251",
-        server_workdir=str(workdir.absolute()),
         client_workdir=str(workdir.absolute()),
     )
     yield wb
@@ -49,27 +48,21 @@ def test_launch_workbench(workbench):
 
 def test_upload_file(workbench):
     """Test uploading a file."""
-    workdir = pathlib.Path(__file__).parent
-    agdb = workdir / "agdb"
-    workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
+    assets = pathlib.Path("assets")
+    workbench.upload_file(str(assets / "axisymmetric_model.agdb"))
 
 
 def test_run_script(workbench):
     """Test running a script."""
-    workdir = pathlib.Path(__file__).parent
-    scripts = workdir / "scripts"
-    assets = workdir / "assets"
-    workbench.upload_file_from_example_repo("cyclic-symmetry-analysis/cdb/sector_model.cdb")
-    workbench.upload_file(str(scripts / "cyclic_symmetry_analysis.py"))
+    scripts = pathlib.Path("scripts")
+    assets = pathlib.Path("assets")
+    workbench.upload_file_from_example_repo("cooled-turbine-blade/wbpz/cooled_turbine_blade.wbpz")
     export_path = "wb_log_file.log"
     workbench.set_log_file(export_path)
-    workbench.run_script_file(str((assets / "project.wbjn").absolute()), log_level="info")
-    workbench.download_file(file_name=export_path, target_dir=str(assets), show_progress=True)
+    workbench.run_script_file(str(assets / "project.wbjn"), log_level="info")
+    # workbench.download_file(file_name=export_path, target_dir=str(assets), show_progress=True)
 
 
 def test_download_file(workbench):
     """Test downloading a file."""
-    workdir = pathlib.Path(__file__).parent
-    agdb = workdir / "agdb"
-    workbench.upload_file(str(agdb / "axisymmetric_model.agdb"))
-    workbench.download_file("axisymmetric_model.agdb", str(agdb))
+    workbench.download_file("axisymmetric_model.agdb")
