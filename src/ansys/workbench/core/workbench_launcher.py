@@ -148,9 +148,9 @@ class Launcher:
 
         ansys_install_path = self.__getenv("AWP_ROOT" + version)
         if ansys_install_path:
-            logging.info("Ansys installation is found at: " + ansys_install_path)
+            logging.info(f"Ansys installation is found at: {ansys_install_path}")
         else:
-            raise Exception("Ansys installation is not found.")
+            raise Exception(f"Ansys {version} installation is not found.")
 
         args = []
         if platform.system() == "Windows":
