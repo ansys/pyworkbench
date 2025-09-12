@@ -58,6 +58,7 @@ class WorkbenchClient:
         self._server_host = server_host
         self._server_port = server_port
         self.__init_logging()
+        self.server_version = -1
 
     def __enter__(self):
         """Connect to the server when entering a context."""
@@ -74,6 +75,7 @@ class WorkbenchClient:
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info("connected to the WB server at " + hnp)
+
         self.server_version = int(
             self.run_script_string(
                 """import json
@@ -621,7 +623,7 @@ wb_script_result=json.dumps(server_info_file)
 
         """
         self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
-StopFluentServerOnSystem(SystemName="{system_name}")
+    StopFluentServerOnSystem(SystemName="{system_name}")
 """)
 
     def start_sherlock_server(self, system_name):
@@ -671,7 +673,7 @@ wb_script_result=json.dumps(server_port)
 
         """
         self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
-StopSherlockServerOnSystem(SystemName="{system_name}")
+    StopSherlockServerOnSystem(SystemName="{system_name}")
 """)
 
 
