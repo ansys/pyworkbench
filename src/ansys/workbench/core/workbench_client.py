@@ -62,7 +62,7 @@ class WorkbenchClient:
 
     @property
     def server_version(self):
-        """The Workbench version of the connected server"""
+        """The Workbench version of the connected server."""
         if self._server_version <= 0:
             ver_str = self.run_script_string("""import json
 wb_script_result=json.dumps(GetFrameworkVersion())""")
