@@ -38,7 +38,7 @@ def workbench():
         client_workdir=str(workdir.absolute()),
     )
     yield wb
-    # wb.exit()
+    wb.exit()
 
 
 def test_launch_workbench(workbench):
