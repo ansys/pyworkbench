@@ -57,8 +57,18 @@ class WorkbenchClient:
         self.workdir = local_workdir
         self._server_host = server_host
         self._server_port = server_port
-        self.server_version = -1
+        self._server_version = -1
         self.__init_logging()
+
+    @property
+    def server_version(self):
+        """The Workbench version of the connected server"""
+        if self._server_version <= 0:
+            ver_str = self.run_script_string("""import json
+wb_script_result=json.dumps(GetFrameworkVersion())""")
+            ver_str = ver_str.replace(".", "")
+            self._server_version = int(ver_str)
+        return self._server_version
 
     def __enter__(self):
         """Connect to the server when entering a context."""
@@ -76,22 +86,13 @@ class WorkbenchClient:
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info(f"connected to the WB server at {hnp}")
 
-        self.server_version = 251
-        # self.server_version = int(
-        #    self.run_script_string(
-        #        """import json
-        # wb_script_result=json.dumps(GetFrameworkVersion())"""
-        #    ).replace(".", "")
-        # )
-        logging.info(f"server version is {self.server_version}")
-
     def _disconnect(self):
         """Disconnect from the server."""
         if self.channel:
             self.channel.close()
             self.channel = None
             self.stub = None
-            self.server_version = -1
+            self._server_version = -1
             logging.info("Disconnected from the Workbench server")
 
     def _is_connected(self):
