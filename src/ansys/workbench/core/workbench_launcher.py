@@ -148,9 +148,9 @@ class Launcher:
 
         ansys_install_path = self.__getenv("AWP_ROOT" + version)
         if ansys_install_path:
-            logging.info("Ansys installation is found at: " + ansys_install_path)
+            logging.info(f"Ansys installation is found at: {ansys_install_path}")
         else:
-            raise Exception("Ansys installation is not found.")
+            raise Exception(f"Ansys {version} installation is not found.")
 
         args = []
         if platform.system() == "Windows":
@@ -295,6 +295,7 @@ class Launcher:
 
         # return the processes child-first-order
         processes_child_first = []
-        for pid in reversed(process_ids_parent_first):
-            processes_child_first.append(process_by_id[pid])
+        for pids in reversed(process_ids_parent_first):
+            for pid in pids:
+                processes_child_first.append(process_by_id[pid])
         return processes_child_first
