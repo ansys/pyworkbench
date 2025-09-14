@@ -49,6 +49,6 @@ def test_get_file_url(example_data):
 def test_download(example_data):
     """Test download."""
     source_path, target_local_dir = example_data
-    local_file_path = ExampleData.download(source_path, target_local_dir)
-    local_file = pathlib.Path(local_file_path)
+    local_file_name = ExampleData.download(source_path, target_local_dir)
+    local_file = pathlib.Path(target_local_dir) / local_file_name
     assert local_file.exists()
