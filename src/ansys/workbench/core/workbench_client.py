@@ -30,7 +30,6 @@ from logging.handlers import WatchedFileHandler
 import os
 import re
 import time
-import warnings
 
 import grpc
 import tqdm
@@ -53,13 +52,12 @@ class WorkbenchClient:
         Port number of the server.
     """
 
-    def __init__(self, local_workdir, server_host, server_port, allow_remote_host=False):
+    def __init__(self, local_workdir, server_host, server_port):
         """Create a Workbench client."""
         self.workdir = local_workdir
         self._server_host = server_host
         self._server_port = server_port
         self._server_version = -1
-        self.allow_remote_host = allow_remote_host
         self.__init_logging()
 
     @property
@@ -83,7 +81,7 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
 
     def _connect(self):
         """Connect to the server."""
-        hnp = self.host + ":" + str(self.port)
+        hnp = self._server_host + ":" + str(self._server_port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info(f"connected to the WB server at {hnp}")
