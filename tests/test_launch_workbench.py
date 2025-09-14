@@ -59,10 +59,6 @@ def test_run_script(workbench):
     export_path = "wb_log_file.log"
     workbench.set_log_file(export_path)
     workbench.run_script_file(str(assets / "project.wbjn"), log_level="info")
-
-
-def test_download_file(workbench):
-    """Test downloading a file."""
     downloaded_file_name = workbench.download_file("cooled_turbine_blade.wbpz")
     downloaded_file = pathlib.Path(downloaded_file_name)
     assert downloaded_file.exists()
