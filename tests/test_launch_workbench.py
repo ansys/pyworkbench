@@ -60,5 +60,5 @@ def test_run_script(workbench):
     workbench.set_log_file(export_path)
     workbench.run_script_file(str(assets / "project.wbjn"), log_level="info")
     downloaded_file_name = workbench.download_file("cooled_turbine_blade.wbpz")
-    downloaded_file = pathlib.Path(downloaded_file_name)
+    downloaded_file = pathlib.Path(__file__).parent / downloaded_file_name
     assert downloaded_file.exists()
