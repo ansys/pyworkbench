@@ -50,6 +50,5 @@ def test_download(example_data):
     """Test download."""
     source_path, target_local_dir = example_data
     local_file_path = ExampleData.download(source_path, target_local_dir)
-    local_file_dir = pathlib.Path(target_local_dir)
-    local_file_path = pathlib.Path(local_file_dir / "axisymmetric_model.agdb")
-    assert local_file_path.exists()
+    local_file = pathlib.Path(local_file_path)
+    assert local_file.exists()

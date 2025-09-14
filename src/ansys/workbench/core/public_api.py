@@ -124,7 +124,6 @@ class LaunchWorkbench(ClientWrapper):
         if self.server_version >= 252:
             self.run_script_string("internal_wbexit()")
         else:
-            self.run_script_string("StopServer()")
             self._launcher.exit()
         super().exit()
         self._exited = True

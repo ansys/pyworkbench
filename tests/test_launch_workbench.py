@@ -59,9 +59,10 @@ def test_run_script(workbench):
     export_path = "wb_log_file.log"
     workbench.set_log_file(export_path)
     workbench.run_script_file(str(assets / "project.wbjn"), log_level="info")
-    # workbench.download_file(file_name=export_path, target_dir=str(assets), show_progress=True)
 
 
 def test_download_file(workbench):
     """Test downloading a file."""
-    # workbench.download_file("axisymmetric_model.agdb")
+    workbench.download_file("axisymmetric_model.agdb")
+    local_file = pathlib.Path("axisymmetric_model.agdb")
+    assert local_file.exists()
