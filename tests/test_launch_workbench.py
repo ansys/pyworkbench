@@ -63,6 +63,6 @@ def test_run_script(workbench):
 
 def test_download_file(workbench):
     """Test downloading a file."""
-    downloaded_file_name = workbench.download_file("axisymmetric_model.agdb")
+    downloaded_file_name = workbench.download_file("cooled_turbine_blade.wbpz")
     downloaded_file = pathlib.Path(downloaded_file_name)
     assert downloaded_file.exists()
