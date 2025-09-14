@@ -34,7 +34,6 @@ def workbench():
     """Launch workbench."""
     workdir = pathlib.Path(__file__).parent
     wb = launch_workbench(
-        version="251",
         client_workdir=str(workdir.absolute()),
     )
     yield wb
