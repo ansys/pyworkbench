@@ -34,23 +34,21 @@ def example_data():
     """Return example data."""
     file_name = "axisymmetric_model.agdb"
     dir_name = "axisymmetric-rotor/agdb"
-    relative_path = f"{dir_name}/{file_name}"
-    assets_dir = "tests/assets/"
-    return relative_path, assets_dir
+    source_path = f"{dir_name}/{file_name}"
+    target_local_dir = "tests/assets/"
+    return source_path, target_local_dir
 
 
 def test_get_file_url(example_data):
     """Test get_file_url."""
-    relative_path, asset_file = example_data
-    url = ExampleData._get_file_url(relative_file_path=relative_path)
-    assert url == f"https://github.com/ansys/example-data/raw/master/pyworkbench/{relative_path}"
+    source_path, target_local_dir = example_data
+    url = ExampleData._get_file_url(relative_file_path=source_path)
+    assert url == f"https://github.com/ansys/example-data/raw/master/pyworkbench/{source_path}"
 
 
 def test_download(example_data):
     """Test download."""
-    relative_path, asset_file = example_data
-    local_file_path = ExampleData.download(relative_path, asset_file)
-    local_file_path = pathlib.Path("tests/assets/axisymmetric_model.agdb")
-    assert local_file_path.exists()
-    local_file_path.unlink()
-    assert not local_file_path.exists()
+    source_path, target_local_dir = example_data
+    local_file_name = ExampleData.download(source_path, target_local_dir)
+    local_file = pathlib.Path(target_local_dir) / local_file_name
+    assert local_file.exists()

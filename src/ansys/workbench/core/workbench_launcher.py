@@ -320,6 +320,7 @@ It is highly recommended to only utilize these features on a trusted, secure net
 
         # return the processes child-first-order
         processes_child_first = []
-        for pid in reversed(process_ids_parent_first):
-            processes_child_first.append(process_by_id[pid])
+        for pids in reversed(process_ids_parent_first):
+            for pid in pids:
+                processes_child_first.append(process_by_id[pid])
         return processes_child_first

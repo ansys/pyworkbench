@@ -58,46 +58,19 @@ class WorkbenchClient:
         self.workdir = local_workdir
         self._server_host = server_host
         self._server_port = server_port
+        self._server_version = -1
         self.allow_remote_host = allow_remote_host
         self.__init_logging()
 
-        # HACK: use setters to verify values for host and port
-        self.host = server_host
-        self.port = server_port
-
     @property
-    def host(self):
-        """Return the hostname value."""
-        return self._server_host
-
-    @host.setter
-    def host(self, value):
-        """Set the hostname value."""
-        if value not in ["localhost", "127.0.0.1"]:
-            warnings.warn(
-                "Allowing remote access can expose the server to unauthorized "
-                "connections and may transmit data over an unencrypted channel "
-                "if the server is not properly configured."
-            )
-            if not self.allow_remote_host:
-                raise ValueError(
-                    "Remote host connections are not permitted by default. "
-                    "To enable connections to hosts other than localhost, set "
-                    "the `allow_remote_host` parameter to `True`."
-                )
-        self._server_host = value
-
-    @property
-    def port(self):
-        """Return the value of the port."""
-        return self._server_port
-
-    @port.setter(self, value)
-    def port(self, value: int):
-        """Set the value of the port."""
-        if value < 0 or value > 65535:
-            raise ValueError("Port value must be in the range of [0, 65535].")
-        self._server_port = value
+    def server_version(self):
+        """The Workbench version of the connected server."""
+        if self._server_version <= 0:
+            ver_str = self.run_script_string("""import json
+wb_script_result=json.dumps(GetFrameworkVersion())""")
+            ver_str = ver_str.replace(".", "")
+            self._server_version = int(ver_str)
+        return self._server_version
 
     def __enter__(self):
         """Connect to the server when entering a context."""
@@ -113,13 +86,7 @@ class WorkbenchClient:
         hnp = self.host + ":" + str(self.port)
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
-        logging.info("connected to the WB server at " + hnp)
-        self.server_version = int(
-            self.run_script_string(
-                """import json
-wb_script_result=json.dumps(GetFrameworkVersion())"""
-            ).replace(".", "")
-        )
+        logging.info(f"connected to the WB server at {hnp}")
 
     def _disconnect(self):
         """Disconnect from the server."""
@@ -127,6 +94,7 @@ wb_script_result=json.dumps(GetFrameworkVersion())"""
             self.channel.close()
             self.channel = None
             self.stub = None
+            self._server_version = -1
             logging.info("Disconnected from the Workbench server")
 
     def _is_connected(self):
@@ -583,7 +551,7 @@ wb_script_result =json.dumps(successful)
         pymech_port = self.run_script_string(
             f"""import json
 if float(GetFrameworkVersion()) >= 25.2:
-    server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}${port_arg}")
+    server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}{port_arg}")
 else:
     server_port=LaunchMechanicalServerOnSystem(SystemName="{system_name}")
 wb_script_result=json.dumps(server_port)
@@ -606,7 +574,9 @@ wb_script_result=json.dumps(server_port)
         >>> wb.stop_mechanical_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(f"""StopMechanicalServerOnSystem(SystemName="{system_name}")""")
+        self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
+    StopMechanicalServerOnSystem(SystemName="{system_name}")
+""")
 
     def start_fluent_server(self, system_name):
         """Start the PyFluent server for the given system in the Workbench project.
@@ -658,7 +628,9 @@ wb_script_result=json.dumps(server_info_file)
         >>> wb.stop_fluent_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(f"""StopFluentServerOnSystem(SystemName="{system_name}")""")
+        self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
+    StopFluentServerOnSystem(SystemName="{system_name}")
+""")
 
     def start_sherlock_server(self, system_name):
         """Start the PySherlock server for the given system in the Workbench project.
@@ -706,7 +678,9 @@ wb_script_result=json.dumps(server_port)
         >>> wb.stop_sherlock_server(system_name=mech_system_name)
 
         """
-        self.run_script_string(f"""StopSherlockServerOnSystem(SystemName="{system_name}")""")
+        self.run_script_string(f"""if float(GetFrameworkVersion()) >= 25.2:
+    StopSherlockServerOnSystem(SystemName="{system_name}")
+""")
 
 
 __all__ = ["WorkbenchClient"]
