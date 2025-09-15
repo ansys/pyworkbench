@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: ansys/actions/doc-build@v10
         with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          python-version: "3.13"
           needs-quarto: true
 
   build-wheelhouse:
