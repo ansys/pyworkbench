@@ -122,7 +122,7 @@ class LaunchWorkbench(ClientWrapper):
         if port is None or port <= 0:
             raise Exception("Failed to launch Ansys Workbench service.")
         if use_insecure_connection:
-            print (
+            print(
                 "Using insecure connection is not recommended. "
                 "Please see the documentation for your installed "
                 "product for additional information."
