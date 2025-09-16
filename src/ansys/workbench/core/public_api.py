@@ -55,6 +55,7 @@ class ClientWrapper(WorkbenchClient):
         """Disconnect from the server."""
         if super()._is_connected():
             super()._disconnect()
+            logging.info("Workbench server connection has ended.")
 
 
 class LaunchWorkbench(ClientWrapper):
@@ -106,23 +107,26 @@ class LaunchWorkbench(ClientWrapper):
         password=None,
     ):
         if not version:
-            version = "251"
+            version = "252"
 
         self._launcher = Launcher()
         port = self._launcher.launch(version, show_gui, server_workdir, host, username, password)
         if port is None or port <= 0:
-            raise Exception("Filed to launch Ansys Workbench service.")
+            raise Exception("Failed to launch Ansys Workbench service.")
         super().__init__(port, client_workdir, host)
+        self._exited = False
 
     def exit(self):
         """Terminate the Workbench server and disconnect the client."""
+        if self._exited:
+            return
         self.run_script_string("Reset()")
-        self.run_script_string("internal_wbexit()")
-
+        if self.server_version >= 252:
+            self.run_script_string("internal_wbexit()")
+        else:
+            self._launcher.exit()
         super().exit()
-
-        self._launcher.exit()
-        logging.info("Workbench server connection has ended.")
+        self._exited = True
 
 
 def launch_workbench(
