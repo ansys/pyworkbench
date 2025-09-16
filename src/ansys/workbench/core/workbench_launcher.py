@@ -74,6 +74,7 @@ class Launcher:
         version,
         show_gui=True,
         server_workdir=None,
+        use_insecure_connection=False,
         host=None,
         username=None,
         password=None,
@@ -89,6 +90,8 @@ class Launcher:
         server_workdir : str, default: None
             Path to a writable directory on the server. The default is ``None``,
             in which case the user preference for the Workbench temporary file folder is used.
+        use_insecure_connection : bool, default: False
+            whether to use insecure connection between the server and clients
         host : str, default: None
             Name or IP address of the server. The default is ``None``, which launches Workbench
             on the local computer.
@@ -129,6 +132,12 @@ class Launcher:
                 "to launch PyWorkbench on a remote machine."
             )
 
+        security = "mtls"
+        if (use_insecure_connection):
+            security = "insecure"
+        elsif not host and self._wmi:
+            security = "wnua"
+
         if self._wmi:
             try:
                 if not host:
@@ -168,6 +177,7 @@ class Launcher:
         prefix = uuid.uuid4().hex
         cmd = "StartServer(EnvironmentPrefix='"
         cmd += prefix + "'"
+        cmd += ",Security='" + security + "'"
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
@@ -210,7 +220,7 @@ It is highly recommended to only utilize these features on a trusted, secure net
             logging.info("Workbench launched on the host with process ID: " + str(self._process_id))
         else:
             logging.error("Workbench failed to launch on the host.")
-            return 0
+            return 0, security
 
         # retrieve server port once WB is fully up running
         port = None
@@ -236,9 +246,9 @@ It is highly recommended to only utilize these features on a trusted, secure net
             time.sleep(10)
         if not port or int(port) <= 0:
             logging.error("Failed to retrieve the port used by Workbench service.")
-            return 0
+            return 0, security
         logging.info("Workbench service uses port: " + port)
-        return int(port)
+        return int(port), security
 
     def __getenv(self, key):
         value = None

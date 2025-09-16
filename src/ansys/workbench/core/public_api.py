@@ -41,16 +41,18 @@ class ClientWrapper(WorkbenchClient):
         Path to a writable directory on the client computer.
     host : str, default: None
         Server computer's name or IP address.
+    security : str
+        Transport mode used for connection security.
     """
 
-    def __init__(self, port, client_workdir=None, host=None):
+    def __init__(self, port, client_workdir=None, host=None, security):
         """Create a PyWorkbench client that connects to a Workbench server."""
         if host is None:
             host = "localhost"
         if client_workdir is None:
             client_workdir = tempfile.gettempdir()
         super().__init__(client_workdir, host, port)
-        super()._connect()
+        super()._connect(security)
 
     def exit(self):
         """Disconnect from the server."""
@@ -74,6 +76,8 @@ class LaunchWorkbench(ClientWrapper):
     server_workdir : str, None
         Path to a writable directory on the server computer. The default is ``None``,
         in which case the user preference for the Workbench temporary file folder is used.
+    use_insecure_connection : bool, default: False
+        whether to use insecure connection between the server and clients
     host : str, None
         Server computer's name or IP address. The default is ``None`` for launching on the
         local computer.
@@ -103,6 +107,7 @@ class LaunchWorkbench(ClientWrapper):
         version=None,
         client_workdir=None,
         server_workdir=None,
+        use_insecure_connection=False,
         host=None,
         username=None,
         password=None,
@@ -111,10 +116,12 @@ class LaunchWorkbench(ClientWrapper):
             version = "252"
 
         self._launcher = Launcher()
-        port = self._launcher.launch(version, show_gui, server_workdir, host, username, password)
+        port, security = self._launcher.launch(version, show_gui, server_workdir, use_insecure_connection, host, username, password)
         if port is None or port <= 0:
             raise Exception("Failed to launch Ansys Workbench service.")
-        super().__init__(port, client_workdir, host)
+        if use_insecure_connection:
+            print ("""Using insecure connection is not recommended. Please see the documentation for your installed product for additional information.""")
+        super().__init__(port, client_workdir, host, security)
         atexit.register(self.exit)
         self._exited = False
 
@@ -136,6 +143,7 @@ def launch_workbench(
     version=None,
     client_workdir=None,
     server_workdir=None,
+    use_insecure_connection=False,
     host=None,
     username=None,
     password=None,
@@ -157,6 +165,8 @@ def launch_workbench(
     server_workdir : str, None
         Path to a writable directory on the server computer. The default is ``None``,
         in which case the user preference for the Workbench temporary file folder is used.
+    use_insecure_connection : bool, default: False
+        whether to use insecure connection between the server and clients
     host : str, None
         Server computer's name or IP address. The default is ``None`` for launching on the
         local computer.
@@ -181,11 +191,11 @@ def launch_workbench(
 
     """
     return LaunchWorkbench(
-        show_gui, version, client_workdir, server_workdir, host, username, password
+        show_gui, version, client_workdir, server_workdir, use_insecure_connection, host, username, password
     )
 
 
-def connect_workbench(port, client_workdir=None, host=None):
+def connect_workbench(port, client_workdir=None, host=None, security='mtls'):
     """Create a PyWorkbench client that connects to an already running Workbench server.
 
     Parameters
@@ -197,6 +207,8 @@ def connect_workbench(port, client_workdir=None, host=None):
         in which case the system temp directory is used.
     host : str, default: None
         Server computer's name or IP address. The default is ``None`` for the local computer.
+    security : str among 'mtls', 'wnua', 'insecure', default: 'mtls'
+        Transport mode used for connection security. The default is `mtls`.
 
     Returns
     -------
@@ -211,7 +223,7 @@ def connect_workbench(port, client_workdir=None, host=None):
     >>> from ansys.workbench.core import connect_workbench
     >>> wb = connect_workbench(port = 32588)
     """
-    return ClientWrapper(port, client_workdir, host)
+    return ClientWrapper(port, client_workdir, host, security)
 
 
 __all__ = ["launch_workbench", "connect_workbench"]

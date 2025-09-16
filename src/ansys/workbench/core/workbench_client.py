@@ -22,6 +22,7 @@
 
 """Workbench client module for PyWorkbench."""
 
+from enum import Enum
 import glob
 import json
 import logging
@@ -38,6 +39,14 @@ from ansys.api.workbench.v0 import workbench_pb2 as wb
 from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
 from ansys.workbench.core.example_data import ExampleData
 
+class SecurityType(str, Enum):
+    """Enum containing the security types for server connection."""
+
+    (INSECURE, MTLS, WNUA) = (
+        "insecure",
+        "mtls",
+        "wnua"
+    )
 
 class WorkbenchClient:
     """Functions of a PyWorkbench client.
@@ -79,12 +88,54 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
         """Disconnect from the server when exiting a context."""
         self._disconnect()
 
-    def _connect(self):
+    def _connect(self, server_security):
         """Connect to the server."""
         hnp = self._server_host + ":" + str(self._server_port)
+
+        match server_security:
+            case SecurityType.INSECURE:
+                self.channel = grpc.insecure_channel(hnp)
+            case SecurityType.MTLS:
+                sslCreds = _getSslCreds()
+                self.channel = grpc.insecure_channel(hnp, sslCreds)
+            case SecurityType.WNUA:
+                self.channel = grpc.insecure_channel(hnp,
+                    options=(('grpc.default_authority', 'localhost'),))
+            case _:
+                raise RuntimeError(f"Unknown security type: {server_security}")
+
         self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info(f"connected to the WB server at {hnp}")
+
+    def _getSslCreds(self):
+        # TLS certificates location
+        if os.environ.get("ANSYS_GRPC_CERTIFICATES"):
+            certs_folder = os.environ.get("ANSYS_GRPC_CERTIFICATES")
+        else:
+            certs_folder = "certs"
+
+        # verify the existence of TLS certificates
+        client_cert = f"{certs_folder}/client.crt"
+        client_key = f"{certs_folder}/client.key"
+        ca_cert = f"{certs_folder}/ca.crt"
+
+        missing = [f for f in (client_cert, client_key, ca_cert) if not os.path.exists(f)]
+        if missing:
+            raise RuntimeError(f"Missing required TLS file(s) for mutual TLS: {', '.join(missing)}")
+
+        # create TLS credential
+        with open(client_cert, 'rb') as f:
+            certificate_chain = f.read()
+        with open(client_key, 'rb') as f:
+            private_key = f.read()
+        with open(ca_cert, 'rb') as f:
+            root_certificates = f.read()
+        return grpc.ssl_channel_credentials(
+            root_certificates=root_certificates,
+            private_key=private_key,
+            certificate_chain=certificate_chain
+        )
 
     def _disconnect(self):
         """Disconnect from the server."""
