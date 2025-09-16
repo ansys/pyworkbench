@@ -133,7 +133,7 @@ class Launcher:
             )
 
         security = "mtls"
-        if (use_insecure_connection):
+        if use_insecure_connection:
             security = "insecure"
         elif not host and self._wmi:
             security = "wnua"

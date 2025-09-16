@@ -98,7 +98,7 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
                 self.channel = grpc.insecure_channel(hnp, ssl_creds)
             case SecurityType.WNUA:
                 self.channel = grpc.insecure_channel(
-                    hnp, options=(('grpc.default_authority', 'localhost'),)
+                    hnp, options=(("grpc.default_authority", "localhost"),)
                 )
             case _:
                 raise RuntimeError(f"Unknown security type: {server_security}")
