@@ -39,14 +39,12 @@ from ansys.api.workbench.v0 import workbench_pb2 as wb
 from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
 from ansys.workbench.core.example_data import ExampleData
 
+
 class SecurityType(str, Enum):
     """Enum containing the security types for server connection."""
 
-    (INSECURE, MTLS, WNUA) = (
-        "insecure",
-        "mtls",
-        "wnua"
-    )
+    (INSECURE, MTLS, WNUA) = ("insecure", "mtls", "wnua")
+
 
 class WorkbenchClient:
     """Functions of a PyWorkbench client.
@@ -96,11 +94,12 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
             case SecurityType.INSECURE:
                 self.channel = grpc.insecure_channel(hnp)
             case SecurityType.MTLS:
-                sslCreds = _getSslCreds()
-                self.channel = grpc.insecure_channel(hnp, sslCreds)
+                ssl_creds = self._get_ssl_creds()
+                self.channel = grpc.insecure_channel(hnp, ssl_creds)
             case SecurityType.WNUA:
-                self.channel = grpc.insecure_channel(hnp,
-                    options=(('grpc.default_authority', 'localhost'),))
+                self.channel = grpc.insecure_channel(
+                    hnp, options=(('grpc.default_authority', 'localhost'),)
+                )
             case _:
                 raise RuntimeError(f"Unknown security type: {server_security}")
 
@@ -108,7 +107,7 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info(f"connected to the WB server at {hnp}")
 
-    def _getSslCreds(self):
+    def _get_ssl_creds(self):
         # TLS certificates location
         if os.environ.get("ANSYS_GRPC_CERTIFICATES"):
             certs_folder = os.environ.get("ANSYS_GRPC_CERTIFICATES")
@@ -125,16 +124,16 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
             raise RuntimeError(f"Missing required TLS file(s) for mutual TLS: {', '.join(missing)}")
 
         # create TLS credential
-        with open(client_cert, 'rb') as f:
+        with open(client_cert, "rb") as f:
             certificate_chain = f.read()
-        with open(client_key, 'rb') as f:
+        with open(client_key, "rb") as f:
             private_key = f.read()
-        with open(ca_cert, 'rb') as f:
+        with open(ca_cert, "rb") as f:
             root_certificates = f.read()
         return grpc.ssl_channel_credentials(
             root_certificates=root_certificates,
             private_key=private_key,
-            certificate_chain=certificate_chain
+            certificate_chain=certificate_chain,
         )
 
     def _disconnect(self):

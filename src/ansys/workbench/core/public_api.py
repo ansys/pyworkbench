@@ -45,7 +45,7 @@ class ClientWrapper(WorkbenchClient):
         Transport mode used for connection security.
     """
 
-    def __init__(self, port, client_workdir=None, host=None, security):
+    def __init__(self, port, client_workdir=None, host=None, security="default"):
         """Create a PyWorkbench client that connects to a Workbench server."""
         if host is None:
             host = "localhost"
@@ -116,11 +116,14 @@ class LaunchWorkbench(ClientWrapper):
             version = "252"
 
         self._launcher = Launcher()
-        port, security = self._launcher.launch(version, show_gui, server_workdir, use_insecure_connection, host, username, password)
+        port, security = self._launcher.launch(version, show_gui, server_workdir,
+            use_insecure_connection, host, username, password)
         if port is None or port <= 0:
             raise Exception("Failed to launch Ansys Workbench service.")
         if use_insecure_connection:
-            print ("""Using insecure connection is not recommended. Please see the documentation for your installed product for additional information.""")
+            print ("Using insecure connection is not recommended. "
+                   "Please see the documentation for your installed "
+                   "product for additional information.")
         super().__init__(port, client_workdir, host, security)
         atexit.register(self.exit)
         self._exited = False
@@ -191,7 +194,8 @@ def launch_workbench(
 
     """
     return LaunchWorkbench(
-        show_gui, version, client_workdir, server_workdir, use_insecure_connection, host, username, password
+        show_gui, version, client_workdir, server_workdir, use_insecure_connection,
+        host, username, password
     )
 
 
