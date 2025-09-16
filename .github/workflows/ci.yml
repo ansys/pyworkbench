@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  MAIN_PYTHON_VERSION: "3.11"
+  MAIN_PYTHON_VERSION: "3.13"
   PACKAGE_NAME: "ansys-workbench-core"
   DOCUMENTATION_CNAME: 'workbench.docs.pyansys.com'
 
