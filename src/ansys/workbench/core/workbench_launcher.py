@@ -192,7 +192,8 @@ class Launcher:
         cmd = (
             '"'
             + cmd2
-            + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin('Ansys.RemoteWB.Addin').Version.Major > 1 else """
+            + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin("""
+            + """'Ansys.RemoteWB.Addin').Version.Major > 1 else """
             + cmd1
             + '"'
         )
