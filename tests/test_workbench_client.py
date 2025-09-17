@@ -68,7 +68,7 @@ def test_connect(mock_grpc, mock_workbench_service_stub):
 
 def test_connect_workbench():
     """Test the connect_workbench method."""
-    client = connect_workbench(port=5000, client_workdir="/tmp", host="localhost")
+    client = connect_workbench(port=5000, client_workdir="/tmp", host="localhost", security="insecure")
     assert isinstance(client, WorkbenchClient)
     client.exit()
 
