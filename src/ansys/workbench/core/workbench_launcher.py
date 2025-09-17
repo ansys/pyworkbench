@@ -189,7 +189,13 @@ class Launcher:
         if host is not None:
             cmd2 += ",AllowRemoteConnection=True"
         cmd2 += ")"
-        cmd = "\"" + cmd2 + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin('Ansys.RemoteWB.Addin').Version.Major > 1 else """ + cmd1 + "\""
+        cmd = (
+            '"'
+            + cmd2
+            + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin('Ansys.RemoteWB.Addin').Version.Major > 1 else """
+            + cmd1
+            + '"'
+        )
         args.append(cmd)
 
         command_line = " ".join(args)
