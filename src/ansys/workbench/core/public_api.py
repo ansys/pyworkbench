@@ -41,7 +41,7 @@ class ClientWrapper(WorkbenchClient):
         Path to a writable directory on the client computer.
     host : str, default: None
         Server computer's name or IP address.
-    security : str
+    security : str, default: 'default'
         Transport mode used for connection security.
     """
 
