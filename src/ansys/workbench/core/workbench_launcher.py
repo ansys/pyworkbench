@@ -74,6 +74,7 @@ class Launcher:
         version,
         show_gui=True,
         server_workdir=None,
+        use_insecure_connection=False,
         host=None,
         username=None,
         password=None,
@@ -89,6 +90,8 @@ class Launcher:
         server_workdir : str, default: None
             Path to a writable directory on the server. The default is ``None``,
             in which case the user preference for the Workbench temporary file folder is used.
+        use_insecure_connection : bool, default: False
+            whether to use insecure connection between the server and clients
         host : str, default: None
             Name or IP address of the server. The default is ``None``, which launches Workbench
             on the local computer.
@@ -129,6 +132,12 @@ class Launcher:
                 "to launch PyWorkbench on a remote machine."
             )
 
+        security = "mtls"
+        if use_insecure_connection:
+            security = "insecure"
+        elif not host and self._wmi:
+            security = "wnua"
+
         if self._wmi:
             try:
                 if not host:
@@ -165,16 +174,38 @@ class Launcher:
             args.append("--start-and-wait")
             args.append("-nowindow")
         args.append("-E")
+
+        # create command string
         prefix = uuid.uuid4().hex
-        cmd = "StartServer(EnvironmentPrefix='"
-        cmd += prefix + "'"
+        cmd1 = "StartServer(EnvironmentPrefix='"
+        cmd1 += prefix + "'"
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
-            cmd += ",WorkingDirectory='" + server_workdir + "'"
-        cmd += ")"
+            cmd1 += ",WorkingDirectory='" + server_workdir + "'"
+        cmd2 = str(cmd1)
+        cmd1 += ")"
+        cmd2 += ",Security='" + security + "'"
+        if host is not None:
+            cmd2 += ",AllowRemoteConnection=True"
+        cmd2 += ")"
+        cmd = (
+            '"'
+            + cmd2
+            + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin("""
+            + """'Ansys.RemoteWB.Addin').Version.Major > 1 else """
+            + cmd1
+            + '"'
+        )
         args.append(cmd)
+
         command_line = " ".join(args)
+
+        # security precaution statement
+        if host is not None:
+            print("""The server started will allow remote access connections to be
+established, possibly permitting control of the machine and any data which resides on it.
+It is highly recommended to only utilize these features on a trusted, secure network.""")
 
         successful = False
         process = None
@@ -202,7 +233,7 @@ class Launcher:
             logging.info("Workbench launched on the host with process ID: " + str(self._process_id))
         else:
             logging.error("Workbench failed to launch on the host.")
-            return 0
+            return 0, security
 
         # retrieve server port once WB is fully up running
         port = None
@@ -228,9 +259,9 @@ class Launcher:
             time.sleep(10)
         if not port or int(port) <= 0:
             logging.error("Failed to retrieve the port used by Workbench service.")
-            return 0
+            return 0, security
         logging.info("Workbench service uses port: " + port)
-        return int(port)
+        return int(port), security
 
     def __getenv(self, key):
         value = None
