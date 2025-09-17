@@ -61,7 +61,7 @@ def mock_wb():
 def test_connect(mock_grpc, mock_workbench_service_stub):
     """Test the connect method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     mock_grpc.assert_called_once_with("localhost:5000")
     mock_workbench_service_stub.assert_called_once()
 
@@ -76,7 +76,7 @@ def test_connect_workbench():
 def test_disconnect():
     """Test the disconnect method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     client._disconnect()
     assert client.channel is None
     assert client.stub is None
@@ -85,7 +85,7 @@ def test_disconnect():
 def test_is_connected():
     """Test the is_connected method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     assert client._is_connected()
     client._disconnect()
     assert not client._is_connected()
@@ -100,7 +100,7 @@ def test_is_connected():
 def test_run_script_string(mock_workbench_service_stub):
     """Test the run_script_string method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
     mock_stub.RunScript.return_value = mock_response
@@ -111,7 +111,7 @@ def test_run_script_string(mock_workbench_service_stub):
 def test_log_file(mock_wb, mock_workbench_service_stub):
     """Test the log file functionality."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
     mock_response.log.messages = [{"level": 2, "message": "Hello World!"}]
@@ -144,7 +144,7 @@ def test_run_script_file(mock_workbench_service_stub):
     local_workdir = workdir = pathlib.Path(__file__).parent
     script_dir = workdir / "scripts"
     client = WorkbenchClient(local_workdir=local_workdir, server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
     mock_stub.RunScript.return_value = mock_response
@@ -160,7 +160,7 @@ def test_run_script_file(mock_workbench_service_stub):
 def test_upload_file(mock_workbench_service_stub):
     """Test the upload_file method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
     mock_response.error = None
@@ -178,7 +178,7 @@ def test_upload_file(mock_workbench_service_stub):
 def test_upload_file_from_example_repo(mock_workbench_service_stub):
     """Test the upload_file_from_example_repo method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     mock_stub = mock_workbench_service_stub.return_value
     mock_response = MagicMock()
     mock_response.error = None
@@ -204,7 +204,7 @@ def test_upload_iterator():
     try:
         # Create a WorkbenchClient instance
         client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-        client._connect()
+        client._connect("insecure")
 
         # Get the temporary file path
         file_path = tmp_file.name
@@ -226,7 +226,7 @@ def test_upload_iterator():
 def test_download_file(mock_workbench_service_stub):
     """Test the download_file method."""
     client = WorkbenchClient(local_workdir="/tmp", server_host="localhost", server_port=5000)
-    client._connect()
+    client._connect("insecure")
     mock_stub = mock_workbench_service_stub.return_value
     client.stub = mock_stub
 
