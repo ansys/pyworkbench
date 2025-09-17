@@ -174,18 +174,24 @@ class Launcher:
             args.append("--start-and-wait")
             args.append("-nowindow")
         args.append("-E")
+
+        # create command string
         prefix = uuid.uuid4().hex
-        cmd = "StartServer(EnvironmentPrefix='"
-        cmd += prefix + "'"
-        cmd += ",Security='" + security + "'"
+        cmd1 = "StartServer(EnvironmentPrefix='"
+        cmd1 += prefix + "'"
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
-            cmd += ",WorkingDirectory='" + server_workdir + "'"
+            cmd1 += ",WorkingDirectory='" + server_workdir + "'"
+        cmd2 = str(cmd1)
+        cmd1 += ")"
+        cmd2 += ",Security='" + security + "'"
         if host is not None:
-            cmd += ",AllowRemoteConnection=True"
-        cmd += ")"
+            cmd2 += ",AllowRemoteConnection=True"
+        cmd2 += ")"
+        cmd = "\"" + cmd2 + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin('Ansys.RemoteWB.Addin').Version.Major > 1 else """ + cmd1 + "\""
         args.append(cmd)
+
         command_line = " ".join(args)
 
         # security precaution statement

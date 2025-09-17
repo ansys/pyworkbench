@@ -89,21 +89,18 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
     def _connect(self, server_security):
         """Connect to the server."""
         hnp = self._server_host + ":" + str(self._server_port)
-
         match server_security:
             case SecurityType.INSECURE:
                 self.channel = grpc.insecure_channel(hnp)
             case SecurityType.MTLS:
                 ssl_creds = self._get_ssl_creds()
-                self.channel = grpc.insecure_channel(hnp, ssl_creds)
+                self.channel = grpc.secure_channel(hnp, ssl_creds)
             case SecurityType.WNUA:
                 self.channel = grpc.insecure_channel(
                     hnp, options=(("grpc.default_authority", "localhost"),)
                 )
             case _:
                 raise RuntimeError(f"Unknown security type: {server_security}")
-
-        self.channel = grpc.insecure_channel(hnp)
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info(f"connected to the WB server at {hnp}")
 
