@@ -125,7 +125,7 @@ class Launcher:
 
         if host and (not username or not password):
             raise Exception(
-                "Username and passwork must be specified "
+                "Username and password must be specified "
                 "to launch PyWorkbench on a remote machine."
             )
 
