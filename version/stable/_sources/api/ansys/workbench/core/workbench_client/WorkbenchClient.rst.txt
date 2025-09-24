@@ -1,0 +1,701 @@
+
+
+
+
+
+
+:class:`WorkbenchClient`
+========================
+
+.. py:class:: ansys.workbench.core.workbench_client.WorkbenchClient(local_workdir, server_host, server_port)
+
+   
+   Functions of a PyWorkbench client.
+
+
+   :Parameters:
+
+       **local_workdir** : :class:`python:str`
+           Local working directory for the client.
+
+       **server_host** : :class:`python:str`
+           Hostname or IP address of the server.
+
+       **server_port** : :class:`python:int`
+           Port number of the server.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+.. py:currentmodule:: WorkbenchClient
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~set_console_log_level`
+            - Set the log filter level for the client console.
+          * - :py:attr:`~set_log_file`
+            - Set a local log file for the Workbench server log.
+          * - :py:attr:`~reset_log_file`
+            - No longer use the current log file for the Workbench server log.
+          * - :py:attr:`~run_script_string`
+            - Run a script as given in the input string on the server.
+          * - :py:attr:`~run_script_file`
+            - Run a script file on the server.
+          * - :py:attr:`~upload_file`
+            - Upload one or more files from the client to the server.
+          * - :py:attr:`~upload_file_from_example_repo`
+            - Upload a file from the Ansys ``example-data`` repository to the server.
+          * - :py:attr:`~download_file`
+            - Download one or more files from the server.
+          * - :py:attr:`~download_project_archive`
+            - Create and download the project archive.
+          * - :py:attr:`~start_mechanical_server`
+            - Start the PyMechanical server for the given system in the Workbench project.
+          * - :py:attr:`~stop_mechanical_server`
+            - Stop the PyMechanical server for the given system in the Workbench project.
+          * - :py:attr:`~start_fluent_server`
+            - Start the PyFluent server for the given system in the Workbench project.
+          * - :py:attr:`~stop_fluent_server`
+            - Stop the Fluent server for the given system in the Workbench project.
+          * - :py:attr:`~start_sherlock_server`
+            - Start the PySherlock server for the given system in the Workbench project.
+          * - :py:attr:`~stop_sherlock_server`
+            - Stop the Sherlock server for the given system in the Workbench project.
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~workdir`
+            - 
+
+
+
+   .. tab-item:: Special methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~__enter__`
+            - Connect to the server when entering a context.
+          * - :py:attr:`~__exit__`
+            - Disconnect from the server when exiting a context.
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.workbench.core.workbench_client import WorkbenchClient
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: workdir
+
+
+
+Method detail
+-------------
+
+.. py:method:: __enter__()
+
+   
+   Connect to the server when entering a context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: __exit__(exc_type, exc_value, traceback)
+
+   
+   Disconnect from the server when exiting a context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_console_log_level(log_level)
+
+   
+   Set the log filter level for the client console.
+
+
+   :Parameters:
+
+       **log_level** : :class:`python:str`, default: "error"
+           Level of logging. Options are "critical", "debug", "error", "info", and "warning".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: set_log_file(log_file)
+
+   
+   Set a local log file for the Workbench server log.
+
+   Create a local log file if one does not exist and append it to the existing log file.
+
+   :Parameters:
+
+       **log_file** : :class:`python:str`
+           Path to a local file to use for logging.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: reset_log_file()
+
+   
+   No longer use the current log file for the Workbench server log.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: run_script_string(script_string, args=None, log_level='error')
+
+   
+   Run a script as given in the input string on the server.
+
+
+   :Parameters:
+
+       **script_string** : :class:`python:str`
+           String containing the content of the script to run.
+
+       **args** : :obj:`dictionary` :obj:`of` :obj:`script` :obj:`variable` :obj:`names` :obj:`and` :obj:`values`
+           Variables in the script specified as $$varname%%50%% will be converted to variable
+           values or use the default value - 50 in the example.
+
+       **log_level** : :class:`python:str`, default: "error"
+           Level of logging. Options are "critical", "debug", "error", "info", and "warning".
+
+
+
+   :Returns:
+
+       :class:`python:str`
+           Output defined in the script.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Run a Workbench script, given in a string, that returns the name of
+   a newly created system.
+
+   >>> wb.run_script_string(r'''import json
+   wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
+   ''')
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: run_script_file(script_file_name, args=None, log_level='error')
+
+   
+   Run a script file on the server.
+
+
+   :Parameters:
+
+       **script_file_name** : :class:`python:str`
+           Name of the script file to run. The script file should be located in the client
+           working directory
+
+       **args** : :obj:`dictionary` :obj:`of` :obj:`script` :obj:`variable` :obj:`names` :obj:`and` :obj:`values`
+           Variables in the script specified as $$varname%%50%% will be converted to variable
+           values or use the default value - 50 in the example.
+
+       **log_level** : :class:`python:str`, default: "error"
+           Level of logging. Options are "critical", "debug", "error", "info", and "warning".
+
+
+
+   :Returns:
+
+       :class:`python:str`
+           Output defined in the script.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: upload_file(*file_list, show_progress=True)
+
+   
+   Upload one or more files from the client to the server.
+
+
+   :Parameters:
+
+       **file_list** : :class:`python:list`\[:class:`python:str`]
+           List of paths to the one or more local files to upload. The
+           wildcard characters "?" and "*" are supported.
+
+       **show_progress** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:True`
+           Whether to show a progress bar during the upload.
+
+
+
+   :Returns:
+
+       :class:`python:list`\[:class:`python:str`]
+           Names of the uploaded files.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: upload_file_from_example_repo(relative_file_path, show_progress=True)
+
+   
+   Upload a file from the Ansys ``example-data`` repository to the server.
+
+
+   :Parameters:
+
+       **relative_file_path** : :class:`python:str`
+           File path relative to the ``pyworkbench`` folder in the ``example-data`` repository.
+
+       **show_progress** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:True`
+           Whether to show a progress bar during the upload.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: download_file(file_name, show_progress=True, target_dir=None)
+
+   
+   Download one or more files from the server.
+
+
+   :Parameters:
+
+       **file_name** : :class:`python:str`
+           Name of the file. File must be located in the server's working directory.
+           The wildcard characters "?" and "*" are supported. A ZIP file is automatically
+           generated and downloaded when multiple files are specified.
+
+       **show_progress** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:True`
+           Whether to show a progress bar during the download.
+
+       **target_dir** : :class:`python:str`, default: :data:`python:None`
+           Path to a local directory to download the files to. The default is ``None``,
+           in which case the client working directory is used.
+
+
+
+   :Returns:
+
+       :class:`python:str`
+           Name of the downloaded file.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: download_project_archive(archive_name, include_solution_result_files=True, show_progress=True)
+
+   
+   Create and download the project archive.
+
+
+   :Parameters:
+
+       **archive_name** : :class:`python:str`
+           Name of the project archive to use, without the file extension.
+
+       **include_solution_result_files** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:True`
+           Whether to include solution and result files in the archive.
+
+       **show_progress** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:True`
+           Whether to show a progress bar during the download.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: start_mechanical_server(system_name, port=0)
+
+   
+   Start the PyMechanical server for the given system in the Workbench project.
+
+
+   :Parameters:
+
+       **system_name** : :class:`python:str`
+           Name of the system in the Workbench project.
+
+       **port** : :class:`python:int`, default: 0
+           Port to use for mechanical server if possible
+
+
+
+   :Returns:
+
+       :class:`python:int`
+           Port of the PyMechanical server to use to start the PyMechanical client.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Start a PyMechanical session for the given system.
+
+   >>> from ansys.mechanical.core import connect_to_mechanical
+   >>> server_port=wb.start_mechanical_server(system_name=mech_system_name)
+   >>> mechanical = connect_to_mechanical(port=server_port)
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: stop_mechanical_server(system_name)
+
+   
+   Stop the PyMechanical server for the given system in the Workbench project.
+
+
+   :Parameters:
+
+       **system_name** : :class:`python:str`
+           Name of the system in the Workbench project.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Stop the PyMechanical session for the given system.
+
+   >>> wb.stop_mechanical_server(system_name=mech_system_name)
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: start_fluent_server(system_name)
+
+   
+   Start the PyFluent server for the given system in the Workbench project.
+
+
+   :Parameters:
+
+       **system_name** : :class:`python:str`
+           Name of the system in the Workbench project.
+
+
+
+   :Returns:
+
+       :class:`python:str`
+           Path to the local file containing the PyFluent server information that
+           can be used to start a PyFluent client.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Start a PyFluent session for the given system.
+
+   >>> import ansys.fluent.core as pyfluent
+   >>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)
+   >>> fluent=pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: stop_fluent_server(system_name)
+
+   
+   Stop the Fluent server for the given system in the Workbench project.
+
+
+   :Parameters:
+
+       **system_name** : :class:`python:str`
+           Name of the system in the Workbench project.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Stop the Fluent session for the given system.
+
+   >>> wb.stop_fluent_server(system_name=mech_system_name)
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: start_sherlock_server(system_name)
+
+   
+   Start the PySherlock server for the given system in the Workbench project.
+
+
+   :Parameters:
+
+       **system_name** : :class:`python:str`
+           Name of the system in the Workbench project.
+
+
+
+   :Returns:
+
+       :class:`python:int`
+           Port of the PySherlock server to use to start a PySherlock client.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Start a PySherlock session for the given system.
+
+   >>> from ansys.sherlock.core import pysherlock
+   >>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)
+   >>> sherlock = pysherlock.connect_grpc_channel(port=server_port)
+   >>> sherlock.common.check()
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: stop_sherlock_server(system_name)
+
+   
+   Stop the Sherlock server for the given system in the Workbench project.
+
+
+   :Parameters:
+
+       **system_name** : :class:`python:str`
+           Name of the system in the Workbench project.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Stop the Sherlock session for the given system.
+
+   >>> wb.stop_sherlock_server(system_name=mech_system_name)
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
