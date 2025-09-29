@@ -26,7 +26,8 @@ import ctypes
 import logging
 import os
 import platform
-import subprocess
+# subprocess is used to launch Workbench on local Linux machine, excluding bandit warning
+import subprocess  # nosec: B404
 import time
 import uuid
 
@@ -191,15 +192,17 @@ class Launcher:
                         self._process = p
                         break
         else:
+            # Excluding bandit warning for subprocess usage
+            # as this is a controlled env
             process = subprocess.Popen(
                 args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
-            )
+            ) # nosec: B603
             if process:
                 successful = True
                 self._process_id = process.pid
                 self._process = process
         if successful:
-            logging.info("Workbench launched on the host with process ID: " + str(self._process_id))
+            logging.info(f"Workbench is launched successfully with process ID {self._process_id}.")
         else:
             logging.error("Workbench failed to launch on the host.")
             return 0
@@ -257,13 +260,13 @@ class Launcher:
                         logging.info("Shutting down " + p.Name + " ...")
                         try:
                             p.Terminate()
-                        except Exception:
-                            pass
+                        except Exception as ex:
+                            logging.info(f"Failed to terminate process {p.Name}: {ex}")
                     self._process.Terminate()
                 else:
                     self._process.terminate()
-            except Exception:
-                pass
+            except Exception as ex:
+                logging.info(f"Failed to terminate process {self._process.pid}: {ex}")
 
         self._wmi_connection = None
         self._process_id = -1
