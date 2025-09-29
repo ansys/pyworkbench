@@ -66,7 +66,7 @@ class ExampleData:
         logging.info(f"Downloading {url} from ``example-data`` repository ...")
 
         # Ignoring bandit error as we need to use urllib to download the file
-        with urllib.request.urlopen(url) as in_stream: # nosec: B310
+        with urllib.request.urlopen(url) as in_stream:  # nosec: B310
             if in_stream.code != 200:
                 raise Exception("error getting the url, code " + str(in_stream.code))
             with open(local_file_path, "wb") as out_file:

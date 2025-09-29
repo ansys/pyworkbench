@@ -26,6 +26,7 @@ import ctypes
 import logging
 import os
 import platform
+
 # subprocess is used to launch Workbench on local Linux machine, excluding bandit warning
 import subprocess  # nosec: B404
 import time
@@ -196,7 +197,7 @@ class Launcher:
             # as this is a controlled env
             process = subprocess.Popen(
                 args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
-            ) # nosec: B603
+            )  # nosec: B603
             if process:
                 successful = True
                 self._process_id = process.pid
