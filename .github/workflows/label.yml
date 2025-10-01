@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - uses: micnncim/action-label-syncer@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,14 +41,16 @@ jobs:
         sync-labels: true
 
     # Label based on branch name
-    - uses: actions-ecosystem/action-add-labels@v1
+    - name: Label documentation
+      uses: actions-ecosystem/action-add-labels@v1
       if: |
         startsWith(github.event.pull_request.head.ref, 'doc') ||
         startsWith(github.event.pull_request.head.ref, 'docs')
       with:
         labels: documentation
 
-    - uses: actions-ecosystem/action-add-labels@v1
+    - name: Label maintenance
+      uses: actions-ecosystem/action-add-labels@v1
       if: |
         startsWith(github.event.pull_request.head.ref, 'maint') ||
         startsWith(github.event.pull_request.head.ref, 'no-ci') ||
@@ -54,13 +58,15 @@ jobs:
       with:
         labels: maintenance
 
-    - uses: actions-ecosystem/action-add-labels@v1
+    - name: Label enhancement
+      uses: actions-ecosystem/action-add-labels@v1
       if: startsWith(github.event.pull_request.head.ref, 'feat')
       with:
         labels: |
           enhancement
 
-    - uses: actions-ecosystem/action-add-labels@v1
+    - name: Label bug fix
+      uses: actions-ecosystem/action-add-labels@v1
       if: |
         startsWith(github.event.pull_request.head.ref, 'fix') ||
         startsWith(github.event.pull_request.head.ref, 'patch')
