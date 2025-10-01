@@ -41,16 +41,14 @@ jobs:
         sync-labels: true
 
     # Label based on branch name
-    - name: Label documentation
-      uses: actions-ecosystem/action-add-labels@v1
+    - uses: actions-ecosystem/action-add-labels@v1
       if: |
         startsWith(github.event.pull_request.head.ref, 'doc') ||
         startsWith(github.event.pull_request.head.ref, 'docs')
       with:
         labels: documentation
 
-    - name: Label maintenance
-      uses: actions-ecosystem/action-add-labels@v1
+    - uses: actions-ecosystem/action-add-labels@v1
       if: |
         startsWith(github.event.pull_request.head.ref, 'maint') ||
         startsWith(github.event.pull_request.head.ref, 'no-ci') ||
@@ -58,15 +56,13 @@ jobs:
       with:
         labels: maintenance
 
-    - name: Label enhancement
-      uses: actions-ecosystem/action-add-labels@v1
+    - uses: actions-ecosystem/action-add-labels@v1
       if: startsWith(github.event.pull_request.head.ref, 'feat')
       with:
         labels: |
           enhancement
 
-    - name: Label bug fix
-      uses: actions-ecosystem/action-add-labels@v1
+    - uses: actions-ecosystem/action-add-labels@v1
       if: |
         startsWith(github.event.pull_request.head.ref, 'fix') ||
         startsWith(github.event.pull_request.head.ref, 'patch')
@@ -74,6 +70,7 @@ jobs:
         labels: bug
 
   commenter:
+    name: Suggest adding a label if none has been applied
     runs-on: ubuntu-latest
     steps:
     - name: Suggest to add labels
