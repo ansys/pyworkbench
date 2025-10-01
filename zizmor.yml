@@ -1,0 +1,9 @@
+rules:
+  unpinned-uses:
+    ignore:
+      - label.yml
+      - ci.yml
+  excessive-permissions:
+    ignore:
+      - label.yml
+      - ci.yml
