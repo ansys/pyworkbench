@@ -191,13 +191,18 @@ class Launcher:
         if host is not None:
             cmd2 += ",AllowRemoteConnection=True"
         cmd2 += ")"
+
+        if self._wmi:
+            quote_or_not = '"'  # quotes needed when constructing command line
+        else:
+            quote_or_not = ''
         cmd = (
-            '"'
+            quote_or_not
             + cmd2
             + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin("""
             + """'Ansys.RemoteWB.Addin').Version.Major > 1 else """
             + cmd1
-            + '"'
+            + quote_or_not
         )
         args.append(cmd)
 
