@@ -48,6 +48,7 @@ jobs:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           dev-mode: ${{ github.ref != 'refs/heads/main' }}
 
+
   actions-security:
     name: "Check actions security"
     runs-on: ubuntu-latest
