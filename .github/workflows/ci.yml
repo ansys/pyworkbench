@@ -48,17 +48,6 @@ jobs:
           auditing-level: 'high'
           trust-ansys-actions: true
 
-  vulnerabilities:
-    name: Vulnerabilities
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ansys/actions/check-vulnerabilities@123a1f17d71f117e0ba29c53d6a0f602e0d8d902 # v10.1.3
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          python-package-name: ${{ env.PACKAGE_NAME }}
-          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-          dev-mode: ${{ github.ref != 'refs/heads/main' }}
-
   update-changelog:
     name: "Update CHANGELOG (on release)"
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
