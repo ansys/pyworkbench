@@ -195,7 +195,7 @@ class Launcher:
         if self._wmi:
             quote_or_not = '"'  # quotes needed when constructing command line
         else:
-            quote_or_not = ''
+            quote_or_not = ""
         cmd = (
             quote_or_not
             + cmd2
