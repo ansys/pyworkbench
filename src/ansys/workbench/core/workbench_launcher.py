@@ -128,6 +128,11 @@ class Launcher:
                 "Launching PyWorkbench on a remote machine from Linux is not supported."
             )
 
+        if not host and not self._wmi and int(version) < 252:
+            raise Exception(
+                "Launching PyWorkbench 25.1 or below on Linux is not supported."
+            )
+
         if host and (not username or not password):
             raise Exception(
                 "Username and password must be specified "
@@ -248,24 +253,26 @@ It is highly recommended to only utilize these features on a trusted, secure net
         port = None
         timeout = 60 * 8  # set 8 minutes as upper limit for WB startup
         start_time = time.time()
-        while True:
-            if self._wmi:
+        if self._wmi:
+            while True:
                 port = self.__getenv("ANSYS_FRAMEWORK_SERVER_PORT")
-            else:
-                for line in process.stdout:
-                    line = line.rstrip()
-                    if line.startswith("ANSYS_FRAMEWORK_SERVER_PORT="):
-                        port = line[28:]
+                if port and port.startswith(prefix):
+                    port = port[len(prefix) :]
+                    break
+                else:
+                    port = None
+                if time.time() - start_time > timeout:
+                    logging.error("Failed to start Workbench service within reasonable timeout.")
+                    break
+                time.sleep(10)
+        else:
+            for line in process.stdout:
+                line = line.rstrip()
+                if line.startswith("ANSYS_FRAMEWORK_SERVER_PORT="):
+                    port = line[28:]
+                    if port.startswith(prefix):
+                        port = port[len(prefix) :]
                         break
-            if port and port.startswith(prefix):
-                port = port[len(prefix) :]
-                break
-            else:
-                port = None
-            if time.time() - start_time > timeout:
-                logging.error("Failed to start Workbench service within reasonable timeout.")
-                break
-            time.sleep(10)
         if not port or int(port) <= 0:
             logging.error("Failed to retrieve the port used by Workbench service.")
             return 0, security
