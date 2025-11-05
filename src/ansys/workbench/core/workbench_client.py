@@ -32,13 +32,12 @@ import os
 import re
 import time
 
-import grpc
 import tqdm
 
 from ansys.api.workbench.v0 import workbench_pb2 as wb
 from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
-from ansys.workbench.core.example_data import ExampleData
 from ansys.workbench.core.cyberchannel import create_channel
+from ansys.workbench.core.example_data import ExampleData
 
 
 class SecurityType(str, Enum):
@@ -91,12 +90,16 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
     def _connect(self):
         """Connect to the server."""
         self.channel = create_channel(
-            host=self._server_host, port=self._server_port,
-            transport_mode=self._server_security, certs_dir=None,
+            host=self._server_host,
+            port=self._server_port,
+            transport_mode=self._server_security,
+            certs_dir=None,
             grpc_options=None,
         )
         self.stub = WorkbenchServiceStub(self.channel)
-        logging.info(f"connected to the WB server at {self._server_host}:{self._server_port} using {self._server_security} connection")
+        logging.info(
+            f"connected to the WB server at {self._server_host}:{self._server_port} using {self._server_security} connection"
+        )
 
     def _disconnect(self):
         """Disconnect from the server."""

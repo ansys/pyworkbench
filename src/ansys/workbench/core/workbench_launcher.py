@@ -129,9 +129,7 @@ class Launcher:
             )
 
         if not host and not self._wmi and int(version) < 252:
-            raise Exception(
-                "Launching PyWorkbench 25.1 or below on Linux is not supported."
-            )
+            raise Exception("Launching PyWorkbench 25.1 or below on Linux is not supported.")
 
         if host and (not username or not password):
             raise Exception(
