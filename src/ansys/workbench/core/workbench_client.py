@@ -98,7 +98,8 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
         )
         self.stub = WorkbenchServiceStub(self.channel)
         logging.info(
-            f"connected to the WB server at {self._server_host}:{self._server_port} using {self._server_security} connection"
+            f"connected to the WB server at {self._server_host}:{self._server_port} "
+            "using {self._server_security} connection"
         )
 
     def _disconnect(self):

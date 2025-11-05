@@ -337,7 +337,7 @@ def create_mtls_channel(
         error_message = f"Certificate file not found: {e.filename}. "
         if certs_folder is not None:
             error_message += (
-                f"Ensure that the certificates are present in the '{certs_folder}' folder or " \
+                f"Ensure that the certificates are present in the '{certs_folder}' folder or "
                 "set the 'ANSYS_GRPC_CERTIFICATES' environment variable."
             )
         raise FileNotFoundError(error_message) from e
