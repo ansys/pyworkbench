@@ -45,14 +45,14 @@ class ClientWrapper(WorkbenchClient):
         Transport mode used for connection security.
     """
 
-    def __init__(self, port, client_workdir=None, host=None, security="default"):
+    def __init__(self, port, client_workdir=None, host=None, security="mtls"):
         """Create a PyWorkbench client that connects to a Workbench server."""
         if host is None:
             host = "localhost"
         if client_workdir is None:
             client_workdir = tempfile.gettempdir()
-        super().__init__(client_workdir, host, port)
-        super()._connect(security)
+        super().__init__(client_workdir, host, port, security)
+        super()._connect()
 
     def exit(self):
         """Disconnect from the server."""
