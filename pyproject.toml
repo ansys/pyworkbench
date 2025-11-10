@@ -48,7 +48,7 @@ vulnerabilities = [
     "safety==3.6.2",
 ]
 tests = [
-    "pytest==8.4.2",
+    "pytest==9.0.0",
     "pytest-cov==7.0.0",
 ]
 
