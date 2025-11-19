@@ -45,7 +45,7 @@ doc = [
 ]
 vulnerabilities = [
     "bandit==1.9.1",
-    "safety==3.6.2",
+    "safety==3.7.0",
 ]
 tests = [
     "pytest==8.4.2",
