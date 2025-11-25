@@ -101,7 +101,10 @@ def test_is_connected():
 
 # def test_set_console_log_level(mock_wb):
 #     client = WorkbenchClient(
-#         local_workdir="/tmp", server_host="localhost", server_port=5000, server_security="insecure"
+#         local_workdir="/tmp",
+#         server_host="localhost",
+#         server_port=5000,
+#         server_security="insecure",
 #     )
 #     client.set_console_log_level("warning")
 #     assert client.__log_console_handler.level == logging.DEBUG
