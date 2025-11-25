@@ -22,7 +22,6 @@
 
 """Workbench client module for PyWorkbench."""
 
-from enum import Enum
 import glob
 import json
 import logging
