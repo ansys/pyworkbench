@@ -41,8 +41,9 @@ class ClientWrapper(WorkbenchClient):
         Path to a writable directory on the client computer.
     host : str, default: None
         Server computer's name or IP address.
-    security : str, default: 'default'
+    security : str, default: 'mtls'
         Transport mode used for connection security.
+        Options are: "insecure", "uds", "wnua", "mtls"
     """
 
     def __init__(self, port, client_workdir=None, host=None, security="mtls"):

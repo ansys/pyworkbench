@@ -40,12 +40,6 @@ from ansys.tools.common.cyberchannel import create_channel
 from ansys.workbench.core.example_data import ExampleData
 
 
-class SecurityType(str, Enum):
-    """Enum containing the security types for server connection."""
-
-    (INSECURE, MTLS, WNUA) = ("insecure", "mtls", "wnua")
-
-
 class WorkbenchClient:
     """Functions of a PyWorkbench client.
 
@@ -57,6 +51,9 @@ class WorkbenchClient:
         Hostname or IP address of the server.
     server_port : int
         Port number of the server.
+    server_security : string
+        Security mode of the server.
+        Options are: "insecure", "uds", "wnua", "mtls"
     """
 
     def __init__(self, local_workdir, server_host, server_port, server_security):
