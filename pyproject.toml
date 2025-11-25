@@ -45,11 +45,11 @@ doc = [
     "sphinx-jinja==2.0.2",
 ]
 vulnerabilities = [
-    "bandit==1.8.6",
-    "safety==3.6.2",
+    "bandit==1.9.1",
+    "safety==3.7.0",
 ]
 tests = [
-    "pytest==8.4.2",
+    "pytest==9.0.1",
     "pytest-cov==7.0.0",
 ]
 
