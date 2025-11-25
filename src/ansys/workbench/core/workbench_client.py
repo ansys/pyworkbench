@@ -36,7 +36,7 @@ import tqdm
 
 from ansys.api.workbench.v0 import workbench_pb2 as wb
 from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
-from ansys.workbench.core.cyberchannel import create_channel
+from ansys.common.tools.cyberchannel import create_channel
 from ansys.workbench.core.example_data import ExampleData
 
 
