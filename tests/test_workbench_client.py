@@ -64,7 +64,7 @@ def test_connect(mock_grpc, mock_workbench_service_stub):
         local_workdir="/tmp", server_host="localhost", server_port=5000, server_security="insecure"
     )
     client._connect()
-    mock_grpc.assert_called_once_with("localhost:5000")
+    mock_grpc.assert_called_once_with("localhost:5000", options=None)
     mock_workbench_service_stub.assert_called_once()
 
 
