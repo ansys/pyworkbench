@@ -30,6 +30,7 @@ dependencies = [
     "ansys-platform-instancemanagement>=1.0.1",
     "ansys-pythonnet>=3.1.0rc1",
     "ansys-tools-path>=0.3.1",
+    "ansys-tools-common>=0.3.0",
     "tqdm>=4.65.0",
     "WMI>=1.4.9; platform_system=='Windows'",
 ]
@@ -44,7 +45,7 @@ doc = [
     "sphinx-jinja==2.0.2",
 ]
 vulnerabilities = [
-    "bandit==1.9.1",
+    "bandit==1.9.2",
     "safety==3.7.0",
 ]
 tests = [

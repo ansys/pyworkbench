@@ -76,6 +76,7 @@ class Launcher:
         version,
         show_gui=True,
         server_workdir=None,
+        use_insecure_connection=False,
         host=None,
         username=None,
         password=None,
@@ -91,6 +92,8 @@ class Launcher:
         server_workdir : str, default: None
             Path to a writable directory on the server. The default is ``None``,
             in which case the user preference for the Workbench temporary file folder is used.
+        use_insecure_connection : bool, default: False
+            whether to use insecure connection between the server and clients
         host : str, default: None
             Name or IP address of the server. The default is ``None``, which launches Workbench
             on the local computer.
@@ -125,11 +128,20 @@ class Launcher:
                 "Launching PyWorkbench on a remote machine from Linux is not supported."
             )
 
+        if not host and not self._wmi and int(version) < 252:
+            raise Exception("Launching PyWorkbench 25.1 or below on Linux is not supported.")
+
         if host and (not username or not password):
             raise Exception(
-                "Username and passwork must be specified "
+                "Username and password must be specified "
                 "to launch PyWorkbench on a remote machine."
             )
+
+        security = "mtls"
+        if use_insecure_connection:
+            security = "insecure"
+        elif not host and self._wmi:
+            security = "wnua"
 
         if self._wmi:
             try:
@@ -167,16 +179,43 @@ class Launcher:
             args.append("--start-and-wait")
             args.append("-nowindow")
         args.append("-E")
+
+        # create command string
         prefix = uuid.uuid4().hex
-        cmd = "StartServer(EnvironmentPrefix='"
-        cmd += prefix + "'"
+        cmd1 = "StartServer(EnvironmentPrefix='"
+        cmd1 += prefix + "'"
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
-            cmd += ",WorkingDirectory='" + server_workdir + "'"
-        cmd += ")"
+            cmd1 += ",WorkingDirectory='" + server_workdir + "'"
+        cmd2 = str(cmd1)
+        cmd1 += ")"
+        cmd2 += ",Security='" + security + "'"
+        if host is not None:
+            cmd2 += ",AllowRemoteConnection=True"
+        cmd2 += ")"
+
+        if self._wmi:
+            quote_or_not = '"'  # quotes needed when constructing command line
+        else:
+            quote_or_not = ""
+        cmd = (
+            quote_or_not
+            + cmd2
+            + """ if __scriptingEngine__.CommandContext.AddinManager.GetAddin("""
+            + """'Ansys.RemoteWB.Addin').Version.Major > 1 else """
+            + cmd1
+            + quote_or_not
+        )
         args.append(cmd)
+
         command_line = " ".join(args)
+
+        # security precaution statement
+        if host is not None:
+            print("""The server started will allow remote access connections to be
+established, possibly permitting control of the machine and any data which resides on it.
+It is highly recommended to only utilize these features on a trusted, secure network.""")
 
         successful = False
         process = None
@@ -206,35 +245,37 @@ class Launcher:
             logging.info(f"Workbench is launched successfully with process ID {self._process_id}.")
         else:
             logging.error("Workbench failed to launch on the host.")
-            return 0
+            return 0, security
 
         # retrieve server port once WB is fully up running
         port = None
         timeout = 60 * 8  # set 8 minutes as upper limit for WB startup
         start_time = time.time()
-        while True:
-            if self._wmi:
+        if self._wmi:
+            while True:
                 port = self.__getenv("ANSYS_FRAMEWORK_SERVER_PORT")
-            else:
-                for line in process.stdout:
-                    line = line.rstrip()
-                    if line.startswith("ANSYS_FRAMEWORK_SERVER_PORT="):
-                        port = line[28:]
+                if port and port.startswith(prefix):
+                    port = port[len(prefix) :]
+                    break
+                else:
+                    port = None
+                if time.time() - start_time > timeout:
+                    logging.error("Failed to start Workbench service within reasonable timeout.")
+                    break
+                time.sleep(10)
+        else:
+            for line in process.stdout:
+                line = line.rstrip()
+                if line.startswith("ANSYS_FRAMEWORK_SERVER_PORT="):
+                    port = line[28:]
+                    if port.startswith(prefix):
+                        port = port[len(prefix) :]
                         break
-            if port and port.startswith(prefix):
-                port = port[len(prefix) :]
-                break
-            else:
-                port = None
-            if time.time() - start_time > timeout:
-                logging.error("Failed to start Workbench service within reasonable timeout.")
-                break
-            time.sleep(10)
         if not port or int(port) <= 0:
             logging.error("Failed to retrieve the port used by Workbench service.")
-            return 0
+            return 0, security
         logging.info("Workbench service uses port: " + port)
-        return int(port)
+        return int(port), security
 
     def __getenv(self, key):
         value = None
