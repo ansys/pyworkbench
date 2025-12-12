@@ -31,11 +31,11 @@ import os
 import re
 import time
 
-import grpc
 import tqdm
 
 from ansys.api.workbench.v0 import workbench_pb2 as wb
 from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
+from ansys.tools.common.cyberchannel import create_channel
 from ansys.workbench.core.example_data import ExampleData
 
 
@@ -50,13 +50,17 @@ class WorkbenchClient:
         Hostname or IP address of the server.
     server_port : int
         Port number of the server.
+    server_security : string
+        Security mode of the server.
+        Options are: "insecure", "uds", "wnua", "mtls"
     """
 
-    def __init__(self, local_workdir, server_host, server_port):
+    def __init__(self, local_workdir, server_host, server_port, server_security):
         """Create a Workbench client."""
         self.workdir = local_workdir
         self._server_host = server_host
         self._server_port = server_port
+        self._server_security = server_security
         self._server_version = -1
         self.__init_logging()
 
@@ -81,10 +85,18 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
 
     def _connect(self):
         """Connect to the server."""
-        hnp = self._server_host + ":" + str(self._server_port)
-        self.channel = grpc.insecure_channel(hnp)
+        self.channel = create_channel(
+            host=self._server_host,
+            port=self._server_port,
+            transport_mode=self._server_security,
+            certs_dir=None,
+            grpc_options=None,
+        )
         self.stub = WorkbenchServiceStub(self.channel)
-        logging.info(f"connected to the WB server at {hnp}")
+        logging.info(
+            f"connected to the WB server at {self._server_host}:{self._server_port} "
+            "using {self._server_security} connection"
+        )
 
     def _disconnect(self):
         """Disconnect from the server."""
