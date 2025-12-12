@@ -9,6 +9,175 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.10.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.10.0>`_ - December 12, 2025
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: bump ansys-sphinx-theme[autoapi] from 1.3.3 to 1.4.4
+          - `#214 <https://github.com/ansys/pyworkbench/pull/214>`_
+
+        * - bump to 0.10.dev0
+          - `#216 <https://github.com/ansys/pyworkbench/pull/216>`_
+
+        * - chore: bump ansys-sphinx-theme[autoapi] from 1.4.4 to 1.4.5
+          - `#220 <https://github.com/ansys/pyworkbench/pull/220>`_
+
+        * - chore: bump ansys-sphinx-theme[autoapi] from 1.4.5 to 1.5.0
+          - `#221 <https://github.com/ansys/pyworkbench/pull/221>`_
+
+        * - chore: bump bandit from 1.8.3 to 1.8.6
+          - `#234 <https://github.com/ansys/pyworkbench/pull/234>`_
+
+        * - chore: bump ansys-sphinx-theme[autoapi] from 1.5.0 to 1.6.0
+          - `#241 <https://github.com/ansys/pyworkbench/pull/241>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: bump ansys/actions from 9 to 10
+          - `#223 <https://github.com/ansys/pyworkbench/pull/223>`_
+
+        * - Chore: bump actions/download-artifact from 4.3.0 to 5.0.0
+          - `#236 <https://github.com/ansys/pyworkbench/pull/236>`_
+
+        * - remote-connection server API changed.
+          - `#237 <https://github.com/ansys/pyworkbench/pull/237>`_
+
+        * - Chore: bump actions/checkout from 4 to 5
+          - `#239 <https://github.com/ansys/pyworkbench/pull/239>`_
+
+        * - Docs: update ``html_context`` with PyAnsys tags
+          - `#240 <https://github.com/ansys/pyworkbench/pull/240>`_
+
+        * - Chore: bump safety from 3.3.0 to 3.6.1
+          - `#242 <https://github.com/ansys/pyworkbench/pull/242>`_
+
+        * - Chore: bump actions/setup-python from 5 to 6
+          - `#244 <https://github.com/ansys/pyworkbench/pull/244>`_
+
+        * - Chore: bump pytest from 8.3.5 to 8.4.2
+          - `#245 <https://github.com/ansys/pyworkbench/pull/245>`_
+
+        * - Chore: bump pytest-cov from 6.1.1 to 7.0.0
+          - `#247 <https://github.com/ansys/pyworkbench/pull/247>`_
+
+        * - Add SECURITY.md
+          - `#248 <https://github.com/ansys/pyworkbench/pull/248>`_
+
+        * - Fli/add server version handling
+          - `#249 <https://github.com/ansys/pyworkbench/pull/249>`_
+
+        * - Chore: bump actions/labeler from 5 to 6
+          - `#251 <https://github.com/ansys/pyworkbench/pull/251>`_
+
+        * - Chore: bump ansys-sphinx-theme[autoapi] from 1.6.0 to 1.6.1
+          - `#252 <https://github.com/ansys/pyworkbench/pull/252>`_
+
+        * - Chore: bump numpydoc from 1.8.0 to 1.9.0
+          - `#253 <https://github.com/ansys/pyworkbench/pull/253>`_
+
+        * - Fli/handle api change for remote connection
+          - `#254 <https://github.com/ansys/pyworkbench/pull/254>`_, `#260 <https://github.com/ansys/pyworkbench/pull/260>`_, `#269 <https://github.com/ansys/pyworkbench/pull/269>`_
+
+        * - Chore: bump safety from 3.6.1 to 3.6.2
+          - `#256 <https://github.com/ansys/pyworkbench/pull/256>`_
+
+        * - Fix: general improvements and errors on subprocess calls
+          - `#257 <https://github.com/ansys/pyworkbench/pull/257>`_
+
+        * - Try adding security check
+          - `#259 <https://github.com/ansys/pyworkbench/pull/259>`_
+
+        * - Feat: vulnerability check
+          - `#261 <https://github.com/ansys/pyworkbench/pull/261>`_
+
+        * - Chore: bump peter-evans/create-or-update-comment from 4 to 5
+          - `#263 <https://github.com/ansys/pyworkbench/pull/263>`_
+
+        * - Chore: bump ansys-sphinx-theme[autoapi] from 1.6.1 to 1.6.3
+          - `#264 <https://github.com/ansys/pyworkbench/pull/264>`_
+
+        * - Chore: bump actions/download-artifact from 5.0.0 to 6.0.0
+          - `#265 <https://github.com/ansys/pyworkbench/pull/265>`_
+
+        * - Chore: bump actions/upload-artifact from 4 to 5
+          - `#266 <https://github.com/ansys/pyworkbench/pull/266>`_
+
+        * - Chore: Update missing or outdated files
+          - `#267 <https://github.com/ansys/pyworkbench/pull/267>`_
+
+        * - Chore: bump safety from 3.6.2 to 3.7.0
+          - `#270 <https://github.com/ansys/pyworkbench/pull/270>`_
+
+        * - Chore: bump pytest from 8.4.2 to 9.0.1
+          - `#272 <https://github.com/ansys/pyworkbench/pull/272>`_
+
+        * - Chore: bump bandit from 1.8.6 to 1.9.1
+          - `#273 <https://github.com/ansys/pyworkbench/pull/273>`_
+
+        * - Chore: bump actions/checkout from 5 to 6
+          - `#274 <https://github.com/ansys/pyworkbench/pull/274>`_
+
+        * - Chore: bump bandit from 1.9.1 to 1.9.2
+          - `#276 <https://github.com/ansys/pyworkbench/pull/276>`_
+
+        * - Docs: fix typo in CONTRIBUTING.md
+          - `#279 <https://github.com/ansys/pyworkbench/pull/279>`_
+
+        * - Chore: bump numpydoc from 1.9.0 to 1.10.0
+          - `#280 <https://github.com/ansys/pyworkbench/pull/280>`_
+
+        * - Docs: Update \`\`CONTRIBUTORS.md\`\` with the latest contributors
+          - `#281 <https://github.com/ansys/pyworkbench/pull/281>`_
+
+        * - Chore: bump pytest from 9.0.1 to 9.0.2
+          - `#282 <https://github.com/ansys/pyworkbench/pull/282>`_
+
+        * - Chore: bump ansys-sphinx-theme[autoapi] from 1.6.3 to 1.6.4
+          - `#284 <https://github.com/ansys/pyworkbench/pull/284>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: update CHANGELOG for v0.9.0
+          - `#215 <https://github.com/ansys/pyworkbench/pull/215>`_
+
+        * - docs: revert cheatsheet in docs
+          - `#217 <https://github.com/ansys/pyworkbench/pull/217>`_
+
+        * - docs: improve install instructions by adding pypi install
+          - `#219 <https://github.com/ansys/pyworkbench/pull/219>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: bump pypa/gh-action-pypi-publish from 1.12.4 to 1.13.0
+          - `#243 <https://github.com/ansys/pyworkbench/pull/243>`_
+
+        * - Fli/handle api change for remote connection
+          - `#277 <https://github.com/ansys/pyworkbench/pull/277>`_
+
+
 `0.9.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.9.0>`_ - May 15, 2025
 ==================================================================================
 
