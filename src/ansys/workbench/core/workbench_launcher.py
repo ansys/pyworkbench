@@ -69,13 +69,13 @@ class Launcher:
 
         self._wmi_connection = None
         self._process_id = -1
-        self._port = None
 
     def launch(
         self,
         version,
         show_gui=True,
         server_workdir=None,
+        port_to_use=-1,
         use_insecure_connection=False,
         host=None,
         username=None,
@@ -188,6 +188,8 @@ class Launcher:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
             cmd1 += ",WorkingDirectory='" + server_workdir + "'"
+        if port_to_use > 0:
+            cmd1 += ",PortToUse=" + str(port_to_use)
         cmd2 = str(cmd1)
         cmd1 += ")"
         cmd2 += ",Security='" + security + "'"
