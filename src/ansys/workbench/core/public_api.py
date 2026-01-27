@@ -119,7 +119,14 @@ class LaunchWorkbench(ClientWrapper):
 
         self._launcher = Launcher()
         port, security = self._launcher.launch(
-            version, show_gui, server_workdir, port, use_insecure_connection, host, username, password
+            version,
+            show_gui,
+            server_workdir,
+            port,
+            use_insecure_connection,
+            host,
+            username,
+            password,
         )
         if port is None or port <= 0:
             raise Exception("Failed to launch Ansys Workbench service.")
