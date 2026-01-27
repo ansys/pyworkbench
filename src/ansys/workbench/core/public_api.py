@@ -113,9 +113,6 @@ class LaunchWorkbench(ClientWrapper):
         username=None,
         password=None,
     ):
-        if not version:
-            version = "252"
-
         self._launcher = Launcher()
         port, security = self._launcher.launch(
             version, show_gui, server_workdir, use_insecure_connection, host, username, password
@@ -166,6 +163,7 @@ def launch_workbench(
         Weather to launch Workbench in UI mode.
     version : str, default: None
         Workbench version to launch. It must be a 3-digit version that is "242" or later.
+        If None, the latest version available will be used.
     client_workdir : str, default: None
         Path to a writable directory on the client computer. The default is ``None``,
         in which case the system temp directory is used.
