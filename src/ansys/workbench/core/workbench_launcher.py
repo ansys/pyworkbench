@@ -87,6 +87,7 @@ class Launcher:
         ----------
         version : str
             Workbench version to launch. It must be a three-digit version, such as ``242`` or later.
+            The latest version available will be used if None.
         show_gui : bool, default: True
             Whether to launch Workbench in UI mode.
         server_workdir : str, default: None
@@ -113,9 +114,8 @@ class Launcher:
             If the wmi service on the remote Windows machine fails
             If the Ansys installation is not found.
         """
-        if (
-            not version
-            or len(version) != 3
+        if version and (
+            len(version) != 3
             or not version.isdigit()
             or version[0] not in ["2", "3"]
             or version[2] not in ["1", "2"]
@@ -160,11 +160,31 @@ class Launcher:
                 else:
                     raise Exception("Failed in initializing WMI service on the local computer.")
 
-        ansys_install_path = self.__getenv("AWP_ROOT" + version)
+        ansys_install_path = None
+        if version:
+            ansys_install_path = self.__getenv("AWP_ROOT" + version)
+        else:
+            for version_to_check in ["272", "271", "261", "252", "251", "242"]:
+                ansys_install_path = self.__getenv("AWP_ROOT" + version_to_check)
+                if ansys_install_path:
+                    break
         if ansys_install_path:
             logging.info(f"Ansys installation is found at: {ansys_install_path}")
         else:
-            raise Exception(f"Ansys {version} installation is not found.")
+            if version:
+                raise Exception(
+                    (
+                        f"Ansys {version} installation is not found."
+                        "Make sure that environment AWP_ROOTxxx is defined."
+                    )
+                )
+            else:
+                raise Exception(
+                    (
+                        "No Ansys installation is not found."
+                        "Make sure that environment AWP_ROOTxxx is defined."
+                    )
+                )
 
         args = []
         if platform.system() == "Windows":
