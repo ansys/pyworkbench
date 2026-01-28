@@ -114,13 +114,12 @@ class Launcher:
             If the wmi service on the remote Windows machine fails
             If the Ansys installation is not found.
         """
-        if (
-            version
-            and (len(version) != 3
+        if version and (
+            len(version) != 3
             or not version.isdigit()
             or version[0] not in ["2", "3"]
             or version[2] not in ["1", "2"]
-            or int(version) < 242)
+            or int(version) < 242
         ):
             raise Exception("Invalid Ansys version: " + version)
 
@@ -162,20 +161,24 @@ class Launcher:
                     raise Exception("Failed in initializing WMI service on the local computer.")
 
         ansys_install_path = None
-        if (version):
+        if version:
             ansys_install_path = self.__getenv("AWP_ROOT" + version)
         else:
-            for versionToTry in ['272', '271', '261', '252', '251', '242']:
+            for versionToTry in ["272", "271", "261", "252", "251", "242"]:
                 ansys_install_path = self.__getenv("AWP_ROOT" + versionToTry)
                 if ansys_install_path:
                     break
         if ansys_install_path:
             logging.info(f"Ansys installation is found at: {ansys_install_path}")
         else:
-            if (version):
-                raise Exception(f"Ansys {version} installation is not found. Make sure that environment AWP_ROOTxxx is defined.")
+            if version:
+                raise Exception(
+                    f"Ansys {version} installation is not found. Make sure that environment AWP_ROOTxxx is defined."
+                )
             else:
-                raise Exception("No Ansys installation is not found. Make sure that environment AWP_ROOTxxx is defined.")
+                raise Exception(
+                    "No Ansys installation is not found. Make sure that environment AWP_ROOTxxx is defined."
+                )
 
         args = []
         if platform.system() == "Windows":
