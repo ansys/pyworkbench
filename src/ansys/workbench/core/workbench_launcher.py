@@ -164,8 +164,8 @@ class Launcher:
         if version:
             ansys_install_path = self.__getenv("AWP_ROOT" + version)
         else:
-            for versionToTry in ["272", "271", "261", "252", "251", "242"]:
-                ansys_install_path = self.__getenv("AWP_ROOT" + versionToTry)
+            for version_to_check in ["272", "271", "261", "252", "251", "242"]:
+                ansys_install_path = self.__getenv("AWP_ROOT" + version_to_check)
                 if ansys_install_path:
                     break
         if ansys_install_path:
@@ -173,11 +173,15 @@ class Launcher:
         else:
             if version:
                 raise Exception(
-                    f"Ansys {version} installation is not found. Make sure that environment AWP_ROOTxxx is defined."
+                    (f"Ansys {version} installation is not found."
+                      "Make sure that environment AWP_ROOTxxx is defined."
+                    )
                 )
             else:
                 raise Exception(
-                    "No Ansys installation is not found. Make sure that environment AWP_ROOTxxx is defined."
+                    ("No Ansys installation is not found."
+                     "Make sure that environment AWP_ROOTxxx is defined."
+                    )
                 )
 
         args = []
