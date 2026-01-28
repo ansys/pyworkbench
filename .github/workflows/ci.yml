@@ -159,6 +159,7 @@ jobs:
         run: |
           Get-ChildItem -Path "C:\Users\ansys\AppData\Local\Temp" -Directory -Filter "act_tmp*" | Remove-Item -Recurse -Force
           Get-ChildItem -Path "C:\Users\ansys\AppData\Local\Temp" -Directory -Filter "WB_ansys*" | Remove-Item -Recurse -Force
+        continue-on-error: true  # ignore locked files
 
   build-library:
     name: "Build library"
