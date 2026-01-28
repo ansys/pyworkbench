@@ -72,7 +72,7 @@ class Launcher:
 
     def launch(
         self,
-        version,
+        version=None,
         show_gui=True,
         server_workdir=None,
         port_to_use=-1,
@@ -128,9 +128,6 @@ class Launcher:
                 "Launching PyWorkbench on a remote machine from Linux is not supported."
             )
 
-        if not host and not self._wmi and int(version) < 252:
-            raise Exception("Launching PyWorkbench 25.1 or below on Linux is not supported.")
-
         if host and (not username or not password):
             raise Exception(
                 "Username and password must be specified "
@@ -167,6 +164,7 @@ class Launcher:
             for version_to_check in ["272", "271", "261", "252", "251", "242"]:
                 ansys_install_path = self.__getenv("AWP_ROOT" + version_to_check)
                 if ansys_install_path:
+                    version = version_to_check
                     break
         if ansys_install_path:
             logging.info(f"Ansys installation is found at: {ansys_install_path}")
@@ -185,6 +183,9 @@ class Launcher:
                         "Make sure that environment AWP_ROOTxxx is defined."
                     )
                 )
+
+        if not host and not self._wmi and int(version) < 252:
+            raise Exception("Launching PyWorkbench 25.1 or below on Linux is not supported.")
 
         args = []
         if platform.system() == "Windows":
