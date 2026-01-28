@@ -9,6 +9,46 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.11.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.11.0>`_ - January 28, 2026
+========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: update CHANGELOG for v0.10.0
+          - `#285 <https://github.com/ansys/pyworkbench/pull/285>`_
+
+        * - Bump version after release 0.10
+          - `#286 <https://github.com/ansys/pyworkbench/pull/286>`_
+
+        * - Chore: bump actions/upload-artifact from 5 to 6
+          - `#287 <https://github.com/ansys/pyworkbench/pull/287>`_
+
+        * - Chore: bump actions/download-artifact from 6.0.0 to 7.0.0
+          - `#288 <https://github.com/ansys/pyworkbench/pull/288>`_
+
+        * - Update copyright year
+          - `#291 <https://github.com/ansys/pyworkbench/pull/291>`_
+
+        * - Version argument is optional
+          - `#293 <https://github.com/ansys/pyworkbench/pull/293>`_
+
+        * - User can specify port when launching WB
+          - `#294 <https://github.com/ansys/pyworkbench/pull/294>`_
+
+        * - Chore: bump ansys-sphinx-theme[autoapi] from 1.6.4 to 1.7.0
+          - `#295 <https://github.com/ansys/pyworkbench/pull/295>`_
+
+        * - Version check must be done after version identification
+          - `#296 <https://github.com/ansys/pyworkbench/pull/296>`_
+
+
 `0.10.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.10.0>`_ - December 12, 2025
 =========================================================================================
 
