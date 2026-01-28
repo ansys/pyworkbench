@@ -173,14 +173,16 @@ class Launcher:
         else:
             if version:
                 raise Exception(
-                    (f"Ansys {version} installation is not found."
-                      "Make sure that environment AWP_ROOTxxx is defined."
+                    (
+                        f"Ansys {version} installation is not found."
+                        "Make sure that environment AWP_ROOTxxx is defined."
                     )
                 )
             else:
                 raise Exception(
-                    ("No Ansys installation is not found."
-                     "Make sure that environment AWP_ROOTxxx is defined."
+                    (
+                        "No Ansys installation is not found."
+                        "Make sure that environment AWP_ROOTxxx is defined."
                     )
                 )
 
