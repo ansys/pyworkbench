@@ -127,6 +127,7 @@ exclude_patterns = [
     "**/ExampleData*",
     "**/LaunchWorkbench*",
     "**/ClientWrapper*",
+    "links.rst",
 ]
 
 # additional logos for the latex coverpage
@@ -258,6 +259,7 @@ ARTIFACTS_SDIST = ARTIFACTS_PATH / f"{project.replace('-', '_')}-{version}.tar.g
 jinja_globals = {
     "SUPPORTED_PYTHON_VERSIONS": ["3.11", "3.12", "3.13"],
     "SUPPORTED_PLATFORMS": ["windows", "ubuntu"],
+    "PYWORKBENCH_VERSION": version,
 }
 
 jinja_contexts = {
@@ -277,3 +279,8 @@ jinja_contexts = {
         "source_hash": get_sha256_from_file(ARTIFACTS_SDIST),
     },
 }
+
+# Common content for every RST file such us links
+rst_epilog = ""
+links_filepath = pathlib.Path(__file__).parent.absolute() / "links.rst"
+rst_epilog += links_filepath.read_text(encoding="utf-8")
