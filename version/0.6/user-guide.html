@@ -1,0 +1,830 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>User guide &#8212; PyWorkbench</title>
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="_static/css/ansys_sphinx_theme.css?v=a362721a" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="_static/documentation_options.js?v=dda85ae5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user-guide';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://workbench.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.6';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API reference" href="api/index.html" />
+    <link rel="prev" title="Connecting with Ansys Workbench" href="getting-started/connection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <link rel="canonical" href="https://workbench.docs.pyansys.com/version/stable/user-guide.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+
+<!-- If there is no MiliSearch enabled, use the PyData search -->
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyWorkbench - Home"/>
+    <script>document.write(`<img src="_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyWorkbench - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="getting-started.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="changelog.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="getting-started.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="examples.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="changelog.html">
+                        Release notes
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">User guide</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="user-guide">
+<h1>User guide<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
+<p>This section explains key concepts and approaches for using PyWorkbench
+with the Workbench gRPC service.</p>
+<section id="start-workbench-client-and-connect-to-a-running-workbench-server">
+<h2>Start Workbench client and connect to a running Workbench server<a class="headerlink" href="#start-workbench-client-and-connect-to-a-running-workbench-server" title="Link to this heading">#</a></h2>
+<p>To start a Workbench client that connects to a running Workbench server on the cloud, you
+must provide the following information:</p>
+<ul class="simple">
+<li><p>Port number</p></li>
+<li><p>Server name or IP address, which is an optional parameter and when not specified, localhost is used</p></li>
+<li><p>Client-side working directory, which is an optional parameter indicating the default location for client-side files</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.workbench.core</span> <span class="kn">import</span> <span class="n">connect_workbench</span>
+
+<span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;server_machine_name_or_IP&quot;</span>
+<span class="n">port</span> <span class="o">=</span> <span class="n">server_port_number</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">connect_workbench</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">client_workdir</span></code> parameter for the <code class="docutils literal notranslate"><span class="pre">connect_workbench()</span></code> function specifies a working
+directory for the client instead of using the default directory.</p>
+</section>
+<section id="launch-workbench-server-and-start-a-client">
+<h2>Launch Workbench server and start a client<a class="headerlink" href="#launch-workbench-server-and-start-a-client" title="Link to this heading">#</a></h2>
+<p>During the development phase or when debugging, it is useful to start the
+Workbench server on your desktop or some computer within the company network.</p>
+<p>You can always start a Workbench server by running the <code class="docutils literal notranslate"><span class="pre">StartServer()</span></code> command
+in any Workbench session. You then use the returned server port to start a client,
+like in the preceding example.</p>
+<p>Alternatively, you can launch a Workbench server and start a client programmatically in a
+client-side Python script.</p>
+<p>This code launches a server on a local Windows machine:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.workbench.core</span> <span class="kn">import</span> <span class="n">launch_workbench</span>
+
+<span class="n">wb</span> <span class="o">=</span> <span class="n">launch_workbench</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This code launches a server on a remote Windows machine with valid user credentials:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.workbench.core</span> <span class="kn">import</span> <span class="n">launch_workbench</span>
+
+<span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;server_machine_name_or_ip&quot;</span>
+<span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;your_username_on_server_machine&quot;</span>
+<span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;your_password_on_server_machine&quot;</span>
+<span class="n">wb</span> <span class="o">=</span> <span class="n">launch_workbench</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Other options for the <code class="docutils literal notranslate"><span class="pre">launch_workbench()</span></code> function include specifying a particular
+Workbench release to launch and specifying working directories on the server and/or the
+client instead of using the default directories:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.workbench.core</span> <span class="kn">import</span> <span class="n">launch_workbench</span>
+
+<span class="n">wb</span> <span class="o">=</span> <span class="n">launch_workbench</span><span class="p">(</span>
+    <span class="n">release</span><span class="o">=</span><span class="s2">&quot;242&quot;</span><span class="p">,</span>
+    <span class="n">server_workdir</span><span class="o">=</span><span class="s2">&quot;path_to_a_dir_on_server&quot;</span><span class="p">,</span>
+    <span class="n">client_workdir</span><span class="o">=</span><span class="s2">&quot;path_to_a_dir_on_client&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="run-scripts-on-workbench-server">
+<h2>Run scripts on Workbench server<a class="headerlink" href="#run-scripts-on-workbench-server" title="Link to this heading">#</a></h2>
+<p>You can use these methods to run IronPython-based Workbench scripts, which contain commands or
+queries, with PyWorkbench:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run_script_file</span></code>: Runs a script file in the client working directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_script_string</span></code>: Runs a script contained in the given string.</p></li>
+</ul>
+<p>To the <code class="docutils literal notranslate"><span class="pre">wb_script_result</span></code> global variable in the script, you can assign any output that needs
+to be returned from these methods, as a JSON string. For example, this Workbench script returns
+all message summaries from the Workbench session:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">Summary</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">GetMessages</span><span class="p">()]</span>
+<span class="n">wb_script_result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also call these methods with different logging levels. While the default logging
+level is <code class="docutils literal notranslate"><span class="pre">error</span></code>, the following example outputs all <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, and <code class="docutils literal notranslate"><span class="pre">error</span></code> levels
+to the logger when the script runs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wb</span><span class="o">.</span><span class="n">run_script_file</span><span class="p">(</span><span class="s2">&quot;a_script_file_name&quot;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="upload-and-download-files">
+<h2>Upload and download files<a class="headerlink" href="#upload-and-download-files" title="Link to this heading">#</a></h2>
+<p>You can upload and download data files to and from the server using the <code class="docutils literal notranslate"><span class="pre">upload_file()</span></code> and <code class="docutils literal notranslate"><span class="pre">download_file</span></code>
+methods. The client-side working directory is used to hold these files unless absolute paths or target directories
+are specified. There is also a working directory on the server for the same purpose. To obtain the server’s working
+directory, you can use the <code class="docutils literal notranslate"><span class="pre">GetServerWorkingDirectory()</span></code> query in the scripts that run on the server.</p>
+<p>This code uploads all part files of a given prefix and all AGDB files in the working directory, along with another file
+outside of the working directory, from the client to the server:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wb</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s2">&quot;model?.prt&quot;</span><span class="p">,</span> <span class="s2">&quot;*.agdb&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/some/file&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This server-side Workbench script loads an uploaded geometry file from the server’s working directory into a
+newly created Workbench system:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wb</span><span class="o">.</span><span class="n">run_script_string</span><span class="p">(</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;import os</span>
+<span class="sd">work_dir = GetServerWorkingDirectory()</span>
+<span class="sd">geometry_file = os.path.join(work_dir, &quot;two_pipes.agdb&quot;)</span>
+<span class="sd">template = GetTemplate(TemplateName=&quot;Static Structural&quot;, Solver=&quot;ANSYS&quot;)</span>
+<span class="sd">system = CreateSystemFromTemplate(Template=template, Name=&quot;Static Structural (ANSYS)&quot;)</span>
+<span class="sd">system.GetContainer(ComponentName=&quot;Geometry&quot;).SetFile(FilePath=geometry_file)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This server-side Workbench script copies a Mechanical solver output file to the server’s working directory:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wb</span><span class="o">.</span><span class="n">run_script_string</span><span class="p">(</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;import os</span>
+<span class="sd">import shutil</span>
+<span class="sd">work_dir = GetServerWorkingDirectory()</span>
+<span class="sd">mechanical_dir = mechanical.project_directory</span>
+<span class="sd">out_file_src = os.path.join(mechanical_dir, &quot;solve.out&quot;)</span>
+<span class="sd">out_file_des = os.path.join(work_dir, &quot;solve.out&quot;)</span>
+<span class="sd">shutil.copyfile(out_file_src, out_file_des)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This client script downloads all files with <code class="docutils literal notranslate"><span class="pre">.out</span></code> extensions from the server’s working directory:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wb</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;*.out&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There is a special client method to upload a data file from the Ansys
+<a class="reference external" href="https://github.com/ansys/example-data/raw/master/pyworkbench">example-data</a> repository
+directly to the Workbench server. You should specify the file path relative to the
+<code class="docutils literal notranslate"><span class="pre">pyworkbench</span></code> folder in the <code class="docutils literal notranslate"><span class="pre">example-data</span></code> repository:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">upload_file_from_example_repo</span><span class="p">(</span><span class="s2">&quot;pymechanical-integration/agdb/two_pipes.agdb&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All methods for uploading and downloading files display a progress bar by default. You can
+turn off the progress bar with an optional argument:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wb</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;solve.out&quot;</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="start-other-pyansys-services-for-systems-in-a-workbench-project">
+<h2>Start other PyAnsys services for systems in a Workbench project<a class="headerlink" href="#start-other-pyansys-services-for-systems-in-a-workbench-project" title="Link to this heading">#</a></h2>
+<section id="pymechanical">
+<h3>PyMechanical<a class="headerlink" href="#pymechanical" title="Link to this heading">#</a></h3>
+<p>For any Mechanical system in the Workbench project, you can start and connect the
+PyMechanical service from the same client machine. This code runs a server-side script
+to create a mechanical system. It then starts the PyMechanical service for the system
+and establishes a PyMechanical client.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.mechanical.core</span> <span class="kn">import</span> <span class="n">launch_mechanical</span>
+
+<span class="n">sys_name</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">run_script_string</span><span class="p">(</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;import json</span>
+<span class="sd">wb_script_result=json.dumps(GetTemplate(TemplateName=&quot;Static Structural (ANSYS)&quot;).CreateSystem().Name)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+<span class="n">server_port</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">start_mechanical_server</span><span class="p">(</span><span class="n">system_name</span><span class="o">=</span><span class="n">sys_name</span><span class="p">)</span>
+<span class="n">mechanical</span> <span class="o">=</span> <span class="n">launch_mechanical</span><span class="p">(</span><span class="n">start_instance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">server_port</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pyfluent">
+<h3>PyFluent<a class="headerlink" href="#pyfluent" title="Link to this heading">#</a></h3>
+<p>This code starts the PyFluent service and client for a Fluent system created in Workbench.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ansys.fluent.core</span> <span class="k">as</span> <span class="nn">pyfluent</span>
+
+<span class="n">sys_name</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">run_script_string</span><span class="p">(</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;import json</span>
+<span class="sd">wb_script_result=json.dumps(GetTemplate(TemplateName=&quot;FLUENT&quot;).CreateSystem().Name)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+<span class="n">server_info_file</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">start_fluent_server</span><span class="p">(</span><span class="n">system_name</span><span class="o">=</span><span class="n">sys_name</span><span class="p">)</span>
+<span class="n">fluent</span> <span class="o">=</span> <span class="n">pyfluent</span><span class="o">.</span><span class="n">connect_to_fluent</span><span class="p">(</span><span class="n">server_info_file_name</span><span class="o">=</span><span class="n">server_info_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pysherlock">
+<h3>PySherlock<a class="headerlink" href="#pysherlock" title="Link to this heading">#</a></h3>
+<p>This code starts the PySherlock service and client for a Sherlock system created in Workbench.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.sherlock.core</span> <span class="kn">import</span> <span class="n">launcher</span> <span class="k">as</span> <span class="n">pysherlock</span>
+
+<span class="n">sys_name</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">run_script_string</span><span class="p">(</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;import json</span>
+<span class="sd">wb_script_result=json.dumps(GetTemplate(TemplateName=&quot;SherlockPre&quot;).CreateSystem().Name)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+<span class="n">server_port</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">start_sherlock_server</span><span class="p">(</span><span class="n">system_name</span><span class="o">=</span><span class="n">sys_name</span><span class="p">)</span>
+<span class="n">sherlock</span> <span class="o">=</span> <span class="n">pysherlock</span><span class="o">.</span><span class="n">connect_grpc_channel</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">server_port</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-workbench-client-and-connect-to-a-running-workbench-server">Start Workbench client and connect to a running Workbench server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch-workbench-server-and-start-a-client">Launch Workbench server and start a client</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-scripts-on-workbench-server">Run scripts on Workbench server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upload-and-download-files">Upload and download files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-other-pyansys-services-for-systems-in-a-workbench-project">Start other PyAnsys services for systems in a Workbench project</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pymechanical">PyMechanical</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyfluent">PyFluent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pysherlock">PySherlock</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pyworkbench/edit/main/doc/source/user-guide.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/user-guide.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  0.16.6. <br />Last updated on
+  <span id="date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("date").innerHTML = date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

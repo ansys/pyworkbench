@@ -1,0 +1,122 @@
+
+
+
+
+
+The ``ansys.workbench.core`` library
+====================================
+
+.. py:module:: ansys.workbench.core
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: core
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:attr:`~ansys.workbench.core.example_data`
+            - 
+
+
+          * - :py:attr:`~ansys.workbench.core.launch_workbench`
+            - 
+
+
+          * - :py:attr:`~ansys.workbench.core.workbench_client`
+            - 
+
+
+
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:attr:`~__version__`
+            - 
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    🗎 example_data<example_data/index.rst>
+    🗎 launch_workbench<launch_workbench/index.rst>
+    🗎 workbench_client<workbench_client/index.rst>
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+
+PyWorkbench client in Python: ansys-workbench-core.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: __version__
+
+   
+
+
+

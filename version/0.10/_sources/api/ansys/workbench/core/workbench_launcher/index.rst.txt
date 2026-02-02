@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``workbench_launcher.py`` module
+====================================
+
+.. py:module:: ansys.workbench.core.workbench_launcher
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: workbench_launcher
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.workbench.core.workbench_launcher.Launcher`
+            - Launch a Workbench server on a local or remote machine.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> Launcher</api/ansys/workbench/core/workbench_launcher/Launcher>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for launching PyWorkbench.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+
