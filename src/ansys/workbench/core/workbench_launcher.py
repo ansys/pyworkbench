@@ -69,13 +69,13 @@ class Launcher:
 
         self._wmi_connection = None
         self._process_id = -1
-        self._port = None
 
     def launch(
         self,
-        version,
+        version=None,
         show_gui=True,
         server_workdir=None,
+        port_to_use=-1,
         use_insecure_connection=False,
         host=None,
         username=None,
@@ -87,6 +87,7 @@ class Launcher:
         ----------
         version : str
             Workbench version to launch. It must be a three-digit version, such as ``242`` or later.
+            The latest version available will be used if None.
         show_gui : bool, default: True
             Whether to launch Workbench in UI mode.
         server_workdir : str, default: None
@@ -113,9 +114,8 @@ class Launcher:
             If the wmi service on the remote Windows machine fails
             If the Ansys installation is not found.
         """
-        if (
-            not version
-            or len(version) != 3
+        if version and (
+            len(version) != 3
             or not version.isdigit()
             or version[0] not in ["2", "3"]
             or version[2] not in ["1", "2"]
@@ -127,9 +127,6 @@ class Launcher:
             raise Exception(
                 "Launching PyWorkbench on a remote machine from Linux is not supported."
             )
-
-        if not host and not self._wmi and int(version) < 252:
-            raise Exception("Launching PyWorkbench 25.1 or below on Linux is not supported.")
 
         if host and (not username or not password):
             raise Exception(
@@ -160,11 +157,35 @@ class Launcher:
                 else:
                     raise Exception("Failed in initializing WMI service on the local computer.")
 
-        ansys_install_path = self.__getenv("AWP_ROOT" + version)
+        ansys_install_path = None
+        if version:
+            ansys_install_path = self.__getenv("AWP_ROOT" + version)
+        else:
+            for version_to_check in ["272", "271", "261", "252", "251", "242"]:
+                ansys_install_path = self.__getenv("AWP_ROOT" + version_to_check)
+                if ansys_install_path:
+                    version = version_to_check
+                    break
         if ansys_install_path:
             logging.info(f"Ansys installation is found at: {ansys_install_path}")
         else:
-            raise Exception(f"Ansys {version} installation is not found.")
+            if version:
+                raise Exception(
+                    (
+                        f"Ansys {version} installation is not found."
+                        "Make sure that environment AWP_ROOTxxx is defined."
+                    )
+                )
+            else:
+                raise Exception(
+                    (
+                        "No Ansys installation is not found."
+                        "Make sure that environment AWP_ROOTxxx is defined."
+                    )
+                )
+
+        if not host and not self._wmi and int(version) < 252:
+            raise Exception("Launching PyWorkbench 25.1 or below on Linux is not supported.")
 
         args = []
         if platform.system() == "Windows":
@@ -188,6 +209,8 @@ class Launcher:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
             cmd1 += ",WorkingDirectory='" + server_workdir + "'"
+        if port_to_use > 0:
+            cmd1 += ",PortToUse=" + str(port_to_use)
         cmd2 = str(cmd1)
         cmd1 += ")"
         cmd2 += ",Security='" + security + "'"

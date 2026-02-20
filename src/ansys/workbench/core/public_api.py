@@ -108,17 +108,22 @@ class LaunchWorkbench(ClientWrapper):
         version=None,
         client_workdir=None,
         server_workdir=None,
+        port=-1,
         use_insecure_connection=False,
         host=None,
         username=None,
         password=None,
     ):
-        if not version:
-            version = "252"
-
         self._launcher = Launcher()
         port, security = self._launcher.launch(
-            version, show_gui, server_workdir, use_insecure_connection, host, username, password
+            version,
+            show_gui,
+            server_workdir,
+            port,
+            use_insecure_connection,
+            host,
+            username,
+            password,
         )
         if port is None or port <= 0:
             raise Exception("Failed to launch Ansys Workbench service.")
@@ -150,6 +155,7 @@ def launch_workbench(
     version=None,
     client_workdir=None,
     server_workdir=None,
+    port=-1,
     use_insecure_connection=False,
     host=None,
     username=None,
@@ -166,12 +172,15 @@ def launch_workbench(
         Weather to launch Workbench in UI mode.
     version : str, default: None
         Workbench version to launch. It must be a 3-digit version that is "242" or later.
+        If None, the latest version available will be used.
     client_workdir : str, default: None
         Path to a writable directory on the client computer. The default is ``None``,
         in which case the system temp directory is used.
     server_workdir : str, None
         Path to a writable directory on the server computer. The default is ``None``,
         in which case the user preference for the Workbench temporary file folder is used.
+    port : int, optional
+        Port to use for the launched server. If not specified, port is auto determined.
     use_insecure_connection : bool, default: False
         whether to use insecure connection between the server and clients
     host : str, None
@@ -202,6 +211,7 @@ def launch_workbench(
         version,
         client_workdir,
         server_workdir,
+        port,
         use_insecure_connection,
         host,
         username,
