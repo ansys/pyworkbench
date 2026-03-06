@@ -18,6 +18,8 @@ env:
   PACKAGE_NAME: "ansys-workbench-core"
   DOCUMENTATION_CNAME: 'workbench.docs.pyansys.com'
 
+permissions: {}
+
 jobs:
 
   code-style:
