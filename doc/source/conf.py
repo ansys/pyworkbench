@@ -140,10 +140,10 @@ latex_elements = {"preamble": latex.generate_preamble(html_title)}
 BUILD_CHEATSHEET = True if os.environ.get("BUILD_CHEATSHEET", "true") == "true" else False
 
 linkcheck_ignore = [
-    "https://github.com/ansys/pyworkbench-examples",
-    "https://github.com/ansys/pyworkbench/issues",
-    "https://github.com/ansys/example-data/raw/master/pyworkbench",
-    "https://workbench.docs.pyansys.com",
+    "https://github.com/ansys/pyworkbench-examples/*",
+    "https://github.com/ansys/pyworkbench/*",
+    "https://github.com/ansys/example-data/*",
+    "https://workbench.docs.pyansys.com/*",
     "workbench.docs.pyansys.com",
     "https://www.ansys.com/*",
 ]
