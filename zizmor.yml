@@ -1,5 +1,0 @@
-rules:
-  excessive-permissions:
-    ignore:
-      - label.yml
-      - ci.yml
