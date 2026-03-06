@@ -93,7 +93,7 @@ jobs:
     strategy:
        matrix:
            os: [ubuntu-latest, windows-latest]
-           python-version: ['3.10', '3.11', '3.12', '3.13']
+           python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
     steps:
       - name: "Build a wheelhouse for ${{ matrix.python-version }}"
         uses: ansys/actions/build-wheelhouse@3931ac9351b13ae11b1203c2ef6b51e5c75502ea # v10.2.5

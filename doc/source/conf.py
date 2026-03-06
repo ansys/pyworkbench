@@ -256,7 +256,7 @@ ARTIFACTS_WHEEL = ARTIFACTS_PATH / f"{project.replace('-', '_')}-{version}-py3-n
 ARTIFACTS_SDIST = ARTIFACTS_PATH / f"{project.replace('-', '_')}-{version}.tar.gz"
 
 jinja_globals = {
-    "SUPPORTED_PYTHON_VERSIONS": ["3.11", "3.12", "3.13"],
+    "SUPPORTED_PYTHON_VERSIONS": ["3.11", "3.12", "3.13", "3.14"],
     "SUPPORTED_PLATFORMS": ["windows", "ubuntu"],
 }
 
