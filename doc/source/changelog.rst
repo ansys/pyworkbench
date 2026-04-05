@@ -9,6 +9,28 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.13.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.13.0>`_ - April 05, 2026
+======================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: update CHANGELOG for v0.12.0
+          - `#320 <https://github.com/ansys/pyworkbench/pull/320>`_
+
+        * - Bump it to version 0.13
+          - `#321 <https://github.com/ansys/pyworkbench/pull/321>`_
+
+        * - Use ansys-api-workbench 0.3
+          - `#322 <https://github.com/ansys/pyworkbench/pull/322>`_
+
+
 `0.12.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.12.0>`_ - April 05, 2026
 ======================================================================================
 
