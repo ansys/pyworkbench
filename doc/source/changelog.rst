@@ -9,6 +9,80 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.12.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.12.0>`_ - April 05, 2026
+======================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Support python 3.14
+          - `#308 <https://github.com/ansys/pyworkbench/pull/308>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: bump bandit from 1.9.2 to 1.9.3
+          - `#292 <https://github.com/ansys/pyworkbench/pull/292>`_
+
+        * - Chore: update CHANGELOG for v0.11.0
+          - `#297 <https://github.com/ansys/pyworkbench/pull/297>`_
+
+        * - Fix: remove usage of ansys-tools-path
+          - `#298 <https://github.com/ansys/pyworkbench/pull/298>`_
+
+        * - Bump it to 0.12
+          - `#299 <https://github.com/ansys/pyworkbench/pull/299>`_
+
+        * - Chore: Update missing or outdated files
+          - `#300 <https://github.com/ansys/pyworkbench/pull/300>`_
+
+        * - Docs: Update \`\`CONTRIBUTORS.md\`\` with the latest contributors
+          - `#301 <https://github.com/ansys/pyworkbench/pull/301>`_
+
+        * - Chore: add dependabot cooldown settings
+          - `#302 <https://github.com/ansys/pyworkbench/pull/302>`_
+
+        * - Chore: bump actions/download-artifact from 7.0.0 to 8.0.0
+          - `#306 <https://github.com/ansys/pyworkbench/pull/306>`_
+
+        * - Pin workflow actions
+          - `#307 <https://github.com/ansys/pyworkbench/pull/307>`_
+
+        * - Chore: bump actions/upload-artifact from 6.0.0 to 7.0.0
+          - `#309 <https://github.com/ansys/pyworkbench/pull/309>`_
+
+        * - Chore: bump bandit from 1.9.3 to 1.9.4
+          - `#310 <https://github.com/ansys/pyworkbench/pull/310>`_
+
+        * - Chore: bump ansys-sphinx-theme[autoapi] from 1.7.0 to 1.7.1
+          - `#311 <https://github.com/ansys/pyworkbench/pull/311>`_
+
+        * - Chore: bump actions-ecosystem/action-add-labels from 1.1.0 to 1.1.3
+          - `#313 <https://github.com/ansys/pyworkbench/pull/313>`_
+
+        * - Chore: bump actions/download-artifact from 8.0.0 to 8.0.1
+          - `#316 <https://github.com/ansys/pyworkbench/pull/316>`_
+
+        * - Chore: bump ansys-sphinx-theme from 1.7.1 to 1.7.2
+          - `#317 <https://github.com/ansys/pyworkbench/pull/317>`_
+
+        * - Chore: bump pytest-cov from 7.0.0 to 7.1.0
+          - `#318 <https://github.com/ansys/pyworkbench/pull/318>`_
+
+        * - Correct ansys-api-workbench name
+          - `#319 <https://github.com/ansys/pyworkbench/pull/319>`_
+
+
 `0.11.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.11.0>`_ - January 28, 2026
 ========================================================================================
 
