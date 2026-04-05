@@ -9,6 +9,9 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.12.1 <https://github.com/ansys/pyworkbench/releases/tag/v0.12.1>`_ - April 05, 2026
+======================================================================================
+No significant changes.
 `0.12.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.12.0>`_ - April 05, 2026
 ======================================================================================
 
