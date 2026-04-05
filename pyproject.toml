@@ -9,7 +9,7 @@ name = "ansys-workbench-core"
 version = "0.13.dev0"
 description = "A python wrapper for Ansys Workbench"
 readme = "README.rst"
-requires-python = ">=3.10,<4.0"
+requires-python = ">=3.11,<4.0"
 license = {file = "LICENSE"}
 authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
 maintainers = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
@@ -19,7 +19,6 @@ classifiers = [
     'Topic :: Scientific/Engineering',
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -27,7 +26,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "ansys-api-workbench>=0.2.0",
+    "ansys-api-workbench>=0.3.0",
     "ansys-platform-instancemanagement>=1.0.1",
     "ansys-tools-common>=0.3.0",
     "tqdm>=4.65.0",
