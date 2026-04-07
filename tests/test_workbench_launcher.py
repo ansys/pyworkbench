@@ -28,7 +28,7 @@ from ansys.workbench.core.workbench_launcher import Launcher
 class MissingWmiProcess:
     """Represent a terminated WMI process object."""
 
-    def __init__(self, process_name):
+    def __init__(self, process_name=None):
         self.Name = process_name
 
     @property
@@ -69,3 +69,21 @@ def test_describe_process_uses_available_name_when_ids_fail():
     launcher._process_id = 61358
 
     assert launcher._Launcher__describe_process(MissingWmiProcess("RunWB2.exe")) == "RunWB2.exe"
+
+
+def test_describe_process_does_not_use_parent_id_for_child_process():
+    """Return an unknown label when a child process cannot describe itself."""
+    launcher = object.__new__(Launcher)
+    launcher._process_id = 61358
+
+    assert launcher._Launcher__describe_process(MissingWmiProcess()) == "unknown process"
+
+
+def test_describe_process_uses_explicit_fallback_process_id():
+    """Use the explicit fallback for the launched process description only."""
+    launcher = object.__new__(Launcher)
+    launcher._process_id = 61358
+
+    assert launcher._Launcher__describe_process(
+        MissingWmiProcess(), fallback_process_id=launcher._process_id
+    ) == "61358"

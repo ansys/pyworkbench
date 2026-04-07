@@ -319,7 +319,9 @@ It is highly recommended to only utilize these features on a trusted, secure net
     def exit(self):
         """End the launched Workbench server."""
         if self._process:
-            launched_process_description = self.__describe_process(self._process)
+            launched_process_description = self.__describe_process(
+                self._process, fallback_process_id=self._process_id
+            )
             try:
                 if self._wmi:
                     for p in self.__collect_process_tree():
@@ -342,7 +344,7 @@ It is highly recommended to only utilize these features on a trusted, secure net
         self._process_id = -1
         self._process = None
 
-    def __describe_process(self, process):
+    def __describe_process(self, process, fallback_process_id=None):
         """Return a stable process description for logging."""
         process_name = self.__get_process_attribute(process, "Name")
         process_id = self.__get_process_attribute(process, "ProcessId")
@@ -355,8 +357,8 @@ It is highly recommended to only utilize these features on a trusted, secure net
             return process_name
         if process_id is not None:
             return str(process_id)
-        if self._process_id >= 0:
-            return str(self._process_id)
+        if fallback_process_id is not None and fallback_process_id >= 0:
+            return str(fallback_process_id)
         return "unknown process"
 
     def __get_process_attribute(self, process, attribute_name):
