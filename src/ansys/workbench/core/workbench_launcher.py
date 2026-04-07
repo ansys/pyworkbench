@@ -319,23 +319,52 @@ It is highly recommended to only utilize these features on a trusted, secure net
     def exit(self):
         """End the launched Workbench server."""
         if self._process:
+            launched_process_description = self.__describe_process(self._process)
             try:
                 if self._wmi:
                     for p in self.__collect_process_tree():
-                        logging.info("Shutting down " + p.Name + " ...")
+                        logging.info("Shutting down " + self.__describe_process(p) + " ...")
                         try:
                             p.Terminate()
                         except Exception as ex:
-                            logging.info(f"Failed to terminate process {p.Name}: {ex}")
+                            logging.info(
+                                "Failed to terminate process "
+                                + self.__describe_process(p)
+                                + f": {ex}"
+                            )
                     self._process.Terminate()
                 else:
                     self._process.terminate()
             except Exception as ex:
-                logging.info(f"Failed to terminate process {self._process.pid}: {ex}")
+                logging.info(f"Failed to terminate process {launched_process_description}: {ex}")
 
         self._wmi_connection = None
         self._process_id = -1
         self._process = None
+
+    def __describe_process(self, process):
+        """Return a stable process description for logging."""
+        process_name = self.__get_process_attribute(process, "Name")
+        process_id = self.__get_process_attribute(process, "ProcessId")
+        if process_id is None:
+            process_id = self.__get_process_attribute(process, "pid")
+
+        if process_name and process_id is not None:
+            return f"{process_name} ({process_id})"
+        if process_name:
+            return process_name
+        if process_id is not None:
+            return str(process_id)
+        if self._process_id >= 0:
+            return str(self._process_id)
+        return "unknown process"
+
+    def __get_process_attribute(self, process, attribute_name):
+        """Read a process attribute without letting property getters abort shutdown."""
+        try:
+            return getattr(process, attribute_name, None)
+        except Exception:
+            return None
 
     def __collect_process_tree(self):
         # collect parent-children mapping
