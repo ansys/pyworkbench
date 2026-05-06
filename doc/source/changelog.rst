@@ -9,6 +9,64 @@ This document contains the release notes for PyWorkbench.
 
 .. towncrier release notes start
 
+`0.14.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.14.0>`_ - May 06, 2026
+====================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: bump pytest from 9.0.2 to 9.0.3
+          - `#332 <https://github.com/ansys/pyworkbench/pull/332>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: update CHANGELOG for v0.13.0
+          - `#324 <https://github.com/ansys/pyworkbench/pull/324>`_
+
+        * - Bump version to 0.14
+          - `#325 <https://github.com/ansys/pyworkbench/pull/325>`_
+
+        * - Chore: bump pypa/gh-action-pypi-publish from 1.13.0 to 1.14.0
+          - `#328 <https://github.com/ansys/pyworkbench/pull/328>`_
+
+        * - Chore: Update license metadata in pyproject.toml
+          - `#330 <https://github.com/ansys/pyworkbench/pull/330>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Fli/still support python 310
+          - `#334 <https://github.com/ansys/pyworkbench/pull/334>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: bump ansys/actions from 10.2.5 to 10.2.12
+          - `#329 <https://github.com/ansys/pyworkbench/pull/329>`_
+
+        * - Chore: bump actions/upload-artifact from 7.0.0 to 7.0.1
+          - `#331 <https://github.com/ansys/pyworkbench/pull/331>`_
+
+
 `0.13.0 <https://github.com/ansys/pyworkbench/releases/tag/v0.13.0>`_ - April 05, 2026
 ======================================================================================
 
