@@ -9,7 +9,7 @@ name = "ansys-workbench-core"
 version = "0.14.dev0"
 description = "A python wrapper for Ansys Workbench"
 readme = "README.rst"
-requires-python = ">=3.11,<4.0"
+requires-python = ">=3.10,<4.0"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{name = "ANSYS, Inc.", email = "pyansys.core@ansys.com"}]
@@ -19,6 +19,7 @@ classifiers = [
     "Development Status :: 4 - Beta",
     'Topic :: Scientific/Engineering',
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
