@@ -340,7 +340,9 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
             return
         dir, fn = os.path.split(relative_file_path)
         dir = os.path.join("pyworkbench", dir)
-        downloaded = download_manager.download_file(filename=fn, directory=dir, destination=self.workdir)
+        downloaded = download_manager.download_file(
+            filename=fn, directory=dir, destination=self.workdir
+        )
         self.upload_file(downloaded, show_progress=show_progress)
 
     def download_file(self, file_name, show_progress=True, target_dir=None):
