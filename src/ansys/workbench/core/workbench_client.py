@@ -36,7 +36,7 @@ import tqdm
 from ansys.api.workbench.v0 import workbench_pb2 as wb
 from ansys.api.workbench.v0.workbench_pb2_grpc import WorkbenchServiceStub
 from ansys.tools.common.cyberchannel import create_channel
-from ansys.workbench.core.example_data import ExampleData
+from ansys.tools.common.example_download import download_manager
 
 
 class WorkbenchClient:
@@ -338,7 +338,9 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
             return
-        downloaded = ExampleData.download(relative_file_path, self.workdir)
+        dir, fn = os.path.split(relative_file_path)
+        dir = os.path.join("pyworkbench", dir)
+        downloaded = download_manager.download_file(filename=fn, directory=dir, destination=self.workdir)
         self.upload_file(downloaded, show_progress=show_progress)
 
     def download_file(self, file_name, show_progress=True, target_dir=None):

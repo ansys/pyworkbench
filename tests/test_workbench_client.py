@@ -213,7 +213,7 @@ def test_upload_file_from_example_repo(mock_workbench_service_stub):
 
     with patch("ansys.workbench.core.workbench_client.os.path.isfile", return_value=True):
         with patch(
-            "ansys.workbench.core.workbench_client.ExampleData.download",
+            "ansys.tools.common.example_download.download_manager.download_file",
             return_value="/tmp/axisymmetric_model.agdb",
         ):
             client.upload_file_from_example_repo(
