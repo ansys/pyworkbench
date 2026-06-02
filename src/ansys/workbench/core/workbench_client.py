@@ -339,7 +339,7 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
             logging.error("Workbench client is not yet connected to a server.")
             return
         dir, fn = os.path.split(relative_file_path)
-        dir = os.path.join("pyworkbench", dir)
+        dir = "pyworkbench/" + dir
         downloaded = download_manager.download_file(
             filename=fn, directory=dir, destination=self.workdir
         )
