@@ -96,7 +96,7 @@ jobs:
            python-version: ['3.11', '3.12', '3.13', '3.14']
     steps:
       - name: "Build a wheelhouse for ${{ matrix.python-version }}"
-        uses: ansys/actions/build-wheelhouse@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
+        uses: ansys/actions/build-wheelhouse@a5b0351dc277d68c2dc1beca2d2674c7dfa4fc55 # v10.3.3
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
