@@ -185,7 +185,7 @@ jobs:
       contents: write        # needed to create GitHub releases and upload assets
     steps:
       - name: Release to the private PyPI repository
-        uses: ansys/actions/release-pypi-private@84b6533ae76f5dde69a1df26c18682160a8121cf # v10.3.5
+        uses: ansys/actions/release-pypi-private@9dc4e3161033d2c2485fbf9687d40cfb7a661fb2 # v10.3.6
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
