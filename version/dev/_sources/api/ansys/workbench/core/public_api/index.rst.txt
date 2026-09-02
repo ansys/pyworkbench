@@ -1,0 +1,196 @@
+
+
+
+
+
+
+The ``public_api.py`` module
+============================
+
+.. py:module:: ansys.workbench.core.public_api
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: public_api
+.. tab-set::
+
+
+
+
+
+
+
+    .. tab-item:: Functions
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~launch_workbench`
+            - Launch PyWorkbench server on the local machine or a remote Windows machine.
+
+
+          * - :py:obj:`~connect_workbench`
+            - Create a PyWorkbench client that connects to an already running Workbench server.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for public API on PyWorkbench.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:function:: launch_workbench(show_gui=True, version=None, client_workdir=None, server_workdir=None, port=-1, use_insecure_connection=False, host=None, username=None, password=None)
+
+   
+   Launch PyWorkbench server on the local machine or a remote Windows machine.
+
+   This method launch a Workbench server on the local machine or a remote Windows machine
+   and creates a PyWorkbench client that connects to the server.
+
+   :Parameters:
+
+       **show_gui** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:True`
+           Weather to launch Workbench in UI mode.
+
+       **version** : :class:`python:str`, default: :data:`python:None`
+           Workbench version to launch. It must be a 3-digit version that is "242" or later.
+           If None, the latest version available will be used.
+
+       **client_workdir** : :class:`python:str`, default: :data:`python:None`
+           Path to a writable directory on the client computer. The default is ``None``,
+           in which case the system temp directory is used.
+
+       **server_workdir** : :class:`python:str`, :data:`python:None`
+           Path to a writable directory on the server computer. The default is ``None``,
+           in which case the user preference for the Workbench temporary file folder is used.
+
+       **port** : :class:`python:int`, :obj:`optional`
+           Port to use for the launched server. If not specified, port is auto determined.
+
+       **use_insecure_connection** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:False`
+           whether to use insecure connection between the server and clients
+
+       **host** : :class:`python:str`, :data:`python:None`
+           Server computer's name or IP address. The default is ``None`` for launching on the
+           local computer.
+
+       **username** : :class:`python:str`, :data:`python:None`
+           User's login name on the server computer. The default is ``None`` for launching on
+           the local computer.
+
+       **password** : :class:`python:str`, :data:`python:None`
+           User's password on the server computer. The default is ``None`` for launching on
+           the local computer.
+
+
+
+   :Returns:
+
+       :obj:`WorkbenchClient`
+           Instance of the PyWorkbench client that is connected to the launched server.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Launch a server on the local computer and use the ``wb`` variable to hold the returned client.
+
+   >>> from ansys.workbench.core import launch_workbench
+   >>> wb = launch_workbench()
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: connect_workbench(port, client_workdir=None, host=None, security='mtls')
+
+   
+   Create a PyWorkbench client that connects to an already running Workbench server.
+
+
+   :Parameters:
+
+       **port** : :class:`python:int`
+           Port used by the server.
+
+       **client_workdir** : :class:`python:str`, default: :data:`python:None`
+           Path to a writable directory on the client computer. The default is ``None``,
+           in which case the system temp directory is used.
+
+       **host** : :class:`python:str`, default: :data:`python:None`
+           Server computer's name or IP address. The default is ``None`` for the local computer.
+
+       **security** : :class:`python:str` :obj:`among` 'mtls', 'wnua', 'insecure', default: 'mtls'
+           Transport mode used for connection security. The default is `mtls`.
+
+
+
+   :Returns:
+
+       :obj:`WorkbenchClient`
+           Instance of the PyWorkbench client that is connected to the server.
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   Connect to a server at port 32588 on localhost and use the ``wb`` variable to hold the
+   returned client.
+
+   >>> from ansys.workbench.core import connect_workbench
+   >>> wb = connect_workbench(port = 32588)
+
+   ..
+       !! processed by numpydoc !!
+
+
+

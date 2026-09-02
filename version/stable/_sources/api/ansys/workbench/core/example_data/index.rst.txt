@@ -1,0 +1,46 @@
+
+
+
+
+
+
+The ``example_data.py`` module
+==============================
+
+.. py:module:: ansys.workbench.core.example_data
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Module for downloading example data from the ``example-data`` repository.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+

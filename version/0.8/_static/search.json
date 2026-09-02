@@ -1,0 +1,688 @@
+[
+    {
+        "objectID": "getting-started/installing/development",
+        "href": "getting-started/installing/development.html#install-pyworkbench-in-developer-mode",
+        "title": "Getting started > Install PyWorkbench in developer mode",
+        "section": "Install PyWorkbench in developer mode",
+        "text": "Developer installation is specifically intended for project maintainers. This\nspecialized installation is tailored to equip developers with the essential\ntools and resources required for effective contribution to the project’s\ndevelopment and maintenance. The developer installation assumes a certain level\nof technical expertise and familiarity with the project’s codebase, rendering\nit most suitable for individuals actively engaged in its continuous development\nand maintenance.\nClone the repository:\nMove inside the project and create a clean Python environment:\nActivate the environment:\nInstall the project in editable mode, which means that any changes you make to\nthe package’s source code is immediately reflected in your project without requiring you\nto reinstall it.\nInstall PyWorkbench in developer mode"
+    },
+    {
+        "objectID": "getting-started/installing/development",
+        "href": "getting-started/installing/development.html#verify-your-installation",
+        "title": "Getting started > Install PyWorkbench in developer mode > Verify your installation",
+        "section": "Verify your installation",
+        "text": "If Ansys Workbench is installed locally, you can verify your PyWorkbench\ninstallation by starting a Workbench server session on your local machine:\nVerify your installation"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#workbenchclient",
+        "title": "WorkbenchClient",
+        "section": "WorkbenchClient",
+        "text": "Functions of a PyWorkbench client.\nLocal working directory for the client.\nHostname or IP address of the server.\nPort number of the server.\nWorkbenchClient\nWorkbenchClient\npython:str\npython:str\npython:int"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#ansys.workbench.core.workbench_client.WorkbenchClient",
+        "title": "WorkbenchClient > WorkbenchClient > WorkbenchClient",
+        "section": "WorkbenchClient > WorkbenchClient",
+        "text": "class ansys.workbench.core.workbench_client.WorkbenchClient(local_workdir, server_host, server_port)\n\nFunctions of a PyWorkbench client.\n\nParameters\n\nlocal_workdir\n\npython:str\n\nLocal working directory for the client.\n\nserver_host\n\npython:str\n\nHostname or IP address of the server.\n\nserver_port\n\npython:int\n\nPort number of the server.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#overview",
+        "title": "WorkbenchClient > Overview",
+        "section": "Overview",
+        "text": "set_console_log_level\nSet the log filter level for the client console.\nset_log_file\nSet a local log file for the Workbench server log.\nreset_log_file\nNo longer use the current log file for the Workbench server log.\nrun_script_string\nRun a script as given in the input string on the server.\nrun_script_file\nRun a script file on the server.\nupload_file\nUpload one or more files from the client to the server.\nupload_file_from_example_repo\nUpload a file from the Ansys example-data repository to the server.\ndownload_file\nDownload one or more files from the server.\ndownload_project_archive\nCreate and download the project archive.\nstart_mechanical_server\nStart the PyMechanical server for the given system in the Workbench project.\nstop_mechanical_server\nStop the PyMechanical server for the given system in the Workbench project.\nstart_fluent_server\nStart the PyFluent server for the given system in the Workbench project.\nstop_fluent_server\nStop the Fluent server for the given system in the Workbench project.\nstart_sherlock_server\nStart the PySherlock server for the given system in the Workbench project.\nstop_sherlock_server\nStop the Sherlock server for the given system in the Workbench project.\nworkdir\n__enter__\nConnect to the server when entering a context.\n__exit__\nDisconnect from the server when exiting a context.\nOverview\nset_console_log_level\nset_log_file\nreset_log_file\nrun_script_string\nrun_script_file\nupload_file\nupload_file_from_example_repo\nexample-data\ndownload_file\ndownload_project_archive\nstart_mechanical_server\nstop_mechanical_server\nstart_fluent_server\nstop_fluent_server\nstart_sherlock_server\nstop_sherlock_server\nworkdir\n__enter__\n__exit__"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#import-detail",
+        "title": "WorkbenchClient > Import detail",
+        "section": "Import detail",
+        "text": "Import detail"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#attribute-detail",
+        "title": "WorkbenchClient > Attribute detail",
+        "section": "Attribute detail",
+        "text": "Attribute detail"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.workdir",
+        "title": "WorkbenchClient > Attribute detail > workdir",
+        "section": "Attribute detail > workdir",
+        "text": "WorkbenchClient.workdir\n\n"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#method-detail",
+        "title": "WorkbenchClient > Method detail",
+        "section": "Method detail",
+        "text": "Connect to the server when entering a context.\nDisconnect from the server when exiting a context.\nSet the log filter level for the client console.\nLevel of logging. Options are “critical”, “debug”, “error”, “info”, and “warning”.\nSet a local log file for the Workbench server log.\nCreate a local log file if one does not exist and append it to the existing log file.\nPath to a local file to use for logging.\nNo longer use the current log file for the Workbench server log.\nRun a script as given in the input string on the server.\nString containing the content of the script to run.\nVariables in the script specified as $$varname%%50%% will be converted to variable\nvalues or use the default value - 50 in the example.\nLevel of logging. Options are “critical”, “debug”, “error”, “info”, and “warning”.\nOutput defined in the script.\nRun a Workbench script, given in a string, that returns the name of\na newly created system.\nRun a script file on the server.\nName of the script file to run. The script file should be located in the client\nworking directory\nVariables in the script specified as $$varname%%50%% will be converted to variable\nvalues or use the default value - 50 in the example.\nLevel of logging. Options are “critical”, “debug”, “error”, “info”, and “warning”.\nOutput defined in the script.\nUpload one or more files from the client to the server.\nList of paths to the one or more local files to upload. The\nwildcard characters “?” and “*” are supported.\nWhether to show a progress bar during the upload.\nNames of the uploaded files.\nUpload a file from the Ansys example-data repository to the server.\nFile path relative to the pyworkbench folder in the example-data repository.\nWhether to show a progress bar during the upload.\nDownload one or more files from the server.\nName of the file. File must be located in the server’s working directory.\nThe wildcard characters “?” and “*” are supported. A ZIP file is automatically\ngenerated and downloaded when multiple files are specified.\nWhether to show a progress bar during the download.\nPath to a local directory to download the files to. The default is None,\nin which case the client working directory is used.\nName of the downloaded file.\nCreate and download the project archive.\nName of the project archive to use, without the file extension.\nWhether to include solution and result files in the archive.\nWhether to show a progress bar during the download.\nStart the PyMechanical server for the given system in the Workbench project.\nName of the system in the Workbench project.\nPort of the PyMechanical server to use to start the PyMechanical client.\nStart a PyMechanical session for the given system.\nStop the PyMechanical server for the given system in the Workbench project.\nName of the system in the Workbench project.\nStop the PyMechanical session for the given system.\nStart the PyFluent server for the given system in the Workbench project.\nName of the system in the Workbench project.\nPath to the local file containing the PyFluent server information that\ncan be used to start a PyFluent client.\nStart a PyFluent session for the given system.\nStop the Fluent server for the given system in the Workbench project.\nName of the system in the Workbench project.\nStop the Fluent session for the given system.\nStart the PySherlock server for the given system in the Workbench project.\nName of the system in the Workbench project.\nPort of the PySherlock server to use to start a PySherlock client.\nStart a PySherlock session for the given system.\nStop the Sherlock server for the given system in the Workbench project.\nName of the system in the Workbench project.\nStop the Sherlock session for the given system.\nMethod detail\npython:str\npython:str\npython:str\ndictionary\nof\nscript\nvariable\nnames\nand\nvalues\npython:str\npython:str\npython:str\ndictionary\nof\nscript\nvariable\nnames\nand\nvalues\npython:str\npython:str\npython:list\npython:str\npython:True\npython:list\npython:str\nexample-data\npython:str\npyworkbench\nexample-data\npython:True\npython:str\npython:True\npython:str\npython:None\nNone\npython:str\npython:str\npython:True\npython:True\npython:str\npython:int\npython:str\npython:str\npython:str\npython:str\npython:str\npython:int\npython:str"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.__enter__",
+        "title": "WorkbenchClient > Method detail > __enter__",
+        "section": "Method detail > __enter__",
+        "text": "WorkbenchClient.__enter__()\n\nConnect to the server when entering a context.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.__exit__",
+        "title": "WorkbenchClient > Method detail > __exit__",
+        "section": "Method detail > __exit__",
+        "text": "WorkbenchClient.__exit__(exc_type, exc_value, traceback)\n\nDisconnect from the server when exiting a context.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.set_console_log_level",
+        "title": "WorkbenchClient > Method detail > set_console_log_level",
+        "section": "Method detail > set_console_log_level",
+        "text": "WorkbenchClient.set_console_log_level(log_level)\n\nSet the log filter level for the client console.\n\nParameters\n\nlog_level\n\npython:str, default: “error”\n\nLevel of logging. Options are “critical”, “debug”, “error”, “info”, and “warning”.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.set_log_file",
+        "title": "WorkbenchClient > Method detail > set_log_file",
+        "section": "Method detail > set_log_file",
+        "text": "WorkbenchClient.set_log_file(log_file)\n\nSet a local log file for the Workbench server log.\n\nCreate a local log file if one does not exist and append it to the existing log file.\n\nParameters\n\nlog_file\n\npython:str\n\nPath to a local file to use for logging.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.reset_log_file",
+        "title": "WorkbenchClient > Method detail > reset_log_file",
+        "section": "Method detail > reset_log_file",
+        "text": "WorkbenchClient.reset_log_file()\n\nNo longer use the current log file for the Workbench server log.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.run_script_string",
+        "title": "WorkbenchClient > Method detail > run_script_string",
+        "section": "Method detail > run_script_string",
+        "text": "WorkbenchClient.run_script_string(script_string, args=None, log_level='error')\n\nRun a script as given in the input string on the server.\n\nParameters\n\nscript_string\n\npython:str\n\nString containing the content of the script to run.\n\nargs\n\ndictionary of script variable names and values\n\nVariables in the script specified as $$varname%%50%% will be converted to variable\nvalues or use the default value - 50 in the example.\n\nlog_level\n\npython:str, default: “error”\n\nLevel of logging. Options are “critical”, “debug”, “error”, “info”, and “warning”.\n\nReturns\n\npython:str\n\nOutput defined in the script.\n\nExamples\n\nRun a Workbench script, given in a string, that returns the name of\na newly created system.\n\n>>> wb.run_script_string(r'''import json\nwb_script_result=json.dumps(GetTemplate(TemplateName=\"FLUENT\").CreateSystem().Name)\n''')\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.run_script_file",
+        "title": "WorkbenchClient > Method detail > run_script_file",
+        "section": "Method detail > run_script_file",
+        "text": "WorkbenchClient.run_script_file(script_file_name, args=None, log_level='error')\n\nRun a script file on the server.\n\nParameters\n\nscript_file_name\n\npython:str\n\nName of the script file to run. The script file should be located in the client\nworking directory\n\nargs\n\ndictionary of script variable names and values\n\nVariables in the script specified as $$varname%%50%% will be converted to variable\nvalues or use the default value - 50 in the example.\n\nlog_level\n\npython:str, default: “error”\n\nLevel of logging. Options are “critical”, “debug”, “error”, “info”, and “warning”.\n\nReturns\n\npython:str\n\nOutput defined in the script.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.upload_file",
+        "title": "WorkbenchClient > Method detail > upload_file",
+        "section": "Method detail > upload_file",
+        "text": "WorkbenchClient.upload_file(*file_list, show_progress=True)\n\nUpload one or more files from the client to the server.\n\nParameters\n\nfile_list\n\npython:list[python:str]\n\nList of paths to the one or more local files to upload. The\nwildcard characters “?” and “*” are supported.\n\nshow_progress\n\nbool, default: python:True\n\nWhether to show a progress bar during the upload.\n\nReturns\n\npython:list[python:str]\n\nNames of the uploaded files.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.upload_file_from_example_repo",
+        "title": "WorkbenchClient > Method detail > upload_file_from_example_repo",
+        "section": "Method detail > upload_file_from_example_repo",
+        "text": "WorkbenchClient.upload_file_from_example_repo(relative_file_path, show_progress=True)\n\nUpload a file from the Ansys example-data repository to the server.\n\nParameters\n\nrelative_file_path\n\npython:str\n\nFile path relative to the pyworkbench folder in the example-data repository.\n\nshow_progress\n\nbool, default: python:True\n\nWhether to show a progress bar during the upload.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.download_file",
+        "title": "WorkbenchClient > Method detail > download_file",
+        "section": "Method detail > download_file",
+        "text": "WorkbenchClient.download_file(file_name, show_progress=True, target_dir=None)\n\nDownload one or more files from the server.\n\nParameters\n\nfile_name\n\npython:str\n\nName of the file. File must be located in the server’s working directory.\nThe wildcard characters “?” and “*” are supported. A ZIP file is automatically\ngenerated and downloaded when multiple files are specified.\n\nshow_progress\n\nbool, default: python:True\n\nWhether to show a progress bar during the download.\n\ntarget_dir\n\npython:str, default: python:None\n\nPath to a local directory to download the files to. The default is None,\nin which case the client working directory is used.\n\nReturns\n\npython:str\n\nName of the downloaded file.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.download_project_archive",
+        "title": "WorkbenchClient > Method detail > download_project_archive",
+        "section": "Method detail > download_project_archive",
+        "text": "WorkbenchClient.download_project_archive(archive_name, include_solution_result_files=True, show_progress=True)\n\nCreate and download the project archive.\n\nParameters\n\narchive_name\n\npython:str\n\nName of the project archive to use, without the file extension.\n\ninclude_solution_result_files\n\nbool, default: python:True\n\nWhether to include solution and result files in the archive.\n\nshow_progress\n\nbool, default: python:True\n\nWhether to show a progress bar during the download.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.start_mechanical_server",
+        "title": "WorkbenchClient > Method detail > start_mechanical_server",
+        "section": "Method detail > start_mechanical_server",
+        "text": "WorkbenchClient.start_mechanical_server(system_name)\n\nStart the PyMechanical server for the given system in the Workbench project.\n\nParameters\n\nsystem_name\n\npython:str\n\nName of the system in the Workbench project.\n\nReturns\n\npython:int\n\nPort of the PyMechanical server to use to start the PyMechanical client.\n\nExamples\n\nStart a PyMechanical session for the given system.\n\n>>> from ansys.mechanical.core import connect_to_mechanical\n>>> server_port=wb.start_mechanical_server(system_name=mech_system_name)\n>>> mechanical = connect_to_mechanical(port=server_port)\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.stop_mechanical_server",
+        "title": "WorkbenchClient > Method detail > stop_mechanical_server",
+        "section": "Method detail > stop_mechanical_server",
+        "text": "WorkbenchClient.stop_mechanical_server(system_name)\n\nStop the PyMechanical server for the given system in the Workbench project.\n\nParameters\n\nsystem_name\n\npython:str\n\nName of the system in the Workbench project.\n\nExamples\n\nStop the PyMechanical session for the given system.\n\n>>> wb.stop_mechanical_server(system_name=mech_system_name)\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.start_fluent_server",
+        "title": "WorkbenchClient > Method detail > start_fluent_server",
+        "section": "Method detail > start_fluent_server",
+        "text": "WorkbenchClient.start_fluent_server(system_name)\n\nStart the PyFluent server for the given system in the Workbench project.\n\nParameters\n\nsystem_name\n\npython:str\n\nName of the system in the Workbench project.\n\nReturns\n\npython:str\n\nPath to the local file containing the PyFluent server information that\ncan be used to start a PyFluent client.\n\nExamples\n\nStart a PyFluent session for the given system.\n\n>>> import ansys.fluent.core as pyfluent\n>>> server_info_file=wb.start_fluent_server(system_name=fluent_sys_name)\n>>> fluent=pyfluent.connect_to_fluent(server_info_file_name=server_info_file)\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.stop_fluent_server",
+        "title": "WorkbenchClient > Method detail > stop_fluent_server",
+        "section": "Method detail > stop_fluent_server",
+        "text": "WorkbenchClient.stop_fluent_server(system_name)\n\nStop the Fluent server for the given system in the Workbench project.\n\nParameters\n\nsystem_name\n\npython:str\n\nName of the system in the Workbench project.\n\nExamples\n\nStop the Fluent session for the given system.\n\n>>> wb.stop_fluent_server(system_name=mech_system_name)\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.start_sherlock_server",
+        "title": "WorkbenchClient > Method detail > start_sherlock_server",
+        "section": "Method detail > start_sherlock_server",
+        "text": "WorkbenchClient.start_sherlock_server(system_name)\n\nStart the PySherlock server for the given system in the Workbench project.\n\nParameters\n\nsystem_name\n\npython:str\n\nName of the system in the Workbench project.\n\nReturns\n\npython:int\n\nPort of the PySherlock server to use to start a PySherlock client.\n\nExamples\n\nStart a PySherlock session for the given system.\n\n>>> from ansys.sherlock.core import pysherlock\n>>> server_port=wb.start_sherlock_server(system_name=sherlock_system_name)\n>>> sherlock = pysherlock.connect_grpc_channel(port=server_port)\n>>> sherlock.common.check()\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/WorkbenchClient",
+        "href": "api/ansys/workbench/core/workbench_client/WorkbenchClient.html#WorkbenchClient.stop_sherlock_server",
+        "title": "WorkbenchClient > Method detail > stop_sherlock_server",
+        "section": "Method detail > stop_sherlock_server",
+        "text": "WorkbenchClient.stop_sherlock_server(system_name)\n\nStop the Sherlock server for the given system in the Workbench project.\n\nParameters\n\nsystem_name\n\npython:str\n\nName of the system in the Workbench project.\n\nExamples\n\nStop the Sherlock session for the given system.\n\n>>> wb.stop_sherlock_server(system_name=mech_system_name)\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "getting-started",
+        "href": "getting-started.html#getting-started",
+        "title": "Getting started",
+        "section": "Getting started",
+        "text": "To run PyWorkbench, you must have a licensed copy of Workbench of version 24.2 or later.\nLearn how to install PyWorkbench in your development\nenvironment from various official sources including PyPI and\nthe Ansys GitHub repository.\nLearn how to use PyWorkbench to start a new instance of Workbench\nor connect to an existing instance.\nGetting started"
+    },
+    {
+        "objectID": "index",
+        "href": "index.html#pyworkbench-documentation-080",
+        "title": "PyWorkbench documentation 0.8.0",
+        "section": "PyWorkbench documentation 0.8.0",
+        "text": "PyWorkbench provides an environment where you can make use of the capabilities\nof various PyAnsys modules for Ansys applications that have been integrated\nwith Workbench.\nLearn how to install PyWorkbench and connect to Workbench.\nUnderstand key concepts and approaches for using PyWorkbench with\nthe Workbench gRPC service.\nUnderstand how to use Python to interact programmatically with PyWorkbench.\nExplore examples that show how to use PyWorkbench to create custom applications,\nautomate your existing Workbench workflows, and integrate with other popular tools\nin the Python ecosystem.\nPyWorkbench documentation 0.8.0"
+    },
+    {
+        "objectID": "getting-started/installing/linux",
+        "href": "getting-started/installing/linux.html#install-pyworkbench-locally-in-linux",
+        "title": "Getting started > Install PyWorkbench locally in Linux",
+        "section": "Install PyWorkbench locally in Linux",
+        "text": "This page explains how to install PyWorkbench locally on a Linux platform.\nThe following instructions assume that you have a local installation of Workbench and a valid\nlicense in your machine.\nInstall PyWorkbench locally in Linux"
+    },
+    {
+        "objectID": "getting-started/installing/linux",
+        "href": "getting-started/installing/linux.html#download-artifacts",
+        "title": "Getting started > Install PyWorkbench locally in Linux > Download artifacts",
+        "section": "Download artifacts",
+        "text": "Start by downloading PyWorkbench wheel or source artifacts for Linux. Wheel artifacts\nare the preferred option for installing PyWorkbench.\nWheel artifacts for installing PyWorkbench:\nArtifact\nansys_workbench_core-0.8.0-py3-none-any.whl\nSize\n0.02 MB\nSHA-256\nf792114a9293f1b773370583073c68cc28be71ec4fa10cb5a452aaede9944f1a\nSource distribution for installing PyWorkbench:\nArtifact\nansys_workbench_core-0.8.0.tar.gz\nSize\n0.01 MB\nSHA-256\nab2d15153bce1be3f3e9e7f1538c4b67e43e13a08907a329aaef6fa864e9e7c0\nDownload artifacts"
+    },
+    {
+        "objectID": "getting-started/installing/linux",
+        "href": "getting-started/installing/linux.html#install-artifacts",
+        "title": "Getting started > Install PyWorkbench locally in Linux > Install artifacts",
+        "section": "Install artifacts",
+        "text": "Install Linux artifacts by using the pip command:\nInstall artifacts"
+    },
+    {
+        "objectID": "getting-started/installing/linux",
+        "href": "getting-started/installing/linux.html#verify-installation",
+        "title": "Getting started > Install PyWorkbench locally in Linux > Verify installation",
+        "section": "Verify installation",
+        "text": "Verify a successful installation of PyWorkbench by running this code:\nVerify installation"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#release-notes",
+        "title": "Release notes",
+        "section": "Release notes",
+        "text": "This document contains the release notes for PyWorkbench.\nRelease notes"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#080---2025-02-14",
+        "title": "Release notes > 0.8.0 - 2025-02-14",
+        "section": "0.8.0 - 2025-02-14",
+        "text": "0.8.0 - 2025-02-14"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#added",
+        "title": "Release notes > Added",
+        "section": "Added",
+        "text": "feat: add cheatsheet #169\nPyWB Cheatsheet reviewed and corrected #172\nAdded"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#fixed",
+        "title": "Release notes > Fixed",
+        "section": "Fixed",
+        "text": "fix: contributors file #153\nfix: use title case in CONTRIBUTORS.md #161\nFIX: Minor typo correction #185\nFixed"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#dependencies",
+        "title": "Release notes > Dependencies",
+        "section": "Dependencies",
+        "text": "chore: bump safety from 3.2.8 to 3.2.9 #149\nchore: bump safety from 3.2.9 to 3.2.10 #150\nchore: bump pytest-cov from 5.0.0 to 6.0.0 #151\nchore: bump ansys-sphinx-theme[autoapi] from 1.1.7 to 1.2.0 #152\nchore: bump safety from 3.2.10 to 3.2.11 #154\nchore: bump ansys-sphinx-theme[autoapi] from 1.2.0 to 1.2.1 #155\nchore: bump ansys-sphinx-theme[autoapi] from 1.2.1 to 1.2.2 #157\nchore: bump bandit from 1.7.10 to 1.8.0 #160\nchore: bump pytest from 8.3.3 to 8.3.4 #162\nchore: bump ansys-sphinx-theme[autoapi] from 1.2.2 to 1.2.3 #164\nchore: bump safety from 3.2.11 to 3.2.13 #166\nchore: bump ansys-sphinx-theme[autoapi] from 1.2.3 to 1.2.4 #173\nchore: bump safety from 3.2.13 to 3.2.14 #174\nchore: bump sphinx-autodoc-typehints from 2.5.0 to 3.0.0 #177\nchore: bump ansys-sphinx-theme[autoapi] from 1.2.4 to 1.2.6 #180\nchore: bump bandit from 1.8.0 to 1.8.2 #181\nchore: bump sphinx-autodoc-typehints from 3.0.0 to 3.0.1 #183\nchore: bump ansys-sphinx-theme[autoapi] from 1.2.6 to 1.2.7 #186\nchore: bump safety from 3.2.14 to 3.3.0 #189\nDependencies"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#miscellaneous",
+        "title": "Release notes > Miscellaneous",
+        "section": "Miscellaneous",
+        "text": "close the current project on exit #159\nMiscellaneous"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#documentation",
+        "title": "Release notes > Documentation",
+        "section": "Documentation",
+        "text": "chore: update CHANGELOG for v0.7.0 #147\nbump version to 0.8 #148\nDOC: Update docs with new pymechanical api #165\nFli/improve archive download #170\ndoc: include library artifacts #179\nDocumentation"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#070---2024-10-23",
+        "title": "Release notes > 0.7.0 - 2024-10-23",
+        "section": "0.7.0 - 2024-10-23",
+        "text": "0.7.0 - 2024-10-23"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#changed",
+        "title": "Release notes > Changed",
+        "section": "Changed",
+        "text": "chore: update CHANGELOG for v0.6.0 #114\nmaint: migrate to ansys sphinx theme 1.0.9 #121\nChanged"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#fixed",
+        "title": "Release notes > Fixed",
+        "section": "Fixed",
+        "text": "fix: update cicd for bot secrets #136\nFixed"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#dependencies",
+        "title": "Release notes > Dependencies",
+        "section": "Dependencies",
+        "text": "chore: bump bandit from 1.7.8 to 1.7.9 #90\nchore: bump pytest from 8.2.2 to 8.3.1 #106\nchore: bump sphinx from 7.4.6 to 7.4.7 #107\nchore: bump ansys/actions from 6 to 7 #109\nbump version to 0.7.dev0 #115\nchore: bump numpydoc from 1.7.0 to 1.8.0 #120\nchore: bump ansys-sphinx-theme[autoapi] from 0.16.6 to 1.0.10 #122\nchore: bump safety from 3.2.4 to 3.2.7 #123\nchore: bump sphinx from 7.4.7 to 8.0.2 #124\nchore: bump ansys-sphinx-theme[autoapi] from 1.0.10 to 1.0.11 #125\nchore: bump bandit from 1.7.9 to 1.7.10 #126\nchore: bump pytest from 8.3.1 to 8.3.3 #128\nchore: bump safety from 3.2.7 to 3.2.8 #129\nchore: bump ansys-sphinx-theme[autoapi] from 1.0.11 to 1.1.1 #130\nchore: bump sphinx-autodoc-typehints from 2.2.0 to 2.5.0 #134\nchore: bump ansys-sphinx-theme[autoapi] from 1.1.1 to 1.1.3 #137\nchore: bump sphinx from 8.0.2 to 8.1.0 #138\nchore: bump sphinx from 8.1.0 to 8.1.3 #140\nchore: bump ansys-sphinx-theme[autoapi] from 1.1.3 to 1.1.7 #146\nDependencies"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#miscellaneous",
+        "title": "Release notes > Miscellaneous",
+        "section": "Miscellaneous",
+        "text": "support launching workbench in non-UI mode #118\nupdate argument name for UI mode #119\ntry fixing accept.txt file #135\nMiscellaneous"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#documentation",
+        "title": "Release notes > Documentation",
+        "section": "Documentation",
+        "text": "support variables in script; change argument release to version #143\nsupport downloading project archive; suppress console window #145\nDocumentation"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#060---2024-08-16",
+        "title": "Release notes > 0.6.0 - 2024-08-16",
+        "section": "0.6.0 - 2024-08-16",
+        "text": "0.6.0 - 2024-08-16"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#changed",
+        "title": "Release notes > Changed",
+        "section": "Changed",
+        "text": "chore: update CHANGELOG for v0.5.0 #111\nChanged"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#dependencies",
+        "title": "Release notes > Dependencies",
+        "section": "Dependencies",
+        "text": "bump version to 0.6.dev0 #112\nDependencies"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#miscellaneous",
+        "title": "Release notes > Miscellaneous",
+        "section": "Miscellaneous",
+        "text": "fix example repo URL; add server release requirement in doc #113\nMiscellaneous"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#050---2024-08-15",
+        "title": "Release notes > 0.5.0 - 2024-08-15",
+        "section": "0.5.0 - 2024-08-15",
+        "text": "0.5.0 - 2024-08-15"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#changed",
+        "title": "Release notes > Changed",
+        "section": "Changed",
+        "text": "chore: update CHANGELOG for v0.4.0 #87\nChanged"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#fixed",
+        "title": "Release notes > Fixed",
+        "section": "Fixed",
+        "text": "docs: update docs links and check-swicher #89\nfix: make WMI windows only dependency #105\nFixed"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#dependencies",
+        "title": "Release notes > Dependencies",
+        "section": "Dependencies",
+        "text": "chore: bump ansys-sphinx-theme[autoapi] from 0.16.5 to 0.16.6 #94\nchore: bump sphinx-autodoc-typehints from 2.1.1 to 2.2.0 #95\nchore: bump safety from 3.2.3 to 3.2.4 #98\nDependencies"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#miscellaneous",
+        "title": "Release notes > Miscellaneous",
+        "section": "Miscellaneous",
+        "text": "fix some doc mistakes #91\nMiscellaneous"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#040---2024-06-12",
+        "title": "Release notes > 0.4.0 - 2024-06-12",
+        "section": "0.4.0 - 2024-06-12",
+        "text": "0.4.0 - 2024-06-12"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#added",
+        "title": "Release notes > Added",
+        "section": "Added",
+        "text": "tests: add the basic units tests #79\nAdded"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#changed",
+        "title": "Release notes > Changed",
+        "section": "Changed",
+        "text": "ci: update the release workflow to trusted publishers #71\nChanged"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#fixed",
+        "title": "Release notes > Fixed",
+        "section": "Fixed",
+        "text": "fix: update ci-cd and repo url #68\ndocs: improve docstring and api reference #69\nFixed\nci-cd"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#dependencies",
+        "title": "Release notes > Dependencies",
+        "section": "Dependencies",
+        "text": "doc: update documentation to match PyAnsys standards #63\ndocs: update the common pyansys documents #64\nMAINT: bump ansys-sphinx-theme[autoapi] from 0.16.4 to 0.16.5 #73\nMAINT: bump sphinx-autodoc-typehints from 2.1.0 to 2.1.1 #75\nchore: bump safety from 3.2.0 to 3.2.1 #77\nchore: bump pytest from 8.2.1 to 8.2.2 #82\nchore: bump safety from 3.2.1 to 3.2.3 #84\nchore: update api version #86\nDependencies"
+    },
+    {
+        "objectID": "changelog",
+        "href": "changelog.html#miscellaneous",
+        "title": "Release notes > Miscellaneous",
+        "section": "Miscellaneous",
+        "text": "feat: adding API for connecting to a running server #80\ndoc: technical review #81\nOverall review based on skimming the doc #83\nMiscellaneous"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#user-guide",
+        "title": "User guide",
+        "section": "User guide",
+        "text": "This section explains key concepts and approaches for using PyWorkbench\nwith the Workbench gRPC service.\nUser guide"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#start-workbench-client-and-connect-to-a-running-workbench-server",
+        "title": "User guide > Start Workbench client and connect to a running Workbench server",
+        "section": "Start Workbench client and connect to a running Workbench server",
+        "text": "To start a Workbench client that connects to a running Workbench server on the cloud, you\nmust provide the following information:\nPort number\nServer name or IP address, which is an optional parameter and when not specified, localhost is used\nClient-side working directory, which is an optional parameter indicating the default location for client-side files\nThe client_workdir parameter for the connect_workbench() function specifies a working\ndirectory for the client instead of using the default directory.\nStart Workbench client and connect to a running Workbench server\nclient_workdir\nconnect_workbench()"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#launch-workbench-server-and-start-a-client",
+        "title": "User guide > Launch Workbench server and start a client",
+        "section": "Launch Workbench server and start a client",
+        "text": "During the development phase or when debugging, it is useful to start the\nWorkbench server on your desktop or some computer within the company network.\nYou can always start a Workbench server by running the StartServer() command\nin any Workbench session. You then use the returned server port to start a client,\nlike in the preceding example.\nAlternatively, you can launch a Workbench server and start a client programmatically in a\nclient-side Python script.\nThis code launches a server on a local Windows machine:\nThis code launches a server on a remote Windows machine with valid user credentials:\nOther options for the launch_workbench() function include specifying a particular\nWorkbench version to launch, whether to launch in UI mode, and specifying working directories\non the server and/or the client instead of using the default directories:\nLaunch Workbench server and start a client\nStartServer()\nlaunch_workbench()"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#run-scripts-on-workbench-server",
+        "title": "User guide > Run scripts on Workbench server",
+        "section": "Run scripts on Workbench server",
+        "text": "You can use these methods to run IronPython-based Workbench scripts, which contain commands or\nqueries, with PyWorkbench:\nrun_script_file: Runs a script file in the client working directory.\nrun_script_string: Runs a script contained in the given string.\nTo the wb_script_result global variable in the script, you can assign any output that needs\nto be returned from these methods, as a JSON string. For example, this Workbench script returns\nall message summaries from the Workbench session:\nYou can also call these methods with different logging levels. While the default logging\nlevel is error, the following example outputs all info, warning, and error levels\nto the logger when the script runs:\nRun scripts on Workbench server\nrun_script_file\nrun_script_string\nwb_script_result\nerror\ninfo\nwarning\nerror"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#upload-and-download-files",
+        "title": "User guide > Upload and download files",
+        "section": "Upload and download files",
+        "text": "You can upload and download data files to and from the server using the upload_file() and download_file\nmethods. The client-side working directory is used to hold these files unless absolute paths or target directories\nare specified. There is also a working directory on the server for the same purpose. To obtain the server’s working\ndirectory, you can use the GetServerWorkingDirectory() query in the scripts that run on the server.\nThis code uploads all part files of a given prefix and all AGDB files in the working directory, along with another file\noutside of the working directory, from the client to the server:\nThis server-side Workbench script loads an uploaded geometry file from the server’s working directory into a\nnewly created Workbench system:\nThis server-side Workbench script copies a Mechanical solver output file to the server’s working directory:\nThis client script downloads all files with .out extensions from the server’s working directory:\nThere is a special client method to upload a data file from the Ansys\nexample-data repository\ndirectly to the Workbench server. You should specify the path relative to the\npyworkbench folder in the example-data repository:\nThere is a convenience function to save the current Workbench project on the server, archive\nthe project, and then download the project archive to the client:\nAll methods for uploading and downloading files display a progress bar by default. You can\nturn off the progress bar with an optional argument:\nUpload and download files\nupload_file()\ndownload_file\nGetServerWorkingDirectory()\n.out\npyworkbench\nexample-data"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#start-other-pyansys-services-for-systems-in-a-workbench-project",
+        "title": "User guide > Start other PyAnsys services for systems in a Workbench project",
+        "section": "Start other PyAnsys services for systems in a Workbench project",
+        "text": "Start other PyAnsys services for systems in a Workbench project"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#pymechanical",
+        "title": "User guide > PyMechanical",
+        "section": "PyMechanical",
+        "text": "For any Mechanical system in the Workbench project, you can start and connect the\nPyMechanical service from the same client machine. This code runs a server-side script\nto create a mechanical system. It then starts the PyMechanical service for the system\nand establishes a PyMechanical client.\nThe PyMechanical service can be stopped for a given system:\nPyMechanical"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#pyfluent",
+        "title": "User guide > PyFluent",
+        "section": "PyFluent",
+        "text": "This code starts the PyFluent service and client for a Fluent system created in Workbench.\nThe PyFluent service can be stopped for a given system:\nPyFluent"
+    },
+    {
+        "objectID": "user-guide",
+        "href": "user-guide.html#pysherlock",
+        "title": "User guide > PySherlock",
+        "section": "PySherlock",
+        "text": "This code starts the PySherlock service and client for a Sherlock system created in Workbench.\nThe PySherlock service can be stopped for a given system:\nPySherlock"
+    },
+    {
+        "objectID": "api/index",
+        "href": "api/index.html#api-reference",
+        "title": "API reference",
+        "section": "API reference",
+        "text": "This section describes ansys-workbench-core endpoints, their capabilities, and how\nto interact with them programmatically.\nAPI reference"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/public_api/index",
+        "href": "api/ansys/workbench/core/public_api/index.html#the-public_apipy-module",
+        "title": "The public_api.py module",
+        "section": "The public_api.py module",
+        "text": "The public_api.py module\npublic_api.py"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/public_api/index",
+        "href": "api/ansys/workbench/core/public_api/index.html#summary",
+        "title": "The public_api.py module > Summary",
+        "section": "Summary",
+        "text": "launch_workbench\nLaunch PyWorkbench server on the local or a remote Windows machine.\nconnect_workbench\nCreate a PyWorkbench client that connects to an already running Workbench server.\nSummary\nlaunch_workbench\nconnect_workbench"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/public_api/index",
+        "href": "api/ansys/workbench/core/public_api/index.html#description",
+        "title": "The public_api.py module > Description",
+        "section": "Description",
+        "text": "Module for starting PyWorkbench.\nDescription"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/public_api/index",
+        "href": "api/ansys/workbench/core/public_api/index.html#module-detail",
+        "title": "The public_api.py module > Module detail",
+        "section": "Module detail",
+        "text": "Launch PyWorkbench server on the local or a remote Windows machine.\nThis method launch a Workbench server on the local or a remote Windows machine and creates\na PyWorkbench client that connects to the server.\nWeather to launch Workbench in UI mode.\nWorkbench version to launch. It must be a 3-digit version that is “242” or later.\nPath to a writable directory on the client computer. The default is None,\nin which case the system temp directory is used.\nPath to a writable directory on the server computer. The default is None,\nin which case the user preference for the Workbench temporary file folder is used.\nServer computer’s name or IP address. The default is None for launching on the\nlocal computer.\nUser’s login name on the server computer. The default is None for launching on\nthe local computer.\nUser’s password on the server computer. The default is None for launching on\nthe local computer.\nInstance of the PyWorkbench client that is connected to the launched server.\nLaunch a server on the local computer and use the wb variable to hold the returned client.\nCreate a PyWorkbench client that connects to an already running Workbench server.\nPort used by the server.\nPath to a writable directory on the client computer. The default is None,\nin which case the system temp directory is used.\nServer computer’s name or IP address. The default is None for the local computer.\nInstance of the PyWorkbench client that is connected to the server.\nConnect to a server at port 32588 on localhost and use the wb variable to hold the\nreturned client.\nModule detail\npython:True\npython:str\npython:None\npython:str\npython:None\nNone\npython:str\npython:None\nNone\npython:str\npython:None\nNone\npython:str\npython:None\nNone\npython:str\npython:None\nNone\nWorkbenchClient\nwb\npython:int\npython:str\npython:None\nNone\npython:str\npython:None\nNone\nWorkbenchClient\nwb"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/public_api/index",
+        "href": "api/ansys/workbench/core/public_api/index.html#public_api.launch_workbench",
+        "title": "The public_api.py module > Module detail > launch_workbench",
+        "section": "Module detail > launch_workbench",
+        "text": "public_api.launch_workbench(show_gui=True, version=None, client_workdir=None, server_workdir=None, host=None, username=None, password=None)\n\nLaunch PyWorkbench server on the local or a remote Windows machine.\n\nThis method launch a Workbench server on the local or a remote Windows machine and creates\na PyWorkbench client that connects to the server.\n\nParameters\n\nshow_gui\n\nbool, default: python:True\n\nWeather to launch Workbench in UI mode.\n\nversion\n\npython:str, default: python:None\n\nWorkbench version to launch. It must be a 3-digit version that is “242” or later.\n\nclient_workdir\n\npython:str, default: python:None\n\nPath to a writable directory on the client computer. The default is None,\nin which case the system temp directory is used.\n\nserver_workdir\n\npython:str, python:None\n\nPath to a writable directory on the server computer. The default is None,\nin which case the user preference for the Workbench temporary file folder is used.\n\nhost\n\npython:str, python:None\n\nServer computer’s name or IP address. The default is None for launching on the\nlocal computer.\n\nusername\n\npython:str, python:None\n\nUser’s login name on the server computer. The default is None for launching on\nthe local computer.\n\npassword\n\npython:str, python:None\n\nUser’s password on the server computer. The default is None for launching on\nthe local computer.\n\nReturns\n\nWorkbenchClient\n\nInstance of the PyWorkbench client that is connected to the launched server.\n\nExamples\n\nLaunch a server on the local computer and use the wb variable to hold the returned client.\n\n>>> from ansys.workbench.core import launch_workbench\n>>> wb = launch_workbench()\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/public_api/index",
+        "href": "api/ansys/workbench/core/public_api/index.html#public_api.connect_workbench",
+        "title": "The public_api.py module > Module detail > connect_workbench",
+        "section": "Module detail > connect_workbench",
+        "text": "public_api.connect_workbench(port, client_workdir=None, host=None)\n\nCreate a PyWorkbench client that connects to an already running Workbench server.\n\nParameters\n\nport\n\npython:int\n\nPort used by the server.\n\nclient_workdir\n\npython:str, default: python:None\n\nPath to a writable directory on the client computer. The default is None,\nin which case the system temp directory is used.\n\nhost\n\npython:str, default: python:None\n\nServer computer’s name or IP address. The default is None for the local computer.\n\nReturns\n\nWorkbenchClient\n\nInstance of the PyWorkbench client that is connected to the server.\n\nExamples\n\nConnect to a server at port 32588 on localhost and use the wb variable to hold the\nreturned client.\n\n>>> from ansys.workbench.core import connect_workbench\n>>> wb = connect_workbench(port = 32588)\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/index",
+        "href": "api/ansys/workbench/core/workbench_client/index.html#the-workbench_clientpy-module",
+        "title": "The workbench_client.py module",
+        "section": "The workbench_client.py module",
+        "text": "The workbench_client.py module\nworkbench_client.py"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/index",
+        "href": "api/ansys/workbench/core/workbench_client/index.html#summary",
+        "title": "The workbench_client.py module > Summary",
+        "section": "Summary",
+        "text": "WorkbenchClient\nFunctions of a PyWorkbench client.\nSummary\nWorkbenchClient"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/workbench_client/index",
+        "href": "api/ansys/workbench/core/workbench_client/index.html#description",
+        "title": "The workbench_client.py module > Description",
+        "section": "Description",
+        "text": "Workbench client module for PyWorkbench.\nDescription"
+    },
+    {
+        "objectID": "getting-started/connection",
+        "href": "getting-started/connection.html#connecting-with-ansys-workbench",
+        "title": "Getting started > Connecting with Ansys Workbench",
+        "section": "Connecting with Ansys Workbench",
+        "text": "This guidelines describe step by step how to connect PyWorkbench to Ansys\nWorkbench. Different options exist, including local and remote connections.\nConnecting with Ansys Workbench"
+    },
+    {
+        "objectID": "getting-started/connection",
+        "href": "getting-started/connection.html#local-connection",
+        "title": "Getting started > Connecting with Ansys Workbench > Local connection",
+        "section": "Local connection",
+        "text": "You can connect PyWorkbench to a local session of Ansys Workbench by running\nthe following steps:\nStart Ansys Workbench\nIn the Workbench Command Window, type StartServer()\nTake a note of the returned port number\nUse the port number to connect PyWorkbench to the server:\nLocal connection\nStartServer()"
+    },
+    {
+        "objectID": "getting-started/connection",
+        "href": "getting-started/connection.html#remote-connection",
+        "title": "Getting started > Connecting with Ansys Workbench > Remote connection",
+        "section": "Remote connection",
+        "text": "You can connect PyWorkbench to an Ansys Workbench session running on a remote\ncomputer by giving its computer name or IP and the port number that the service uses:\nRemote connection"
+    },
+    {
+        "objectID": "getting-started/installing",
+        "href": "getting-started/installing.html#install-pyworkbench",
+        "title": "Getting started > Install PyWorkbench",
+        "section": "Install PyWorkbench",
+        "text": "PyWorkbench can be installed on different platforms. Select your platform for\ninstructions on how to install PyWorkbench.\nFor Windows users\nFor Linux users\nFor developers\nInstall PyWorkbench"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/example_data/index",
+        "href": "api/ansys/workbench/core/example_data/index.html#the-example_datapy-module",
+        "title": "The example_data.py module",
+        "section": "The example_data.py module",
+        "text": "The example_data.py module\nexample_data.py"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/example_data/index",
+        "href": "api/ansys/workbench/core/example_data/index.html#summary",
+        "title": "The example_data.py module > Summary",
+        "section": "Summary",
+        "text": "Summary"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/example_data/index",
+        "href": "api/ansys/workbench/core/example_data/index.html#description",
+        "title": "The example_data.py module > Description",
+        "section": "Description",
+        "text": "Module for downloading example data from the example-data repository.\nDescription\nexample-data"
+    },
+    {
+        "objectID": "getting-started/installing/windows",
+        "href": "getting-started/installing/windows.html#install-pyworkbench-locally-in-windows",
+        "title": "Getting started > Install PyWorkbench locally in Windows",
+        "section": "Install PyWorkbench locally in Windows",
+        "text": "This page explains how to install PyWorkbench locally on a Windows platform.\nThe following instructions assume that you have a local installation of Workbench and a valid\nlicense in your machine.\nInstall PyWorkbench locally in Windows"
+    },
+    {
+        "objectID": "getting-started/installing/windows",
+        "href": "getting-started/installing/windows.html#download-artifacts",
+        "title": "Getting started > Install PyWorkbench locally in Windows > Download artifacts",
+        "section": "Download artifacts",
+        "text": "Start by downloading PyWorkbench wheel or source artifacts for Windows. Wheel artifacts\nare the preferred option for installing PyWorkbench.\nWheel artifacts for installing PyWorkbench:\nArtifact\nansys_workbench_core-0.8.0-py3-none-any.whl\nSize\n0.02 MB\nSHA-256\nf792114a9293f1b773370583073c68cc28be71ec4fa10cb5a452aaede9944f1a\nSource distribution for installing PyWorkbench:\nArtifact\nansys_workbench_core-0.8.0.tar.gz\nSize\n0.01 MB\nSHA-256\nab2d15153bce1be3f3e9e7f1538c4b67e43e13a08907a329aaef6fa864e9e7c0\nDownload artifacts"
+    },
+    {
+        "objectID": "getting-started/installing/windows",
+        "href": "getting-started/installing/windows.html#install-artifacts",
+        "title": "Getting started > Install PyWorkbench locally in Windows > Install artifacts",
+        "section": "Install artifacts",
+        "text": "Install Windows artifacts by using the pip command:\nInstall artifacts"
+    },
+    {
+        "objectID": "getting-started/installing/windows",
+        "href": "getting-started/installing/windows.html#verify-installation",
+        "title": "Getting started > Install PyWorkbench locally in Windows > Verify installation",
+        "section": "Verify installation",
+        "text": "Verify a successful installation of PyWorkbench by running:\nVerify installation"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/index",
+        "href": "api/ansys/workbench/core/index.html#the-ansysworkbenchcore-library",
+        "title": "The ansys.workbench.core library",
+        "section": "The ansys.workbench.core library",
+        "text": "The ansys.workbench.core library\nansys.workbench.core"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/index",
+        "href": "api/ansys/workbench/core/index.html#summary",
+        "title": "The ansys.workbench.core library > Summary",
+        "section": "Summary",
+        "text": "example_data\nModule for downloading example data from the example-data repository.\npublic_api\nModule for starting PyWorkbench.\nworkbench_client\nWorkbench client module for PyWorkbench.\n__version__\nVersion of ansys-workbench-core module.\nSummary\nexample_data\nexample-data\npublic_api\nworkbench_client\n__version__"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/index",
+        "href": "api/ansys/workbench/core/index.html#description",
+        "title": "The ansys.workbench.core library > Description",
+        "section": "Description",
+        "text": "PyWorkbench Python client.\nDescription"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/index",
+        "href": "api/ansys/workbench/core/index.html#module-detail",
+        "title": "The ansys.workbench.core library > Module detail",
+        "section": "Module detail",
+        "text": "Version of ansys-workbench-core module.\nModule detail"
+    },
+    {
+        "objectID": "api/ansys/workbench/core/index",
+        "href": "api/ansys/workbench/core/index.html#core.__version__",
+        "title": "The ansys.workbench.core library > Module detail > __version__",
+        "section": "Module detail > __version__",
+        "text": "core.__version__\n\nVersion of ansys-workbench-core module.\n\n!! processed by numpydoc !!"
+    },
+    {
+        "objectID": "examples",
+        "href": "examples.html#examples",
+        "title": "Examples",
+        "section": "Examples",
+        "text": "This section collects examples that show how to use PyWorkbench to create custom applications,\nautomate your existing Workbench workflows, and integrate with other popular tools in the\nPython ecosystem.\nExplore both basic and advanced examples for using PyWorkbench.\nExamples"
+    },
+    {
+        "objectID": "artifacts",
+        "href": "artifacts.html#artifacts",
+        "title": "Artifacts",
+        "section": "Artifacts",
+        "text": "This page explains how to download the different artifacts generated by the build\nprocess. These artifacts include wheels, source tarballs, and documentation\nfiles in various formats.\nArtifacts"
+    },
+    {
+        "objectID": "artifacts",
+        "href": "artifacts.html#required-artifacts",
+        "title": "Artifacts > Required artifacts",
+        "section": "Required artifacts",
+        "text": "These artifacts include the minimum software required for installing\nPyWorkbench.\n Platform\n Wheels\n Source\n Windows\nansys_workbench_core-0.8.0-py3-none-any.whl\nansys_workbench_core-0.8.0.tar.gz\n Ubuntu\nansys_workbench_core-0.8.0-py3-none-any.whl\nansys_workbench_core-0.8.0.tar.gz\nRequired artifacts"
+    }
+]
