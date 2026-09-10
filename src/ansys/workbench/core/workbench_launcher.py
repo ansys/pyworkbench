@@ -212,7 +212,22 @@ class Launcher:
                 f"Make sure that environment AWP_ROOT{version} points to a valid "
                 "Ansys installation."
             )
-        args.append(executable)
+        if self._wmi:
+            # This path is embedded in a Windows command line string, so it must be
+            # quoted: installation paths such as "C:\Program Files\ANSYS Inc\v242"
+            # contain spaces, and CreateProcess would otherwise treat the text before
+            # the first space as the executable and try candidate binaries such as
+            # C:\Program.exe first (CWE-428, unquoted search path element).
+            if '"' in executable:
+                raise Exception(
+                    f"Invalid Ansys installation path: {executable}. "
+                    "It must not contain double quote characters."
+                )
+            args.append('"' + executable + '"')
+        else:
+            # On Linux the arguments are passed to subprocess.Popen as a list, which
+            # bypasses shell parsing entirely, so no quoting must be added here.
+            args.append(executable)
         if show_gui:
             args.append("-I")
         else:
