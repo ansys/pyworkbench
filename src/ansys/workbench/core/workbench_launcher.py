@@ -201,6 +201,17 @@ class Launcher:
         else:
             exe_loc = os.path.join("Linux64", "runwb2")
         executable = os.path.join(ansys_install_path, "Framework", "bin", exe_loc)
+        # The installation path comes from an AWP_ROOT* environment variable, so it is
+        # outside this library's control. When launching locally, confirm it resolves to
+        # an existing file, so that a stale or tampered variable cannot silently redirect
+        # the launch to another binary. For a remote launch the path refers to the remote
+        # machine and cannot be validated from here.
+        if host is None and not os.path.isfile(executable):
+            raise Exception(
+                f"Workbench executable is not found at: {executable}. "
+                f"Make sure that environment AWP_ROOT{version} points to a valid "
+                "Ansys installation."
+            )
         args.append(executable)
         if show_gui:
             args.append("-I")
