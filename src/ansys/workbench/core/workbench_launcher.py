@@ -26,11 +26,19 @@ import ctypes
 import logging
 import os
 import platform
+import re
 
 # subprocess is used to launch Workbench on local Linux machine, excluding bandit warning
 import subprocess  # nosec: B404
 import time
 import uuid
+
+# Characters allowed in a server working directory path, after backslashes have been
+# normalized to forward slashes. Unicode word characters are permitted so that paths
+# containing non-ASCII user or folder names remain valid, while quotes, backslashes,
+# parentheses, control characters and NUL are excluded. This prevents breaking out of
+# the quoted string literal embedded in the Workbench scripting-engine command.
+_SERVER_WORKDIR_PATTERN = re.compile(r"[\w./:\- ]+")
 
 
 class Launcher:
@@ -208,13 +216,12 @@ class Launcher:
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
-            # reject characters that could break out of the quoted string literal
-            # embedded in the scripting-engine command (single/double quotes) or
-            # inject additional lines/commands (newlines), preventing script/command
-            # injection into the Workbench scripting engine or the OS command line.
-            if any(c in server_workdir for c in ("'", '"', "\n", "\r")):
-                raise Exception(
-                    "Invalid server_workdir: it must not contain quote or newline characters."
+            # Validate against an allow list rather than rejecting known-bad characters,
+            # so that the guard stays effective independently of the normalization above.
+            if not _SERVER_WORKDIR_PATTERN.fullmatch(server_workdir):
+                raise ValueError(
+                    "Invalid server_workdir: only letters, digits, spaces and the "
+                    "characters _ . / : - are allowed."
                 )
             cmd1 += ",WorkingDirectory='" + server_workdir + "'"
         if port_to_use > 0:
