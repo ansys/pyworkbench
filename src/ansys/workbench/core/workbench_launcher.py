@@ -208,6 +208,14 @@ class Launcher:
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
+            # reject characters that could break out of the quoted string literal
+            # embedded in the scripting-engine command (single/double quotes) or
+            # inject additional lines/commands (newlines), preventing script/command
+            # injection into the Workbench scripting engine or the OS command line.
+            if any(c in server_workdir for c in ("'", '"', "\n", "\r")):
+                raise Exception(
+                    "Invalid server_workdir: it must not contain quote or newline characters."
+                )
             cmd1 += ",WorkingDirectory='" + server_workdir + "'"
         if port_to_use > 0:
             cmd1 += ",PortToUse=" + str(port_to_use)
