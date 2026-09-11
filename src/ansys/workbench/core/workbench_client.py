@@ -29,6 +29,7 @@ import logging.handlers
 from logging.handlers import WatchedFileHandler
 import os
 import re
+import tempfile
 import time
 
 import tqdm
@@ -365,62 +366,129 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
         -------
         str
             Name of the downloaded file.
+
+        Notes
+        -----
+        The destination is replaced atomically only after the download succeeds.
+        Absolute paths and target directories explicitly supplied by the caller are
+        supported. Do not pass untrusted server responses as destination paths.
         """
+        return self.__download_file(
+            file_name,
+            file_name.replace("*", "_").replace("?", "_"),
+            target_dir,
+            show_progress,
+        )
+
+    @staticmethod
+    def __validate_server_file_name(file_name):
+        """Require a portable bare filename, never a server-selected local path."""
+        if (
+            not isinstance(file_name, str)
+            or not file_name
+            or re.search(r'[<>:"/\\|?*\x00-\x1f\x7f]', file_name)
+            or file_name.endswith((".", " "))
+        ):
+            raise ValueError("The server must return a bare filename, not a path or pattern.")
+
+        # Check Windows device names on every OS, including extension/space aliases.
+        stem = file_name.partition(".")[0].rstrip(" ").upper()
+        if stem in {"CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$"} or re.fullmatch(
+            r"(?:COM|LPT)[1-9¹²³]", stem
+        ):
+            raise ValueError("The server returned a reserved device filename.")
+
+    @staticmethod
+    def __check_download_path(file_path, target_dir):
+        """Reject destinations that resolve outside the trusted working directory."""
+        root = os.path.normcase(os.path.realpath(target_dir))
+        destination = os.path.normcase(os.path.realpath(file_path))
+        try:
+            contained = os.path.commonpath([root, destination]) == root
+        except ValueError:
+            contained = False
+        if not contained:
+            raise ValueError("The server file destination is outside the client working directory.")
+
+    def __download_file(
+        self, remote_file_name, local_file_name, target_dir, show_progress, *, server_file=False
+    ):
+        """Stream to a secure temporary file, then atomically publish the download."""
         if not self._is_connected():
             logging.error("Workbench client is not yet connected to a server.")
             return None
-        request = wb.DownloadFileRequest(file_name=file_name)
-        file_name = file_name.replace("*", "_").replace("?", "_")
-        td = target_dir
-        if td is None:
-            td = self.workdir
-        file_path = os.path.join(td, file_name)
+        if server_file:
+            self.__validate_server_file_name(local_file_name)
+        target_dir = os.path.realpath(self.workdir if target_dir is None else target_dir)
+        file_path = os.path.abspath(os.path.join(target_dir, local_file_name))
+        if server_file:
+            self.__check_download_path(file_path, target_dir)
+        request = wb.DownloadFileRequest(file_name=remote_file_name)
         pbar = None
-        started = False
-        for response in self.stub.DownloadFile(request):
-            if response.error:
-                logging.error("Error during file download: " + response.error)
-                return None
-            if response.file_info:
-                if response.file_info.is_archive:
-                    file_name += ".zip"
-                    file_path += ".zip"
-                if response.file_info.file_size > 0:
-                    if show_progress:
+        temporary_file = None
+        temporary_path = None
+        is_archive = False
+        try:
+            for response in self.stub.DownloadFile(request):
+                if response.error:
+                    logging.error("Error during file download: " + response.error)
+                    return None
+                if response.file_info:
+                    if response.file_info.is_archive and not is_archive:
+                        if server_file:
+                            raise ValueError("Expected a server information file, not an archive.")
+                        local_file_name += ".zip"
+                        file_path += ".zip"
+                        is_archive = True
+                    if response.file_info.file_size > 0 and show_progress and pbar is None:
                         pbar = tqdm.tqdm(
                             total=response.file_info.file_size,
-                            desc=f"Downloading {file_name}",
+                            desc=f"Downloading {local_file_name}",
                             unit="B",
                             unit_scale=True,
                             unit_divisor=1024,
                         )
-            if response.file_content:
-                size = len(response.file_content)
-                if size > 0:
-                    if not started:
-                        if os.path.exists(file_path):
-                            os.remove(file_path)
-                        started = True
-
-                    try_more = 3
-                    while try_more > 0:
-                        try:
-                            with open(file_path, mode="ab") as f:
-                                f.write(response.file_content)
-                            try_more = 0
-                        except PermissionError:
-                            # intermittent "Permission Denied" error can happen
-                            if try_more <= 0:
-                                raise
-                            try_more -= 1
-                            time.sleep(0.1)
-
-                    if pbar is not None:
-                        pbar.update(size)
-        logging.info(f"Dwnloaded the file {file_name}.")
-        if pbar is not None:
-            pbar.close()
-        return file_name
+                if response.file_info or response.file_content:
+                    if temporary_file is None:
+                        if server_file:
+                            self.__check_download_path(file_path, target_dir)
+                        temporary_file = tempfile.NamedTemporaryFile(
+                            mode="wb",
+                            prefix=".pyworkbench-",
+                            suffix=".tmp",
+                            dir=os.path.dirname(file_path),
+                            delete=False,
+                        )
+                        temporary_path = temporary_file.name
+                    if response.file_content:
+                        temporary_file.write(response.file_content)
+                        if pbar is not None:
+                            pbar.update(len(response.file_content))
+            if temporary_file is None:
+                return None
+            # Close before replacing on Windows. Never unlink the existing destination
+            # or reopen it for appending: replacement does not follow a final symlink.
+            temporary_file.close()
+            for attempt in range(3):
+                if server_file:
+                    self.__check_download_path(file_path, target_dir)
+                try:
+                    os.replace(temporary_path, file_path)
+                    temporary_path = None
+                    break
+                except PermissionError:
+                    if attempt == 2:
+                        raise
+                    time.sleep(0.1)
+            logging.info(f"Downloaded the file {local_file_name}.")
+            return local_file_name
+        finally:
+            if temporary_file is not None:
+                temporary_file.close()
+            if temporary_path is not None:
+                os.unlink(temporary_path)
+            if pbar is not None:
+                pbar.close()
 
     def download_project_archive(
         self, archive_name, include_solution_result_files=True, show_progress=True
@@ -602,9 +670,22 @@ wb_script_result=json.dumps(server_port)
 
         Returns
         -------
-        str
+        str or None
             Path to the local file containing the PyFluent server information that
-            can be used to start a PyFluent client.
+            can be used to start a PyFluent client, or ``None`` if the download fails.
+
+        Raises
+        ------
+        ValueError
+            If the server returns an unsafe filename, an archive, or a destination
+            that resolves outside the client working directory.
+
+        Notes
+        -----
+        The client working directory must not be writable by untrusted local users.
+        Server filenames are confined to this directory; existing symlinks and
+        junctions resolving outside it are rejected. Concurrent replacement of the
+        working directory or its ancestors by a local attacker is not supported.
 
         Examples
         --------
@@ -621,11 +702,17 @@ server_info_file=LaunchFluentServerOnSystem(SystemName="{system_name}")
 wb_script_result=json.dumps(server_info_file)
 """
         )
-        local_copy = os.path.join(self.workdir, server_info_file_name)
-        if os.path.exists(local_copy):
-            os.remove(local_copy)
-        self.download_file(server_info_file_name, show_progress=False)
-        return local_copy
+        target_dir = os.path.realpath(self.workdir)
+        downloaded = self.__download_file(
+            server_info_file_name,
+            server_info_file_name,
+            target_dir,
+            show_progress=False,
+            server_file=True,
+        )
+        if downloaded is None:
+            return None
+        return os.path.join(target_dir, downloaded)
 
     def stop_fluent_server(self, system_name):
         """Stop the Fluent server for the given system in the Workbench project.

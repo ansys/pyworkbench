@@ -108,6 +108,11 @@ methods. The client-side working directory is used to hold these files unless ab
 are specified. There is also a working directory on the server for the same purpose. To obtain the server’s working
 directory, you can use the ``GetServerWorkingDirectory()`` query in the scripts that run on the server.
 
+Downloads are written to securely created temporary files in the destination directory and
+replace the destination atomically after the transfer succeeds. A failed transfer leaves an
+existing destination unchanged. Absolute paths and target directories are trusted caller
+inputs; do not populate them directly from untrusted server responses.
+
 This code uploads all part files of a given prefix and all AGDB files in the working directory, along with another file
 outside of the working directory, from the client to the server:
 
@@ -222,6 +227,13 @@ This code starts the PyFluent service and client for a Fluent system created in 
     )
     server_info_file = wb.start_fluent_server(system_name=sys_name)
     fluent = pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
+
+The server information filename must be a bare filename. Paths, wildcard patterns,
+Windows device names, and destinations that resolve outside the client working directory
+through a symlink or junction are rejected with ``ValueError``. A failed download returns
+``None`` instead of a path to stale information. Use a client working directory that
+untrusted local users cannot modify; these checks do not protect against concurrent
+replacement of that directory or its ancestors by a local attacker.
 
 The PyFluent service can be stopped for a given system:
 
