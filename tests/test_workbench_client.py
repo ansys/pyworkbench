@@ -290,7 +290,6 @@ def test_download_file(mock_workbench_service_stub):
     assert mock_response_1.file_info.file_size == 200  # Ensure the file size is set correctly
 
 
-
 def _make_download_responses(content=b"mock_file_content"):
     """Build a fake DownloadFile stream yielding a header and one content chunk."""
     header = MagicMock()
@@ -326,9 +325,7 @@ def _client(workdir):
         os.path.join("..", "..", "sample.txt"),
     ],
 )
-def test_download_file_rejects_path_traversal(
-    mock_workbench_service_stub, tmp_path, unsafe_name
-):
+def test_download_file_rejects_path_traversal(mock_workbench_service_stub, tmp_path, unsafe_name):
     """A file name with ``..`` segments must never escape ``target_dir``."""
     target_dir = tmp_path / "target"
     target_dir.mkdir()
@@ -407,5 +404,7 @@ def test_download_file_not_connected(tmp_path):
     client = _client(tmp_path)
     client.channel = None
 
-    assert client.download_file("../sample.txt", show_progress=False, target_dir=str(tmp_path)) is None
+    assert (
+        client.download_file("../sample.txt", show_progress=False, target_dir=str(tmp_path)) is None
+    )
     assert list(tmp_path.iterdir()) == []
