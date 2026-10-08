@@ -288,3 +288,124 @@ def test_download_file(mock_workbench_service_stub):
     # Assertions
     assert mock_stub.DownloadFile.call_count == 1
     assert mock_response_1.file_info.file_size == 200  # Ensure the file size is set correctly
+
+
+
+def _make_download_responses(content=b"mock_file_content"):
+    """Build a fake DownloadFile stream yielding a header and one content chunk."""
+    header = MagicMock()
+    header.error = None
+    header.file_info = MagicMock()
+    header.file_info.is_archive = False
+    header.file_info.file_size = len(content)
+    header.file_content = b""
+
+    chunk = MagicMock()
+    chunk.error = None
+    chunk.file_info = None
+    chunk.file_content = content
+
+    return [header, chunk]
+
+
+def _client(workdir):
+    return WorkbenchClient(
+        local_workdir=str(workdir),
+        server_host="localhost",
+        server_port=5000,
+        server_security="insecure",
+    )
+
+
+@pytest.mark.parametrize(
+    "unsafe_name",
+    [
+        "../sample.txt",
+        "../../sample.txt",
+        "sub/dir/../../../sample.txt",
+        os.path.join("..", "..", "sample.txt"),
+    ],
+)
+def test_download_file_rejects_path_traversal(
+    mock_workbench_service_stub, tmp_path, unsafe_name
+):
+    """A file name with ``..`` segments must never escape ``target_dir``."""
+    target_dir = tmp_path / "target"
+    target_dir.mkdir()
+    outside = tmp_path  # parent of target_dir - must stay unmodified
+
+    client = _client(target_dir)
+    client._connect()
+    mock_stub = mock_workbench_service_stub.return_value
+    client.stub = mock_stub
+    mock_stub.DownloadFile.return_value = _make_download_responses()
+
+    client.download_file(unsafe_name, show_progress=False, target_dir=str(target_dir))
+
+    # Nothing was written outside the target directory
+    assert not (outside / "sample.txt").exists()
+    assert [p.name for p in outside.iterdir()] == ["target"]
+    # The name was reduced to its basename inside the target directory
+    assert (target_dir / "sample.txt").exists()
+    assert (target_dir / "sample.txt").read_bytes() == b"mock_file_content"
+
+
+def test_download_file_rejects_absolute_path(mock_workbench_service_stub, tmp_path):
+    """An absolute file name is reduced to its basename inside ``target_dir``."""
+    target_dir = tmp_path / "target"
+    target_dir.mkdir()
+    preexisting_file = tmp_path / "preexisting_file.txt"
+    preexisting_file.write_text("original")
+
+    client = _client(target_dir)
+    client._connect()
+    mock_stub = mock_workbench_service_stub.return_value
+    client.stub = mock_stub
+    mock_stub.DownloadFile.return_value = _make_download_responses(b"overwritten")
+
+    client.download_file(str(preexisting_file), show_progress=False, target_dir=str(target_dir))
+
+    # The pre-existing file outside the target directory is untouched
+    assert preexisting_file.read_text() == "original"
+    assert (target_dir / "preexisting_file.txt").read_bytes() == b"overwritten"
+
+
+def test_download_file_flattens_nested_path(mock_workbench_service_stub, tmp_path):
+    """``sub/dir/file.txt`` resolves to ``target_dir/file.txt``."""
+    client = _client(tmp_path)
+    client._connect()
+    mock_stub = mock_workbench_service_stub.return_value
+    client.stub = mock_stub
+    mock_stub.DownloadFile.return_value = _make_download_responses()
+
+    result = client.download_file("sub/dir/file.txt", show_progress=False, target_dir=str(tmp_path))
+
+    assert result == "file.txt"
+    assert (tmp_path / "file.txt").exists()
+    assert not (tmp_path / "sub").exists()
+    # The server still receives the original, unmodified name
+    args, kwargs = mock_stub.DownloadFile.call_args
+    assert args[0].file_name == "sub/dir/file.txt"
+
+
+def test_download_file_normal_name(mock_workbench_service_stub, tmp_path):
+    """A plain file name downloads normally into ``target_dir``."""
+    client = _client(tmp_path)
+    client._connect()
+    mock_stub = mock_workbench_service_stub.return_value
+    client.stub = mock_stub
+    mock_stub.DownloadFile.return_value = _make_download_responses(b"hello")
+
+    result = client.download_file("report.txt", show_progress=False, target_dir=str(tmp_path))
+
+    assert result == "report.txt"
+    assert (tmp_path / "report.txt").read_bytes() == b"hello"
+
+
+def test_download_file_not_connected(tmp_path):
+    """No file is written when the client is not connected."""
+    client = _client(tmp_path)
+    client.channel = None
+
+    assert client.download_file("../sample.txt", show_progress=False, target_dir=str(tmp_path)) is None
+    assert list(tmp_path.iterdir()) == []
