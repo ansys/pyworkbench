@@ -322,7 +322,7 @@ def _client(workdir):
         "../sample.txt",
         "../../sample.txt",
         "sub/dir/../../../sample.txt",
-        os.path.join("..", "..", "sample.txt"),
+        str(pathlib.Path("..") / ".." / "sample.txt"),
     ],
 )
 def test_download_file_rejects_path_traversal(mock_workbench_service_stub, tmp_path, unsafe_name):
