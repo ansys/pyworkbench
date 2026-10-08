@@ -362,7 +362,7 @@ def test_download_file_rejects_absolute_path(mock_workbench_service_stub, tmp_pa
 
     client.download_file(str(preexisting_file), show_progress=False, target_dir=str(target_dir))
 
-    # The pre-existing file outside the target directory is untouched
+    # The pre-existing file outside the target directory is unmodified.
     assert preexisting_file.read_text() == "original"
     assert (target_dir / "preexisting_file.txt").read_bytes() == b"overwritten"
 
