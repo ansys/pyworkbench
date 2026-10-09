@@ -1,0 +1,80 @@
+
+
+
+
+
+
+The ``workbench_client.py`` module
+==================================
+
+.. py:module:: ansys.workbench.core.workbench_client
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+
+
+.. py:currentmodule:: workbench_client
+.. tab-set::
+
+
+
+
+    .. tab-item:: Classes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.workbench.core.workbench_client.WorkbenchClient`
+            - Functions of a PyWorkbench client.
+
+
+
+
+
+
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-cod-symbol_class"></span> WorkbenchClient</api/ansys/workbench/core/workbench_client/WorkbenchClient>
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+Workbench client module for PyWorkbench.
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+
