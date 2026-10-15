@@ -2,17 +2,22 @@ name: Dependabot auto-merge
 
 on: pull_request
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions: {}
 
 jobs:
   dependabot-automerge:
+    name: Approve and auto-merge Dependabot PRs
     runs-on: ubuntu-latest
     if: >-
       github.event.pull_request.user.login == 'dependabot[bot]' &&
       github.event.pull_request.head.repo.full_name == github.repository
     permissions:
-      pull-requests: write
-      contents: write
+      pull-requests: write # Needed to approve pull requests
+      contents: write # Needed to enable squash auto-merge
     steps:
       - name: Dependabot metadata
         id: metadata
