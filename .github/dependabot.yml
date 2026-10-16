@@ -1,28 +1,70 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
-    cooldown:
-      default-days: 10 # Fallback cooldown if no specific rule applies
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    assignees:
+      - "pyansys-ci-bot"
+    commit-message:
+      prefix: "CHORE"
     labels:
       - "maintenance"
       - "dependencies"
-    assignees:
-      - "pyansys-ci-bot"
-    commit-message:
-      prefix: "chore"
+      - "dependabot"
+    groups:
+      core:
+        patterns:
+          - "*ansys*"
+          - "tqdm"
+          - "wmi"
+        exclude-patterns:
+          - "*sphinx*"
+        update-types:
+          - "minor"
+          - "patch"
+      tests:
+        patterns:
+          - "pytest*"
+        update-types:
+          - "minor"
+          - "patch"
+      doc:
+        patterns:
+          - "*sphinx*"
+          - "jupyter"
+          - "numpydoc"
+        update-types:
+          - "minor"
+          - "patch"
+      vulnerabilities:
+        patterns:
+          - "bandit"
+          - "safety"
+        update-types:
+          - "minor"
+          - "patch"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "github-actions"
-    cooldown:
-      default-days: 10 # Fallback cooldown if no specific rule applies
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     labels:
       - "maintenance"
+      - "dependencies"
+      - "dependabot"
     assignees:
       - "pyansys-ci-bot"
     commit-message:
-      prefix: "chore"
+      prefix: "CHORE"
+    groups:
+      actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    cooldown:
+      default-days: 7
