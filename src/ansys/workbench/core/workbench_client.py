@@ -370,11 +370,15 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
             logging.error("Workbench client is not yet connected to a server.")
             return None
         request = wb.DownloadFileRequest(file_name=file_name)
-        file_name = file_name.replace("*", "_").replace("?", "_")
+        file_name = os.path.basename(file_name.replace("*", "_").replace("?", "_"))
         td = target_dir
         if td is None:
             td = self.workdir
-        file_path = os.path.join(td, file_name)
+        td = os.path.abspath(td)
+        file_path = os.path.abspath(os.path.join(td, file_name))
+        if os.path.commonpath([td, file_path]) != td:
+            logging.error(f"Invalid file name: {file_name}")
+            return None
         pbar = None
         started = False
         for response in self.stub.DownloadFile(request):
