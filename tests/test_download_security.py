@@ -292,22 +292,27 @@ def test_atomic_replace_retries_and_cleans_up(client, monkeypatch, failures):
 
 
 @pytest.mark.parametrize("destination_kind", ["absolute", "target-dir", "parent-relative"])
-def test_keep_explicit_caller_destinations(client, tmp_path, destination_kind):
-    """Public downloads still accept destinations explicitly selected by the caller."""
-    destination = tmp_path / "caller-selected.txt"
-    destination.write_bytes(b"original")
+def test_caller_destinations_are_confined(client, tmp_path, destination_kind):
+    """Public downloads keep only the base name and write inside the target directory."""
+    outside = tmp_path / "caller-selected.txt"
+    outside.write_bytes(b"original")
     target_dir = None
     if destination_kind == "absolute":
-        filename = str(destination)
+        filename = str(outside)
     elif destination_kind == "target-dir":
-        filename = destination.name
+        filename = outside.name
         target_dir = tmp_path
     else:
         filename = "../caller-selected.txt"
 
-    assert client.download_file(filename, show_progress=False, target_dir=target_dir) == filename
-    assert destination.read_bytes() == b"new data"
-    assert list(Path(client.workdir).iterdir()) == []
+    result = client.download_file(filename, show_progress=False, target_dir=target_dir)
+    assert result == "caller-selected.txt"
+    if target_dir is None:
+        assert outside.read_bytes() == b"original"
+        assert (Path(client.workdir) / result).read_bytes() == b"new data"
+    else:
+        assert outside.read_bytes() == b"new data"
+        assert list(Path(client.workdir).iterdir()) == []
     assert client.stub.DownloadFile.call_args.args[0].file_name == filename
 
 

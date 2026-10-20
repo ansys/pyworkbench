@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -370,12 +370,12 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
         Notes
         -----
         The destination is replaced atomically only after the download succeeds.
-        Absolute paths and target directories explicitly supplied by the caller are
-        supported. Do not pass untrusted server responses as destination paths.
+        Only the base name of ``file_name`` is used locally, so the file is always
+        written inside ``target_dir``.
         """
         return self.__download_file(
             file_name,
-            file_name.replace("*", "_").replace("?", "_"),
+            os.path.basename(file_name.replace("*", "_").replace("?", "_")),
             target_dir,
             show_progress,
         )
@@ -423,6 +423,9 @@ wb_script_result=json.dumps(GetFrameworkVersion())""")
         file_path = os.path.abspath(os.path.join(target_dir, local_file_name))
         if server_file:
             self.__check_download_path(file_path, target_dir)
+        elif os.path.commonpath([target_dir, file_path]) != target_dir:
+            logging.error(f"Invalid file name: {local_file_name}")
+            return None
         request = wb.DownloadFileRequest(file_name=remote_file_name)
         pbar = None
         temporary_file = None
