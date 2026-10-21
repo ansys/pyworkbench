@@ -1,70 +1,67 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
+    cooldown:
+      default-days: 10 # Fallback cooldown if no specific rule applies
     directory: "/"
     schedule:
-      interval: "weekly"
-    assignees:
-      - "pyansys-ci-bot"
-    commit-message:
-      prefix: "CHORE"
+      interval: "daily"
     labels:
       - "maintenance"
       - "dependencies"
-      - "dependabot"
+    assignees:
+      - "pyansys-ci-bot"
+    commit-message:
+      prefix: "chore"
     groups:
-      core:
+      docs-deps:
         patterns:
-          - "*ansys*"
-          - "tqdm"
-          - "wmi"
-        exclude-patterns:
-          - "*sphinx*"
-        update-types:
-          - "minor"
-          - "patch"
-      tests:
+          - "ansys-sphinx-theme*"
+          - "jupyter*"
+          - "numpydoc"
+          - "sphinx*"
+      tests-deps:
         patterns:
           - "pytest*"
-        update-types:
-          - "minor"
-          - "patch"
-      doc:
-        patterns:
-          - "*sphinx*"
-          - "jupyter"
-          - "numpydoc"
-        update-types:
-          - "minor"
-          - "patch"
-      vulnerabilities:
+      vulnerabilities-deps:
         patterns:
           - "bandit"
           - "safety"
-        update-types:
-          - "minor"
-          - "patch"
-    cooldown:
-      default-days: 7
 
   - package-ecosystem: "github-actions"
+    cooldown:
+      default-days: 10 # Fallback cooldown if no specific rule applies
+      exclude:
+        - "ansys/actions/*"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     labels:
       - "maintenance"
-      - "dependencies"
-      - "dependabot"
     assignees:
       - "pyansys-ci-bot"
     commit-message:
-      prefix: "CHORE"
+      prefix: "chore"
     groups:
       actions:
         patterns:
           - "*"
-        update-types:
-          - "minor"
-          - "patch"
+
+  - package-ecosystem: "pre-commit"
     cooldown:
-      default-days: 7
+      default-days: 10 # Fallback cooldown if no specific rule applies
+      exclude:
+        - "ansys/pre-commit-hooks/*"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "maintenance"
+    assignees:
+      - "pyansys-ci-bot"
+    commit-message:
+      prefix: "chore"
+    groups:
+      pre-commit-hooks:
+        patterns:
+          - "*"
