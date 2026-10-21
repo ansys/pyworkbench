@@ -107,5 +107,4 @@ Verify a successful installation of PyWorkbench by running:
 
         from ansys.workbench.core import launch_workbench
 
-
         launch_workbench()

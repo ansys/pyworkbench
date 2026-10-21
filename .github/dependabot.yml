@@ -13,10 +13,26 @@ updates:
       - "pyansys-ci-bot"
     commit-message:
       prefix: "chore"
+    groups:
+      docs-deps:
+        patterns:
+          - "ansys-sphinx-theme*"
+          - "jupyter*"
+          - "numpydoc"
+          - "sphinx*"
+      tests-deps:
+        patterns:
+          - "pytest*"
+      vulnerabilities-deps:
+        patterns:
+          - "bandit"
+          - "safety"
 
   - package-ecosystem: "github-actions"
     cooldown:
       default-days: 10 # Fallback cooldown if no specific rule applies
+      exclude:
+        - "ansys/actions/*"
     directory: "/"
     schedule:
       interval: "daily"
@@ -26,3 +42,26 @@ updates:
       - "pyansys-ci-bot"
     commit-message:
       prefix: "chore"
+    groups:
+      actions:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "pre-commit"
+    cooldown:
+      default-days: 10 # Fallback cooldown if no specific rule applies
+      exclude:
+        - "ansys/pre-commit-hooks/*"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "maintenance"
+    assignees:
+      - "pyansys-ci-bot"
+    commit-message:
+      prefix: "chore"
+    groups:
+      pre-commit-hooks:
+        patterns:
+          - "*"

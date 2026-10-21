@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2023 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -138,8 +138,7 @@ class Launcher:
 
         if host and (not username or not password):
             raise Exception(
-                "Username and password must be specified "
-                "to launch PyWorkbench on a remote machine."
+                "Username and password must be specified to launch PyWorkbench on a remote machine."
             )
 
         security = "mtls"
