@@ -120,30 +120,26 @@ newly created Workbench system:
 
 .. code-block:: python
 
-    wb.run_script_string(
-        r"""import os
+    wb.run_script_string(r"""import os
     work_dir = GetServerWorkingDirectory()
     geometry_file = os.path.join(work_dir, "two_pipes.agdb")
     template = GetTemplate(TemplateName="Static Structural", Solver="ANSYS")
     system = CreateSystemFromTemplate(Template=template, Name="Static Structural (ANSYS)")
     system.GetContainer(ComponentName="Geometry").SetFile(FilePath=geometry_file)
-    """
-    )
+    """)
 
 This server-side Workbench script copies a Mechanical solver output file to the server's working directory:
 
 .. code-block:: python
 
-    wb.run_script_string(
-        r"""import os
+    wb.run_script_string(r"""import os
     import shutil
     work_dir = GetServerWorkingDirectory()
     mechanical_dir = mechanical.project_directory
     out_file_src = os.path.join(mechanical_dir, "solve.out")
     out_file_des = os.path.join(work_dir, "solve.out")
     shutil.copyfile(out_file_src, out_file_des)
-    """
-    )
+    """)
 
 This client script downloads all files with ``.out`` extensions from the server's working directory:
 
@@ -191,11 +187,9 @@ and establishes a PyMechanical client.
 
     from ansys.mechanical.core import connect_to_mechanical
 
-    sys_name = wb.run_script_string(
-        r"""import json
+    sys_name = wb.run_script_string(r"""import json
     wb_script_result=json.dumps(GetTemplate(TemplateName="Static Structural (ANSYS)").CreateSystem().Name)
-    """
-    )
+    """)
     server_port = wb.start_mechanical_server(system_name=sys_name)
     mechanical = connect_to_mechanical(ip="localhost", port=server_port)
 
@@ -215,11 +209,9 @@ This code starts the PyFluent service and client for a Fluent system created in 
 
     import ansys.fluent.core as pyfluent
 
-    sys_name = wb.run_script_string(
-        r"""import json
+    sys_name = wb.run_script_string(r"""import json
     wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
-    """
-    )
+    """)
     server_info_file = wb.start_fluent_server(system_name=sys_name)
     fluent = pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
 
@@ -238,11 +230,9 @@ This code starts the PySherlock service and client for a Sherlock system created
 
     from ansys.sherlock.core import launcher as pysherlock
 
-    sys_name = wb.run_script_string(
-        r"""import json
+    sys_name = wb.run_script_string(r"""import json
     wb_script_result=json.dumps(GetTemplate(TemplateName="SherlockPre").CreateSystem().Name)
-    """
-    )
+    """)
     server_port = wb.start_sherlock_server(system_name=sys_name)
     sherlock = pysherlock.connect_grpc_channel(port=server_port)
 
