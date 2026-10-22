@@ -26,11 +26,19 @@ import ctypes
 import logging
 import os
 import platform
+import re
 
 # subprocess is used to launch Workbench on local Linux machine, excluding bandit warning
 import subprocess  # nosec: B404
 import time
 import uuid
+
+# Characters allowed in a server working directory path, after backslashes have been
+# normalized to forward slashes. Unicode word characters are permitted so that paths
+# containing non-ASCII user or folder names remain valid, while quotes, backslashes,
+# parentheses, control characters and NUL are excluded. This prevents breaking out of
+# the quoted string literal embedded in the Workbench scripting-engine command.
+_SERVER_WORKDIR_PATTERN = re.compile(r"[\w./:\- ]+")
 
 
 class Launcher:
@@ -192,7 +200,33 @@ class Launcher:
         else:
             exe_loc = os.path.join("Linux64", "runwb2")
         executable = os.path.join(ansys_install_path, "Framework", "bin", exe_loc)
-        args.append(executable)
+        # The installation path comes from an AWP_ROOT* environment variable, so it is
+        # outside this library's control. When launching locally, confirm it resolves to
+        # an existing file, so that a stale or tampered variable cannot silently redirect
+        # the launch to another binary. For a remote launch the path refers to the remote
+        # machine and cannot be validated from here.
+        if host is None and not os.path.isfile(executable):
+            raise Exception(
+                f"Workbench executable is not found at: {executable}. "
+                f"Make sure that environment AWP_ROOT{version} points to a valid "
+                "Ansys installation."
+            )
+        if self._wmi:
+            # This path is embedded in a Windows command line string, so it must be
+            # quoted: installation paths such as "C:\Program Files\ANSYS Inc\v242"
+            # contain spaces, and CreateProcess would otherwise treat the text before
+            # the first space as the executable and try candidate binaries such as
+            # C:\Program.exe first (CWE-428, unquoted search path element).
+            if '"' in executable:
+                raise Exception(
+                    f"Invalid Ansys installation path: {executable}. "
+                    "It must not contain double quote characters."
+                )
+            args.append('"' + executable + '"')
+        else:
+            # On Linux the arguments are passed to subprocess.Popen as a list, which
+            # bypasses shell parsing entirely, so no quoting must be added here.
+            args.append(executable)
         if show_gui:
             args.append("-I")
         else:
@@ -207,6 +241,13 @@ class Launcher:
         if server_workdir is not None:
             # use forward slash only to avoid escaping as command line argument
             server_workdir = server_workdir.replace("\\", "/")
+            # Validate against an allow list rather than rejecting known-bad characters,
+            # so that the guard stays effective independently of the normalization above.
+            if not _SERVER_WORKDIR_PATTERN.fullmatch(server_workdir):
+                raise ValueError(
+                    "Invalid server_workdir: only letters, digits, spaces and the "
+                    "characters _ . / : - are allowed."
+                )
             cmd1 += ",WorkingDirectory='" + server_workdir + "'"
         if port_to_use > 0:
             cmd1 += ",PortToUse=" + str(port_to_use)
