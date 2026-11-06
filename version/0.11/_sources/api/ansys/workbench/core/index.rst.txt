@@ -1,0 +1,147 @@
+
+
+
+
+
+
+The ``ansys.workbench.core`` library
+====================================
+
+.. py:module:: ansys.workbench.core
+
+
+Summary
+-------
+
+
+
+
+
+
+
+
+.. py:currentmodule:: core
+.. tab-set::
+
+
+    .. tab-item:: Submodules
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~ansys.workbench.core.example_data`
+            - Module for downloading example data from the ``example-data`` repository.
+
+
+          * - :py:obj:`~ansys.workbench.core.public_api`
+            - Module for public API on PyWorkbench.
+
+
+          * - :py:obj:`~ansys.workbench.core.workbench_client`
+            - Workbench client module for PyWorkbench.
+
+
+          * - :py:obj:`~ansys.workbench.core.workbench_launcher`
+            - Module for launching PyWorkbench.
+
+
+
+
+
+
+
+
+    .. tab-item:: Attributes
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+
+          * - :py:obj:`~__version__`
+            - Version of ansys-workbench-core module.
+
+
+
+
+
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+    <span class="nf nf-fa-file"></span> example_data</api/ansys/workbench/core/example_data/index>
+    <span class="nf nf-fa-file"></span> public_api</api/ansys/workbench/core/public_api/index>
+    <span class="nf nf-fa-file"></span> workbench_client</api/ansys/workbench/core/workbench_client/index>
+    <span class="nf nf-fa-file"></span> workbench_launcher</api/ansys/workbench/core/workbench_launcher/index>
+
+
+
+
+
+
+
+
+
+
+
+Description
+-----------
+
+
+PyWorkbench Python client.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+..
+    !! processed by numpydoc !!
+
+
+
+
+
+
+Module detail
+-------------
+
+.. py:data:: __version__
+
+   
+   Version of ansys-workbench-core module.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
