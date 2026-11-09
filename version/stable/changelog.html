@@ -1,0 +1,1287 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Release notes &#8212; PyWorkbench</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="_static/documentation_options.js?v=1a9b1e2b"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changelog';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://workbench.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.11';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Artifacts" href="artifacts.html" />
+    <link rel="prev" title="Examples" href="examples.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.11.0" />
+  <meta property="og:site_name" content="PyAnsys" />
+  <meta name="physics" content="Multiphysics" />
+  <meta name="physics" content="Platform" />
+  <link rel="canonical" href="https://workbench.docs.pyansys.com/version/stable/changelog.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://docs.pyansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyWorkbench - Home"/>
+    <img src="_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyWorkbench - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html" title="PyWorkbench home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Examples
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Release notes
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="artifacts.html">
+    Artifacts
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    
+<!--
+  Announcement Version Loader
+  Dynamically loads the announcement.html content into the announcement_msg div.
+-->
+<div id="announcement_msg" aria-live="polite"></div>
+<script>
+  // Fetch and inject the announcement HTML content
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
+      }
+      return response.text();
+    })
+    .then((text) => {
+      var msgDiv = document.getElementById("announcement_msg");
+      if (msgDiv) {
+        msgDiv.innerHTML = text;
+      }
+    })
+    .catch((error) => {
+      // Log only unexpected fetch errors
+      if (!(error.message && error.message.startsWith("HTTP error: 404"))) {
+        console.error(`Fetch problem: ${error.message} Announcement.html could not be loaded.`);
+      }
+    });
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="index.html" title="PyWorkbench home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="artifacts.html">
+    Artifacts
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pyworkbench/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Release notes</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="release-notes">
+<span id="ref-release-notes"></span><h1>Release notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h1>
+<p>This document contains the release notes for PyWorkbench.</p>
+<section id="january-28-2026">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.11.0">0.11.0</a> - January 28, 2026<a class="headerlink" href="#january-28-2026" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Miscellaneous</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Chore: update CHANGELOG for v0.10.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/285">#285</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bump version after release 0.10</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/286">#286</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump actions/upload-artifact from 5 to 6</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/287">#287</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump actions/download-artifact from 6.0.0 to 7.0.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/288">#288</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Update copyright year</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/291">#291</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Version argument is optional</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/293">#293</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>User can specify port when launching WB</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/294">#294</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump ansys-sphinx-theme[autoapi] from 1.6.4 to 1.7.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/295">#295</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Version check must be done after version identification</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/296">#296</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="december-12-2025">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.10.0">0.10.0</a> - December 12, 2025<a class="headerlink" href="#december-12-2025" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Dependencies</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>chore: bump ansys-sphinx-theme[autoapi] from 1.3.3 to 1.4.4</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/214">#214</a></p></td>
+</tr>
+<tr class="row-even"><td><p>bump to 0.10.dev0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/216">#216</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore: bump ansys-sphinx-theme[autoapi] from 1.4.4 to 1.4.5</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/220">#220</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: bump ansys-sphinx-theme[autoapi] from 1.4.5 to 1.5.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/221">#221</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore: bump bandit from 1.8.3 to 1.8.6</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/234">#234</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: bump ansys-sphinx-theme[autoapi] from 1.5.0 to 1.6.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/241">#241</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Miscellaneous</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Chore: bump ansys/actions from 9 to 10</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/223">#223</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump actions/download-artifact from 4.3.0 to 5.0.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/236">#236</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>remote-connection server API changed.</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/237">#237</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump actions/checkout from 4 to 5</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/239">#239</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Docs: update <code class="docutils literal notranslate"><span class="pre">html_context</span></code> with PyAnsys tags</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/240">#240</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump safety from 3.3.0 to 3.6.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/242">#242</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump actions/setup-python from 5 to 6</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/244">#244</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump pytest from 8.3.5 to 8.4.2</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/245">#245</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump pytest-cov from 6.1.1 to 7.0.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/247">#247</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Add SECURITY.md</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/248">#248</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Fli/add server version handling</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/249">#249</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump actions/labeler from 5 to 6</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/251">#251</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump ansys-sphinx-theme[autoapi] from 1.6.0 to 1.6.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/252">#252</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump numpydoc from 1.8.0 to 1.9.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/253">#253</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Fli/handle api change for remote connection</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/254">#254</a>, <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/260">#260</a>, <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/269">#269</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump safety from 3.6.1 to 3.6.2</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/256">#256</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Fix: general improvements and errors on subprocess calls</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/257">#257</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Try adding security check</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/259">#259</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Feat: vulnerability check</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/261">#261</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump peter-evans/create-or-update-comment from 4 to 5</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/263">#263</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump ansys-sphinx-theme[autoapi] from 1.6.1 to 1.6.3</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/264">#264</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump actions/download-artifact from 5.0.0 to 6.0.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/265">#265</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump actions/upload-artifact from 4 to 5</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/266">#266</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: Update missing or outdated files</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/267">#267</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump safety from 3.6.2 to 3.7.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/270">#270</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump pytest from 8.4.2 to 9.0.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/272">#272</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump bandit from 1.8.6 to 1.9.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/273">#273</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump actions/checkout from 5 to 6</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/274">#274</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump bandit from 1.9.1 to 1.9.2</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/276">#276</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Docs: fix typo in CONTRIBUTING.md</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/279">#279</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump numpydoc from 1.9.0 to 1.10.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/280">#280</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Docs: Update ``CONTRIBUTORS.md`` with the latest contributors</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/281">#281</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Chore: bump pytest from 9.0.1 to 9.0.2</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/282">#282</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Chore: bump ansys-sphinx-theme[autoapi] from 1.6.3 to 1.6.4</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/284">#284</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+Documentation</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>chore: update CHANGELOG for v0.9.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/215">#215</a></p></td>
+</tr>
+<tr class="row-even"><td><p>docs: revert cheatsheet in docs</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/217">#217</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>docs: improve install instructions by adding pypi install</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/219">#219</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+Maintenance</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>chore: bump pypa/gh-action-pypi-publish from 1.12.4 to 1.13.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/243">#243</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Fli/handle api change for remote connection</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/277">#277</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="may-15-2025">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.9.0">0.9.0</a> - May 15, 2025<a class="headerlink" href="#may-15-2025" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+Dependencies</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>bump version to 0.9.dev0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/191">#191</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: bump bandit from 1.8.2 to 1.8.3</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/192">#192</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore: bump sphinx-autodoc-typehints from 3.0.1 to 3.1.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/193">#193</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: bump sphinx from 8.1.3 to 8.2.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/194">#194</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore: bump ansys-sphinx-theme[autoapi] from 1.2.7 to 1.3.2</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/195">#195</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: bump sphinx from 8.2.0 to 8.2.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/196">#196</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore: bump sphinx from 8.2.1 to 8.2.3</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/197">#197</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: bump pytest from 8.3.4 to 8.3.5</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/198">#198</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore: bump ansys-sphinx-theme[autoapi] from 1.3.2 to 1.3.3</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/202">#202</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: bump pytest-cov from 6.0.0 to 6.1.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/207">#207</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-6">
+Miscellaneous</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>allow user to specify port to use for pymechanical</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/201">#201</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-7">
+Documentation</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>chore: update CHANGELOG for v0.8.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/190">#190</a></p></td>
+</tr>
+<tr class="row-even"><td><p>docs: remove .tex file from cheatsheet dir</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/200">#200</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>support launching pywb on linux</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/209">#209</a></p></td>
+</tr>
+<tr class="row-even"><td><p>python version support: drop 3.9 and add 3.13; bump ansys/action to 9</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/213">#213</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-8">
+Maintenance</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>docs: Update <code class="docutils literal notranslate"><span class="pre">CONTRIBUTORS.md</span></code> with the latest contributors</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/pyworkbench/pull/206">#206</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="id77">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.8.0">0.8.0</a> - 2025-02-14<a class="headerlink" href="#id77" title="Link to this heading">#</a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: add cheatsheet <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/169">#169</a></p></li>
+<li><p>PyWB Cheatsheet reviewed and corrected <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/172">#172</a></p></li>
+</ul>
+</section>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: contributors file <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/153">#153</a></p></li>
+<li><p>fix: use title case in CONTRIBUTORS.md <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/161">#161</a></p></li>
+<li><p>FIX: Minor typo correction <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/185">#185</a></p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: bump safety from 3.2.8 to 3.2.9 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/149">#149</a></p></li>
+<li><p>chore: bump safety from 3.2.9 to 3.2.10 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/150">#150</a></p></li>
+<li><p>chore: bump pytest-cov from 5.0.0 to 6.0.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/151">#151</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.1.7 to 1.2.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/152">#152</a></p></li>
+<li><p>chore: bump safety from 3.2.10 to 3.2.11 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/154">#154</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.2.0 to 1.2.1 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/155">#155</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.2.1 to 1.2.2 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/157">#157</a></p></li>
+<li><p>chore: bump bandit from 1.7.10 to 1.8.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/160">#160</a></p></li>
+<li><p>chore: bump pytest from 8.3.3 to 8.3.4 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/162">#162</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.2.2 to 1.2.3 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/164">#164</a></p></li>
+<li><p>chore: bump safety from 3.2.11 to 3.2.13 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/166">#166</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.2.3 to 1.2.4 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/173">#173</a></p></li>
+<li><p>chore: bump safety from 3.2.13 to 3.2.14 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/174">#174</a></p></li>
+<li><p>chore: bump sphinx-autodoc-typehints from 2.5.0 to 3.0.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/177">#177</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.2.4 to 1.2.6 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/180">#180</a></p></li>
+<li><p>chore: bump bandit from 1.8.0 to 1.8.2 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/181">#181</a></p></li>
+<li><p>chore: bump sphinx-autodoc-typehints from 3.0.0 to 3.0.1 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/183">#183</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.2.6 to 1.2.7 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/186">#186</a></p></li>
+<li><p>chore: bump safety from 3.2.14 to 3.3.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/189">#189</a></p></li>
+</ul>
+</section>
+<section id="miscellaneous">
+<h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>close the current project on exit <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/159">#159</a></p></li>
+</ul>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.7.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/147">#147</a></p></li>
+<li><p>bump version to 0.8 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/148">#148</a></p></li>
+<li><p>DOC: Update docs with new pymechanical api <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/165">#165</a></p></li>
+<li><p>Fli/improve archive download <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/170">#170</a></p></li>
+<li><p>doc: include library artifacts <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/179">#179</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id109">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.7.0">0.7.0</a> - 2024-10-23<a class="headerlink" href="#id109" title="Link to this heading">#</a></h2>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.6.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/114">#114</a></p></li>
+<li><p>maint: migrate to ansys sphinx theme 1.0.9 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/121">#121</a></p></li>
+</ul>
+</section>
+<section id="id112">
+<h3>Fixed<a class="headerlink" href="#id112" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: update cicd for bot secrets <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/136">#136</a></p></li>
+</ul>
+</section>
+<section id="id114">
+<h3>Dependencies<a class="headerlink" href="#id114" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: bump bandit from 1.7.8 to 1.7.9 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/90">#90</a></p></li>
+<li><p>chore: bump pytest from 8.2.2 to 8.3.1 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/106">#106</a></p></li>
+<li><p>chore: bump sphinx from 7.4.6 to 7.4.7 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/107">#107</a></p></li>
+<li><p>chore: bump ansys/actions from 6 to 7 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/109">#109</a></p></li>
+<li><p>bump version to 0.7.dev0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/115">#115</a></p></li>
+<li><p>chore: bump numpydoc from 1.7.0 to 1.8.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/120">#120</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 0.16.6 to 1.0.10 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/122">#122</a></p></li>
+<li><p>chore: bump safety from 3.2.4 to 3.2.7 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/123">#123</a></p></li>
+<li><p>chore: bump sphinx from 7.4.7 to 8.0.2 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/124">#124</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.0.10 to 1.0.11 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/125">#125</a></p></li>
+<li><p>chore: bump bandit from 1.7.9 to 1.7.10 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/126">#126</a></p></li>
+<li><p>chore: bump pytest from 8.3.1 to 8.3.3 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/128">#128</a></p></li>
+<li><p>chore: bump safety from 3.2.7 to 3.2.8 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/129">#129</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.0.11 to 1.1.1 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/130">#130</a></p></li>
+<li><p>chore: bump sphinx-autodoc-typehints from 2.2.0 to 2.5.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/134">#134</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.1.1 to 1.1.3 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/137">#137</a></p></li>
+<li><p>chore: bump sphinx from 8.0.2 to 8.1.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/138">#138</a></p></li>
+<li><p>chore: bump sphinx from 8.1.0 to 8.1.3 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/140">#140</a></p></li>
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 1.1.3 to 1.1.7 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/146">#146</a></p></li>
+</ul>
+</section>
+<section id="id134">
+<h3>Miscellaneous<a class="headerlink" href="#id134" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>support launching workbench in non-UI mode <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/118">#118</a></p></li>
+<li><p>update argument name for UI mode <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/119">#119</a></p></li>
+<li><p>try fixing accept.txt file <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/135">#135</a></p></li>
+</ul>
+</section>
+<section id="id138">
+<h3>Documentation<a class="headerlink" href="#id138" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>support variables in script; change argument release to version <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/143">#143</a></p></li>
+<li><p>support downloading project archive; suppress console window <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/145">#145</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id142">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.6.0">0.6.0</a> - 2024-08-16<a class="headerlink" href="#id142" title="Link to this heading">#</a></h2>
+<section id="id143">
+<h3>Changed<a class="headerlink" href="#id143" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.5.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/111">#111</a></p></li>
+</ul>
+</section>
+<section id="id145">
+<h3>Dependencies<a class="headerlink" href="#id145" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>bump version to 0.6.dev0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/112">#112</a></p></li>
+</ul>
+</section>
+<section id="id147">
+<h3>Miscellaneous<a class="headerlink" href="#id147" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix example repo URL; add server release requirement in doc <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/113">#113</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id150">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.5.0">0.5.0</a> - 2024-08-15<a class="headerlink" href="#id150" title="Link to this heading">#</a></h2>
+<section id="id151">
+<h3>Changed<a class="headerlink" href="#id151" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.4.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/87">#87</a></p></li>
+</ul>
+</section>
+<section id="id153">
+<h3>Fixed<a class="headerlink" href="#id153" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>docs: update docs links and <cite>check-swicher</cite> <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/89">#89</a></p></li>
+<li><p>fix: make <cite>WMI</cite> windows only dependency <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/105">#105</a></p></li>
+</ul>
+</section>
+<section id="id156">
+<h3>Dependencies<a class="headerlink" href="#id156" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: bump ansys-sphinx-theme[autoapi] from 0.16.5 to 0.16.6 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/94">#94</a></p></li>
+<li><p>chore: bump sphinx-autodoc-typehints from 2.1.1 to 2.2.0 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/95">#95</a></p></li>
+<li><p>chore: bump safety from 3.2.3 to 3.2.4 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/98">#98</a></p></li>
+</ul>
+</section>
+<section id="id160">
+<h3>Miscellaneous<a class="headerlink" href="#id160" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix some doc mistakes <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/91">#91</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id163">
+<h2><a class="reference external" href="https://github.com/ansys/pyworkbench/releases/tag/v0.4.0">0.4.0</a> - 2024-06-12<a class="headerlink" href="#id163" title="Link to this heading">#</a></h2>
+<section id="id164">
+<h3>Added<a class="headerlink" href="#id164" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>tests: add the basic units tests <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/79">#79</a></p></li>
+</ul>
+</section>
+<section id="id166">
+<h3>Changed<a class="headerlink" href="#id166" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ci: update the release workflow to trusted publishers <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/71">#71</a></p></li>
+</ul>
+</section>
+<section id="id168">
+<h3>Fixed<a class="headerlink" href="#id168" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: update <code class="docutils literal notranslate"><span class="pre">ci-cd</span></code> and repo url <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/68">#68</a></p></li>
+<li><p>docs: improve docstring and api reference <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/69">#69</a></p></li>
+</ul>
+</section>
+<section id="id171">
+<h3>Dependencies<a class="headerlink" href="#id171" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>doc: update documentation to match PyAnsys standards <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/63">#63</a></p></li>
+<li><p>docs: update the common pyansys documents <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/64">#64</a></p></li>
+<li><p>MAINT: bump ansys-sphinx-theme[autoapi] from 0.16.4 to 0.16.5 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/73">#73</a></p></li>
+<li><p>MAINT: bump sphinx-autodoc-typehints from 2.1.0 to 2.1.1 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/75">#75</a></p></li>
+<li><p>chore: bump safety from 3.2.0 to 3.2.1 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/77">#77</a></p></li>
+<li><p>chore: bump pytest from 8.2.1 to 8.2.2 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/82">#82</a></p></li>
+<li><p>chore: bump safety from 3.2.1 to 3.2.3 <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/84">#84</a></p></li>
+<li><p>chore: update api version <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/86">#86</a></p></li>
+</ul>
+</section>
+<section id="id180">
+<h3>Miscellaneous<a class="headerlink" href="#id180" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: adding API for connecting to a running server <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/80">#80</a></p></li>
+<li><p>doc: technical review <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/81">#81</a></p></li>
+<li><p>Overall review based on skimming the doc <a class="reference external" href="https://github.com/ansys/pyworkbench/pull/83">#83</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#january-28-2026">0.11.0 - January 28, 2026</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#december-12-2025">0.10.0 - December 12, 2025</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#may-15-2025">0.9.0 - May 15, 2025</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id77">0.8.0 - 2025-02-14</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#added">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">Miscellaneous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id109">0.7.0 - 2024-10-23</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changed">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id112">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id114">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id134">Miscellaneous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id138">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id142">0.6.0 - 2024-08-16</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id143">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id145">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id147">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id150">0.5.0 - 2024-08-15</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id151">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id153">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id156">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id160">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id163">0.4.0 - 2024-06-12</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id164">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id166">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id168">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id171">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id180">Miscellaneous</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pyworkbench/edit/main/doc/source/changelog.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="_sources/changelog.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "_static/search.json";
+const ADVANCE_SEARCH_PATH = "search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

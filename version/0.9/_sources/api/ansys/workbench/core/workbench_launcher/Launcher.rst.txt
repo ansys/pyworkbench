@@ -1,0 +1,158 @@
+
+
+
+
+
+
+:class:`Launcher`
+=================
+
+.. py:class:: ansys.workbench.core.workbench_launcher.Launcher
+
+   
+   Launch a Workbench server on a local or remote machine.
+
+   Note that launching a server on a remote Linux machine, or on a remote Windows
+   machine from a Linux machine, is not supported.
+
+
+
+
+
+
+
+
+   :Raises:
+
+       :obj:`Exception`
+           If the wmi module on Windows, or the ctypes module on Linux, is not available
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: Launcher
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+   .. tab-item:: Methods
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~launch`
+            - Launch PyWorkbench server on the local or a remote computer.
+          * - :py:attr:`~exit`
+            - End the launched Workbench server.
+
+
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from ansys.workbench.core.workbench_launcher import Launcher
+
+
+
+Method detail
+-------------
+
+.. py:method:: launch(version, show_gui=True, server_workdir=None, host=None, username=None, password=None)
+
+   
+   Launch PyWorkbench server on the local or a remote computer.
+
+
+   :Parameters:
+
+       **version** : :class:`python:str`
+           Workbench version to launch. It must be a three-digit version, such as ``242`` or later.
+
+       **show_gui** : :ref:`bool <python:bltin-boolean-values>`, default: :data:`python:True`
+           Whether to launch Workbench in UI mode.
+
+       **server_workdir** : :class:`python:str`, default: :data:`python:None`
+           Path to a writable directory on the server. The default is ``None``,
+           in which case the user preference for the Workbench temporary file folder is used.
+
+       **host** : :class:`python:str`, default: :data:`python:None`
+           Name or IP address of the server. The default is ``None``, which launches Workbench
+           on the local computer.
+
+       **username** : :class:`python:str`, default: :data:`python:None`
+           User's login name on the server. The default is ``None``, which launches Workbench
+           on the local computer.
+
+       **password** : :class:`python:str`, default: :data:`python:None`
+           User's password on the server. The default is ``None``, which launches Workbench
+           on the local computer.
+
+
+
+
+
+
+
+   :Raises:
+
+       :obj:`Exception`
+           If the Ansys version string is invalid.
+           If the host is given but the username or password is missing.
+           If remote launching is attempted from or onto a Linux machine
+           If the wmi service on the remote Windows machine fails
+           If the Ansys installation is not found.
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:method:: exit()
+
+   
+   End the launched Workbench server.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
